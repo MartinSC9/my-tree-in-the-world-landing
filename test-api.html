@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API - Árboles Colaborativos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+        input {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test API - Árboles Colaborativos</h1>
+
+    <div class="section">
+        <h3>1. Login</h3>
+        <input type="email" id="email" placeholder="Email" value="usuario1@prueba.com">
+        <input type="password" id="password" placeholder="Password" value="password123">
+        <button onclick="login()">Login</button>
+        <div id="loginResult"></div>
+    </div>
+
+    <div class="section">
+        <h3>2. Get My Projects</h3>
+        <button onclick="getMyProjects()">Obtener Mis Proyectos</button>
+        <div id="projectsResult"></div>
+    </div>
+
+    <div class="section">
+        <h3>3. Can Create?</h3>
+        <button onclick="canCreate()">¿Puedo crear proyecto?</button>
+        <div id="canCreateResult"></div>
+    </div>
+
+    <div class="section">
+        <h3>4. Get All Projects</h3>
+        <button onclick="getAllProjects()">Obtener Todos los Proyectos</button>
+        <div id="allProjectsResult"></div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        let token = localStorage.getItem('token');
+
+        async function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const resultDiv = document.getElementById('loginResult');
+
+            try {
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    token = data.token;
+                    localStorage.setItem('token', token);
+                    resultDiv.innerHTML = `<p class="success">✅ Login exitoso!</p>
+                        <pre>${JSON.stringify(data.user, null, 2)}</pre>`;
+                } else {
+                    resultDiv.innerHTML = `<p class="error">❌ Error: ${data.error || JSON.stringify(data)}</p>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+            }
+        }
+
+        async function getMyProjects() {
+            const resultDiv = document.getElementById('projectsResult');
+
+            if (!token) {
+                resultDiv.innerHTML = '<p class="error">❌ Debes hacer login primero</p>';
+                return;
+            }
+
+            try {
+                resultDiv.innerHTML = '<p>Cargando...</p>';
+
+                const response = await fetch(`${API_URL}/collaborative-trees/my-projects`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.innerHTML = `<p class="success">✅ Proyectos obtenidos: ${data.my_projects.length}</p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                } else {
+                    resultDiv.innerHTML = `<p class="error">❌ Error ${response.status}: ${JSON.stringify(data, null, 2)}</p>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+            }
+        }
+
+        async function canCreate() {
+            const resultDiv = document.getElementById('canCreateResult');
+
+            if (!token) {
+                resultDiv.innerHTML = '<p class="error">❌ Debes hacer login primero</p>';
+                return;
+            }
+
+            try {
+                resultDiv.innerHTML = '<p>Cargando...</p>';
+
+                const response = await fetch(`${API_URL}/collaborative-trees/can-create`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.innerHTML = `<p class="success">✅ Respuesta recibida</p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                } else {
+                    resultDiv.innerHTML = `<p class="error">❌ Error ${response.status}: ${JSON.stringify(data, null, 2)}</p>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+            }
+        }
+
+        async function getAllProjects() {
+            const resultDiv = document.getElementById('allProjectsResult');
+
+            try {
+                resultDiv.innerHTML = '<p>Cargando...</p>';
+
+                const response = await fetch(`${API_URL}/collaborative-trees`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.innerHTML = `<p class="success">✅ Proyectos públicos: ${data.collaborative_trees.length}</p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                } else {
+                    resultDiv.innerHTML = `<p class="error">❌ Error ${response.status}: ${JSON.stringify(data, null, 2)}</p>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+            }
+        }
+
+        // Restaurar token si existe
+        if (token) {
+            document.getElementById('loginResult').innerHTML = '<p class="success">✅ Token encontrado en localStorage</p>';
+        }
+    </script>
+</body>
+</html>
