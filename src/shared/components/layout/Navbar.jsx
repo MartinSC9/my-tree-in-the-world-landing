@@ -4,7 +4,6 @@ import { Button } from '@shared/components/ui/button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuth } from '@core/contexts/AuthContext';
 import { TreePine, Menu, X, Home, Building2, Sprout, Globe, User, Users, LogOut, LogIn, UserPlus, Settings, ShoppingCart, Bell, ChevronDown } from 'lucide-react';
-import RoleSwitcher from '@shared/components/RoleSwitcher';
 
 // URL de la app (para login/registro)
 const APP_URL = import.meta.env.VITE_APP_URL || 'http://localhost:5174';
@@ -370,3 +369,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
