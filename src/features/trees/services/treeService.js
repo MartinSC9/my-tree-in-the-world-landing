@@ -6,6 +6,11 @@ export const statsService = {
   async getLandingStats() {
     const response = await api.get(API_ENDPOINTS.STATS_LANDING);
     return response.data;
+  },
+
+  async getTopCompanies(limit = 5) {
+    const response = await api.get(`${API_ENDPOINTS.STATS_TOP_COMPANIES}?limit=${limit}`);
+    return response.data.companies;
   }
 };
 

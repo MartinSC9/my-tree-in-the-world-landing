@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@shared/components/ui/button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuth } from '@core/contexts/AuthContext';
-import { TreePine, Menu, X, Home, Building2, Sprout, Globe, User, Users, LogOut, LogIn, UserPlus, Settings, ShoppingCart, Bell, ChevronDown } from 'lucide-react';
+import { TreePine, Menu, X, Home, Gift, Sprout, Globe, User, Users, LogOut, LogIn, UserPlus, Settings, ShoppingCart, Bell, ChevronDown } from 'lucide-react';
 
 // URL de la app (para login/registro)
 const APP_URL = import.meta.env.VITE_APP_URL || 'http://localhost:5174';
@@ -72,7 +72,7 @@ const Navbar = () => {
 
   const navigationItems = [
     { name: 'Inicio', path: '/', icon: Home, isInternal: true },
-    { name: 'Empresas', path: '/empresas', icon: Building2, isInternal: true },
+    { name: 'Sorteos', path: '/sorteos', icon: Gift, isInternal: true },
     { name: 'Plantar Árbol', path: `${APP_URL}/registro`, icon: Sprout, isInternal: false },
     { name: 'Mapa Global', path: '/mapa', icon: Globe, isInternal: true },
   ];

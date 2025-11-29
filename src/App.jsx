@@ -10,6 +10,7 @@ import ScrollToTop from '@shared/components/ScrollToTop';
 import LandingHome from '@/pages/landing/LandingHome';
 import AboutPage from '@/pages/landing/AboutPage';
 import EmpresasPage from '@/pages/landing/EmpresasPage';
+import SorteosPage from '@/pages/landing/SorteosPage';
 import ContactoPage from '@/pages/landing/ContactoPage';
 
 // Public pages
@@ -41,6 +42,11 @@ const App = () => {
             <Route path="/empresas" element={
               <AuthenticatedLayout>
                 <EmpresasPage />
+              </AuthenticatedLayout>
+            } />
+            <Route path="/sorteos" element={
+              <AuthenticatedLayout>
+                <SorteosPage />
               </AuthenticatedLayout>
             } />
             <Route path="/contacto" element={

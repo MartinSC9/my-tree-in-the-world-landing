@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { TreePine, Globe, Users, Award, Leaf, Building2, Heart, QrCode, Microscope, Shield, Droplets, Sprout, CheckCircle, ArrowRight, Sparkles, MapPin } from 'lucide-react';
+import { TreePine, Globe, Users, Award, Leaf, Heart, QrCode, Shield, CheckCircle, ArrowRight, MapPin, TrendingUp, FileText, Building2, Trophy } from 'lucide-react';
 import { Button } from '@shared/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@shared/components/ui/card';
 import { useTree } from '@core/contexts/TreeContext';
@@ -40,7 +40,7 @@ const LandingHome = () => {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
 
-  // Estado para las estadísticas de landing (endpoint ligero)
+  // Estado para las estadisticas de landing (endpoint ligero)
   const [landingStats, setLandingStats] = useState({
     totalTrees: 0,
     plantedTrees: 0,
@@ -48,7 +48,10 @@ const LandingHome = () => {
     totalCompanies: 0
   });
 
-  // Cargar stats ligeras al montar el componente
+  // Estado para top empresas
+  const [topCompanies, setTopCompanies] = useState([]);
+
+  // Cargar stats y top empresas al montar el componente
   useEffect(() => {
     const fetchStats = async () => {
       try {
@@ -58,8 +61,18 @@ const LandingHome = () => {
         console.error('Error cargando stats:', error);
       }
     };
+
+    const fetchTopCompanies = async () => {
+      try {
+        const companies = await statsService.getTopCompanies(5);
+        setTopCompanies(companies || []);
+      } catch (error) {
+        console.error('Error cargando top empresas:', error);
+      }
+    };
+
     fetchStats();
-    // También cargar árboles para la sección de "Recent Trees"
+    fetchTopCompanies();
     loadTrees();
   }, []);
 
@@ -73,27 +86,32 @@ const LandingHome = () => {
   const stats = [
     { icon: TreePine, label: 'Arboles Comprados', value: landingStats.totalTrees, color: 'hsl(152 68% 38%)', bgColor: 'hsl(152 68% 92%)' },
     { icon: Leaf, label: 'Ya Plantados', value: landingStats.plantedTrees, color: 'hsl(165 60% 40%)', bgColor: 'hsl(165 60% 90%)' },
-    { icon: Globe, label: 'Paises', value: landingStats.totalCountries, color: 'hsl(200 85% 45%)', bgColor: 'hsl(200 85% 92%)' }
+    { icon: Globe, label: 'Paises', value: landingStats.totalCountries, color: 'hsl(200 85% 45%)', bgColor: 'hsl(200 85% 92%)' },
+    { icon: Users, label: 'Arboles Colaborativos', value: landingStats.collaborativeTrees || 0, color: 'hsl(280 60% 50%)', bgColor: 'hsl(280 60% 92%)' }
   ];
 
   // Section refs for scroll animations
   const statsRef = useRef(null);
-  const missionRef = useRef(null);
-  const environmentRef = useRef(null);
+  const uniqueRef = useRef(null);
+  const impactRef = useRef(null);
   const howItWorksRef = useRef(null);
   const collaborativeRef = useRef(null);
+  const topCompaniesRef = useRef(null);
   const recentTreesRef = useRef(null);
+  const ctaRef = useRef(null);
 
   const statsInView = useInView(statsRef, { once: true, margin: "-100px" });
-  const missionInView = useInView(missionRef, { once: true, margin: "-100px" });
-  const environmentInView = useInView(environmentRef, { once: true, margin: "-100px" });
+  const uniqueInView = useInView(uniqueRef, { once: true, margin: "-100px" });
+  const impactInView = useInView(impactRef, { once: true, margin: "-100px" });
   const howItWorksInView = useInView(howItWorksRef, { once: true, margin: "-100px" });
   const collaborativeInView = useInView(collaborativeRef, { once: true, margin: "-100px" });
+  const topCompaniesInView = useInView(topCompaniesRef, { once: true, margin: "-100px" });
   const recentTreesInView = useInView(recentTreesRef, { once: true, margin: "-100px" });
+  const ctaInView = useInView(ctaRef, { once: true, margin: "-100px" });
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+      {/* Hero Section - SIMPLIFICADO */}
       <section
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
@@ -140,7 +158,7 @@ const LandingHome = () => {
           ))}
         </div>
 
-        {/* Hero Content */}
+        {/* Hero Content - MAS DIRECTO */}
         <motion.div
           style={{ opacity: heroOpacity }}
           className="relative z-10 max-w-6xl mx-auto px-6 text-center"
@@ -150,13 +168,6 @@ const LandingHome = () => {
             animate="visible"
             variants={staggerContainer}
           >
-            <motion.div variants={fadeInUp} className="mb-6">
-              <span className="badge-nature inline-flex items-center gap-2 backdrop-blur-sm bg-white/10 border-white/20 text-white">
-                <Sparkles className="w-4 h-4" />
-                Reforestacion con Impacto Real
-              </span>
-            </motion.div>
-
             <motion.h1
               variants={fadeInUp}
               className="font-display text-5xl md:text-7xl lg:text-8xl text-white mb-8 leading-tight tracking-tight"
@@ -177,12 +188,15 @@ const LandingHome = () => {
 
             <motion.p
               variants={fadeInUp}
-              className="text-xl md:text-2xl text-green-100/90 mb-12 max-w-3xl mx-auto leading-relaxed font-light"
+              className="text-xl md:text-2xl text-green-100/90 mb-6 max-w-3xl mx-auto leading-relaxed font-light"
             >
-              Ayudamos a reforestar el planeta gracias al compromiso de personas como vos.
-              <span className="block mt-3 text-white font-medium">
-                Cada arbol que compras se planta realmente.
-              </span>
+              Planta un arbol real. Visitalo cuando quieras.
+            </motion.p>
+            <motion.p
+              variants={fadeInUp}
+              className="text-lg md:text-xl text-white/80 mb-12 max-w-2xl mx-auto"
+            >
+              Cada arbol tiene su propio codigo QR y certificado.
             </motion.p>
 
             <motion.div
@@ -230,7 +244,6 @@ const LandingHome = () => {
 
       {/* Stats Section */}
       <section ref={statsRef} className="section-padding relative overflow-hidden">
-        {/* Background Decorations */}
         <div className="absolute top-0 right-0 w-96 h-96 blob-shape nature-blob" />
         <div className="absolute bottom-0 left-0 w-80 h-80 blob-shape earth-blob" />
 
@@ -239,7 +252,7 @@ const LandingHome = () => {
             initial="hidden"
             animate={statsInView ? "visible" : "hidden"}
             variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
           >
             {stats.map((stat, index) => (
               <motion.div key={index} variants={scaleIn}>
@@ -267,82 +280,52 @@ const LandingHome = () => {
         </div>
       </section>
 
-      {/* Mission Section */}
-      <section ref={missionRef} className="section-padding nature-gradient relative overflow-hidden">
-        {/* Pattern Overlay */}
+      {/* QUE HACE UNICO A TU ARBOL - Nueva seccion (reemplaza Nuestra Mision) */}
+      <section ref={uniqueRef} className="section-padding nature-gradient relative overflow-hidden">
         <div className="absolute inset-0 grid-pattern opacity-10" />
 
         <div className="container-wide relative z-10">
           <motion.div
             initial="hidden"
-            animate={missionInView ? "visible" : "hidden"}
+            animate={uniqueInView ? "visible" : "hidden"}
             variants={staggerContainer}
             className="text-center mb-16"
           >
             <motion.div variants={fadeInUp}>
-              <Heart className="h-16 w-16 mx-auto mb-6 text-white/90 floating" />
+              <QrCode className="h-16 w-16 mx-auto mb-6 text-white/90 floating" />
             </motion.div>
             <motion.h2 variants={fadeInUp} className="section-title text-white mb-6">
-              Nuestra Mision
+              Cada Arbol Tiene su Propia Identidad
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-green-100/90 max-w-4xl mx-auto leading-relaxed">
-              En "Mi Arbol en el Mundo" ayudamos a reforestar el planeta gracias al compromiso de personas como vos.
-              Cada vez que alguien compra un arbol en nuestra plataforma, se planta un arbol real en el lugar elegido.
+            <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-green-100/90 max-w-3xl mx-auto leading-relaxed">
+              Cuando plantas con nosotros, tu arbol recibe una identidad unica y verificable.
             </motion.p>
           </motion.div>
 
           <motion.div
             initial="hidden"
-            animate={missionInView ? "visible" : "hidden"}
+            animate={uniqueInView ? "visible" : "hidden"}
             variants={fadeInUp}
             className="glass-dark rounded-3xl p-8 md:p-12"
           >
-            <div className="text-center mb-10">
-              <QrCode className="h-16 w-16 mx-auto text-emerald-300 mb-4 breathe" />
-              <h3 className="font-display text-3xl font-semibold text-white mb-4">
-                Cada Arbol Tiene su Propia Identidad Digital
-              </h3>
-              <p className="text-green-200 text-lg max-w-3xl mx-auto">
-                Tu arbol recibe un codigo QR unico instalado en una chapa de acero inoxidable anti-oxidacion
-              </p>
-            </div>
-
-            {/* QR Trail Image */}
-            <div className="flex justify-center mb-10">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-md group">
-                <img
-                  src="https://preview.redd.it/the-walking-trail-around-the-park-i-visited-has-signs-v0-8uo37xifrl4b1.jpg?width=640&crop=smart&auto=webp&s=3aff62b51923974ec61020621a9f0f4cde7c058b"
-                  alt="Ejemplo de cartel QR instalado en sendero"
-                  className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <p className="text-white text-sm text-center font-medium">
-                    Asi lucen nuestros carteles QR instalados junto a cada arbol
-                  </p>
-                </div>
-              </div>
-            </div>
-
             {/* Features Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
               {/* Physical Tag */}
               <div className="bg-white/10 backdrop-blur rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-colors">
-                <div className="flex items-start gap-4 mb-5">
+                <div className="flex items-center gap-4 mb-5">
                   <div className="bg-emerald-400/20 p-4 rounded-xl">
                     <Shield className="h-7 w-7 text-emerald-300" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-semibold text-white mb-1">Chapa Resistente</h4>
-                    <p className="text-green-200/80 text-sm">Acero inoxidable anti-oxidacion</p>
+                    <h4 className="text-xl font-semibold text-white">Chapa Fisica con QR</h4>
                   </div>
                 </div>
                 <ul className="space-y-3 text-green-100">
                   {[
-                    'Durabilidad de 10+ anos en exteriores',
-                    'Nombre personalizado grabado con laser',
-                    'Resistente a lluvia, sol y temperaturas',
-                    'Instalada en poste junto al arbol'
+                    'Acero inoxidable anti-oxidacion',
+                    'Durabilidad 10+ anos',
+                    'Nombre personalizado grabado',
+                    'Instalada junto al arbol'
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm">
                       <CheckCircle className="h-5 w-5 text-emerald-400 flex-shrink-0 mt-0.5" />
@@ -354,22 +337,47 @@ const LandingHome = () => {
 
               {/* Web Page */}
               <div className="bg-white/10 backdrop-blur rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-colors">
-                <div className="flex items-start gap-4 mb-5">
+                <div className="flex items-center gap-4 mb-5">
                   <div className="bg-emerald-400/20 p-4 rounded-xl">
                     <Globe className="h-7 w-7 text-emerald-300" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-semibold text-white mb-1">Pagina Web Unica</h4>
-                    <p className="text-green-200/80 text-sm">Al escanear el QR, se abre:</p>
+                    <h4 className="text-xl font-semibold text-white">Pagina Web Unica</h4>
+                  </div>
+                </div>
+                <p className="text-green-200/80 text-sm mb-4">Al escanear el QR, cualquiera puede ver:</p>
+                <ul className="space-y-3 text-green-100">
+                  {[
+                    'Foto de tu arbol',
+                    'Ubicacion exacta (GPS)',
+                    'Especie y fecha de plantacion',
+                    'CO2 absorbido',
+                    'Quien lo planto'
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm">
+                      <CheckCircle className="h-5 w-5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Certificate */}
+              <div className="bg-white/10 backdrop-blur rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-colors">
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="bg-emerald-400/20 p-4 rounded-xl">
+                    <FileText className="h-7 w-7 text-emerald-300" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold text-white">Certificado Digital</h4>
                   </div>
                 </div>
                 <ul className="space-y-3 text-green-100">
                   {[
-                    'Nombre y foto de tu arbol',
-                    'Ubicacion exacta en mapa con GPS',
-                    'Todos los participantes (arboles colaborativos)',
-                    'Especie, vivero y plantador',
-                    'Impacto ambiental (CO2, agua filtrada)'
+                    'Coordenadas GPS exactas',
+                    'Descargable en PDF',
+                    'Compartible en redes',
+                    'Verificable online'
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm">
                       <CheckCircle className="h-5 w-5 text-emerald-400 flex-shrink-0 mt-0.5" />
@@ -380,124 +388,100 @@ const LandingHome = () => {
               </div>
             </div>
 
-            {/* Example Preview */}
-            <div className="certificate-border rounded-2xl">
-              <div className="bg-white/5 backdrop-blur rounded-xl p-6">
-                <p className="text-white font-semibold text-center mb-4">Ejemplo de lo que veran al escanear tu QR:</p>
-                <div className="bg-white rounded-xl p-6 space-y-4 shadow-lg">
-                  <div className="text-center">
-                    <span className="text-5xl">🌳</span>
-                  </div>
-                  <p className="text-emerald-700 font-display text-2xl text-center font-semibold">
-                    "Jacaranda de la Abuela Maria"
-                  </p>
-                  <p className="text-gray-600 text-center text-sm italic">
-                    Este arbol fue plantado gracias a Martin Lopez
-                  </p>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm pt-4 border-t border-gray-200">
-                    {[
-                      { icon: '📍', label: 'Ubicacion', value: 'Plaza San Martin' },
-                      { icon: '🌱', label: 'Especie', value: 'Jacaranda mimosifolia' },
-                      { icon: '📅', label: 'Plantado', value: '15 Enero 2025' },
-                      { icon: '🌍', label: 'CO2 Absorbido', value: '21.77 kg/ano' },
-                    ].map((item, i) => (
-                      <div key={i} className="text-center">
-                        <p className="text-2xl mb-1">{item.icon}</p>
-                        <p className="font-semibold text-emerald-600 text-xs uppercase tracking-wide">{item.label}</p>
-                        <p className="text-gray-700 font-medium">{item.value}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Environmental Commitment Section */}
-      <section ref={environmentRef} className="section-padding bg-white relative overflow-hidden">
+      {/* IMPACTO TRIPLE - Nueva seccion (reemplaza Environmental Commitment y Beneficios Gratuitos) */}
+      <section ref={impactRef} className="section-padding bg-white relative overflow-hidden">
         <div className="absolute top-20 left-10 w-72 h-72 blob-shape nature-blob opacity-30" />
         <div className="absolute bottom-10 right-10 w-64 h-64 blob-shape earth-blob opacity-30" />
 
         <div className="container-wide relative z-10">
           <motion.div
             initial="hidden"
-            animate={environmentInView ? "visible" : "hidden"}
+            animate={impactInView ? "visible" : "hidden"}
             variants={staggerContainer}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
-            <motion.div variants={fadeInUp}>
-              <Microscope className="h-16 w-16 mx-auto mb-6 text-[hsl(152,68%,38%)] floating-slow" />
-            </motion.div>
-            <motion.h2 variants={fadeInUp} className="section-title mb-6">
-              Plantamos con Conciencia Ambiental
+            <motion.h2 variants={fadeInUp} className="section-title mb-4">
+              Tu Compra Mueve una Cadena de Impacto
             </motion.h2>
             <motion.p variants={fadeInUp} className="section-subtitle mx-auto">
-              Cada arbol es seleccionado cuidadosamente por botanicos y especialistas en ecologia
-              para que sea el adecuado para la zona.
+              Cada arbol activa un ciclo que beneficia al planeta y a las comunidades locales.
             </motion.p>
           </motion.div>
 
+          {/* Circulo Virtuoso - Zigzag Compacto */}
           <motion.div
             initial="hidden"
-            animate={environmentInView ? "visible" : "hidden"}
+            animate={impactInView ? "visible" : "hidden"}
             variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            className="relative max-w-sm mx-auto"
           >
-            {/* What we DON'T do */}
-            <motion.div variants={fadeInUp}>
-              <Card className="h-full premium-card bg-gradient-to-br from-red-50 to-orange-50 border-red-200/50">
-                <CardHeader>
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-red-100 flex items-center justify-center">
-                      <Droplets className="h-7 w-7 text-red-500" />
-                    </div>
-                    <CardTitle className="text-red-800 font-display text-2xl">Lo que NO hacemos</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-4 text-red-700">
-                    {[
-                      'Evitamos plantar especies que consumen mucha agua en zonas secas',
-                      'No introducimos arboles urbanos en ecosistemas naturales delicados',
-                      'No plantamos cualquier arbol en cualquier lado'
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <span className="text-red-400 font-bold text-lg">✗</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            </motion.div>
+            <div className="flex flex-col gap-2">
+              {/* Row 1 - Left */}
+              <motion.div variants={fadeInUp} className="flex items-center">
+                <div className="bg-emerald-500 rounded-xl p-4 text-center text-white shadow-lg hover:scale-105 transition-all duration-300 w-36">
+                  <div className="text-3xl mb-1">🌱</div>
+                  <h4 className="font-display text-sm font-bold">Tu plantas</h4>
+                </div>
+                <svg className="w-16 h-10 text-gray-400 ml-1" viewBox="0 0 64 40" fill="none">
+                  <path d="M4 4 L52 32" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M44 30 L52 32 L50 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </motion.div>
 
-            {/* Our Commitment */}
-            <motion.div variants={fadeInUp}>
-              <Card className="h-full premium-card bg-gradient-to-br from-emerald-50 to-green-50 border-emerald-200/50">
-                <CardHeader>
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center">
-                      <Shield className="h-7 w-7 text-emerald-600" />
-                    </div>
-                    <CardTitle className="text-emerald-800 font-display text-2xl">Nuestro Compromiso</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent className="flex flex-col items-center justify-center text-center pt-4">
-                  <Leaf className="h-20 w-20 text-emerald-500 mb-6 leaf-sway" />
-                  <p className="text-emerald-700 text-lg font-medium leading-relaxed">
-                    Nuestro compromiso es con el planeta y la biodiversidad.
-                    Cada decision se toma pensando en el equilibrio ecologico.
-                  </p>
-                </CardContent>
-              </Card>
+              {/* Row 2 - Right */}
+              <motion.div variants={fadeInUp} className="flex items-center justify-end">
+                <div className="bg-amber-500 rounded-xl p-4 text-center text-white shadow-lg hover:scale-105 transition-all duration-300 w-36">
+                  <div className="text-3xl mb-1">🏡</div>
+                  <h4 className="font-display text-sm font-bold">Viveros venden</h4>
+                </div>
+              </motion.div>
+
+              {/* Arrow down-left */}
+              <motion.div variants={fadeInUp} className="flex justify-end pr-28">
+                <svg className="w-16 h-10 text-gray-400" viewBox="0 0 64 40" fill="none">
+                  <path d="M60 4 L12 32" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M20 30 L12 32 L14 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </motion.div>
+
+              {/* Row 3 - Left */}
+              <motion.div variants={fadeInUp} className="flex items-center">
+                <div className="bg-orange-500 rounded-xl p-4 text-center text-white shadow-lg hover:scale-105 transition-all duration-300 w-36">
+                  <div className="text-3xl mb-1">👷</div>
+                  <h4 className="font-display text-sm font-bold">Generas empleo</h4>
+                </div>
+                <svg className="w-16 h-10 text-gray-400 ml-1" viewBox="0 0 64 40" fill="none">
+                  <path d="M4 4 L52 32" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M44 30 L52 32 L50 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </motion.div>
+
+              {/* Row 4 - Right */}
+              <motion.div variants={fadeInUp} className="flex items-center justify-end">
+                <div className="bg-green-600 rounded-xl p-4 text-center text-white shadow-lg hover:scale-105 transition-all duration-300 w-36">
+                  <div className="text-3xl mb-1">🌍</div>
+                  <h4 className="font-display text-sm font-bold">Planeta mas verde</h4>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Mensaje final */}
+            <motion.div variants={fadeInUp} className="mt-8 text-center">
+              <p className="text-xl text-gray-600">
+                <span className="font-bold text-emerald-600">Trabajo digno</span> para familias locales.
+                <span className="font-bold text-emerald-600"> Oxigeno</span> para el planeta.
+                <span className="font-bold text-emerald-600"> Un arbol real</span> con tu nombre.
+              </p>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* How it Works Section */}
+      {/* COMO FUNCIONA - Simplificado con precios */}
       <section ref={howItWorksRef} className="section-padding premium-gradient relative overflow-hidden">
         <div className="container-wide relative z-10">
           <motion.div
@@ -507,20 +491,11 @@ const LandingHome = () => {
             className="text-center mb-16"
           >
             <motion.h2 variants={fadeInUp} className="section-title mb-6">
-              ¿Cómo Funciona?
+              Como Funciona
             </motion.h2>
-            <motion.p variants={fadeInUp} className="section-subtitle mx-auto mb-10">
-              Unete a nuestra comunidad global de reforestadores y obten increibles beneficios mientras ayudas al planeta
+            <motion.p variants={fadeInUp} className="section-subtitle mx-auto">
+              En 3 simples pasos, tu arbol estara plantado y con su propia identidad.
             </motion.p>
-            <motion.div
-              variants={fadeInUp}
-              className="glass-effect rounded-2xl p-6 max-w-3xl mx-auto"
-            >
-              <p className="text-[hsl(200,85%,35%)] font-medium text-lg">
-                <strong>Todos son bienvenidos!</strong> Puedes crear tu cuenta gratuita y ser parte de nuestra comunidad
-                incluso sin comprar arboles.
-              </p>
-            </motion.div>
           </motion.div>
 
           {/* Steps */}
@@ -528,7 +503,7 @@ const LandingHome = () => {
             initial="hidden"
             animate={howItWorksInView ? "visible" : "hidden"}
             variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20"
+            className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12"
           >
             {[
               {
@@ -536,21 +511,22 @@ const LandingHome = () => {
                 color: 'hsl(152 68% 38%)',
                 bg: 'hsl(152 68% 92%)',
                 title: '1. Compra tu Arbol',
-                desc: 'Elige tu pais, dale un nombre a tu arbol y realiza la compra. Un arbol real sera plantado por nuestros especialistas.'
+                desc: 'Elige ubicacion, nombre y especie.',
+                price: 'Desde $15,000 ARS'
               },
               {
                 icon: Globe,
                 color: 'hsl(200 85% 45%)',
                 bg: 'hsl(200 85% 92%)',
                 title: '2. Plantacion Real',
-                desc: 'Nuestros especialistas plantan tu arbol en el lugar elegido con un codigo QR unico para su seguimiento.'
+                desc: 'Viveros locales preparan tu arbol. Plantadores profesionales lo plantan. Recibiras fotos del proceso.'
               },
               {
                 icon: Award,
                 color: 'hsl(45 95% 45%)',
                 bg: 'hsl(45 95% 90%)',
-                title: '3. Seguimiento y Certificado',
-                desc: 'Tu arbol aparece en el mapa mundial y recibes tu certificado digital personalizado con coordenadas GPS.'
+                title: '3. Tu Arbol, Tu Legado',
+                desc: 'Chapa QR instalada junto al arbol. Certificado digital descargable. Visitalo cuando quieras.'
               }
             ].map((step, i) => (
               <motion.div key={i} variants={fadeInUp} className="text-center">
@@ -562,71 +538,35 @@ const LandingHome = () => {
                 </div>
                 <div className="premium-card rounded-2xl p-6">
                   <h3 className="font-display text-xl font-semibold text-gray-800 mb-3">{step.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{step.desc}</p>
+                  <p className="text-gray-600 leading-relaxed mb-3">{step.desc}</p>
+                  {step.price && (
+                    <p className="text-emerald-600 font-bold text-lg">{step.price}</p>
+                  )}
                 </div>
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Benefits */}
           <motion.div
             initial="hidden"
             animate={howItWorksInView ? "visible" : "hidden"}
             variants={fadeInUp}
-            className="glass-effect rounded-3xl p-8 md:p-12"
+            className="text-center"
           >
-            <div className="text-center mb-10">
-              <h3 className="font-display text-3xl font-semibold text-gray-800 mb-4">Beneficios de Nuestra Comunidad</h3>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Desde el momento que te registras, formas parte de nuestra familia ecologica.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-8 mb-8 border border-blue-200/50">
-              <h4 className="font-display text-2xl font-semibold text-blue-800 mb-6 text-center">
-                Beneficios Gratuitos para Todos
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {[
-                  { icon: Globe, title: 'Mapa Global', desc: 'Explora todos los arboles plantados' },
-                  { icon: Users, title: 'Red Social', desc: 'Conecta con otros eco-warriors' },
-                  { icon: Leaf, title: 'Contenido Educativo', desc: 'Aprende sobre sostenibilidad' },
-                  { icon: Heart, title: 'Impacto Global', desc: 'Sigue el progreso mundial' },
-                ].map((benefit, i) => (
-                  <div key={i} className="premium-card bg-white rounded-xl p-5 text-center">
-                    <benefit.icon className="h-8 w-8 text-blue-500 mx-auto mb-3" />
-                    <h5 className="font-semibold text-blue-800 mb-1">{benefit.title}</h5>
-                    <p className="text-xs text-blue-600">{benefit.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="text-center space-y-4">
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  onClick={() => window.open(`${APP_URL}/registro`, '_blank')}
-                  size="lg"
-                  className="btn-primary bg-blue-600 hover:bg-blue-700"
-                >
-                  <Users className="h-5 w-5 mr-2" />
-                  Unete Gratis Ahora!
-                </Button>
-                <Button
-                  onClick={() => window.open(`${APP_URL}/login`, '_blank')}
-                  size="lg"
-                  className="btn-secondary"
-                >
-                  <TreePine className="h-5 w-5 mr-2" />
-                  Ya Tengo Cuenta
-                </Button>
-              </div>
-            </div>
+            <Button
+              onClick={() => window.open(`${APP_URL}/registro`, '_blank')}
+              size="lg"
+              className="btn-primary group text-lg px-10"
+            >
+              <TreePine className="h-6 w-6 mr-3 group-hover:scale-110 transition-transform" />
+              Comenzar Ahora
+              <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
           </motion.div>
         </div>
       </section>
 
-      {/* Collaborative Trees Section */}
+      {/* Collaborative Trees Section - Simplificado */}
       <section ref={collaborativeRef} className="section-padding bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-purple-200/30 blur-3xl" />
         <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-pink-200/30 blur-3xl" />
@@ -636,7 +576,7 @@ const LandingHome = () => {
             initial="hidden"
             animate={collaborativeInView ? "visible" : "hidden"}
             variants={staggerContainer}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
             <motion.div variants={fadeInUp}>
               <Users className="h-16 w-16 mx-auto mb-6 text-purple-600 floating" />
@@ -644,9 +584,8 @@ const LandingHome = () => {
             <motion.h2 variants={fadeInUp} className="section-title text-purple-900 mb-6">
               Arboles Colaborativos
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl text-purple-700 max-w-4xl mx-auto">
+            <motion.p variants={fadeInUp} className="text-xl text-purple-700 max-w-3xl mx-auto">
               Unite con amigos, familia o comunidades para plantar arboles juntos.
-              <span className="block mt-2 font-semibold">Es como una "vaquita" digital para reforestar el planeta.</span>
             </motion.p>
           </motion.div>
 
@@ -655,15 +594,14 @@ const LandingHome = () => {
             initial="hidden"
             animate={collaborativeInView ? "visible" : "hidden"}
             variants={fadeInUp}
-            className="premium-card bg-white rounded-3xl p-8 md:p-12 mb-12"
+            className="premium-card bg-white rounded-3xl p-8 md:p-12 mb-10"
           >
-            <h3 className="font-display text-2xl font-semibold text-purple-800 mb-10 text-center">¿Cómo Funciona?</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
                 { num: '1', title: 'Crea o Unite', desc: 'Crea tu proyecto o unite a uno existente' },
-                { num: '2', title: 'Aporta', desc: 'Cada persona aporta para uno o varios arboles' },
+                { num: '2', title: 'Aporta', desc: 'Cada persona aporta lo que pueda' },
                 { num: '3', title: 'Completa la Meta', desc: 'Entre todos llegan al objetivo' },
-                { num: '4', title: 'Se Plantan!', desc: 'Los arboles se plantan y todos reciben certificado' },
+                { num: '4', title: 'Se Plantan!', desc: 'Los arboles se plantan y todos aparecen en el certificado' },
               ].map((step, i) => (
                 <div key={i} className="text-center">
                   <div className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center mx-auto mb-4">
@@ -676,106 +614,18 @@ const LandingHome = () => {
             </div>
           </motion.div>
 
-          {/* Two Types */}
-          <motion.div
-            initial="hidden"
-            animate={collaborativeInView ? "visible" : "hidden"}
-            variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-          >
-            {/* User Projects */}
-            <motion.div variants={fadeInUp}>
-              <Card className="premium-card h-full bg-gradient-to-br from-blue-50 to-cyan-50 border-blue-200/50">
-                <CardHeader className="pb-4">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
-                      <Heart className="h-6 w-6 text-blue-600" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-xl text-blue-800">Proyectos de Usuarios</CardTitle>
-                      <p className="text-blue-600 text-sm">Amigos, familia, comunidades</p>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {[
-                    { title: 'Proyectos Personales', desc: 'Crea tu propio proyecto (max 1 activo)' },
-                    { title: 'Certificado Colaborativo', desc: 'Todos aparecen en el certificado' },
-                    { title: 'Aportes Flexibles', desc: 'Desde $100 ARS por persona' },
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" />
-                      <div>
-                        <p className="font-medium text-blue-800">{item.title}</p>
-                        <p className="text-sm text-blue-600">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                  <div className="bg-blue-100/50 rounded-xl p-4 mt-4">
-                    <p className="text-sm font-medium text-blue-800 mb-2">💡 Ejemplos:</p>
-                    <ul className="text-xs text-blue-700 space-y-1">
-                      <li>• Cumpleanos del abuelo: toda la familia planta juntos</li>
-                      <li>• Proyecto escolar: una clase reforesta su comunidad</li>
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Company Projects */}
-            <motion.div variants={fadeInUp}>
-              <Card className="premium-card h-full bg-gradient-to-br from-orange-50 to-yellow-50 border-orange-200/50">
-                <CardHeader className="pb-4">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center">
-                      <Building2 className="h-6 w-6 text-orange-600" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-xl text-orange-800">Proyectos de Empresas</CardTitle>
-                      <p className="text-orange-600 text-sm">Marketing + RSE + Engagement</p>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {[
-                    { title: 'Proyectos Ilimitados', desc: 'Multiples proyectos simultaneos' },
-                    { title: 'Sorteo de Cupones', desc: 'Descuentos del 10% al 50%' },
-                    { title: 'Empresa Aporta Primero', desc: 'Minimo 30% inicial' },
-                    { title: 'Mas Aportas, Mas Chances', desc: 'Cada $1 ARS = 1 ticket' },
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-orange-500 mt-0.5 flex-shrink-0" />
-                      <div>
-                        <p className="font-medium text-orange-800">{item.title}</p>
-                        <p className="text-sm text-orange-600">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                  <div className="bg-orange-100/50 rounded-xl p-4 mt-4">
-                    <p className="text-sm font-medium text-orange-800 mb-2">🏆 Beneficios empresariales:</p>
-                    <ul className="text-xs text-orange-700 space-y-1">
-                      <li>• Marketing positivo con impacto real</li>
-                      <li>• Fidelizacion mediante cupones</li>
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </motion.div>
-
           {/* CTA */}
           <motion.div
             initial="hidden"
             animate={collaborativeInView ? "visible" : "hidden"}
             variants={fadeInUp}
-            className="mt-12"
           >
             <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl p-10 text-center text-white relative overflow-hidden">
               <div className="absolute inset-0 grid-pattern opacity-10" />
               <div className="relative z-10">
-                <h3 className="font-display text-3xl font-semibold mb-4">¿Listos para plantar juntos?</h3>
+                <h3 className="font-display text-3xl font-semibold mb-4">Listos para plantar juntos?</h3>
                 <p className="text-lg mb-8 max-w-2xl mx-auto text-purple-100">
-                  Unite a proyectos existentes o crea el tuyo propio. Juntos podemos hacer mas por el planeta.
+                  Ideal para cumpleanos, proyectos escolares, o simplemente para hacer algo bueno con amigos.
                 </p>
                 <Button
                   onClick={() => window.open(`${APP_URL}/registro`, '_blank')}
@@ -790,6 +640,101 @@ const LandingHome = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Top Companies Section */}
+        <section ref={topCompaniesRef} className="section-padding bg-white relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-96 h-96 rounded-full bg-emerald-100/40 blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-teal-100/40 blur-3xl" />
+
+          <div className="container-wide relative z-10">
+            <motion.div
+              initial="hidden"
+              animate={topCompaniesInView ? "visible" : "hidden"}
+              variants={staggerContainer}
+              className="text-center mb-12"
+            >
+              <motion.div variants={fadeInUp}>
+                <Building2 className="h-14 w-14 mx-auto mb-4 text-emerald-600" />
+              </motion.div>
+              <motion.h2 variants={fadeInUp} className="section-title mb-4">
+                Empresas que Hacen la Diferencia
+              </motion.h2>
+              <motion.p variants={fadeInUp} className="section-subtitle mx-auto">
+                Estas empresas lideran el cambio con proyectos de reforestacion.
+              </motion.p>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              animate={topCompaniesInView ? "visible" : "hidden"}
+              variants={staggerContainer}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6"
+            >
+              {topCompanies.length === 0 && (
+                <div className="col-span-full text-center py-8 text-gray-500">
+                  Cargando empresas...
+                </div>
+              )}
+              {topCompanies.map((company, index) => (
+                <motion.div key={company.id} variants={fadeInUp}>
+                  <Card className="h-full bg-gradient-to-br from-white to-emerald-50 border-emerald-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <CardContent className="p-6 text-center">
+                      {/* Ranking Badge */}
+                      <div className="flex justify-center mb-4">
+                        <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                          index === 0 ? 'bg-yellow-400 text-yellow-900' :
+                          index === 1 ? 'bg-gray-300 text-gray-700' :
+                          index === 2 ? 'bg-amber-600 text-amber-100' :
+                          'bg-emerald-100 text-emerald-700'
+                        }`}>
+                          {index < 3 ? (
+                            <Trophy className="h-6 w-6" />
+                          ) : (
+                            <span className="font-bold text-lg">#{index + 1}</span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Company Name */}
+                      <h3 className="font-display font-bold text-lg text-gray-800 mb-3">
+                        {company.company_name || company.username}
+                      </h3>
+
+                      {/* Stats */}
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-center gap-2 text-emerald-600">
+                          <TreePine className="h-4 w-4" />
+                          <span className="font-semibold">{company.completed_projects} proyectos</span>
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          ${Number(company.total_raised).toLocaleString('es-AR')} recaudado
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* CTA for companies */}
+            <motion.div
+              initial="hidden"
+              animate={topCompaniesInView ? "visible" : "hidden"}
+              variants={fadeInUp}
+              className="text-center mt-10"
+            >
+              <p className="text-gray-600 mb-4">Tu empresa tambien puede ser parte del cambio.</p>
+              <Button
+                onClick={() => window.open(`${APP_URL}/registro`, '_blank')}
+                variant="outline"
+                className="border-emerald-600 text-emerald-700 hover:bg-emerald-50"
+              >
+                <Building2 className="h-4 w-4 mr-2" />
+                Conoce el programa empresarial
+              </Button>
+            </motion.div>
+          </div>
+        </section>
 
       {/* Recent Trees Section */}
       {trees.length > 0 && (
@@ -829,7 +774,6 @@ const LandingHome = () => {
                             Fisico
                           </span>
                         )}
-
                       </div>
                     </CardHeader>
                     <CardContent>
@@ -863,6 +807,44 @@ const LandingHome = () => {
           </div>
         </section>
       )}
+
+      {/* CTA FINAL - Nuevo */}
+      <section ref={ctaRef} className="section-padding bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 relative overflow-hidden">
+        <div className="absolute inset-0 grid-pattern opacity-10" />
+
+        <div className="container-wide relative z-10">
+          <motion.div
+            initial="hidden"
+            animate={ctaInView ? "visible" : "hidden"}
+            variants={staggerContainer}
+            className="text-center"
+          >
+            <motion.div variants={fadeInUp}>
+              <TreePine className="h-20 w-20 mx-auto mb-6 text-white/90" />
+            </motion.div>
+            <motion.h2 variants={fadeInUp} className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
+              Planta tu Primer Arbol Hoy
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-green-100 mb-4 max-w-2xl mx-auto">
+              Un arbol real. Con tu nombre. Para siempre.
+            </motion.p>
+            <motion.p variants={fadeInUp} className="text-3xl font-bold text-white mb-10">
+              Desde $15,000 ARS
+            </motion.p>
+            <motion.div variants={fadeInUp}>
+              <Button
+                onClick={() => window.open(`${APP_URL}/registro`, '_blank')}
+                size="lg"
+                className="bg-white hover:bg-gray-50 text-emerald-600 shadow-xl hover:shadow-2xl px-12 py-7 text-xl font-semibold"
+              >
+                <TreePine className="h-6 w-6 mr-3" />
+                Comenzar Ahora
+                <ArrowRight className="h-6 w-6 ml-3" />
+              </Button>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Footer */}
       <Footer />

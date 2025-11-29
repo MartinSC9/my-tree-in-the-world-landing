@@ -263,24 +263,6 @@ const UnifiedMapPage = () => {
             </div>
           </div>
 
-          {/* Filters Toggle */}
-          <div className="flex justify-between items-center mb-4">
-            <Button
-              onClick={() => setShowFilters(!showFilters)}
-              size="sm"
-              variant="outline"
-              className="flex items-center gap-2"
-            >
-              <Filter className="h-4 w-4" />
-              {showFilters ? 'Ocultar Filtros' : 'Mostrar Filtros'}
-              {showFilters ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-            </Button>
-
-            <div className="text-sm text-gray-600">
-              Mostrando {filteredTrees.length} de {displayedTrees.length} árboles
-            </div>
-          </div>
-
           {/* Filters Panel */}
           <AnimatePresence>
             {showFilters && (
