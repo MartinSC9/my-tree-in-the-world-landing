@@ -163,9 +163,9 @@ const UnifiedMapPage = () => {
   }, [activeView, trees, collaborativeTrees, myTrees, stats]);
 
   const tabs = [
-    { id: 'all', label: 'Todos los Árboles', icon: Globe, color: 'blue' },
+    
     { id: 'my-trees', label: 'Mis Árboles', icon: User, color: 'green', requireAuth: true },
-    { id: 'collaborative', label: 'Colaborativos', icon: Users, color: 'purple' },
+    
   ];
 
   return (
@@ -177,7 +177,7 @@ const UnifiedMapPage = () => {
           transition={{ duration: 0.6 }}
         >
           {/* Header */}
-          <div className="text-center mb-6">
+          <div className="text-center mb-4">
             <h1 className="text-3xl md:text-4xl font-bold text-green-800 mb-2">
               Mapa Global de Árboles
             </h1>

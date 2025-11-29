@@ -1,6 +1,14 @@
 import api from '@core/config/api';
 import { API_ENDPOINTS } from '@core/config/api.config';
 
+// Stats service para landing page (público)
+export const statsService = {
+  async getLandingStats() {
+    const response = await api.get(API_ENDPOINTS.STATS_LANDING);
+    return response.data;
+  }
+};
+
 export const treeService = {
   // Get all trees
   async getTrees(filters = {}) {

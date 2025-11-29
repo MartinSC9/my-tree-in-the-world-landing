@@ -35,7 +35,8 @@ export const API_ENDPOINTS = {
   // Moderation
   MODERATION_POSTS: '/moderation/posts',
 
-  // Stats (Admin)
+  // Stats
+  STATS_LANDING: '/stats/landing',
   STATS_SYSTEM: '/stats/system',
   STATS_PLANTER: (id) => `/stats/planter/${id}`,
   STATS_PLANTERS_RANKING: '/stats/planters/ranking',
