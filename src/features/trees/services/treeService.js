@@ -11,6 +11,11 @@ export const statsService = {
   async getTopCompanies(limit = 5) {
     const response = await api.get(`${API_ENDPOINTS.STATS_TOP_COMPANIES}?limit=${limit}`);
     return response.data.companies;
+  },
+
+  async getTopContributors(limit = 6) {
+    const response = await api.get(`${API_ENDPOINTS.STATS_TOP_CONTRIBUTORS}?limit=${limit}`);
+    return response.data.contributors;
   }
 };
 

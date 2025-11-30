@@ -38,6 +38,7 @@ export const API_ENDPOINTS = {
   // Stats
   STATS_LANDING: '/stats/landing',
   STATS_TOP_COMPANIES: '/stats/top-companies',
+  STATS_TOP_CONTRIBUTORS: '/stats/top-contributors',
   STATS_SYSTEM: '/stats/system',
   STATS_PLANTER: (id) => `/stats/planter/${id}`,
   STATS_PLANTERS_RANKING: '/stats/planters/ranking',
