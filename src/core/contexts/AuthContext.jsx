@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { APP_URL } from '@core/config/app.config';
 
 const AuthContext = createContext();
 
@@ -32,8 +33,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const getRedirectPath = (role, userId) => {
-    const APP_URL = import.meta.env.VITE_APP_URL || 'http://localhost:5174';
-    switch (role) {
+        switch (role) {
       case 'admin':
         return APP_URL + '/admin/' + userId + '/dashboard';
       case 'company':

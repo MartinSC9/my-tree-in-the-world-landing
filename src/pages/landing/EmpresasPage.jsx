@@ -7,9 +7,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@shared/components/ui/
 import { Input } from '@shared/components/ui/input';
 import { Label } from '@shared/components/ui/label';
 import { calculateCarbonFootprint } from '@/utils/carbonCalculator';
+import { APP_URL } from '@core/config/app.config';
 
-// URL de la app (para login/registro)
-const APP_URL = import.meta.env.VITE_APP_URL || 'http://localhost:5174';
+
+
 
 const EmpresasPage = () => {
   const [carbonData, setCarbonData] = useState({

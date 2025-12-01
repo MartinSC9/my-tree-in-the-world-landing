@@ -4,8 +4,9 @@ import { Gift, Users, Ticket, Trophy, CheckCircle, ArrowRight, Sparkles } from '
 import { Button } from '@shared/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@shared/components/ui/card';
 import Footer from '@shared/components/layout/Footer';
+import { APP_URL } from '@core/config/app.config';
 
-const APP_URL = import.meta.env.VITE_APP_URL || 'http://localhost:5174';
+
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },

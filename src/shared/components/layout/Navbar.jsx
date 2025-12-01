@@ -4,9 +4,10 @@ import { Button } from '@shared/components/ui/button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuth } from '@core/contexts/AuthContext';
 import { TreePine, Menu, X, Home, Gift, Sprout, Globe, User, Users, LogOut, LogIn, UserPlus, Settings, ShoppingCart, Bell, ChevronDown } from 'lucide-react';
+import { APP_URL } from '@core/config/app.config';
 
-// URL de la app (para login/registro)
-const APP_URL = import.meta.env.VITE_APP_URL || 'http://localhost:5174';
+
+
 
 const Navbar = () => {
   const navigate = useNavigate();

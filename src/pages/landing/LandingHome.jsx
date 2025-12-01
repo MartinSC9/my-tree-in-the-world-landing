@@ -8,9 +8,10 @@ import { useTree } from '@core/contexts/TreeContext';
 import { useAuth } from '@core/contexts/AuthContext';
 import { statsService } from '@features/trees/services';
 import Footer from '@shared/components/layout/Footer';
+import { APP_URL } from '@core/config/app.config';
 
-// URL de la app (para login/registro)
-const APP_URL = import.meta.env.VITE_APP_URL || 'http://localhost:5174';
+
+
 
 // Animation variants
 const fadeInUp = {
