@@ -12,6 +12,7 @@ import { useAuth } from '@core/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@shared/components/ui/dialog';
 import { toast } from '@shared/components/ui/use-toast';
+import Footer from '@shared/components/layout/Footer';
 
 const UnifiedMapPage = () => {
   const navigate = useNavigate();
@@ -350,6 +351,9 @@ const UnifiedMapPage = () => {
           )}
         </DialogContent>
       </Dialog>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
