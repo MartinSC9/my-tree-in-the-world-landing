@@ -1,4 +1,9 @@
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Production: Render backend, Development: localhost
+const PRODUCTION_API_URL = 'https://my-tree-in-the-world-back.onrender.com/api';
+const DEVELOPMENT_API_URL = 'http://localhost:5000/api';
+
+export const API_BASE_URL = import.meta.env.VITE_API_URL ||
+  (import.meta.env.PROD ? PRODUCTION_API_URL : DEVELOPMENT_API_URL);
 
 export const API_ENDPOINTS = {
   // Auth
@@ -9,6 +14,7 @@ export const API_ENDPOINTS = {
 
   // Trees
   TREES: '/trees',
+  TREE_MARKERS: '/trees/markers',
   TREE_BY_ID: (id) => `/trees/${id}`,
 
   // Available Trees (Catalog)
