@@ -507,34 +507,29 @@ const LandingHome = () => {
           >
             {[
               {
-                icon: TreePine,
-                color: 'hsl(152 68% 38%)',
-                bg: 'hsl(152 68% 92%)',
+                image: '/images/1.png',
                 title: '1. Compra tu Árbol',
                 desc: 'Elige ubicación, nombre y especie.',
                 price: 'Desde $15,000 ARS'
               },
               {
-                icon: Globe,
-                color: 'hsl(200 85% 45%)',
-                bg: 'hsl(200 85% 92%)',
+                image: '/images/2.png',
                 title: '2. Plantación Real',
                 desc: 'Viveros locales preparan tu árbol. Plantadores profesionales lo plantan. Recibirás fotos del proceso.'
               },
               {
-                icon: Award,
-                color: 'hsl(45 95% 45%)',
-                bg: 'hsl(45 95% 90%)',
+                image: '/images/3.png',
                 title: '3. Tu Árbol, Tu Legado',
                 desc: 'Chapa QR instalada junto al árbol. Certificado digital descargable. Visitálo cuando quieras.'
               }
             ].map((step, i) => (
               <motion.div key={i} variants={fadeInUp} className="text-center">
-                <div
-                  className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg"
-                  style={{ background: step.bg }}
-                >
-                  <step.icon className="h-10 w-10" style={{ color: step.color }} />
+                <div className="mb-6 overflow-hidden rounded-2xl shadow-lg">
+                  <img
+                    src={step.image}
+                    alt={step.title}
+                    className="w-full h-48 object-cover hover:scale-105 transition-transform duration-500"
+                  />
                 </div>
                 <div className="premium-card rounded-2xl p-6">
                   <h3 className="font-display text-xl font-semibold text-gray-800 mb-3">{step.title}</h3>
