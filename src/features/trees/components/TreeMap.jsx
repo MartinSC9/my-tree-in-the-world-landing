@@ -480,8 +480,7 @@ const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels })
           {details.status && (
             <p className="text-xs mt-1">
               <span className={`inline-block w-2 h-2 rounded-full mr-1 ${
-                details.status === 'plantado' || details.status === 'verificado' ? 'bg-green-600' :
-                details.status === 'en_proceso' ? 'bg-blue-500' : 'bg-yellow-500'
+                details.status === 'plantado' || details.status === 'verificado' ? 'bg-green-600' : 'bg-yellow-500'
               }`}></span>
               {statusLabels[details.status] || details.status}
             </p>
