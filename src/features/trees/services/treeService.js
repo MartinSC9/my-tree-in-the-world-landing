@@ -20,6 +20,12 @@ export const statsService = {
 };
 
 export const treeService = {
+  // Get tree markers (optimized for maps - only coordinates)
+  async getTreeMarkers() {
+    const response = await api.get(API_ENDPOINTS.TREE_MARKERS);
+    return response.data.trees;
+  },
+
   // Get all trees
   async getTrees(filters = {}) {
     const params = new URLSearchParams(filters).toString();

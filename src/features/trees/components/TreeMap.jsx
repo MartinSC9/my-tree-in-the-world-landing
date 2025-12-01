@@ -2,7 +2,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents, Rectangle, Polygon } from 'react-leaflet';
 import L from 'leaflet';
-import { TreePine } from 'lucide-react';
+import { TreePine, Loader2 } from 'lucide-react';
+import { treeService } from '../services';
 import { getGreenSpaces, isPointInGreenSpace } from '../../../services/greenSpacesService';
 
 // Límites geográficos de Córdoba Capital, Argentina
@@ -45,22 +46,24 @@ const createTreeIcon = (status, type = 'regular') => {
 
   // Definir colores según estado del árbol
   const statusColors = {
-    'sin_plantar': 'bg-yellow-500',
-    'en_proceso': 'bg-blue-500',
+    'en_proceso': 'bg-yellow-500',
+    'active': 'bg-yellow-500',
+    'completed': 'bg-yellow-500',  // Financiado pero no plantado aún
     'plantado': 'bg-green-600',
     'verificado': 'bg-green-800',
     'cancelado': 'bg-gray-500'
   };
 
-  const color = statusColors[status] || 'bg-green-500';
+  // Color basado en estado para todos (incluido colaborativos)
+  const color = statusColors[status] || 'bg-yellow-500';
 
-  // Icono diferente para árboles colaborativos
+  // Icono de árbol para todos los marcadores
   const iconSvg = (type === 'collaborative' || type === 'myProject')
     ? `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
          <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
        </svg>`
-    : `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-         <path d="M12 2L13.09 8.26L22 9L17 14L18.18 22.74L12 19.27L5.82 22.74L7 14L2 9L10.91 8.26L12 2Z"/>
+    : `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 448 512">
+         <path d="M210.6 5.9L62 169.4c-3.9 4.2-6 9.8-6 15.5C56 197.7 66.3 208 79.1 208H104L30.6 281.4c-4.2 4.2-6.6 10-6.6 16C24 309.9 34.1 320 46.6 320H80L5.4 409.5C1.9 413.7 0 419 0 424.5c0 13 10.5 23.5 23.5 23.5H192v32c0 17.7 14.3 32 32 32s32-14.3 32-32V448H424.5c13 0 23.5-10.5 23.5-23.5c0-5.5-1.9-10.8-5.4-15L368 320h33.4c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16L344 208h24.9c12.8 0 23.1-10.3 23.1-23.1c0-5.7-2.1-11.3-6-15.5L237.4 5.9C234 2.1 229.1 0 224 0s-10 2.1-13.4 5.9z"/>
        </svg>`;
 
   // Añadir borde diferente según tipo
@@ -86,7 +89,6 @@ const createTreeIcon = (status, type = 'regular') => {
 
 // Mapeo de estados a texto legible (mover fuera del render)
 const statusLabels = {
-  'sin_plantar': 'Sin Plantar',
   'en_proceso': 'En Proceso',
   'plantado': 'Plantado',
   'verificado': 'Verificado',
@@ -153,9 +155,26 @@ const TreeMap = ({
   onNotInGreenSpace
 }) => {
   const mapRef = useRef();
+  const [loadedDetails, setLoadedDetails] = useState({});
+  const [loadingDetails, setLoadingDetails] = useState({});
   const [greenSpaces, setGreenSpaces] = useState([]);
   const [loadingGreenSpaces, setLoadingGreenSpaces] = useState(false);
   const [errorGreenSpaces, setErrorGreenSpaces] = useState(false);
+
+  // Función para cargar detalles de un árbol
+  const loadTreeDetails = async (treeId) => {
+    if (loadedDetails[treeId] || loadingDetails[treeId]) return;
+
+    setLoadingDetails(prev => ({ ...prev, [treeId]: true }));
+    try {
+      const details = await treeService.getTreeById(treeId);
+      setLoadedDetails(prev => ({ ...prev, [treeId]: details }));
+    } catch (error) {
+      console.error('Error loading tree details:', error);
+    } finally {
+      setLoadingDetails(prev => ({ ...prev, [treeId]: false }));
+    }
+  };
 
   // Centro: usar el prop si está disponible, sino Córdoba Capital, Argentina
   const center = centerProp || [-31.4201, -64.1888];
@@ -364,6 +383,9 @@ const TreeMap = ({
             ? () => onProjectClick(tree)
             : undefined;
 
+          // Z-index mayor para árboles plantados (aparecen encima)
+          const zIndex = (tree.status === 'plantado' || tree.status === 'verificado') ? 1000 : 100;
+
           // Si es colaborativo con onProjectClick, no mostrar popup (abrir modal directo)
           if (handleMarkerClick) {
             return (
@@ -371,6 +393,7 @@ const TreeMap = ({
                 key={`${markerType}-${tree.id}`}
                 position={[lat, lng]}
                 icon={createTreeIcon(tree.status, markerType)}
+                zIndexOffset={zIndex}
                 eventHandlers={{ click: handleMarkerClick }}
               />
             );
@@ -381,77 +404,18 @@ const TreeMap = ({
               key={`${markerType}-${tree.id}`}
               position={[lat, lng]}
               icon={createTreeIcon(tree.status, markerType)}
+              zIndexOffset={zIndex}
+              eventHandlers={{
+                popupopen: () => loadTreeDetails(tree.id)
+              }}
             >
               <Popup>
-                <div className="p-2">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="font-semibold text-green-800">{tree.name || 'Árbol'}</h3>
-                    {tree.type === 'collaborative' && (
-                      <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">
-                        Colaborativo
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-sm text-gray-600">{tree.country || tree.city || 'Ubicación desconocida'}</p>
-                  {tree.type === 'collaborative' ? (
-                    <>
-                      <p className="text-xs text-gray-500 mt-1">
-                        Especie: {tree.tree_species || 'No especificada'}
-                      </p>
-                      {tree.funding_percentage !== undefined && (
-                        <div className="mt-2">
-                          <div className="flex justify-between text-xs mb-1">
-                            <span className="text-gray-600">Financiamiento:</span>
-                            <span className="font-semibold text-purple-600">{tree.funding_percentage}%</span>
-                          </div>
-                          <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div
-                              className="bg-purple-600 h-2 rounded-full transition-all"
-                              style={{ width: `${Math.min(tree.funding_percentage || 0, 100)}%` }}
-                            ></div>
-                          </div>
-                        </div>
-                      )}
-                      {tree.creator_name && (
-                        <p className="text-xs text-gray-500 mt-1">
-                          Creador: {tree.creator_name}
-                        </p>
-                      )}
-                      {tree.status && (
-                        <p className="text-xs mt-1">
-                          <span className={`inline-block w-2 h-2 rounded-full mr-1 ${
-                            tree.status === 'plantado' || tree.status === 'verificado' ? 'bg-green-600' :
-                            tree.status === 'en_proceso' ? 'bg-blue-500' : 'bg-yellow-500'
-                          }`}></span>
-                          {statusLabels[tree.status] || tree.status}
-                        </p>
-                      )}
-                      {tree.message && (
-                        <p className="text-xs text-gray-600 mt-1 italic">
-                          "{tree.message}"
-                        </p>
-                      )}
-                    </>
-                  ) : (
-                    <>
-                      <p className="text-xs text-gray-500">
-                        Creado: {tree.planted_at ? new Date(tree.planted_at).toLocaleDateString() : 'Fecha desconocida'}
-                      </p>
-                      <p className="text-xs mt-1">
-                        <span className={`inline-block w-2 h-2 rounded-full mr-1 ${
-                          tree.status === 'plantado' || tree.status === 'verificado' ? 'bg-green-600' :
-                          tree.status === 'en_proceso' ? 'bg-blue-500' : 'bg-yellow-500'
-                        }`}></span>
-                        {statusLabels[tree.status] || tree.status}
-                      </p>
-                      {tree.message && (
-                        <p className="text-xs text-gray-600 mt-1 italic">
-                          "{tree.message}"
-                        </p>
-                      )}
-                    </>
-                  )}
-                </div>
+                <TreePopupContent
+                  tree={tree}
+                  loadedDetails={loadedDetails}
+                  loadingDetails={loadingDetails}
+                  statusLabels={statusLabels}
+                />
               </Popup>
             </Marker>
           );
@@ -461,7 +425,97 @@ const TreeMap = ({
   );
 };
 
-// Función de comparación personalizada para React.memo
+
+// Componente para el contenido del popup con carga bajo demanda
+const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels }) => {
+  // Usar detalles cargados si existen, sino usar datos del tree
+  const details = loadedDetails[tree.id] || tree;
+  const isLoading = loadingDetails[tree.id];
+
+  // Si está cargando y no hay datos completos
+  if (isLoading && !details.name) {
+    return (
+      <div className="p-2 flex items-center gap-2">
+        <Loader2 className="h-4 w-4 animate-spin text-green-600" />
+        <span className="text-sm text-gray-600">Cargando...</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="p-2">
+      <div className="flex items-center gap-2 mb-1">
+        <h3 className="font-semibold text-green-800">{details.name || 'Árbol'}</h3>
+        {tree.type === 'collaborative' && (
+          <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">
+            Colaborativo
+          </span>
+        )}
+      </div>
+      <p className="text-sm text-gray-600">{details.country || details.city || 'Ubicación desconocida'}</p>
+      {tree.type === 'collaborative' ? (
+        <>
+          <p className="text-xs text-gray-500 mt-1">
+            Especie: {details.tree_species || 'No especificada'}
+          </p>
+          {details.funding_percentage !== undefined && (
+            <div className="mt-2">
+              <div className="flex justify-between text-xs mb-1">
+                <span className="text-gray-600">Financiamiento:</span>
+                <span className="font-semibold text-purple-600">{details.funding_percentage}%</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div
+                  className="bg-purple-600 h-2 rounded-full transition-all"
+                  style={{ width: `${Math.min(details.funding_percentage || 0, 100)}%` }}
+                ></div>
+              </div>
+            </div>
+          )}
+          {details.creator_name && (
+            <p className="text-xs text-gray-500 mt-1">
+              Creador: {details.creator_name}
+            </p>
+          )}
+          {details.status && (
+            <p className="text-xs mt-1">
+              <span className={`inline-block w-2 h-2 rounded-full mr-1 ${
+                details.status === 'plantado' || details.status === 'verificado' ? 'bg-green-600' :
+                details.status === 'en_proceso' ? 'bg-blue-500' : 'bg-yellow-500'
+              }`}></span>
+              {statusLabels[details.status] || details.status}
+            </p>
+          )}
+          {details.message && (
+            <p className="text-xs text-gray-600 mt-1 italic">
+              "{details.message}"
+            </p>
+          )}
+        </>
+      ) : (
+        <>
+          <p className="text-xs text-gray-500">
+            Creado: {details.planted_at ? new Date(details.planted_at).toLocaleDateString() : 'Fecha desconocida'}
+          </p>
+          <p className="text-xs mt-1">
+            <span className={`inline-block w-2 h-2 rounded-full mr-1 ${
+              details.status === 'plantado' || details.status === 'verificado' ? 'bg-green-600' :
+              details.status === 'en_proceso' ? 'bg-blue-500' : 'bg-yellow-500'
+            }`}></span>
+            {statusLabels[details.status] || details.status}
+          </p>
+          {details.message && (
+            <p className="text-xs text-gray-600 mt-1 italic">
+              "{details.message}"
+            </p>
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
+// Función de comparación
 const areEqual = (prevProps, nextProps) => {
   // Comparar props simples
   if (prevProps.height !== nextProps.height) return false;

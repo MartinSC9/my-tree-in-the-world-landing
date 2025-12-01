@@ -620,12 +620,12 @@ const LandingHome = () => {
             <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl p-10 text-center text-white relative overflow-hidden">
               <div className="absolute inset-0 grid-pattern opacity-10" />
               <div className="relative z-10">
-                <h3 className="font-display text-3xl font-semibold mb-4">¿Listos para plantar juntos?</h3>
+                <h3 className="font-display text-3xl font-semibold mb-4 text-white">¿Listos para plantar juntos?</h3>
                 <p className="text-lg mb-8 max-w-2xl mx-auto text-purple-100">
                   Ideal para cumpleaños, proyectos escolares, o simplemente para hacer algo bueno con amigos.
                 </p>
                 <Button
-                  onClick={() => window.open(`${APP_URL}/registro`, '_blank')}
+                  onClick={() => window.location.href = '/mapa'}
                   size="lg"
                   className="bg-white hover:bg-gray-50 text-purple-600 shadow-xl hover:shadow-2xl px-10 py-6"
                 >
@@ -722,7 +722,7 @@ const LandingHome = () => {
             >
               <p className="text-gray-600 mb-4">Tu empresa también puede ser parte del cambio.</p>
               <Button
-                onClick={() => window.open(`${APP_URL}/registro`, '_blank')}
+                onClick={() => window.location.href = '/empresas'}
                 variant="outline"
                 className="border-emerald-600 text-emerald-700 hover:bg-emerald-50"
               >

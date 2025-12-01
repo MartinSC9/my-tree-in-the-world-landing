@@ -8,6 +8,7 @@ import { Input } from '@shared/components/ui/input';
 import { Label } from '@shared/components/ui/label';
 import { calculateCarbonFootprint } from '@/utils/carbonCalculator';
 import { APP_URL } from '@core/config/app.config';
+import Footer from '@shared/components/layout/Footer';
 
 
 
@@ -104,7 +105,7 @@ const EmpresasPage = () => {
               {/* Formulario */}
               <Card className="bg-white shadow-lg border-green-200">
                 <CardHeader className="bg-gradient-to-r from-green-500 to-emerald-600 text-white p-4">
-                  <CardTitle className="flex items-center gap-2 text-lg">
+                  <CardTitle className="flex items-center gap-2 text-lg text-white">
                     <Calculator className="h-5 w-5" />
                     <span>Ingresá los datos de tu empresa</span>
                   </CardTitle>
@@ -163,7 +164,7 @@ const EmpresasPage = () => {
               {/* Resultados */}
               <Card className="bg-white shadow-lg border-green-200">
                 <CardHeader className="bg-gradient-to-r from-green-500 to-emerald-600 text-white p-4">
-                  <CardTitle className="flex items-center gap-2 text-lg">
+                  <CardTitle className="flex items-center gap-2 text-lg text-white">
                     <TrendingUp className="h-5 w-5" />
                     <span>Resultado del cálculo</span>
                   </CardTitle>
@@ -466,7 +467,7 @@ const EmpresasPage = () => {
 
             {/* ROI Section */}
             <div className="mt-8 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl p-6 md:p-8 text-white">
-              <h4 className="text-2xl font-bold mb-4 text-center">ROI de Marketing</h4>
+              <h4 className="text-2xl font-bold mb-4 text-center text-white">ROI de Marketing</h4>
               <p className="text-center mb-6 text-green-100">Con un proyecto colaborativo de $1,800,000 obtenés:</p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -506,7 +507,7 @@ const EmpresasPage = () => {
             className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl p-6 md:p-8 text-white text-center"
           >
             <Building2 className="h-12 w-12 mx-auto mb-4" />
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">¿Listo para hacer la diferencia?</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-3 text-white">¿Listo para hacer la diferencia?</h2>
             <p className="text-base md:text-lg mb-6 max-w-2xl mx-auto">
               Únete a las empresas que ya están compensando su huella de carbono y construyendo un futuro más sostenible
             </p>
@@ -521,6 +522,8 @@ const EmpresasPage = () => {
           </motion.div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

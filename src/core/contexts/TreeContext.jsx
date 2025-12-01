@@ -22,6 +22,7 @@ export const TreeProvider = ({ children }) => {
     inProgressTrees: 0
   });
   const [loadingTrees, setLoadingTrees] = useState(false);
+  const [treeMarkers, setTreeMarkers] = useState([]);
 
   // Usar useRef para persistir entre re-renders de StrictMode
   const cacheRef = useRef({
@@ -83,6 +84,24 @@ export const TreeProvider = ({ children }) => {
     } finally {
       cacheRef.current.isLoading = false;
       setLoadingTrees(false);
+    }
+  };
+
+
+  // Cargar solo marcadores (optimizado para mapas)
+  const loadTreeMarkers = async (forceReload = false) => {
+    if (treeMarkers.length > 0 && !forceReload) {
+      return treeMarkers;
+    }
+
+    try {
+      const data = await treeService.getTreeMarkers();
+      setTreeMarkers(data || []);
+      return data || [];
+    } catch (error) {
+      console.error('Error loading tree markers:', error);
+      setTreeMarkers([]);
+      return [];
     }
   };
 
@@ -177,6 +196,8 @@ export const TreeProvider = ({ children }) => {
     updateTreeStatus,
     getTreesByEmail,
     getTreeById,
+    loadTreeMarkers,
+    treeMarkers,
     stats
   };
 

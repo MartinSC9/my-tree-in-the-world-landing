@@ -32,7 +32,7 @@ const Footer = () => {
 
           {/* Enlaces rápidos */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Enlaces Rápidos</h3>
+            <h3 className="text-lg font-semibold mb-4 text-white">Enlaces Rápidos</h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/" className="text-green-200 hover:text-white transition-colors">
@@ -59,11 +59,11 @@ const Footer = () => {
 
           {/* Contacto */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contacto</h3>
+            <h3 className="text-lg font-semibold mb-4 text-white">Contacto</h3>
             <ul className="space-y-2 text-green-200">
               <li className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
-                <span>info@miarbol.com</span>
+                <span>info@miarbolenelmundo.com</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Phone className="h-4 w-4" />
@@ -71,7 +71,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4" />
-                <span>Buenos Aires, Argentina</span>
+                <span>Córdoba, Argentina</span>
               </li>
             </ul>
           </div>

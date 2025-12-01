@@ -17,6 +17,10 @@ export const API_ENDPOINTS = {
   TREE_MARKERS: '/trees/markers',
   TREE_BY_ID: (id) => `/trees/${id}`,
 
+  // Collaborative Trees
+  COLLABORATIVE_TREES: '/collaborative-trees',
+  COLLABORATIVE_TREE_BY_ID: (id) => `/collaborative-trees/${id}`,
+
   // Available Trees (Catalog)
   AVAILABLE_TREES: '/available-trees',
   AVAILABLE_TREE_BY_ID: (id) => `/available-trees/${id}`,

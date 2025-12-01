@@ -59,7 +59,7 @@ const SorteosPage = () => {
             <motion.div variants={fadeInUp} className="mb-6">
               <Gift className="h-20 w-20 mx-auto text-yellow-300" />
             </motion.div>
-            <motion.h1 variants={fadeInUp} className="text-5xl md:text-6xl font-bold mb-6">
+            <motion.h1 variants={fadeInUp} className="text-5xl md:text-6xl font-bold mb-6 text-white">
               Sorteos de Cupones
             </motion.h1>
             <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-purple-100 max-w-3xl mx-auto mb-8">
@@ -90,7 +90,7 @@ const SorteosPage = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-gray-800 mb-4">
+            <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-purple-800 mb-4">
               Cómo Funcionan los Sorteos
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -142,15 +142,15 @@ const SorteosPage = () => {
                 yellow: 'bg-yellow-100 text-yellow-600 border-yellow-200'
               };
               return (
-                <motion.div key={i} variants={fadeInUp} className="text-center">
+                <motion.div key={i} variants={fadeInUp} className="text-center flex flex-col">
                   <div className={`w-20 h-20 rounded-2xl ${colors[item.color]} border-2 flex items-center justify-center mx-auto mb-4`}>
                     <item.icon className="h-10 w-10" />
                   </div>
-                  <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
-                    <span className="inline-block bg-purple-600 text-white text-sm font-bold px-3 py-1 rounded-full mb-3">
+                  <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 flex-1 flex flex-col justify-center items-center text-center">
+                    <span className="bg-purple-600 text-white text-sm font-bold px-4 py-1 rounded-full mb-3">
                       Paso {item.step}
                     </span>
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2">{item.title}</h3>
+                    <h3 className="text-xl font-semibold text-purple-700 mb-2">{item.title}</h3>
                     <p className="text-gray-600">{item.desc}</p>
                   </div>
                 </motion.div>
@@ -170,7 +170,7 @@ const SorteosPage = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-gray-800 mb-4">
+            <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-purple-800 mb-4">
               Premios Disponibles
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-xl text-gray-600">
@@ -216,7 +216,7 @@ const SorteosPage = () => {
                     <div className="text-white/90 font-medium">DESCUENTO</div>
                   </div>
                   <CardContent className="p-6 text-center">
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2">{item.title}</h3>
+                    <h3 className="text-xl font-semibold text-purple-700 mb-2">{item.title}</h3>
                     <p className="text-gray-600">{item.desc}</p>
                   </CardContent>
                 </Card>
@@ -236,7 +236,7 @@ const SorteosPage = () => {
                 <Sparkles className="h-6 w-6 text-purple-600" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">Mas Aportas = Mas Chances</h3>
+                <h3 className="text-xl font-semibold text-purple-700 mb-2">Mas Aportas = Mas Chances</h3>
                 <p className="text-gray-600">
                   El sistema es justo: cada peso que aportas es un ticket para el sorteo.
                   Si aportas $500, tenes 500 tickets. Si otro aporta $100, tiene 100 tickets.
@@ -258,7 +258,7 @@ const SorteosPage = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-gray-800 mb-4">
+            <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-purple-800 mb-4">
               Todos Ganan
             </motion.h2>
           </motion.div>
@@ -339,7 +339,7 @@ const SorteosPage = () => {
             <motion.div variants={fadeInUp}>
               <Gift className="h-16 w-16 mx-auto mb-6 text-yellow-300" />
             </motion.div>
-            <motion.h2 variants={fadeInUp} className="text-4xl font-bold mb-6">
+            <motion.h2 variants={fadeInUp} className="text-4xl font-bold mb-6 text-white">
               Participa en un Sorteo Hoy
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-xl text-purple-100 mb-8">
