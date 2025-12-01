@@ -89,7 +89,7 @@ const createTreeIcon = (status, type = 'regular') => {
 
 // Mapeo de estados a texto legible (mover fuera del render)
 const statusLabels = {
-  'en_proceso': 'En Proceso',
+  'en_proceso': 'En Progreso',
   'plantado': 'Plantado',
   'verificado': 'Verificado',
   'cancelado': 'Cancelado'
