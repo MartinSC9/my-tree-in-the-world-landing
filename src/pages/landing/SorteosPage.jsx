@@ -80,7 +80,7 @@ const SorteosPage = () => {
         </div>
       </section>
 
-      {/* Como Funciona */}
+      {/* Cómo Funciona */}
       <section className="py-20 px-6">
         <div className="container mx-auto max-w-6xl">
           <motion.div
@@ -91,7 +91,7 @@ const SorteosPage = () => {
             className="text-center mb-16"
           >
             <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-gray-800 mb-4">
-              Como Funcionan los Sorteos
+              Cómo Funcionan los Sorteos
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-2xl mx-auto">
               Las empresas crean proyectos colaborativos con sorteos de cupones para sus clientes.

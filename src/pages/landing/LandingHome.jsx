@@ -98,10 +98,10 @@ const LandingHome = () => {
   }, [user, authLoading, getRedirectPath, navigate]);
 
   const stats = [
-    { icon: TreePine, label: 'Arboles Comprados', value: landingStats.totalTrees, color: 'hsl(152 68% 38%)', bgColor: 'hsl(152 68% 92%)' },
+    { icon: TreePine, label: 'Árboles Comprados', value: landingStats.totalTrees, color: 'hsl(152 68% 38%)', bgColor: 'hsl(152 68% 92%)' },
     { icon: Leaf, label: 'Ya Plantados', value: landingStats.plantedTrees, color: 'hsl(165 60% 40%)', bgColor: 'hsl(165 60% 90%)' },
-    { icon: Globe, label: 'Paises', value: landingStats.totalCountries, color: 'hsl(200 85% 45%)', bgColor: 'hsl(200 85% 92%)' },
-    { icon: Users, label: 'Arboles Colaborativos', value: landingStats.collaborativeTrees || 0, color: 'hsl(280 60% 50%)', bgColor: 'hsl(280 60% 92%)' }
+    { icon: Globe, label: 'Países', value: landingStats.totalCountries, color: 'hsl(200 85% 45%)', bgColor: 'hsl(200 85% 92%)' },
+    { icon: Users, label: 'Árboles Colaborativos', value: landingStats.collaborativeTrees || 0, color: 'hsl(280 60% 50%)', bgColor: 'hsl(280 60% 92%)' }
   ];
 
   // Section refs for scroll animations
@@ -186,7 +186,7 @@ const LandingHome = () => {
               variants={fadeInUp}
               className="font-display text-5xl md:text-7xl lg:text-8xl text-white mb-8 leading-tight tracking-tight"
             >
-              Mi Arbol en el{' '}
+              Mi Árbol en el{' '}
               <span className="relative inline-block">
                 <span className="text-gradient bg-gradient-to-r from-emerald-300 via-green-300 to-teal-300 bg-clip-text text-transparent">
                   Mundo
@@ -204,13 +204,13 @@ const LandingHome = () => {
               variants={fadeInUp}
               className="text-xl md:text-2xl text-green-100/90 mb-6 max-w-3xl mx-auto leading-relaxed font-light"
             >
-              Planta un arbol real. Visitalo cuando quieras.
+              Planta un árbol real. Visitálo cuando quieras.
             </motion.p>
             <motion.p
               variants={fadeInUp}
               className="text-lg md:text-xl text-white/80 mb-12 max-w-2xl mx-auto"
             >
-              Cada arbol tiene su propio codigo QR y certificado.
+              Cada árbol tiene su propio código QR y certificado.
             </motion.p>
 
             <motion.div
@@ -295,10 +295,10 @@ const LandingHome = () => {
               <QrCode className="h-16 w-16 mx-auto mb-6 text-white/90 floating" />
             </motion.div>
             <motion.h2 variants={fadeInUp} className="section-title text-white mb-6">
-              Cada Arbol Tiene su Propia Identidad
+              Cada Árbol Tiene su Propia Identidad
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-green-100/90 max-w-3xl mx-auto leading-relaxed">
-              Cuando plantas con nosotros, tu arbol recibe una identidad unica y verificable.
+              Cuando plantas con nosotros, tu árbol recibe una identidad única y verificable.
             </motion.p>
           </motion.div>
 
@@ -317,15 +317,15 @@ const LandingHome = () => {
                     <Shield className="h-7 w-7 text-emerald-300" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-semibold text-white">Chapa Fisica con QR</h4>
+                    <h4 className="text-xl font-semibold text-white">Chapa Física con QR</h4>
                   </div>
                 </div>
                 <ul className="space-y-3 text-green-100">
                   {[
-                    'Acero inoxidable anti-oxidacion',
-                    'Durabilidad 10+ anos',
+                    'Acero inoxidable anti-oxidación',
+                    'Durabilidad 10+ años',
                     'Nombre personalizado grabado',
-                    'Instalada junto al arbol'
+                    'Instalada junto al árbol'
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm">
                       <CheckCircle className="h-5 w-5 text-emerald-400 flex-shrink-0 mt-0.5" />
@@ -342,17 +342,17 @@ const LandingHome = () => {
                     <Globe className="h-7 w-7 text-emerald-300" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-semibold text-white">Pagina Web Unica</h4>
+                    <h4 className="text-xl font-semibold text-white">Página Web Única</h4>
                   </div>
                 </div>
                 <p className="text-green-200/80 text-sm mb-4">Al escanear el QR, cualquiera puede ver:</p>
                 <ul className="space-y-3 text-green-100">
                   {[
-                    'Foto de tu arbol',
-                    'Ubicacion exacta (GPS)',
-                    'Especie y fecha de plantacion',
+                    'Foto de tu árbol',
+                    'Ubicación exacta (GPS)',
+                    'Especie y fecha de plantación',
                     'CO2 absorbido',
-                    'Quien lo planto'
+                    'Quién lo plantó'
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm">
                       <CheckCircle className="h-5 w-5 text-emerald-400 flex-shrink-0 mt-0.5" />
@@ -408,7 +408,7 @@ const LandingHome = () => {
               Tu Compra Mueve una Cadena de Impacto
             </motion.h2>
             <motion.p variants={fadeInUp} className="section-subtitle mx-auto">
-              Cada arbol activa un ciclo que beneficia al planeta y a las comunidades locales.
+              Cada árbol activa un ciclo que beneficia al planeta y a las comunidades locales.
             </motion.p>
           </motion.div>
 
@@ -464,7 +464,7 @@ const LandingHome = () => {
               <motion.div variants={fadeInUp} className="flex items-center justify-end">
                 <div className="bg-green-600 rounded-xl p-4 text-center text-white shadow-lg hover:scale-105 transition-all duration-300 w-36">
                   <div className="text-3xl mb-1">🌍</div>
-                  <h4 className="font-display text-sm font-bold">Planeta mas verde</h4>
+                  <h4 className="font-display text-sm font-bold">Planeta más verde</h4>
                 </div>
               </motion.div>
             </div>
@@ -474,7 +474,7 @@ const LandingHome = () => {
               <p className="text-xl text-gray-600">
                 <span className="font-bold text-emerald-600">Trabajo digno</span> para familias locales.
                 <span className="font-bold text-emerald-600"> Oxigeno</span> para el planeta.
-                <span className="font-bold text-emerald-600"> Un arbol real</span> con tu nombre.
+                <span className="font-bold text-emerald-600"> Un árbol real</span> con tu nombre.
               </p>
             </motion.div>
           </motion.div>
@@ -491,10 +491,10 @@ const LandingHome = () => {
             className="text-center mb-16"
           >
             <motion.h2 variants={fadeInUp} className="section-title mb-6">
-              Como Funciona
+              Cómo Funciona
             </motion.h2>
             <motion.p variants={fadeInUp} className="section-subtitle mx-auto">
-              En 3 simples pasos, tu arbol estara plantado y con su propia identidad.
+              En 3 simples pasos, tu árbol estará plantado y con su propia identidad.
             </motion.p>
           </motion.div>
 
@@ -510,23 +510,23 @@ const LandingHome = () => {
                 icon: TreePine,
                 color: 'hsl(152 68% 38%)',
                 bg: 'hsl(152 68% 92%)',
-                title: '1. Compra tu Arbol',
-                desc: 'Elige ubicacion, nombre y especie.',
+                title: '1. Compra tu Árbol',
+                desc: 'Elige ubicación, nombre y especie.',
                 price: 'Desde $15,000 ARS'
               },
               {
                 icon: Globe,
                 color: 'hsl(200 85% 45%)',
                 bg: 'hsl(200 85% 92%)',
-                title: '2. Plantacion Real',
-                desc: 'Viveros locales preparan tu arbol. Plantadores profesionales lo plantan. Recibiras fotos del proceso.'
+                title: '2. Plantación Real',
+                desc: 'Viveros locales preparan tu árbol. Plantadores profesionales lo plantan. Recibirás fotos del proceso.'
               },
               {
                 icon: Award,
                 color: 'hsl(45 95% 45%)',
                 bg: 'hsl(45 95% 90%)',
-                title: '3. Tu Arbol, Tu Legado',
-                desc: 'Chapa QR instalada junto al arbol. Certificado digital descargable. Visitalo cuando quieras.'
+                title: '3. Tu Árbol, Tu Legado',
+                desc: 'Chapa QR instalada junto al árbol. Certificado digital descargable. Visitálo cuando quieras.'
               }
             ].map((step, i) => (
               <motion.div key={i} variants={fadeInUp} className="text-center">
@@ -582,10 +582,10 @@ const LandingHome = () => {
               <Users className="h-16 w-16 mx-auto mb-6 text-purple-600 floating" />
             </motion.div>
             <motion.h2 variants={fadeInUp} className="section-title text-purple-900 mb-6">
-              Arboles Colaborativos
+              Árboles Colaborativos
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-xl text-purple-700 max-w-3xl mx-auto">
-              Unite con amigos, familia o comunidades para plantar arboles juntos.
+              Unite con amigos, familia o comunidades para plantar árboles juntos.
             </motion.p>
           </motion.div>
 
@@ -623,9 +623,9 @@ const LandingHome = () => {
             <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl p-10 text-center text-white relative overflow-hidden">
               <div className="absolute inset-0 grid-pattern opacity-10" />
               <div className="relative z-10">
-                <h3 className="font-display text-3xl font-semibold mb-4">Listos para plantar juntos?</h3>
+                <h3 className="font-display text-3xl font-semibold mb-4">¿Listos para plantar juntos?</h3>
                 <p className="text-lg mb-8 max-w-2xl mx-auto text-purple-100">
-                  Ideal para cumpleanos, proyectos escolares, o simplemente para hacer algo bueno con amigos.
+                  Ideal para cumpleaños, proyectos escolares, o simplemente para hacer algo bueno con amigos.
                 </p>
                 <Button
                   onClick={() => window.open(`${APP_URL}/registro`, '_blank')}
@@ -660,7 +660,7 @@ const LandingHome = () => {
                 Empresas que Hacen la Diferencia
               </motion.h2>
               <motion.p variants={fadeInUp} className="section-subtitle mx-auto">
-                Estas empresas lideran el cambio con proyectos de reforestacion.
+                Estas empresas lideran el cambio con proyectos de reforestación.
               </motion.p>
             </motion.div>
 
@@ -723,7 +723,7 @@ const LandingHome = () => {
               variants={fadeInUp}
               className="text-center mt-10"
             >
-              <p className="text-gray-600 mb-4">Tu empresa tambien puede ser parte del cambio.</p>
+              <p className="text-gray-600 mb-4">Tu empresa también puede ser parte del cambio.</p>
               <Button
                 onClick={() => window.open(`${APP_URL}/registro`, '_blank')}
                 variant="outline"
@@ -755,7 +755,7 @@ const LandingHome = () => {
                 Top Colaboradores
               </motion.h2>
               <motion.p variants={fadeInUp} className="section-subtitle text-amber-700 mx-auto">
-                Las personas que mas han aportado a proyectos colaborativos
+                Las personas que más han aportado a proyectos colaborativos
               </motion.p>
             </motion.div>
 
@@ -817,7 +817,7 @@ const LandingHome = () => {
               transition={{ delay: 0.5 }}
               className="text-center mt-10"
             >
-              <p className="text-amber-700 mb-4">Unite a los colaboradores y apoya proyectos de reforestacion</p>
+              <p className="text-amber-700 mb-4">Unite a los colaboradores y apoya proyectos de reforestación</p>
               <Button
                 onClick={() => window.open(`${APP_URL}/registro`, '_blank')}
                 className="bg-amber-500 hover:bg-amber-600 text-white"
@@ -844,10 +844,10 @@ const LandingHome = () => {
               <TreePine className="h-20 w-20 mx-auto mb-6 text-white/90" />
             </motion.div>
             <motion.h2 variants={fadeInUp} className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
-              Planta tu Primer Arbol Hoy
+              Planta tu Primer Árbol Hoy
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-green-100 mb-4 max-w-2xl mx-auto">
-              Un arbol real. Con tu nombre. Para siempre.
+              Un árbol real. Con tu nombre. Para siempre.
             </motion.p>
             <motion.p variants={fadeInUp} className="text-3xl font-bold text-white mb-10">
               Desde $15,000 ARS
