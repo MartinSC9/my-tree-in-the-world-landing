@@ -238,20 +238,6 @@ const LandingHome = () => {
             </motion.div>
           </motion.div>
 
-          {/* Scroll Indicator */}
-          <motion.div
-            className="absolute bottom-10 right-10"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <div className="w-8 h-12 border-2 border-white/30 rounded-full flex justify-center pt-2">
-              <motion.div
-                className="w-2 h-2 bg-white rounded-full"
-                animate={{ y: [0, 16, 0], opacity: [1, 0.3, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-            </div>
-          </motion.div>
         </motion.div>
       </section>
 
