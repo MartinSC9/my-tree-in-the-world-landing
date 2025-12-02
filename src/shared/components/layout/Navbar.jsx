@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@shared/components/ui/button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuth } from '@core/contexts/AuthContext';
@@ -11,6 +11,15 @@ import { APP_URL } from '@core/config/app.config';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Funci�n para scroll al inicio
+  const scrollToTop = (e) => {
+    if (location.pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
   const { user, logout, getRedirectPath } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
@@ -40,7 +49,11 @@ const Navbar = () => {
   };
 
   const handleNavigation = (path) => {
-    navigate(path);
+    if (path === '/' && location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate(path);
+    }
     setIsMenuOpen(false);
     setIsProfileDropdownOpen(false);
   };
@@ -88,7 +101,7 @@ const Navbar = () => {
         <div className="w-full px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 gap-4">
             {/* Logo */}
-            <Link to="/" className="flex items-center space-x-2 flex-shrink-0" aria-label="Ir a página de inicio">
+            <Link to="/" onClick={scrollToTop} className="flex items-center space-x-2 flex-shrink-0" aria-label="Ir a página de inicio">
               <TreePine className="h-7 w-7 text-green-600" />
               <span className="text-lg font-bold text-green-800 hidden xl:block">Mi Árbol en el Mundo</span>
               <span className="text-lg font-bold text-green-800 xl:hidden hidden md:block">Mi Árbol</span>
@@ -102,6 +115,7 @@ const Navbar = () => {
                       <Link
                         key={item.name}
                         to={item.path}
+                        onClick={item.path === "/" ? scrollToTop : undefined}
                         className="text-green-700 hover:text-green-900 hover:bg-green-50 transition-all flex items-center gap-1.5 font-medium px-3 py-2 rounded-lg"
                       >
                         <item.icon className="h-4 w-4" />

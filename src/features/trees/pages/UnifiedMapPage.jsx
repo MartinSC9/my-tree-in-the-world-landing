@@ -222,7 +222,7 @@ const UnifiedMapPage = () => {
                 />
 
                 {/* Leyenda de colores */}
-                <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-3 border border-gray-200 z-[1000]">
+                <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-3 border border-gray-200 z-[10]">
                   <div className="text-xs font-semibold text-gray-700 mb-2">Leyenda</div>
                   <div className="space-y-1.5 text-xs">
                     <div className="flex items-center space-x-2">

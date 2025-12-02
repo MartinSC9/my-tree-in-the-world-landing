@@ -220,7 +220,7 @@ const LandingHome = () => {
               <Button
                 onClick={() => window.open(`${APP_URL}/registro`, '_blank')}
                 size="lg"
-                className="btn-primary group text-lg px-10 rounded-xl w-[280px] h-[68px] justify-center items-center"
+                className="btn-primary group text-lg px-10 rounded-xl w-full sm:w-[280px] h-[68px] justify-center items-center"
               >
                 <TreePine className="h-6 w-6 mr-3 group-hover:scale-110 transition-transform" />
                 Comenzar Ahora
@@ -229,9 +229,9 @@ const LandingHome = () => {
               <Button
                 asChild
                 size="lg"
-                className="glass-effect hover:bg-white/20 text-white px-10 text-lg rounded-xl border-white/30 w-[280px] h-[68px] justify-center items-center"
+                className="glass-effect hover:bg-white/20 text-white px-10 text-lg rounded-xl border-white/30 w-full sm:w-[280px] h-[68px] justify-center items-center"
               >
-                <Link to="/mapa" className="flex items-center justify-center w-[280px] h-[68px]">
+                <Link to="/mapa" className="flex items-center justify-center w-full sm:w-[280px] h-[68px]">
                   <Globe className="h-6 w-6 mr-3" />
                   Ver Mapa Global
                 </Link>
