@@ -99,7 +99,7 @@ Una página web única con:
 - 🌍 Impacto ambiental (CO₂ absorbido, agua filtrada)
 - 📊 Estadísticas de crecimiento
 
-📄 **Ver documentación completa**: `SISTEMA_QR_ARBOLES.md`
+📄 **Ver documentación completa**: [sistema-qr-arboles.md](./features/sistema-qr-arboles.md)
 
 ## ¿Qué son los Árboles Colaborativos?
 
@@ -208,3 +208,38 @@ No, es tan fácil como:
 ---
 
 **En resumen**: Es una página web donde cualquier persona puede plantar árboles para ayudar al planeta, todo desde la comodidad de su casa, y esos árboles se plantan de verdad en el mundo real.
+
+---
+
+## Documentación Técnica
+
+Esta carpeta contiene documentación organizada por categorías:
+
+### Estructura de Documentación
+
+| Carpeta | Descripción |
+|---------|-------------|
+| [roles/](./roles/) | Documentación por tipo de usuario |
+| [features/](./features/) | Sistemas y funcionalidades planificadas |
+| [technical/](./technical/) | Documentación técnica para desarrolladores |
+| [setup/](./setup/) | Guías de configuración y mejoras |
+
+### Enlaces Rápidos
+
+**Por Rol:**
+- [Usuario Final](./roles/01-usuario/)
+- [Empresa](./roles/02-empresa/)
+- [Vivero](./roles/03-vivero/)
+- [Plantador](./roles/04-plantador/)
+- [Administrador](./roles/05-admin/)
+
+**Funcionalidades:**
+- [Sistema EcoPoints](./features/sistema-ecopoints.md)
+- [Sistema QR](./features/sistema-qr-arboles.md)
+- [Sorteos y Cupones](./features/sistema-sorteo-cupones.md)
+
+**Técnico:**
+- [Arquitectura Frontend](./technical/arquitectura-frontend.md)
+
+**Setup:**
+- [Mejoras Landing](./setup/mejoras-landing.md)
