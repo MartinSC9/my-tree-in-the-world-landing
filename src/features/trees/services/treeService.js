@@ -38,24 +38,6 @@ export const treeService = {
   async getTreeById(id) {
     const response = await api.get(API_ENDPOINTS.TREE_BY_ID(id));
     return response.data.tree;
-  },
-
-  // Create tree
-  async createTree(treeData) {
-    const response = await api.post(API_ENDPOINTS.TREES, treeData);
-    return response.data;
-  },
-
-  // Update tree
-  async updateTree(id, updates) {
-    const response = await api.put(API_ENDPOINTS.TREE_BY_ID(id), updates);
-    return response.data.tree;
-  },
-
-  // Delete tree
-  async deleteTree(id) {
-    const response = await api.delete(API_ENDPOINTS.TREE_BY_ID(id));
-    return response.data;
   }
 };
 

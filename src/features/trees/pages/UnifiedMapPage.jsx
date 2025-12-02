@@ -1,26 +1,19 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Filter, Search, TreePine, Globe, Users, Plus, X, ChevronDown, ChevronUp, User } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { TreePine, Globe, Users, Plus, X, User } from 'lucide-react';
 import { Button } from '@shared/components/ui/button';
-import { Input } from '@shared/components/ui/input';
-import { Select } from '@shared/components/ui/select';
 import { Card, CardContent } from '@shared/components/ui/card';
 import TreeMap from '@features/trees/components/TreeMap';
-import PlantTreeWizard from '@features/trees/components/PlantTreeWizard';
 import { treeService } from '@features/trees/services';
 import { useAuth } from '@core/contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@shared/components/ui/dialog';
-import { toast } from '@shared/components/ui/use-toast';
 import Footer from '@shared/components/layout/Footer';
+import { APP_URL } from '@core/config/app.config';
 
 const UnifiedMapPage = () => {
-  const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, getRedirectPath } = useAuth();
   const [allMarkers, setAllMarkers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showFilters, setShowFilters] = useState(false);
-  const [showPlantModal, setShowPlantModal] = useState(false);
   const [selectedTree, setSelectedTree] = useState(null);
 
   // Vista activa: 'all', 'my-trees', 'collaborative'
@@ -120,13 +113,13 @@ const UnifiedMapPage = () => {
     setSelectedTree(tree);
   };
 
-  const handlePlantComplete = (newTree) => {
-    setShowPlantModal(false);
-    toast({
-      title: "¡Árbol plantado!",
-      description: "Tu árbol ha sido registrado exitosamente",
-    });
-    loadMarkers();
+  // Redirigir al front app para plantar
+  const handlePlantClick = () => {
+    if (user) {
+      window.location.href = getRedirectPath(user.role, user.id);
+    } else {
+      window.location.href = APP_URL + '/registro';
+    }
   };
 
   // Estadísticas globales simplificadas
@@ -245,49 +238,26 @@ const UnifiedMapPage = () => {
             </CardContent>
           </Card>
 
-          {/* Floating Plant Button */}
-          {user && (
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.5, type: 'spring' }}
-              className="fixed bottom-8 right-8 z-50"
+          {/* Floating Plant Button - Redirects to front app */}
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.5, type: 'spring' }}
+            className="fixed bottom-8 right-8 z-50"
+          >
+            <Button
+              onClick={handlePlantClick}
+              className="bg-green-600 hover:bg-green-700 text-white rounded-full w-16 h-16 shadow-2xl flex items-center justify-center group"
+              size="lg"
             >
-              <Button
-                onClick={() => setShowPlantModal(true)}
-                className="bg-green-600 hover:bg-green-700 text-white rounded-full w-16 h-16 shadow-2xl flex items-center justify-center group"
-                size="lg"
-              >
-                <Plus className="h-8 w-8 group-hover:rotate-90 transition-transform duration-300" />
-              </Button>
-              <div className="absolute -top-12 right-0 bg-gray-900 text-white text-sm px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                Plantar Árbol
-              </div>
-            </motion.div>
-          )}
+              <Plus className="h-8 w-8 group-hover:rotate-90 transition-transform duration-300" />
+            </Button>
+            <div className="absolute -top-12 right-0 bg-gray-900 text-white text-sm px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+              Plantar Árbol
+            </div>
+          </motion.div>
         </motion.div>
       </div>
-
-      {/* Plant Tree Modal */}
-      <Dialog open={showPlantModal} onOpenChange={setShowPlantModal}>
-        <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <div className="flex items-center justify-between">
-              <DialogTitle className="text-2xl font-bold text-green-800 flex items-center gap-2">
-                <TreePine className="h-6 w-6" />
-                Plantar Nuevo Árbol
-              </DialogTitle>
-              <button
-                onClick={() => setShowPlantModal(false)}
-                className="rounded-full p-2 hover:bg-gray-100 transition-colors"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-          </DialogHeader>
-          <PlantTreeWizard onComplete={handlePlantComplete} />
-        </DialogContent>
-      </Dialog>
 
       {/* Collaborative Tree Detail Modal */}
       <Dialog open={!!selectedTree} onOpenChange={(open) => !open && setSelectedTree(null)}>
