@@ -172,11 +172,11 @@ const ContactoPage = () => {
                     <Mail className="h-6 w-6 text-green-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">Email corporativo</h3>
-                    <p className="text-gray-600">empresas@miarbol.com</p>
+                    <h3 className="font-semibold">Email</h3>
+                    <p className="text-gray-600">info@miarbolenelmundo.com</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-4">
                   <div className="bg-green-100 p-3 rounded-full">
                     <Phone className="h-6 w-6 text-green-600" />
@@ -186,14 +186,14 @@ const ContactoPage = () => {
                     <p className="text-gray-600">+54 11 1234-5678</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-4">
                   <div className="bg-green-100 p-3 rounded-full">
                     <MapPin className="h-6 w-6 text-green-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold">Oficina</h3>
-                    <p className="text-gray-600">Buenos Aires, Argentina</p>
+                    <p className="text-gray-600">Córdoba, Argentina</p>
                   </div>
                 </div>
               </CardContent>
