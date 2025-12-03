@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@shared/components/ui/button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuth } from '@core/contexts/AuthContext';
-import { TreePine, Menu, X, Home, Gift, Sprout, Globe, User, Users, LogOut, LogIn, UserPlus, Settings, ShoppingCart, Bell, ChevronDown } from 'lucide-react';
+import { TreePine, Menu, X, Home, Gift, Sprout, Globe, User, Users, LogOut, LogIn, UserPlus, Settings, ShoppingCart, Bell, ChevronDown, QrCode, Share2 } from 'lucide-react';
 import { APP_URL } from '@core/config/app.config';
 
 
@@ -23,24 +23,29 @@ const Navbar = () => {
   const { user, logout, getRedirectPath } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [isProgramsDropdownOpen, setIsProgramsDropdownOpen] = useState(false);
   const profileDropdownRef = useRef(null);
+  const programsDropdownRef = useRef(null);
 
-  // Cerrar dropdown al hacer click fuera
+  // Cerrar dropdowns al hacer click fuera
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target)) {
         setIsProfileDropdownOpen(false);
       }
+      if (programsDropdownRef.current && !programsDropdownRef.current.contains(event.target)) {
+        setIsProgramsDropdownOpen(false);
+      }
     };
 
-    if (isProfileDropdownOpen) {
+    if (isProfileDropdownOpen || isProgramsDropdownOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isProfileDropdownOpen]);
+  }, [isProfileDropdownOpen, isProgramsDropdownOpen]);
 
   const handleLogout = () => {
     logout();
@@ -86,9 +91,14 @@ const Navbar = () => {
 
   const navigationItems = [
     { name: 'Inicio', path: '/', icon: Home, isInternal: true },
-    { name: 'Sorteos', path: '/sorteos', icon: Gift, isInternal: true },
     { name: 'Plantar Árbol', path: `${APP_URL}/registro`, icon: Sprout, isInternal: false },
     { name: 'Mapa Global', path: '/mapa', icon: Globe, isInternal: true },
+  ];
+
+  const programsItems = [
+    { name: 'Sorteos', path: '/sorteos', icon: Gift, desc: 'Participá y ganá árboles' },
+    { name: 'Referidos', path: '/referidos', icon: Share2, desc: 'Invitá amigos y ganá puntos' },
+    { name: 'QR Empresas', path: '/qr-productos', icon: QrCode, desc: 'Programa para empresas partner' },
   ];
 
   return (
@@ -132,6 +142,47 @@ const Navbar = () => {
                       </button>
                     )
                   ))}
+
+                  {/* Dropdown Programas */}
+                  <div className="relative" ref={programsDropdownRef}>
+                    <button
+                      onClick={() => setIsProgramsDropdownOpen(!isProgramsDropdownOpen)}
+                      className="text-green-700 hover:text-green-900 hover:bg-green-50 transition-all flex items-center gap-1.5 font-medium px-3 py-2 rounded-lg"
+                    >
+                      <Gift className="h-4 w-4" />
+                      <span className="text-sm">Programas</span>
+                      <ChevronDown className={`h-4 w-4 transition-transform ${isProgramsDropdownOpen ? 'rotate-180' : ''}`} />
+                    </button>
+
+                    <AnimatePresence>
+                      {isProgramsDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50"
+                        >
+                          {programsItems.map((item) => (
+                            <Link
+                              key={item.name}
+                              to={item.path}
+                              onClick={() => setIsProgramsDropdownOpen(false)}
+                              className="flex items-start gap-3 px-4 py-3 hover:bg-green-50 transition-colors"
+                            >
+                              <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
+                                <item.icon className="h-4 w-4 text-green-600" />
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium text-gray-900">{item.name}</p>
+                                <p className="text-xs text-gray-500">{item.desc}</p>
+                              </div>
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
               </div>
             )}
 
@@ -359,6 +410,26 @@ const Navbar = () => {
                           <span className="font-medium">{item.name}</span>
                         </button>
                       ))}
+
+                      {/* Sección Programas en móvil */}
+                      <div className="pt-4 mt-4 border-t border-gray-200">
+                        <p className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                          Programas
+                        </p>
+                        {programsItems.map((item) => (
+                          <button
+                            key={item.name}
+                            onClick={() => handleNavigation(item.path)}
+                            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-gray-700 hover:bg-green-50 hover:text-green-900 transition-colors"
+                          >
+                            <item.icon className="h-5 w-5" />
+                            <div>
+                              <span className="font-medium block">{item.name}</span>
+                              <span className="text-xs text-gray-500">{item.desc}</span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
                   </nav>
                 )}
 

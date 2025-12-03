@@ -12,6 +12,8 @@ import AboutPage from '@/pages/landing/AboutPage';
 import EmpresasPage from '@/pages/landing/EmpresasPage';
 import SorteosPage from '@/pages/landing/SorteosPage';
 import ContactoPage from '@/pages/landing/ContactoPage';
+import ReferidosPage from '@/pages/landing/ReferidosPage';
+import QRProductosPage from '@/pages/landing/QRProductosPage';
 
 // Public pages
 import UnifiedMapPage from '@features/trees/pages/UnifiedMapPage';
@@ -52,6 +54,16 @@ const App = () => {
             <Route path="/contacto" element={
               <AuthenticatedLayout>
                 <ContactoPage />
+              </AuthenticatedLayout>
+            } />
+            <Route path="/referidos" element={
+              <AuthenticatedLayout>
+                <ReferidosPage />
+              </AuthenticatedLayout>
+            } />
+            <Route path="/qr-productos" element={
+              <AuthenticatedLayout>
+                <QRProductosPage />
               </AuthenticatedLayout>
             } />
             <Route path="/mapa" element={
