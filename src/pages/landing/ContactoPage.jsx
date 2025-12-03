@@ -53,7 +53,7 @@ const ContactoPage = () => {
             Contacto Corporativo
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            ¿Tu empresa quiere ser parte del cambio? Contáctaños para conocer nuestras soluciones de compensación de carbono y reforestación corporativa.
+            ¿Tu empresa quiere ser parte del cambio? Contáctanos para conocer nuestras soluciones de compensación de carbono y reforestación corporativa.
           </p>
         </div>
 
@@ -144,7 +144,7 @@ const ContactoPage = () => {
                     name="mensaje"
                     value={formData.mensaje}
                     onChange={handleInputChange}
-                    placeholder="Cuéntaños sobre tu empresa y qué tipo de solución ambiental estás buscando..."
+                    placeholder="Cuéntanos sobre tu empresa y qué tipo de solución ambiental estás buscando..."
                     rows={5}
                     required
                   />
