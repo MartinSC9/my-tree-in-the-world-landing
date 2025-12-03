@@ -418,8 +418,7 @@ const QRProductosPage = () => {
               <Button
                 onClick={() => navigate('/empresas')}
                 size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white/10 px-12 py-7 text-xl"
+                className="border-2 border-white bg-transparent text-white hover:bg-white/10 px-12 py-7 text-xl"
               >
                 Ver Programa Empresarial
               </Button>
