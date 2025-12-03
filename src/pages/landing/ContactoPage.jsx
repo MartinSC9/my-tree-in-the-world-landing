@@ -7,6 +7,7 @@ import { Label } from '@shared/components/ui/label';
 import { Mail, Phone, MapPin, Send, Building2 } from 'lucide-react';
 import { useToast } from '@shared/components/ui/use-toast';
 import { Link } from 'react-router-dom';
+import Footer from '@shared/components/layout/Footer';
 
 const ContactoPage = () => {
   const { toast } = useToast();
@@ -224,6 +225,8 @@ const ContactoPage = () => {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };
