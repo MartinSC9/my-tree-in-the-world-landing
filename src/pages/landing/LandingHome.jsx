@@ -92,7 +92,7 @@ const LandingHome = () => {
 
   useEffect(() => {
     if (user && !authLoading) {
-      const redirectPath = getRedirectPath(user.role, user.id);
+      const redirectPath = getRedirectPath(user.role);
       navigate(redirectPath, { replace: true });
     }
   }, [user, authLoading, getRedirectPath, navigate]);

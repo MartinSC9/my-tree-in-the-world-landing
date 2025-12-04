@@ -116,7 +116,7 @@ const UnifiedMapPage = () => {
   // Redirigir al front app para plantar
   const handlePlantClick = () => {
     if (user) {
-      window.open(APP_URL + getRedirectPath(user.role, user.id), '_blank');
+      window.open(getRedirectPath(user.role), '_blank');
     } else {
       window.open(APP_URL + '/', '_blank');
     }

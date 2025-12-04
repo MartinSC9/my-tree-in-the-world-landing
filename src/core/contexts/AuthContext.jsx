@@ -32,19 +32,19 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const getRedirectPath = (role, userId) => {
-        switch (role) {
+  const getRedirectPath = (role) => {
+    switch (role) {
       case 'admin':
-        return APP_URL + '/admin/' + userId + '/dashboard';
+        return APP_URL + '/admin/dashboard';
       case 'company':
       case 'empresa':
-        return APP_URL + '/empresa/' + userId + '/dashboard';
+        return APP_URL + '/empresa/dashboard';
       case 'plantador':
-        return APP_URL + '/plantador/' + userId + '/dashboard';
+        return APP_URL + '/plantador/dashboard';
       case 'vivero':
-        return APP_URL + '/vivero/' + userId + '/dashboard';
+        return APP_URL + '/vivero/dashboard';
       case 'user':
-        return APP_URL + '/usuario/' + userId + '/feed';
+        return APP_URL + '/usuario/feed';
       default:
         return '/';
     }
