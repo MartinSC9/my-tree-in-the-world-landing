@@ -116,9 +116,9 @@ const UnifiedMapPage = () => {
   // Redirigir al front app para plantar
   const handlePlantClick = () => {
     if (user) {
-      window.location.href = getRedirectPath(user.role, user.id);
+      window.open(APP_URL + getRedirectPath(user.role, user.id), '_blank');
     } else {
-      window.location.href = APP_URL + '/registro';
+      window.open(APP_URL + '/', '_blank');
     }
   };
 
@@ -247,14 +247,12 @@ const UnifiedMapPage = () => {
           >
             <Button
               onClick={handlePlantClick}
-              className="bg-green-600 hover:bg-green-700 text-white rounded-full w-16 h-16 shadow-2xl flex items-center justify-center group"
+              className="bg-green-600 hover:bg-green-700 text-white rounded-full px-6 py-4 shadow-2xl flex items-center justify-center gap-2"
               size="lg"
             >
-              <Plus className="h-8 w-8 group-hover:rotate-90 transition-transform duration-300" />
+              <TreePine className="h-5 w-5" />
+              <span className="font-medium">Plantar Árbol</span>
             </Button>
-            <div className="absolute -top-12 right-0 bg-gray-900 text-white text-sm px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-              Plantar Árbol
-            </div>
           </motion.div>
         </motion.div>
       </div>
