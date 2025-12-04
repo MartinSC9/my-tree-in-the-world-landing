@@ -14,6 +14,8 @@ import SorteosPage from '@/pages/landing/SorteosPage';
 import ContactoPage from '@/pages/landing/ContactoPage';
 import ReferidosPage from '@/pages/landing/ReferidosPage';
 import QRProductosPage from '@/pages/landing/QRProductosPage';
+import TerminosPage from '@/pages/landing/TerminosPage';
+import PrivacidadPage from '@/pages/landing/PrivacidadPage';
 
 // Public pages
 import UnifiedMapPage from '@features/trees/pages/UnifiedMapPage';
@@ -69,6 +71,18 @@ const App = () => {
             <Route path="/mapa" element={
               <AuthenticatedLayout>
                 <UnifiedMapPage />
+              </AuthenticatedLayout>
+            } />
+
+            {/* Legal pages (public) */}
+            <Route path="/terminos" element={
+              <AuthenticatedLayout>
+                <TerminosPage />
+              </AuthenticatedLayout>
+            } />
+            <Route path="/privacidad" element={
+              <AuthenticatedLayout>
+                <PrivacidadPage />
               </AuthenticatedLayout>
             } />
 

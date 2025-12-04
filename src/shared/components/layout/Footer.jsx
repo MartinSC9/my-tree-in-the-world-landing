@@ -77,9 +77,21 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-green-700 mt-8 pt-8 text-center text-green-200">
-          <p>&copy; {new Date().getFullYear()} Mi Árbol en el Mundo. Todos los derechos reservados.</p>
+        {/* Legal Links */}
+        <div className="border-t border-green-700 mt-8 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-green-200 text-center md:text-left">
+              &copy; {new Date().getFullYear()} Mi Árbol en el Mundo. Todos los derechos reservados.
+            </p>
+            <div className="flex gap-6">
+              <Link to="/terminos" className="text-green-200 hover:text-white transition-colors text-sm">
+                Términos y Condiciones
+              </Link>
+              <Link to="/privacidad" className="text-green-200 hover:text-white transition-colors text-sm">
+                Política de Privacidad
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
