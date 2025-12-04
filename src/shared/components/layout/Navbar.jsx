@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@shared/components/ui/button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuth } from '@core/contexts/AuthContext';
-import { TreePine, Menu, X, Home, Gift, Sprout, Globe, User, Users, LogOut, LogIn, UserPlus, Settings, ShoppingCart, Bell, ChevronDown, QrCode, Share2 } from 'lucide-react';
+import { TreePine, Menu, X, Home, Gift, Sprout, Globe, User, Users, LogOut, LogIn, UserPlus, Settings, ShoppingCart, Bell, ChevronDown, QrCode, Share2, Store, Shovel } from 'lucide-react';
 import { APP_URL } from '@core/config/app.config';
 
 
@@ -24,8 +24,10 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [isProgramsDropdownOpen, setIsProgramsDropdownOpen] = useState(false);
+  const [isSociosDropdownOpen, setIsSociosDropdownOpen] = useState(false);
   const profileDropdownRef = useRef(null);
   const programsDropdownRef = useRef(null);
+  const sociosDropdownRef = useRef(null);
 
   // Cerrar dropdowns al hacer click fuera
   useEffect(() => {
@@ -36,16 +38,19 @@ const Navbar = () => {
       if (programsDropdownRef.current && !programsDropdownRef.current.contains(event.target)) {
         setIsProgramsDropdownOpen(false);
       }
+      if (sociosDropdownRef.current && !sociosDropdownRef.current.contains(event.target)) {
+        setIsSociosDropdownOpen(false);
+      }
     };
 
-    if (isProfileDropdownOpen || isProgramsDropdownOpen) {
+    if (isProfileDropdownOpen || isProgramsDropdownOpen || isSociosDropdownOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isProfileDropdownOpen, isProgramsDropdownOpen]);
+  }, [isProfileDropdownOpen, isProgramsDropdownOpen, isSociosDropdownOpen]);
 
   const handleLogout = () => {
     logout();
@@ -99,6 +104,11 @@ const Navbar = () => {
     { name: 'Sorteos', path: '/sorteos', icon: Gift, desc: 'Participá y ganá árboles' },
     { name: 'Referidos', path: '/referidos', icon: Share2, desc: 'Invitá amigos y ganá puntos' },
     { name: 'QR Empresas', path: '/qr-productos', icon: QrCode, desc: 'Programa para empresas partner' },
+  ];
+
+  const sociosItems = [
+    { name: 'Viveros', path: '/viveros', icon: Store, desc: 'Vendé tus árboles con nosotros' },
+    { name: 'Plantadores', path: '/plantadores', icon: Shovel, desc: 'Ganá dinero plantando árboles' },
   ];
 
   return (
@@ -168,6 +178,47 @@ const Navbar = () => {
                               key={item.name}
                               to={item.path}
                               onClick={() => setIsProgramsDropdownOpen(false)}
+                              className="flex items-start gap-3 px-4 py-3 hover:bg-green-50 transition-colors"
+                            >
+                              <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
+                                <item.icon className="h-4 w-4 text-green-600" />
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium text-gray-900">{item.name}</p>
+                                <p className="text-xs text-gray-500">{item.desc}</p>
+                              </div>
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Dropdown Socios */}
+                  <div className="relative" ref={sociosDropdownRef}>
+                    <button
+                      onClick={() => setIsSociosDropdownOpen(!isSociosDropdownOpen)}
+                      className="text-green-700 hover:text-green-900 hover:bg-green-50 transition-all flex items-center gap-1.5 font-medium px-3 py-2 rounded-lg"
+                    >
+                      <Users className="h-4 w-4" />
+                      <span className="text-sm">Socios</span>
+                      <ChevronDown className={`h-4 w-4 transition-transform ${isSociosDropdownOpen ? 'rotate-180' : ''}`} />
+                    </button>
+
+                    <AnimatePresence>
+                      {isSociosDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50"
+                        >
+                          {sociosItems.map((item) => (
+                            <Link
+                              key={item.name}
+                              to={item.path}
+                              onClick={() => setIsSociosDropdownOpen(false)}
                               className="flex items-start gap-3 px-4 py-3 hover:bg-green-50 transition-colors"
                             >
                               <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
@@ -417,6 +468,26 @@ const Navbar = () => {
                           Programas
                         </p>
                         {programsItems.map((item) => (
+                          <button
+                            key={item.name}
+                            onClick={() => handleNavigation(item.path)}
+                            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-gray-700 hover:bg-green-50 hover:text-green-900 transition-colors"
+                          >
+                            <item.icon className="h-5 w-5" />
+                            <div>
+                              <span className="font-medium block">{item.name}</span>
+                              <span className="text-xs text-gray-500">{item.desc}</span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+
+                      {/* Sección Socios en móvil */}
+                      <div className="pt-4 mt-4 border-t border-gray-200">
+                        <p className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                          Socios
+                        </p>
+                        {sociosItems.map((item) => (
                           <button
                             key={item.name}
                             onClick={() => handleNavigation(item.path)}

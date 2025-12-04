@@ -16,6 +16,8 @@ import ReferidosPage from '@/pages/landing/ReferidosPage';
 import QRProductosPage from '@/pages/landing/QRProductosPage';
 import TerminosPage from '@/pages/landing/TerminosPage';
 import PrivacidadPage from '@/pages/landing/PrivacidadPage';
+import ViverosPage from '@/pages/landing/ViverosPage';
+import PlantadoresPage from '@/pages/landing/PlantadoresPage';
 
 // Public pages
 import UnifiedMapPage from '@features/trees/pages/UnifiedMapPage';
@@ -66,6 +68,16 @@ const App = () => {
             <Route path="/qr-productos" element={
               <AuthenticatedLayout>
                 <QRProductosPage />
+              </AuthenticatedLayout>
+            } />
+            <Route path="/viveros" element={
+              <AuthenticatedLayout>
+                <ViverosPage />
+              </AuthenticatedLayout>
+            } />
+            <Route path="/plantadores" element={
+              <AuthenticatedLayout>
+                <PlantadoresPage />
               </AuthenticatedLayout>
             } />
             <Route path="/mapa" element={
