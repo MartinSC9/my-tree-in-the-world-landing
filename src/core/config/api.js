@@ -63,7 +63,7 @@ api.interceptors.response.use(
 
         // Redirigir al login después de un breve delay
         setTimeout(() => {
-          window.location.href = '/login';
+          window.location.href = '/';
         }, 1500);
 
         return Promise.reject(refreshError);

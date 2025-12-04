@@ -259,7 +259,7 @@ const Navbar = () => {
               ) : (
                 <>
                   <Button
-                    onClick={() => window.open(`${APP_URL}/login`, '_blank')}
+                    onClick={() => window.open(`${APP_URL}/`, '_blank')}
                     variant="ghost"
                     size="sm"
                     className="text-green-700 hover:text-green-900 hover:bg-green-50"
@@ -373,7 +373,7 @@ const Navbar = () => {
                 ) : (
                   <div className="mb-6 space-y-2">
                     <Button
-                      onClick={() => window.open(`${APP_URL}/login`, '_blank')}
+                      onClick={() => window.open(`${APP_URL}/`, '_blank')}
                       variant="outline"
                       className="w-full border-green-600 text-green-700 hover:bg-green-50"
                     >
