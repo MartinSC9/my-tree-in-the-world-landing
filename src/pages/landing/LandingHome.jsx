@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { TreePine, Globe, Users, Award, Leaf, Heart, QrCode, Shield, CheckCircle, ArrowRight, MapPin, TrendingUp, FileText, Building2, Trophy, Gift, Share2 } from 'lucide-react';
+import { TreePine, Globe, Users, Award, Leaf, Heart, QrCode, Shield, CheckCircle, ArrowRight, MapPin, TrendingUp, FileText, Building2, Trophy, Gift, Share2, ChevronDown } from 'lucide-react';
 import { Button } from '@shared/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@shared/components/ui/card';
 import { useTree } from '@core/contexts/TreeContext';
@@ -239,9 +239,28 @@ const LandingHome = () => {
                 </Link>
               </Button>
             </motion.div>
+
+            {/* Scroll Indicator */}
+            <motion.div
+              variants={fadeInUp}
+              className="mt-10"
+            >
+              <motion.div
+                className="flex flex-col items-center cursor-pointer"
+                onClick={() => uniqueRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                animate={{ y: [0, 6, 0] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <span className="text-white/70 text-sm mb-2 font-medium">Descubre más</span>
+                <div className="w-10 h-10 rounded-full border-2 border-white/40 flex items-center justify-center backdrop-blur-sm bg-white/10 hover:bg-white/20 transition-colors">
+                  <ChevronDown className="h-5 w-5 text-white/80" />
+                </div>
+              </motion.div>
+            </motion.div>
           </motion.div>
 
         </motion.div>
+
       </section>
 
       {/* Stats Section */}
