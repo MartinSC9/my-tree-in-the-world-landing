@@ -302,7 +302,14 @@ const LandingHome = () => {
       </section>
 
       {/* QUE HACE UNICO A TU ARBOL - Nueva seccion (reemplaza Nuestra Mision) */}
-      <section ref={uniqueRef} className="section-padding nature-gradient relative overflow-hidden">
+      <section ref={uniqueRef} className="section-padding relative overflow-hidden">
+        {/* Background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/images/arbol-identidad.jpeg')" }}
+        />
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-black/60" />
         <div className="absolute inset-0 grid-pattern opacity-10" />
 
         <div className="container-wide relative z-10">
@@ -315,8 +322,11 @@ const LandingHome = () => {
             <motion.div variants={fadeInUp}>
               <QrCode className="h-16 w-16 mx-auto mb-6 text-white/90 floating" />
             </motion.div>
-            <motion.h2 variants={fadeInUp} className="section-title text-white mb-6">
-              Cada Árbol Tiene su Propia Identidad
+            <motion.h2 variants={fadeInUp} className="section-title !text-white mb-6">
+              Cada Árbol Tiene su Propia{' '}
+              <span className="text-gradient bg-gradient-to-r from-emerald-300 via-green-300 to-teal-300 bg-clip-text text-transparent">
+                Identidad
+              </span>
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-green-100/90 max-w-3xl mx-auto leading-relaxed">
               Cuando plantas con nosotros, tu árbol recibe una identidad única y verificable.
@@ -414,7 +424,12 @@ const LandingHome = () => {
       </section>
 
       {/* IMPACTO TRIPLE - Nueva seccion (reemplaza Environmental Commitment y Beneficios Gratuitos) */}
-      <section ref={impactRef} className="section-padding bg-white relative overflow-hidden">
+      <section ref={impactRef} className="py-24 md:py-32 px-4 bg-white relative overflow-hidden">
+        {/* Background image muy transparente */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.15]"
+          style={{ backgroundImage: "url('/images/community-benefits-of-trees.jpg')" }}
+        />
         <div className="absolute top-20 left-10 w-72 h-72 blob-shape nature-blob opacity-30" />
         <div className="absolute bottom-10 right-10 w-64 h-64 blob-shape earth-blob opacity-30" />
 
@@ -433,69 +448,78 @@ const LandingHome = () => {
             </motion.p>
           </motion.div>
 
-          {/* Circulo Virtuoso - Zigzag Compacto */}
+          {/* Circulo Virtuoso - Horizontal */}
           <motion.div
             initial="hidden"
             animate={impactInView ? "visible" : "hidden"}
             variants={staggerContainer}
-            className="relative max-w-sm mx-auto"
+            className="relative max-w-4xl mx-auto"
           >
-            <div className="flex flex-col gap-2">
-              {/* Row 1 - Left */}
+            <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4">
+              {/* Step 1 */}
               <motion.div variants={fadeInUp} className="flex items-center">
-                <div className="bg-emerald-500 rounded-xl p-4 text-center text-white shadow-lg hover:scale-105 transition-all duration-300 w-36">
-                  <div className="text-3xl mb-1">🌱</div>
-                  <h4 className="font-display text-sm font-bold">Tu plantas</h4>
-                </div>
-                <svg className="w-16 h-10 text-gray-400 ml-1" viewBox="0 0 64 40" fill="none">
-                  <path d="M4 4 L52 32" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                  <path d="M44 30 L52 32 L50 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </motion.div>
-
-              {/* Row 2 - Right */}
-              <motion.div variants={fadeInUp} className="flex items-center justify-end">
-                <div className="bg-amber-500 rounded-xl p-4 text-center text-white shadow-lg hover:scale-105 transition-all duration-300 w-36">
-                  <div className="text-3xl mb-1">🏡</div>
-                  <h4 className="font-display text-sm font-bold">Viveros venden</h4>
+                <div className="bg-emerald-500 rounded-xl p-3 md:p-4 text-center text-white shadow-lg hover:scale-105 transition-all duration-300 w-28 md:w-32">
+                  <div className="text-2xl md:text-3xl mb-1">🌱</div>
+                  <h4 className="font-display text-xs md:text-sm font-bold">Tu plantas</h4>
                 </div>
               </motion.div>
 
-              {/* Arrow down-left */}
-              <motion.div variants={fadeInUp} className="flex justify-end pr-28">
-                <svg className="w-16 h-10 text-gray-400" viewBox="0 0 64 40" fill="none">
-                  <path d="M60 4 L12 32" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                  <path d="M20 30 L12 32 L14 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </motion.div>
+              {/* Arrow 1 */}
+              <svg className="w-8 h-6 md:w-12 md:h-8 text-gray-400" viewBox="0 0 48 32" fill="none">
+                <path d="M4 16 L36 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                <path d="M30 10 L36 16 L30 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
 
-              {/* Row 3 - Left */}
+              {/* Step 2 */}
               <motion.div variants={fadeInUp} className="flex items-center">
-                <div className="bg-orange-500 rounded-xl p-4 text-center text-white shadow-lg hover:scale-105 transition-all duration-300 w-36">
-                  <div className="text-3xl mb-1">👷</div>
-                  <h4 className="font-display text-sm font-bold">Generas empleo</h4>
+                <div className="bg-amber-500 rounded-xl p-3 md:p-4 text-center text-white shadow-lg hover:scale-105 transition-all duration-300 w-28 md:w-32">
+                  <div className="text-2xl md:text-3xl mb-1">🏡</div>
+                  <h4 className="font-display text-xs md:text-sm font-bold">Viveros venden</h4>
                 </div>
-                <svg className="w-16 h-10 text-gray-400 ml-1" viewBox="0 0 64 40" fill="none">
-                  <path d="M4 4 L52 32" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                  <path d="M44 30 L52 32 L50 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
               </motion.div>
 
-              {/* Row 4 - Right */}
-              <motion.div variants={fadeInUp} className="flex items-center justify-end">
-                <div className="bg-green-600 rounded-xl p-4 text-center text-white shadow-lg hover:scale-105 transition-all duration-300 w-36">
-                  <div className="text-3xl mb-1">🌍</div>
-                  <h4 className="font-display text-sm font-bold">Planeta más verde</h4>
+              {/* Arrow 2 */}
+              <svg className="w-8 h-6 md:w-12 md:h-8 text-gray-400" viewBox="0 0 48 32" fill="none">
+                <path d="M4 16 L36 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                <path d="M30 10 L36 16 L30 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+
+              {/* Step 3 */}
+              <motion.div variants={fadeInUp} className="flex items-center">
+                <div className="bg-orange-500 rounded-xl p-3 md:p-4 text-center text-white shadow-lg hover:scale-105 transition-all duration-300 w-28 md:w-32">
+                  <div className="text-2xl md:text-3xl mb-1">👷</div>
+                  <h4 className="font-display text-xs md:text-sm font-bold">Generas empleo</h4>
+                </div>
+              </motion.div>
+
+              {/* Arrow 3 */}
+              <svg className="w-8 h-6 md:w-12 md:h-8 text-gray-400" viewBox="0 0 48 32" fill="none">
+                <path d="M4 16 L36 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                <path d="M30 10 L36 16 L30 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+
+              {/* Step 4 */}
+              <motion.div variants={fadeInUp} className="flex items-center">
+                <div className="bg-green-600 rounded-xl p-3 md:p-4 text-center text-white shadow-lg hover:scale-105 transition-all duration-300 w-28 md:w-32">
+                  <div className="text-2xl md:text-3xl mb-1">🌍</div>
+                  <h4 className="font-display text-xs md:text-sm font-bold">Planeta más verde</h4>
                 </div>
               </motion.div>
             </div>
 
             {/* Mensaje final */}
-            <motion.div variants={fadeInUp} className="mt-8 text-center">
-              <p className="text-xl text-gray-600">
+            <motion.div variants={fadeInUp} className="mt-12 text-center max-w-md mx-auto">
+              <p className="text-xl text-gray-600 leading-relaxed">
+                <span className="font-bold text-emerald-600">Tu plantas</span> un árbol con tu nombre.
+              </p>
+              <p className="text-xl text-gray-600 leading-relaxed mt-2">
+                <span className="font-bold text-emerald-600">Viveros</span> venden y generan ingresos.
+              </p>
+              <p className="text-xl text-gray-600 leading-relaxed mt-2">
                 <span className="font-bold text-emerald-600">Trabajo digno</span> para familias locales.
-                <span className="font-bold text-emerald-600"> Oxigeno</span> para el planeta.
-                <span className="font-bold text-emerald-600"> Un árbol real</span> con tu nombre.
+              </p>
+              <p className="text-xl text-gray-600 leading-relaxed mt-2">
+                <span className="font-bold text-emerald-600">Planeta más verde</span> para todos.
               </p>
             </motion.div>
           </motion.div>
@@ -1008,3 +1032,4 @@ const LandingHome = () => {
 };
 
 export default LandingHome;
+
