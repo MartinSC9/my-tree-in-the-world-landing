@@ -86,9 +86,9 @@ const ReferidosPage = () => {
           >
             {[
               { icon: Share2, title: 'Compartí tu código', desc: 'Cada usuario tiene un código único para compartir', color: 'bg-purple-100 text-purple-600' },
-              { icon: Users, title: 'Tu amigo se registra', desc: 'Cuando usa tu código al registrarse, ambos ganan', color: 'bg-blue-100 text-blue-600' },
-              { icon: Coins, title: 'Acumulás EcoPoints', desc: 'Ganá puntos por registros y por compras de tus referidos', color: 'bg-green-100 text-green-600' },
-              { icon: TreePine, title: 'Canjeá tus puntos', desc: 'Usá tus puntos para descuentos o árboles gratis', color: 'bg-amber-100 text-amber-600' }
+              { icon: Users, title: 'Tu amigo se registra', desc: 'Se vincula a tu cuenta usando tu código', color: 'bg-blue-100 text-blue-600' },
+              { icon: TreePine, title: 'Tu amigo planta', desc: 'Cuando planta su primer árbol, vos ganás 500 pts', color: 'bg-green-100 text-green-600' },
+              { icon: Coins, title: 'Canjeá tus puntos', desc: 'Usá tus puntos para descuentos o árboles gratis', color: 'bg-amber-100 text-amber-600' }
             ].map((step, i) => (
               <motion.div key={i} variants={fadeInUp}>
                 <Card className="h-full text-center hover:shadow-lg transition-shadow">
@@ -142,26 +142,26 @@ const ReferidosPage = () => {
                     Cómo Ganar Puntos
                   </h3>
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between p-4 bg-purple-50 rounded-xl">
+                    <div className="flex items-center justify-between p-4 bg-yellow-50 rounded-xl">
                       <div className="flex items-center gap-3">
-                        <Users className="h-6 w-6 text-purple-600" />
+                        <Users className="h-6 w-6 text-yellow-600" />
                         <span className="font-medium">Amigo se registra</span>
                       </div>
-                      <span className="text-2xl font-bold text-purple-600">+100 pts</span>
+                      <span className="text-sm font-medium text-yellow-600">Se vincula</span>
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-green-50 rounded-xl">
+                    <div className="flex items-center justify-between p-4 bg-green-50 rounded-xl border-2 border-green-200">
                       <div className="flex items-center gap-3">
                         <TreePine className="h-6 w-6 text-green-600" />
                         <span className="font-medium">Amigo planta un árbol</span>
                       </div>
                       <span className="text-2xl font-bold text-green-600">+500 pts</span>
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-amber-50 rounded-xl">
+                    <div className="flex items-center justify-between p-4 bg-purple-50 rounded-xl">
                       <div className="flex items-center gap-3">
-                        <Gift className="h-6 w-6 text-amber-600" />
-                        <span className="font-medium">Tu amigo también recibe</span>
+                        <Gift className="h-6 w-6 text-purple-600" />
+                        <span className="font-medium">Amigo colabora en proyecto</span>
                       </div>
-                      <span className="text-2xl font-bold text-amber-600">10% dto</span>
+                      <span className="text-2xl font-bold text-purple-600">+200 pts</span>
                     </div>
                   </div>
                 </CardContent>
@@ -232,23 +232,23 @@ const ReferidosPage = () => {
           >
             {[
               {
-                scenario: '5 amigos se registran',
-                compras: '0 compran',
+                scenario: '1 amigo planta',
+                compras: 'su primer árbol',
                 puntos: '500 pts',
                 beneficio: '15% de descuento',
                 color: 'border-gray-200 bg-gray-50'
               },
               {
-                scenario: '5 amigos se registran',
-                compras: '2 plantan árbol',
-                puntos: '1,500 pts',
+                scenario: '2 amigos plantan',
+                compras: 'su primer árbol',
+                puntos: '1,000 pts',
                 beneficio: '30% de descuento',
                 color: 'border-blue-200 bg-blue-50'
               },
               {
-                scenario: '5 amigos se registran',
-                compras: '5 plantan árbol',
-                puntos: '3,000 pts',
+                scenario: '5 amigos plantan',
+                compras: 'su primer árbol',
+                puntos: '2,500 pts',
                 beneficio: '¡ÁRBOL GRATIS!',
                 color: 'border-green-300 bg-green-50',
                 highlight: true
@@ -298,10 +298,10 @@ const ReferidosPage = () => {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {[
-              'Recompensa tangible por invitar amigos',
-              'Tu referido también gana 10% en su primer árbol',
+              'Sistema anti-fraude: puntos solo cuando plantan',
+              'Meta clara: 5 referidos que planten = árbol gratis',
               'Puntos acumulables sin vencimiento',
-              'Meta clara: 5 referidos que compren = árbol gratis',
+              '500 pts por cada amigo que plante su primer árbol',
               'Código único fácil de compartir',
               'Seguimiento en tiempo real de tus referidos'
             ].map((benefit, i) => (
