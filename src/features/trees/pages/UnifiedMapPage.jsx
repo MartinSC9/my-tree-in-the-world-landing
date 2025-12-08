@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { TreePine, Globe, Users, Plus, X, User } from 'lucide-react';
+import { TreePine, Globe, Users, User, Check, Clock } from 'lucide-react';
 import { Button } from '@shared/components/ui/button';
 import { Card, CardContent } from '@shared/components/ui/card';
 import TreeMap from '@features/trees/components/TreeMap';
 import { treeService } from '@features/trees/services';
 import { useAuth } from '@core/contexts/AuthContext';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@shared/components/ui/dialog';
 import Footer from '@shared/components/layout/Footer';
 import { APP_URL } from '@core/config/app.config';
 
@@ -14,7 +13,6 @@ const UnifiedMapPage = () => {
   const { user, getRedirectPath } = useAuth();
   const [allMarkers, setAllMarkers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedTree, setSelectedTree] = useState(null);
 
   // Vista activa: 'all', 'my-trees', 'collaborative'
   const [activeView, setActiveView] = useState('all');
@@ -109,10 +107,6 @@ const UnifiedMapPage = () => {
     setFilters(prev => ({ ...prev, [key]: value }));
   };
 
-  const handleTreeClick = (tree) => {
-    setSelectedTree(tree);
-  };
-
   // Redirigir al front app para plantar
   const handlePlantClick = () => {
     if (user) {
@@ -168,11 +162,16 @@ const UnifiedMapPage = () => {
               onClick={() => setStatsFilter('all')}
               className={`bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl px-6 py-4 shadow-lg transition-all hover:scale-105 ${statsFilter === 'all' ? 'ring-4 ring-blue-300' : ''}`}
             >
-              <div className="flex items-center gap-3">
-                <TreePine className="h-8 w-8 text-white" />
-                <div className="text-white text-left">
-                  <div className="text-3xl font-bold">{viewStats.total}</div>
-                  <div className="text-sm opacity-90">Total</div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <TreePine className="h-8 w-8 text-white" />
+                  <div className="text-white text-left">
+                    <div className="text-3xl font-bold">{viewStats.total}</div>
+                    <div className="text-sm opacity-90">Total</div>
+                  </div>
+                </div>
+                <div className={`w-6 h-6 rounded-full border-2 border-white/60 flex items-center justify-center transition-all ${statsFilter === 'all' ? 'bg-white' : 'bg-transparent'}`}>
+                  {statsFilter === 'all' && <Check className="h-4 w-4 text-blue-600" />}
                 </div>
               </div>
             </button>
@@ -181,11 +180,19 @@ const UnifiedMapPage = () => {
               onClick={() => setStatsFilter(statsFilter === 'planted' ? 'all' : 'planted')}
               className={`bg-gradient-to-br from-green-500 to-green-600 rounded-xl px-6 py-4 shadow-lg transition-all hover:scale-105 ${statsFilter === 'planted' ? 'ring-4 ring-green-300' : ''}`}
             >
-              <div className="flex items-center gap-3">
-                <TreePine className="h-8 w-8 text-white" />
-                <div className="text-white text-left">
-                  <div className="text-3xl font-bold">{viewStats.planted}</div>
-                  <div className="text-sm opacity-90">Plantados</div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="relative">
+                    <TreePine className="h-8 w-8 text-white" />
+                    <Check className="h-4 w-4 text-white absolute -bottom-1 -right-1 bg-green-600 rounded-full p-0.5" />
+                  </div>
+                  <div className="text-white text-left">
+                    <div className="text-3xl font-bold">{viewStats.planted}</div>
+                    <div className="text-sm opacity-90">Plantados</div>
+                  </div>
+                </div>
+                <div className={`w-6 h-6 rounded-full border-2 border-white/60 flex items-center justify-center transition-all ${statsFilter === 'planted' ? 'bg-white' : 'bg-transparent'}`}>
+                  {statsFilter === 'planted' && <Check className="h-4 w-4 text-green-600" />}
                 </div>
               </div>
             </button>
@@ -194,11 +201,19 @@ const UnifiedMapPage = () => {
               onClick={() => setStatsFilter(statsFilter === 'inProgress' ? 'all' : 'inProgress')}
               className={`bg-gradient-to-br from-yellow-500 to-amber-500 rounded-xl px-6 py-4 shadow-lg transition-all hover:scale-105 ${statsFilter === 'inProgress' ? 'ring-4 ring-yellow-300' : ''}`}
             >
-              <div className="flex items-center gap-3">
-                <Globe className="h-8 w-8 text-white" />
-                <div className="text-white text-left">
-                  <div className="text-3xl font-bold">{viewStats.inProgress}</div>
-                  <div className="text-sm opacity-90">En Progreso</div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="relative">
+                    <TreePine className="h-8 w-8 text-white" />
+                    <Clock className="h-4 w-4 text-white absolute -bottom-1 -right-1 bg-amber-500 rounded-full p-0.5" />
+                  </div>
+                  <div className="text-white text-left">
+                    <div className="text-3xl font-bold">{viewStats.inProgress}</div>
+                    <div className="text-sm opacity-90">En Progreso</div>
+                  </div>
+                </div>
+                <div className={`w-6 h-6 rounded-full border-2 border-white/60 flex items-center justify-center transition-all ${statsFilter === 'inProgress' ? 'bg-white' : 'bg-transparent'}`}>
+                  {statsFilter === 'inProgress' && <Check className="h-4 w-4 text-amber-600" />}
                 </div>
               </div>
             </button>
@@ -211,7 +226,6 @@ const UnifiedMapPage = () => {
                 <TreeMap
                   trees={filteredTrees}
                   height="700px"
-                  onProjectClick={handleTreeClick}
                 />
 
                 {/* Leyenda de colores */}
@@ -256,69 +270,6 @@ const UnifiedMapPage = () => {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Collaborative Tree Detail Modal */}
-      <Dialog open={!!selectedTree} onOpenChange={(open) => !open && setSelectedTree(null)}>
-        <DialogContent className="max-w-lg">
-          <DialogHeader>
-            <div className="flex items-center justify-between">
-              <DialogTitle className="text-xl font-bold text-purple-800 flex items-center gap-2">
-                <Users className="h-5 w-5" />
-                Proyecto Colaborativo
-              </DialogTitle>
-              <button
-                onClick={() => setSelectedTree(null)}
-                className="rounded-full p-2 hover:bg-gray-100 transition-colors"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-          </DialogHeader>
-          {selectedTree && (
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-lg font-semibold text-gray-800">
-                  {selectedTree.tree_name || selectedTree.name || 'Árbol Colaborativo'}
-                </h3>
-                <p className="text-sm text-gray-500">ID: {selectedTree.id}</p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-purple-50 rounded-lg p-3">
-                  <p className="text-xs text-purple-600 font-medium">Estado</p>
-                  <p className="text-sm font-semibold capitalize">
-                    {selectedTree.status === 'active' ? 'Activo' :
-                     selectedTree.status === 'completed' ? 'Completado' : selectedTree.status}
-                  </p>
-                </div>
-                {selectedTree.funding_percentage !== undefined && (
-                  <div className="bg-green-50 rounded-lg p-3">
-                    <p className="text-xs text-green-600 font-medium">Financiamiento</p>
-                    <p className="text-sm font-semibold">{selectedTree.funding_percentage}%</p>
-                  </div>
-                )}
-              </div>
-
-              {selectedTree.funding_percentage !== undefined && (
-                <div>
-                  <div className="w-full bg-gray-200 rounded-full h-3">
-                    <div
-                      className="bg-purple-600 h-3 rounded-full transition-all"
-                      style={{ width: `${Math.min(selectedTree.funding_percentage || 0, 100)}%` }}
-                    />
-                  </div>
-                </div>
-              )}
-
-              <div className="text-center pt-2">
-                <p className="text-xs text-gray-500">
-                  Coordenadas: {selectedTree.latitude}, {selectedTree.longitude}
-                </p>
-              </div>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
 
       {/* Footer */}
       <Footer />

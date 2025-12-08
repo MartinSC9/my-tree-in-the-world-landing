@@ -38,6 +38,12 @@ export const treeService = {
   async getTreeById(id) {
     const response = await api.get(API_ENDPOINTS.TREE_BY_ID(id));
     return response.data.tree;
+  },
+
+  // Get collaborative tree by ID
+  async getCollaborativeTreeById(id) {
+    const response = await api.get(API_ENDPOINTS.COLLABORATIVE_TREE_BY_ID(id));
+    return response.data.project;
   }
 };
 

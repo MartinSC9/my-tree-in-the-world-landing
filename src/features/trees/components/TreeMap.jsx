@@ -161,13 +161,18 @@ const TreeMap = ({
   const [loadingGreenSpaces, setLoadingGreenSpaces] = useState(false);
   const [errorGreenSpaces, setErrorGreenSpaces] = useState(false);
 
-  // Función para cargar detalles de un árbol
-  const loadTreeDetails = async (treeId) => {
+  // Función para cargar detalles de un árbol (regular o colaborativo)
+  const loadTreeDetails = async (treeId, treeType = 'regular') => {
     if (loadedDetails[treeId] || loadingDetails[treeId]) return;
 
     setLoadingDetails(prev => ({ ...prev, [treeId]: true }));
     try {
-      const details = await treeService.getTreeById(treeId);
+      let details;
+      if (treeType === 'collaborative') {
+        details = await treeService.getCollaborativeTreeById(treeId);
+      } else {
+        details = await treeService.getTreeById(treeId);
+      }
       setLoadedDetails(prev => ({ ...prev, [treeId]: details }));
     } catch (error) {
       console.error('Error loading tree details:', error);
@@ -378,26 +383,8 @@ const TreeMap = ({
           // Determinar el tipo de marcador
           const markerType = tree.isMyProject ? 'myProject' : (tree.type || 'regular');
 
-          // Para árboles colaborativos con onProjectClick, abrir modal directamente al hacer clic
-          const handleMarkerClick = (tree.type === 'collaborative' && onProjectClick)
-            ? () => onProjectClick(tree)
-            : undefined;
-
           // Z-index mayor para árboles plantados (aparecen encima)
           const zIndex = (tree.status === 'plantado' || tree.status === 'verificado') ? 1000 : 100;
-
-          // Si es colaborativo con onProjectClick, no mostrar popup (abrir modal directo)
-          if (handleMarkerClick) {
-            return (
-              <Marker
-                key={`${markerType}-${tree.id}`}
-                position={[lat, lng]}
-                icon={createTreeIcon(tree.status, markerType)}
-                zIndexOffset={zIndex}
-                eventHandlers={{ click: handleMarkerClick }}
-              />
-            );
-          }
 
           return (
             <Marker
@@ -406,7 +393,7 @@ const TreeMap = ({
               icon={createTreeIcon(tree.status, markerType)}
               zIndexOffset={zIndex}
               eventHandlers={{
-                popupopen: () => loadTreeDetails(tree.id)
+                popupopen: () => loadTreeDetails(tree.id, tree.type)
               }}
             >
               <Popup>
