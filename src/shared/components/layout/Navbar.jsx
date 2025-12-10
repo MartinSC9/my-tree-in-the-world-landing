@@ -96,7 +96,6 @@ const Navbar = () => {
 
   const navigationItems = [
     { name: 'Inicio', path: '/', icon: Home, isInternal: true },
-    { name: 'Plantar Árbol', path: `${APP_URL}/registro`, icon: Sprout, isInternal: false },
     { name: 'Mapa Global', path: '/mapa', icon: Globe, isInternal: true },
   ];
 
