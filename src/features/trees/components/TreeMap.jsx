@@ -152,14 +152,17 @@ const TreeMap = ({
   showGreenSpaces = false,
   onOutOfBounds,
   onProjectClick,
-  onNotInGreenSpace
+  onNotInGreenSpace,
+  defaultOpenTreeId = null
 }) => {
   const mapRef = useRef();
+  const markerRefs = useRef({});
   const [loadedDetails, setLoadedDetails] = useState({});
   const [loadingDetails, setLoadingDetails] = useState({});
   const [greenSpaces, setGreenSpaces] = useState([]);
   const [loadingGreenSpaces, setLoadingGreenSpaces] = useState(false);
   const [errorGreenSpaces, setErrorGreenSpaces] = useState(false);
+  const [defaultPopupOpened, setDefaultPopupOpened] = useState(false);
 
   // Función para cargar detalles de un árbol (regular o colaborativo)
   const loadTreeDetails = async (treeId, treeType = 'regular') => {
@@ -208,6 +211,26 @@ const TreeMap = ({
         });
     }
   }, [showGreenSpaces, restrictToGreenSpaces]);
+
+  // Abrir popup por defecto cuando se especifica defaultOpenTreeId
+  useEffect(() => {
+    if (defaultOpenTreeId && !defaultPopupOpened && trees && trees.length > 0) {
+      // Pequeño delay para asegurar que el mapa y marcadores estén renderizados
+      const timer = setTimeout(() => {
+        const markerRef = markerRefs.current[defaultOpenTreeId];
+        if (markerRef) {
+          markerRef.openPopup();
+          setDefaultPopupOpened(true);
+          // Cargar detalles del árbol
+          const tree = trees.find(t => t.id === defaultOpenTreeId);
+          if (tree) {
+            loadTreeDetails(tree.id, tree.type);
+          }
+        }
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [defaultOpenTreeId, defaultPopupOpened, trees]);
 
   // Determinar si hay una ubicación seleccionada para mostrar marcador
   const showSelectionMarker = selectedLocation && selectedLocation[0] && selectedLocation[1];
@@ -392,6 +415,11 @@ const TreeMap = ({
               position={[lat, lng]}
               icon={createTreeIcon(tree.status, markerType)}
               zIndexOffset={zIndex}
+              ref={(ref) => {
+                if (ref) {
+                  markerRefs.current[tree.id] = ref;
+                }
+              }}
               eventHandlers={{
                 popupopen: () => loadTreeDetails(tree.id, tree.type)
               }}
@@ -508,6 +536,7 @@ const areEqual = (prevProps, nextProps) => {
   if (prevProps.restrictToCordoba !== nextProps.restrictToCordoba) return false;
   if (prevProps.restrictToGreenSpaces !== nextProps.restrictToGreenSpaces) return false;
   if (prevProps.showGreenSpaces !== nextProps.showGreenSpaces) return false;
+  if (prevProps.defaultOpenTreeId !== nextProps.defaultOpenTreeId) return false;
 
   // Comparar arrays de center y selectedLocation
   if (JSON.stringify(prevProps.center) !== JSON.stringify(nextProps.center)) return false;

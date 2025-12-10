@@ -13,6 +13,7 @@ const UnifiedMapPage = () => {
   const { user, getRedirectPath } = useAuth();
   const [allMarkers, setAllMarkers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [randomTreeId, setRandomTreeId] = useState(null);
 
   // Vista activa: 'all', 'my-trees', 'collaborative'
   const [activeView, setActiveView] = useState('all');
@@ -31,6 +32,12 @@ const UnifiedMapPage = () => {
     try {
       const markers = await treeService.getTreeMarkers();
       setAllMarkers(markers || []);
+
+      // Seleccionar un árbol aleatorio para mostrar su popup abierto
+      if (markers && markers.length > 0) {
+        const randomIndex = Math.floor(Math.random() * markers.length);
+        setRandomTreeId(markers[randomIndex].id);
+      }
     } catch (error) {
       console.error('Error loading tree markers:', error);
       setAllMarkers([]);
@@ -226,6 +233,7 @@ const UnifiedMapPage = () => {
                 <TreeMap
                   trees={filteredTrees}
                   height="700px"
+                  defaultOpenTreeId={randomTreeId}
                 />
 
                 {/* Leyenda de colores */}
