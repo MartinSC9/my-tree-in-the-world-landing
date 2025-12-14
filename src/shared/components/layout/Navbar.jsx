@@ -13,7 +13,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Funci�n para scroll al inicio
+  // Función para scroll al inicio
   const scrollToTop = (e) => {
     if (location.pathname === '/') {
       e.preventDefault();
@@ -525,4 +525,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
