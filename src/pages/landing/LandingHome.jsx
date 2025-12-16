@@ -263,6 +263,144 @@ const LandingHome = () => {
 
       </section>
 
+      {/* NUEVA SECCION: Planta Sin Plata */}
+      <section className="py-16 md:py-20 px-4 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-amber-200/30 blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-orange-200/30 blur-3xl" />
+
+        <div className="container-wide relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-10"
+          >
+            <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
+              <Gift className="h-4 w-4" />
+              No necesitas dinero para empezar
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-amber-900 mb-4">
+              3 Formas de Plantar{' '}
+              <span className="text-gradient bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                GRATIS
+              </span>
+            </h2>
+            <p className="text-lg text-amber-700 max-w-2xl mx-auto">
+              No hace falta plata para ser parte del cambio. Elegí la opción que mejor te funcione.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {/* Opcion 1: Referidos */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="group"
+            >
+              <div className="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-purple-300 h-full flex flex-col">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Users className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">Invita 5 Amigos</h3>
+                <p className="text-gray-600 mb-4 flex-1">
+                  Compartí tu código. Cuando 5 amigos planten, vos tenés un <span className="font-bold text-purple-600">árbol gratis</span>.
+                </p>
+                <div className="bg-purple-50 rounded-xl p-3 border border-purple-100">
+                  <div className="flex items-center gap-2 text-purple-700 text-sm font-medium">
+                    <CheckCircle className="h-4 w-4" />
+                    <span>500 pts por cada amigo que plante</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-purple-700 text-sm font-medium mt-1">
+                    <Trophy className="h-4 w-4" />
+                    <span>2,500 pts = Árbol GRATIS</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Opcion 2: Colaborativo */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="group"
+            >
+              <div className="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-emerald-300 h-full flex flex-col">
+                <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Heart className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">Árbol Colaborativo</h3>
+                <p className="text-gray-600 mb-4 flex-1">
+                  Creá un proyecto y compartilo. Tus amigos <span className="font-bold text-emerald-600">aportan lo que puedan</span> para completar la meta.
+                </p>
+                <div className="bg-emerald-50 rounded-xl p-3 border border-emerald-100">
+                  <div className="flex items-center gap-2 text-emerald-700 text-sm font-medium">
+                    <CheckCircle className="h-4 w-4" />
+                    <span>Desde $500 por persona</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-emerald-700 text-sm font-medium mt-1">
+                    <Users className="h-4 w-4" />
+                    <span>30 personas × $500 = 1 árbol</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Opcion 3: QR Productos */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="group"
+            >
+              <div className="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-blue-300 h-full flex flex-col">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <QrCode className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">Escaneá y Ganá</h3>
+                <p className="text-gray-600 mb-4 flex-1">
+                  Productos de empresas partner tienen QR. Escaneá y <span className="font-bold text-blue-600">participá en sorteos</span> de árboles.
+                </p>
+                <div className="bg-blue-50 rounded-xl p-3 border border-blue-100">
+                  <div className="flex items-center gap-2 text-blue-700 text-sm font-medium">
+                    <CheckCircle className="h-4 w-4" />
+                    <span>Sin costo, solo escaneá</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-blue-700 text-sm font-medium mt-1">
+                    <Gift className="h-4 w-4" />
+                    <span>Sorteos mensuales de árboles</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-center mt-10"
+          >
+            <Button
+              onClick={() => window.open(`${APP_URL}/registro`, '_blank')}
+              size="lg"
+              className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white shadow-xl hover:shadow-2xl px-10 py-6 text-lg"
+            >
+              <Leaf className="h-5 w-5 mr-2" />
+              Empezá Gratis Ahora
+              <ArrowRight className="h-5 w-5 ml-2" />
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Stats Section */}
       <section ref={statsRef} className="section-padding relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 blob-shape nature-blob" />
@@ -638,10 +776,35 @@ const LandingHome = () => {
             variants={fadeInUp}
             className="premium-card bg-white rounded-3xl p-8 md:p-12 mb-10"
           >
+            {/* Ejemplo de montos - NUEVO */}
+            <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl p-5 mb-8 border border-purple-200">
+              <div className="flex items-center gap-2 mb-3">
+                <Gift className="h-5 w-5 text-purple-600" />
+                <span className="font-semibold text-purple-800">Ejemplo: Arbol de $15,000</span>
+              </div>
+              <div className="grid grid-cols-3 gap-4 text-center">
+                <div className="bg-white/70 rounded-xl p-3">
+                  <div className="text-2xl font-bold text-purple-600">30</div>
+                  <div className="text-xs text-gray-600">personas × $500</div>
+                </div>
+                <div className="bg-white/70 rounded-xl p-3">
+                  <div className="text-2xl font-bold text-purple-600">15</div>
+                  <div className="text-xs text-gray-600">personas × $1,000</div>
+                </div>
+                <div className="bg-white/70 rounded-xl p-3">
+                  <div className="text-2xl font-bold text-purple-600">5</div>
+                  <div className="text-xs text-gray-600">personas × $3,000</div>
+                </div>
+              </div>
+              <p className="text-xs text-purple-700 mt-3 text-center font-medium">
+                Sin monto minimo - Cada persona aporta lo que pueda
+              </p>
+            </div>
+
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
                 { num: '1', title: 'Crea o Unite', desc: 'Crea tu proyecto o unite a uno existente' },
-                { num: '2', title: 'Aporta', desc: 'Cada persona aporta lo que pueda' },
+                { num: '2', title: 'Aporta', desc: 'Desde $500, lo que puedas' },
                 { num: '3', title: 'Completa la Meta', desc: 'Entre todos llegan al objetivo' },
                 { num: '4', title: 'Se Plantan!', desc: 'Los arboles se plantan y todos aparecen en el certificado' },
               ].map((step, i) => (
