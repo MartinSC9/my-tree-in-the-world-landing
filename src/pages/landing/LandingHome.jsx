@@ -109,7 +109,6 @@ const LandingHome = () => {
   const uniqueRef = useRef(null);
   const impactRef = useRef(null);
   const howItWorksRef = useRef(null);
-  const collaborativeRef = useRef(null);
   const topCompaniesRef = useRef(null);
   const recentTreesRef = useRef(null);
   const ctaRef = useRef(null);
@@ -118,11 +117,8 @@ const LandingHome = () => {
   const uniqueInView = useInView(uniqueRef, { once: true, margin: "-100px" });
   const impactInView = useInView(impactRef, { once: true, margin: "-100px" });
   const howItWorksInView = useInView(howItWorksRef, { once: true, margin: "-100px" });
-  const collaborativeInView = useInView(collaborativeRef, { once: true, margin: "-100px" });
   const topCompaniesInView = useInView(topCompaniesRef, { once: true, margin: "-100px" });
   const recentTreesInView = useInView(recentTreesRef, { once: true, margin: "-100px" });
-  const programsRef = useRef(null);
-  const programsInView = useInView(programsRef, { once: true, margin: "-100px" });
   const ctaInView = useInView(ctaRef, { once: true, margin: "-100px" });
 
   return (
@@ -746,106 +742,6 @@ const LandingHome = () => {
         </div>
       </section>
 
-      {/* Collaborative Trees Section - Simplificado */}
-      <section ref={collaborativeRef} className="section-padding bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-purple-200/30 blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-pink-200/30 blur-3xl" />
-
-        <div className="container-wide relative z-10">
-          <motion.div
-            initial="hidden"
-            animate={collaborativeInView ? "visible" : "hidden"}
-            variants={staggerContainer}
-            className="text-center mb-12"
-          >
-            <motion.div variants={fadeInUp}>
-              <Users className="h-16 w-16 mx-auto mb-6 text-purple-600 floating" />
-            </motion.div>
-            <motion.h2 variants={fadeInUp} className="section-title text-purple-900 mb-6">
-              Árboles Colaborativos
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl text-purple-700 max-w-3xl mx-auto">
-              Unite con amigos, familia o comunidades para plantar árboles juntos.
-            </motion.p>
-          </motion.div>
-
-          {/* How Collaborative Works */}
-          <motion.div
-            initial="hidden"
-            animate={collaborativeInView ? "visible" : "hidden"}
-            variants={fadeInUp}
-            className="premium-card bg-white rounded-3xl p-8 md:p-12 mb-10"
-          >
-            {/* Ejemplo de montos - NUEVO */}
-            <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl p-5 mb-8 border border-purple-200">
-              <div className="flex items-center gap-2 mb-3">
-                <Gift className="h-5 w-5 text-purple-600" />
-                <span className="font-semibold text-purple-800">Ejemplo: Arbol de $15,000</span>
-              </div>
-              <div className="grid grid-cols-3 gap-4 text-center">
-                <div className="bg-white/70 rounded-xl p-3">
-                  <div className="text-2xl font-bold text-purple-600">30</div>
-                  <div className="text-xs text-gray-600">personas × $500</div>
-                </div>
-                <div className="bg-white/70 rounded-xl p-3">
-                  <div className="text-2xl font-bold text-purple-600">15</div>
-                  <div className="text-xs text-gray-600">personas × $1,000</div>
-                </div>
-                <div className="bg-white/70 rounded-xl p-3">
-                  <div className="text-2xl font-bold text-purple-600">5</div>
-                  <div className="text-xs text-gray-600">personas × $3,000</div>
-                </div>
-              </div>
-              <p className="text-xs text-purple-700 mt-3 text-center font-medium">
-                Sin monto minimo - Cada persona aporta lo que pueda
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[
-                { num: '1', title: 'Crea o Unite', desc: 'Crea tu proyecto o unite a uno existente' },
-                { num: '2', title: 'Aporta', desc: 'Desde $500, lo que puedas' },
-                { num: '3', title: 'Completa la Meta', desc: 'Entre todos llegan al objetivo' },
-                { num: '4', title: 'Se Plantan!', desc: 'Los arboles se plantan y todos aparecen en el certificado' },
-              ].map((step, i) => (
-                <div key={i} className="text-center">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center mx-auto mb-4">
-                    <span className="text-xl font-bold text-purple-700">{step.num}</span>
-                  </div>
-                  <h4 className="font-semibold text-purple-800 mb-2">{step.title}</h4>
-                  <p className="text-sm text-gray-600">{step.desc}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* CTA */}
-          <motion.div
-            initial="hidden"
-            animate={collaborativeInView ? "visible" : "hidden"}
-            variants={fadeInUp}
-          >
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl p-10 text-center text-white relative overflow-hidden">
-              <div className="absolute inset-0 grid-pattern opacity-10" />
-              <div className="relative z-10">
-                <h3 className="font-display text-3xl font-semibold mb-4 text-white">¿Listos para plantar juntos?</h3>
-                <p className="text-lg mb-8 max-w-2xl mx-auto text-purple-100">
-                  Ideal para cumpleaños, proyectos escolares, o simplemente para hacer algo bueno con amigos.
-                </p>
-                <Button
-                  onClick={() => navigate('/mapa')}
-                  size="lg"
-                  className="bg-white hover:bg-gray-50 text-purple-600 shadow-xl hover:shadow-2xl px-10 py-6"
-                >
-                  <Users className="h-5 w-5 mr-2" />
-                  Explorar Proyectos Colaborativos
-                </Button>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Top Companies Section */}
         <section ref={topCompaniesRef} className="section-padding bg-white relative overflow-hidden">
           <div className="absolute top-0 left-0 w-96 h-96 rounded-full bg-emerald-100/40 blur-3xl" />
@@ -1033,122 +929,6 @@ const LandingHome = () => {
             </motion.div>
           </div>
         </section>
-
-      {/* Programas Especiales - Referidos y QR */}
-      <section ref={programsRef} className="section-padding bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-purple-200/30 blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-indigo-200/30 blur-3xl" />
-
-        <div className="container-wide relative z-10">
-          <motion.div
-            initial="hidden"
-            animate={programsInView ? "visible" : "hidden"}
-            variants={staggerContainer}
-            className="text-center mb-12"
-          >
-            <motion.div variants={fadeInUp}>
-              <Gift className="h-14 w-14 mx-auto mb-4 text-purple-600" />
-            </motion.div>
-            <motion.h2 variants={fadeInUp} className="section-title text-purple-900 mb-4">
-              Programas Especiales
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="section-subtitle text-purple-700 mx-auto">
-              Más formas de participar y ganar con Mi Árbol en el Mundo
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            animate={programsInView ? "visible" : "hidden"}
-            variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
-          >
-            {/* Sistema de Referidos */}
-            <motion.div variants={fadeInUp}>
-              <Card className="h-full border-2 border-purple-200 bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-100 to-indigo-100 flex items-center justify-center">
-                      <Share2 className="h-8 w-8 text-purple-600" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-purple-800">Sistema de Referidos</h3>
-                      <p className="text-purple-600">Invitá amigos y ganá</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 mb-6">
-                    Compartí tu código único con amigos. Por cada uno que se registre y plante, ganás EcoPoints canjeables por descuentos o árboles gratis.
-                  </p>
-                  <ul className="space-y-2 mb-6">
-                    <li className="flex items-center gap-2 text-sm text-gray-600">
-                      <CheckCircle className="h-4 w-4 text-purple-500" />
-                      <span>+100 pts por registro</span>
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-gray-600">
-                      <CheckCircle className="h-4 w-4 text-purple-500" />
-                      <span>+500 pts si planta un árbol</span>
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-gray-600">
-                      <CheckCircle className="h-4 w-4 text-purple-500" />
-                      <span>2,500 pts = árbol gratis</span>
-                    </li>
-                  </ul>
-                  <Button
-                    onClick={() => navigate('/referidos')}
-                    className="w-full bg-purple-600 hover:bg-purple-700 text-white"
-                  >
-                    <Users className="h-5 w-5 mr-2" />
-                    Ver Programa de Referidos
-                    <ArrowRight className="h-4 w-4 ml-2" />
-                  </Button>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* QR en Productos */}
-            <motion.div variants={fadeInUp}>
-              <Card className="h-full border-2 border-emerald-200 bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center">
-                      <QrCode className="h-8 w-8 text-emerald-600" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-emerald-800">QR en Productos</h3>
-                      <p className="text-emerald-600">Para empresas partner</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 mb-6">
-                    Las empresas asociadas incluyen nuestro sello QR en sus productos. Los clientes escanean y pueden ganar un árbol plantado gratis.
-                  </p>
-                  <ul className="space-y-2 mb-6">
-                    <li className="flex items-center gap-2 text-sm text-gray-600">
-                      <CheckCircle className="h-4 w-4 text-emerald-500" />
-                      <span>Escaneá el QR del producto</span>
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-gray-600">
-                      <CheckCircle className="h-4 w-4 text-emerald-500" />
-                      <span>Participá automáticamente</span>
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-gray-600">
-                      <CheckCircle className="h-4 w-4 text-emerald-500" />
-                      <span>Podés ganar un árbol gratis</span>
-                    </li>
-                  </ul>
-                  <Button
-                    onClick={() => navigate('/qr-productos')}
-                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
-                  >
-                    <QrCode className="h-5 w-5 mr-2" />
-                    Ver Programa QR Empresas
-                    <ArrowRight className="h-4 w-4 ml-2" />
-                  </Button>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* CTA FINAL - Nuevo */}
       <section ref={ctaRef} className="section-padding bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 relative overflow-hidden">
