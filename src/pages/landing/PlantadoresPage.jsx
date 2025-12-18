@@ -151,7 +151,7 @@ const PlantadoresPage = () => {
             <Button
               size="lg"
               className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-6 text-lg"
-              onClick={() => window.open(`${APP_URL}/registro`, '_blank')}
+              onClick={() => window.open(`${APP_URL}/registro/plantador`, '_blank')}
             >
               <Shovel className="h-5 w-5 mr-2" />
               Quiero ser Plantador
@@ -436,7 +436,7 @@ const PlantadoresPage = () => {
               <Button
                 size="lg"
                 className="bg-white hover:bg-gray-50 text-amber-600"
-                onClick={() => window.open(`${APP_URL}/registro`, '_blank')}
+                onClick={() => window.open(`${APP_URL}/registro/plantador`, '_blank')}
               >
                 <Shovel className="h-5 w-5 mr-2" />
                 Registrarme como Plantador
