@@ -9,6 +9,7 @@ import { useAuth } from '@core/contexts/AuthContext';
 import { statsService } from '@features/trees/services';
 import Footer from '@shared/components/layout/Footer';
 import { APP_URL } from '@core/config/app.config';
+import { formatCurrency } from '@/utils/currencyUtils';
 
 
 
@@ -52,8 +53,6 @@ const LandingHome = () => {
   // Estado para top empresas
   const [topCompanies, setTopCompanies] = useState([]);
 
-  // Estado para top colaboradores
-  const [topContributors, setTopContributors] = useState([]);
 
   // Cargar stats y top empresas al montar el componente
   useEffect(() => {
@@ -75,18 +74,8 @@ const LandingHome = () => {
       }
     };
 
-    const fetchTopContributors = async () => {
-      try {
-        const contributors = await statsService.getTopContributors(6);
-        setTopContributors(contributors || []);
-      } catch (error) {
-        console.error('Error cargando top colaboradores:', error);
-      }
-    };
-
     fetchStats();
     fetchTopCompanies();
-    fetchTopContributors();
     loadTrees();
   }, []);
 
@@ -110,7 +99,6 @@ const LandingHome = () => {
   const impactRef = useRef(null);
   const howItWorksRef = useRef(null);
   const topCompaniesRef = useRef(null);
-  const recentTreesRef = useRef(null);
   const ctaRef = useRef(null);
 
   const statsInView = useInView(statsRef, { once: true, margin: "-100px" });
@@ -118,7 +106,6 @@ const LandingHome = () => {
   const impactInView = useInView(impactRef, { once: true, margin: "-100px" });
   const howItWorksInView = useInView(howItWorksRef, { once: true, margin: "-100px" });
   const topCompaniesInView = useInView(topCompaniesRef, { once: true, margin: "-100px" });
-  const recentTreesInView = useInView(recentTreesRef, { once: true, margin: "-100px" });
   const ctaInView = useInView(ctaRef, { once: true, margin: "-100px" });
 
   return (
@@ -364,11 +351,11 @@ const LandingHome = () => {
                 <div className="bg-white/15 rounded-xl p-3 space-y-2 border border-white/20">
                   <div className="flex items-center gap-2 text-white text-sm">
                     <CheckCircle className="h-4 w-4 flex-shrink-0" />
-                    <span>Desde $500 por persona</span>
+                    <span>Desde {formatCurrency(500)} por persona</span>
                   </div>
                   <div className="flex items-center gap-2 text-white text-sm font-semibold">
                     <Users className="h-4 w-4 flex-shrink-0" />
-                    <span>30 personas × $500 = 1 árbol</span>
+                    <span>30 personas × {formatCurrency(500)} = 1 árbol</span>
                   </div>
                 </div>
               </div>
@@ -726,7 +713,7 @@ const LandingHome = () => {
                 image: '/images/1.png',
                 title: '1. Compra tu Árbol',
                 desc: 'Elige ubicación, nombre y especie.',
-                price: 'Desde $15,000 ARS'
+                price: `Desde ${formatCurrency(15000)}`
               },
               {
                 image: '/images/2.png',
@@ -845,7 +832,7 @@ const LandingHome = () => {
                           <span className="font-semibold">{company.completed_projects} proyectos</span>
                         </div>
                         <div className="text-sm text-gray-500">
-                          ${Number(company.total_raised).toLocaleString('es-AR')} recaudado
+                          {formatCurrency(company.total_raised)} recaudado
                         </div>
                       </div>
                     </CardContent>
@@ -874,99 +861,6 @@ const LandingHome = () => {
           </div>
         </section>
 
-      {/* Top Contributors Section */}
-        <section ref={recentTreesRef} className="section-padding bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-amber-200/30 blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-orange-200/30 blur-3xl" />
-
-          <div className="container-wide relative z-10">
-            <motion.div
-              initial="hidden"
-              animate={recentTreesInView ? "visible" : "hidden"}
-              variants={staggerContainer}
-              className="text-center mb-12"
-            >
-              <motion.div variants={fadeInUp}>
-                <Heart className="h-14 w-14 mx-auto mb-4 text-amber-600" />
-              </motion.div>
-              <motion.h2 variants={fadeInUp} className="section-title text-amber-900 mb-4">
-                Top Colaboradores
-              </motion.h2>
-              <motion.p variants={fadeInUp} className="section-subtitle text-amber-700 mx-auto">
-                Las personas que más han aportado a proyectos colaborativos
-              </motion.p>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              animate={recentTreesInView ? "visible" : "hidden"}
-              variants={staggerContainer}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {topContributors.length === 0 && (
-                <div className="col-span-full text-center py-8 text-amber-600">
-                  Cargando colaboradores...
-                </div>
-              )}
-              {topContributors.map((contributor, index) => (
-                <motion.div key={contributor.id} variants={fadeInUp}>
-                  <Card className="h-full bg-white border-amber-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <CardContent className="p-6">
-                      <div className="flex items-center gap-4">
-                        {/* Ranking Badge */}
-                        <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
-                          index === 0 ? 'bg-yellow-400 text-yellow-900' :
-                          index === 1 ? 'bg-gray-300 text-gray-700' :
-                          index === 2 ? 'bg-amber-600 text-amber-100' :
-                          'bg-amber-100 text-amber-700'
-                        }`}>
-                          {index < 3 ? (
-                            <Trophy className="h-6 w-6" />
-                          ) : (
-                            <span className="font-bold text-lg">#{index + 1}</span>
-                          )}
-                        </div>
-
-                        {/* Contributor Info */}
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-display font-bold text-lg text-gray-800 truncate">
-                            {contributor.first_name && contributor.last_name
-                              ? `${contributor.first_name} ${contributor.last_name}`
-                              : contributor.username}
-                          </h3>
-                          <div className="flex items-center gap-2 text-amber-600">
-                            <Heart className="h-4 w-4" />
-                            <span className="font-semibold">{contributor.projects_supported} proyectos</span>
-                          </div>
-                          <div className="text-sm text-gray-500">
-                            ${Number(contributor.total_contributed).toLocaleString('es-AR')} aportado
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={recentTreesInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.5 }}
-              className="text-center mt-10"
-            >
-              <p className="text-amber-700 mb-4">Unite a los colaboradores y apoya proyectos de reforestación</p>
-              <Button
-                onClick={() => navigate('/mapa')}
-                className="bg-amber-500 hover:bg-amber-600 text-white"
-              >
-                <Users className="h-5 w-5 mr-2" />
-                Ver Proyectos Colaborativos
-              </Button>
-            </motion.div>
-          </div>
-        </section>
-
       {/* CTA FINAL - Nuevo */}
       <section ref={ctaRef} className="section-padding bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 relative overflow-hidden">
         <div className="absolute inset-0 grid-pattern opacity-10" />
@@ -988,7 +882,7 @@ const LandingHome = () => {
               Un árbol real. Con tu nombre. Para siempre.
             </motion.p>
             <motion.p variants={fadeInUp} className="text-3xl font-bold text-white mb-10">
-              Desde $15,000 ARS
+              Desde {formatCurrency(15000)}
             </motion.p>
             <motion.div variants={fadeInUp}>
               <Button
