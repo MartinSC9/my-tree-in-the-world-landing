@@ -10,6 +10,7 @@ import { statsService } from '@features/trees/services';
 import Footer from '@shared/components/layout/Footer';
 import { APP_URL } from '@core/config/app.config';
 import { formatCurrency } from '@/utils/currencyUtils';
+import heroBackground from '@/assets/images/login-background.jpeg';
 
 
 
@@ -110,147 +111,167 @@ const LandingHome = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section - SIMPLIFICADO */}
-      <section
-        ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      >
-        {/* Animated Background */}
+      {/* Hero Section */}
+      <section ref={heroRef} className="hero-section relative min-h-screen flex items-center overflow-hidden">
+        {/* Parallax Background */}
         <motion.div
           className="absolute inset-0 z-0"
           style={{ scale: heroScale }}
         >
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: 'url(https://img.freepik.com/fotos-premium/plantar-arboles-crecer-suelo-sobre-fondo-verde_44622-1057.jpg)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
+          <img
+            src={heroBackground}
+            alt="Bosque"
+            className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/40" />
         </motion.div>
 
-        {/* Floating Decorative Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(5)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-32 h-32 rounded-full"
-              style={{
-                background: `radial-gradient(circle, hsl(152 68% 50% / 0.15) 0%, transparent 70%)`,
-                left: `${10 + i * 20}%`,
-                top: `${20 + (i % 3) * 25}%`,
-              }}
-              animate={{
-                y: [0, -30, 0],
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.6, 0.3],
-              }}
-              transition={{
-                duration: 6 + i * 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Hero Content - MAS DIRECTO */}
+        {/* Content */}
         <motion.div
           style={{ opacity: heroOpacity }}
-          className="relative z-10 max-w-6xl mx-auto px-6 text-center"
+          className="container-wide relative z-10 px-4 py-20"
         >
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-          >
-            <motion.h1
-              variants={fadeInUp}
-              className="font-display text-5xl md:text-7xl lg:text-8xl text-white mb-8 leading-tight tracking-tight"
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={staggerContainer}
+              className="text-white"
             >
-              Mi Árbol en el{' '}
-              <span className="relative inline-block">
-                <span className="text-gradient bg-gradient-to-r from-emerald-300 via-green-300 to-teal-300 bg-clip-text text-transparent">
-                  Mundo
+              <motion.div variants={fadeInUp} className="mb-6">
+                <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 text-sm font-medium">
+                  <Leaf className="h-4 w-4 text-emerald-400" />
+                  Plataforma de reforestación
                 </span>
-                <motion.span
-                  className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 1, delay: 1 }}
-                />
-              </span>
-            </motion.h1>
+              </motion.div>
 
-            <motion.p
-              variants={fadeInUp}
-              className="text-xl md:text-2xl text-green-100/90 mb-6 max-w-3xl mx-auto leading-relaxed font-light"
-            >
-              Planta un árbol real. Visitálo cuando quieras.
-            </motion.p>
-            <motion.p
-              variants={fadeInUp}
-              className="text-lg md:text-xl text-white/80 mb-12 max-w-2xl mx-auto"
-            >
-              Cada árbol tiene su propio código QR y certificado.
-            </motion.p>
+              <motion.h1 variants={fadeInUp} className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white">
+                Tu Árbol,{' '}
+                <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400 bg-clip-text text-transparent">
+                  Tu Legado
+                </span>
+              </motion.h1>
 
-            <motion.div
-              variants={fadeInUp}
-              className="flex flex-col sm:flex-row gap-5 justify-center"
-            >
-              <Button
-                onClick={() => window.open(`${APP_URL}/registro`, '_blank')}
-                size="lg"
-                className="btn-primary group text-lg px-10 rounded-xl w-full sm:w-[280px] h-[68px] justify-center items-center"
-              >
-                <TreePine className="h-6 w-6 mr-3 group-hover:scale-110 transition-transform" />
-                Comenzar Ahora
-                <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                className="glass-effect hover:bg-white/20 text-white px-10 text-lg rounded-xl border-white/30 w-full sm:w-[280px] h-[68px] justify-center items-center"
-              >
-                <Link to="/mapa" className="flex items-center justify-center w-full sm:w-[280px] h-[68px]">
-                  <Globe className="h-6 w-6 mr-3" />
-                  Ver Mapa Global
-                </Link>
-              </Button>
-            </motion.div>
+              <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-green-100/90 mb-8 leading-relaxed max-w-xl">
+                Entrá gratis, explorá la plataforma y unite a nuestra comunidad. Próximamente podrás plantar tu propio árbol.
+              </motion.p>
 
-            {/* Scroll Indicator */}
-            <motion.div
-              variants={fadeInUp}
-              className="mt-10"
-            >
-              <motion.div
-                className="flex flex-col items-center cursor-pointer"
-                onClick={() => uniqueRef.current?.scrollIntoView({ behavior: 'smooth' })}
-                animate={{ y: [0, 6, 0] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <span className="text-white/70 text-sm mb-2 font-medium">Descubre más</span>
-                <div className="w-10 h-10 rounded-full border-2 border-white/40 flex items-center justify-center backdrop-blur-sm bg-white/10 hover:bg-white/20 transition-colors">
-                  <ChevronDown className="h-5 w-5 text-white/80" />
+              <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 mb-10">
+                <Button
+                  onClick={() => window.open(`${APP_URL}/`, '_blank')}
+                  size="lg"
+                  className="btn-primary group text-lg px-8 bg-emerald-500 hover:bg-emerald-600"
+                >
+                  <Users className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
+                  Entrar a la App
+                  <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white text-lg px-8"
+                >
+                  <Link to="/mapa">
+                    <Globe className="h-5 w-5 mr-2" />
+                    Ver Mapa Global
+                  </Link>
+                </Button>
+              </motion.div>
+
+              {/* Trust indicators */}
+              <motion.div variants={fadeInUp} className="flex flex-wrap gap-6 text-sm text-green-100/70">
+                <div className="flex items-center gap-2">
+                  <Users className="h-4 w-4 text-emerald-400" />
+                  <span>Red social integrada</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-emerald-400" />
+                  <span>Árboles verificados</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin className="h-4 w-4 text-emerald-400" />
+                  <span>GPS exacto</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Shield className="h-4 w-4 text-emerald-400" />
+                  <span>Certificado digital</span>
                 </div>
               </motion.div>
             </motion.div>
+
+            {/* Right Content - Features Card */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="hidden lg:block"
+            >
+              <div className="relative">
+                {/* Main floating card */}
+                <div className="glass-dark rounded-3xl p-8 transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="bg-emerald-500/20 p-3 rounded-xl">
+                      <Users className="h-8 w-8 text-emerald-400" />
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-white">Comunidad</p>
+                      <p className="text-green-200/70">Unite ahora</p>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="bg-white/5 rounded-xl p-4 flex items-center gap-3">
+                      <Heart className="h-5 w-5 text-emerald-400" />
+                      <p className="text-sm text-white">Compartí tu pasión por el ambiente</p>
+                    </div>
+                    <div className="bg-white/5 rounded-xl p-4 flex items-center gap-3">
+                      <Globe className="h-5 w-5 text-emerald-400" />
+                      <p className="text-sm text-white">Explorá el mapa global de árboles</p>
+                    </div>
+                    <div className="bg-white/5 rounded-xl p-4 flex items-center gap-3">
+                      <TreePine className="h-5 w-5 text-emerald-400" />
+                      <p className="text-sm text-white">Próximamente: plantá tu árbol</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Secondary floating card */}
+                <div className="absolute -bottom-6 -left-6 glass rounded-2xl p-4 transform -rotate-3 hover:rotate-0 transition-transform duration-500">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-emerald-500 p-2 rounded-lg">
+                      <Leaf className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-white">100% Gratis</p>
+                      <p className="text-xs text-green-200/70">Registrate sin costo</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            className="flex flex-col items-center cursor-pointer mt-12"
+            onClick={() => statsRef.current?.scrollIntoView({ behavior: 'smooth' })}
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <span className="text-white/60 text-sm mb-2">Descubre más</span>
+            <div className="border-2 border-white/40 rounded-full p-2">
+              <ChevronDown className="h-5 w-5 text-white/60" />
+            </div>
           </motion.div>
-
         </motion.div>
-
       </section>
 
       {/* NUEVA SECCION: Planta Sin Plata */}
-      <section className="py-16 md:py-24 px-4 bg-gradient-to-br from-gray-50 via-white to-emerald-50/30 relative overflow-hidden">
+      <section className="py-16 md:py-24 px-4 bg-gradient-to-br from-gray-50 via-white to-emerald-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900 relative overflow-hidden">
         {/* Elementos decorativos sutiles */}
-        <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-emerald-100/30 blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-gray-200/30 blur-3xl" />
+        <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-emerald-100/30 dark:bg-emerald-900/20 blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-gray-200/30 dark:bg-gray-800/30 blur-3xl" />
 
         <div className="container-wide relative z-10">
           <motion.div
@@ -261,19 +282,19 @@ const LandingHome = () => {
             className="text-center mb-12"
           >
             {/* Badge simple */}
-            <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-medium mb-5">
+            <div className="inline-flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 px-4 py-2 rounded-full text-sm font-medium mb-5">
               <Gift className="h-4 w-4" />
               <span>No necesitas dinero para empezar</span>
             </div>
 
             {/* Titulo limpio */}
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
-              <span className="text-emerald-600">3</span> Formas de Plantar{' '}
-              <span className="text-emerald-600">GRATIS</span>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 dark:text-white mb-4">
+              <span className="text-emerald-600 dark:text-emerald-400">3</span> Formas de Plantar{' '}
+              <span className="text-emerald-600 dark:text-emerald-400">GRATIS</span>
             </h2>
 
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              No hace falta plata para ser parte del cambio. Elegí la opción que mejor te funcione.
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              No hace falta plata para ser parte del cambio. Elegi la opcion que mejor te funcione.
             </p>
           </motion.div>
 
@@ -286,10 +307,10 @@ const LandingHome = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="group"
             >
-              <div className="relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col group-hover:-translate-y-1">
+              <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 h-full flex flex-col group-hover:-translate-y-1">
                 {/* Numero de opcion */}
-                <div className="absolute top-4 right-4 w-7 h-7 rounded-full bg-emerald-100 flex items-center justify-center">
-                  <span className="text-emerald-600 font-bold text-xs">1</span>
+                <div className="absolute top-4 right-4 w-7 h-7 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
+                  <span className="text-emerald-600 dark:text-emerald-400 font-bold text-xs">1</span>
                 </div>
 
                 {/* Icono */}
@@ -297,20 +318,20 @@ const LandingHome = () => {
                   <Users className="h-7 w-7 text-white" />
                 </div>
 
-                <h3 className="text-xl font-bold text-gray-800 mb-2">Invita 5 Amigos</h3>
-                <p className="text-gray-600 mb-4 flex-1 text-sm leading-relaxed">
-                  Compartí tu código. Cuando 5 amigos planten, vos tenés un <span className="font-semibold text-emerald-600">árbol gratis</span>.
+                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">Invita 5 Amigos</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-4 flex-1 text-sm leading-relaxed">
+                  Comparti tu codigo. Cuando 5 amigos planten, vos tenes un <span className="font-semibold text-emerald-600 dark:text-emerald-400">arbol gratis</span>.
                 </p>
 
                 {/* Info box */}
-                <div className="bg-emerald-50 rounded-xl p-3 space-y-2">
-                  <div className="flex items-center gap-2 text-emerald-700 text-sm">
+                <div className="bg-emerald-50 dark:bg-emerald-900/30 rounded-xl p-3 space-y-2">
+                  <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 text-sm">
                     <CheckCircle className="h-4 w-4 flex-shrink-0" />
                     <span>500 pts por cada amigo</span>
                   </div>
-                  <div className="flex items-center gap-2 text-emerald-700 text-sm font-semibold">
+                  <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 text-sm font-semibold">
                     <Trophy className="h-4 w-4 flex-shrink-0" />
-                    <span>2,500 pts = Árbol GRATIS</span>
+                    <span>2,500 pts = Arbol GRATIS</span>
                   </div>
                 </div>
               </div>
@@ -369,10 +390,10 @@ const LandingHome = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="group"
             >
-              <div className="relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col group-hover:-translate-y-1">
+              <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 h-full flex flex-col group-hover:-translate-y-1">
                 {/* Numero de opcion */}
-                <div className="absolute top-4 right-4 w-7 h-7 rounded-full bg-emerald-100 flex items-center justify-center">
-                  <span className="text-emerald-600 font-bold text-xs">3</span>
+                <div className="absolute top-4 right-4 w-7 h-7 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
+                  <span className="text-emerald-600 dark:text-emerald-400 font-bold text-xs">3</span>
                 </div>
 
                 {/* Icono */}
@@ -380,18 +401,18 @@ const LandingHome = () => {
                   <QrCode className="h-7 w-7 text-white" />
                 </div>
 
-                <h3 className="text-xl font-bold text-gray-800 mb-2">Escaneá y Ganá</h3>
-                <p className="text-gray-600 mb-4 flex-1 text-sm leading-relaxed">
-                  Productos de empresas partner tienen QR. Escaneá y <span className="font-semibold text-emerald-600">participá en sorteos</span> de árboles.
+                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">Escanea y Gana</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-4 flex-1 text-sm leading-relaxed">
+                  Productos de empresas partner tienen QR. Escanea y <span className="font-semibold text-emerald-600 dark:text-emerald-400">participa en sorteos</span> de arboles.
                 </p>
 
                 {/* Info box */}
-                <div className="bg-emerald-50 rounded-xl p-3 space-y-2">
-                  <div className="flex items-center gap-2 text-emerald-700 text-sm">
+                <div className="bg-emerald-50 dark:bg-emerald-900/30 rounded-xl p-3 space-y-2">
+                  <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 text-sm">
                     <CheckCircle className="h-4 w-4 flex-shrink-0" />
-                    <span>Sin costo, solo escaneá</span>
+                    <span>Sin costo, solo escanea</span>
                   </div>
-                  <div className="flex items-center gap-2 text-emerald-700 text-sm font-semibold">
+                  <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 text-sm font-semibold">
                     <Gift className="h-4 w-4 flex-shrink-0" />
                     <span>Sorteos mensuales</span>
                   </div>
@@ -422,7 +443,7 @@ const LandingHome = () => {
       </section>
 
       {/* Stats Section */}
-      <section ref={statsRef} className="section-padding relative overflow-hidden">
+      <section ref={statsRef} className="section-padding relative overflow-hidden bg-white dark:bg-gray-900">
         <div className="absolute top-0 right-0 w-96 h-96 blob-shape nature-blob" />
         <div className="absolute bottom-0 left-0 w-80 h-80 blob-shape earth-blob" />
 
@@ -451,7 +472,7 @@ const LandingHome = () => {
                   >
                     {stat.value}
                   </motion.div>
-                  <div className="text-lg font-semibold text-gray-700">{stat.label}</div>
+                  <div className="text-lg font-semibold text-gray-700 dark:text-gray-300">{stat.label}</div>
                 </div>
               </motion.div>
             ))}
@@ -582,7 +603,7 @@ const LandingHome = () => {
       </section>
 
       {/* IMPACTO TRIPLE - Nueva seccion (reemplaza Environmental Commitment y Beneficios Gratuitos) */}
-      <section ref={impactRef} className="py-24 md:py-32 px-4 bg-white relative overflow-hidden">
+      <section ref={impactRef} className="py-24 md:py-32 px-4 bg-white dark:bg-gray-900 relative overflow-hidden">
         {/* Background image muy transparente */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.15]"
@@ -667,17 +688,17 @@ const LandingHome = () => {
 
             {/* Mensaje final */}
             <motion.div variants={fadeInUp} className="mt-12 text-center max-w-md mx-auto">
-              <p className="text-xl text-gray-600 leading-relaxed">
-                <span className="font-bold text-emerald-600">Tu plantas</span> un árbol con tu nombre.
+              <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                <span className="font-bold text-emerald-600 dark:text-emerald-400">Tu plantas</span> un arbol con tu nombre.
               </p>
-              <p className="text-xl text-gray-600 leading-relaxed mt-2">
-                <span className="font-bold text-emerald-600">Viveros</span> venden y generan ingresos.
+              <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mt-2">
+                <span className="font-bold text-emerald-600 dark:text-emerald-400">Viveros</span> venden y generan ingresos.
               </p>
-              <p className="text-xl text-gray-600 leading-relaxed mt-2">
-                <span className="font-bold text-emerald-600">Trabajo digno</span> para familias locales.
+              <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mt-2">
+                <span className="font-bold text-emerald-600 dark:text-emerald-400">Trabajo digno</span> para familias locales.
               </p>
-              <p className="text-xl text-gray-600 leading-relaxed mt-2">
-                <span className="font-bold text-emerald-600">Planeta más verde</span> para todos.
+              <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mt-2">
+                <span className="font-bold text-emerald-600 dark:text-emerald-400">Planeta mas verde</span> para todos.
               </p>
             </motion.div>
           </motion.div>
@@ -727,7 +748,7 @@ const LandingHome = () => {
               }
             ].map((step, i) => (
               <motion.div key={i} variants={fadeInUp} className="text-center flex w-full">
-                <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full w-full">
+                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full w-full border border-gray-100 dark:border-gray-700">
                   <div className="overflow-hidden">
                     <img
                       src={step.image}
@@ -736,10 +757,10 @@ const LandingHome = () => {
                     />
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="font-display text-xl font-semibold text-gray-800 mb-3">{step.title}</h3>
-                    <p className="text-gray-600 leading-relaxed mb-3 flex-1">{step.desc}</p>
+                    <h3 className="font-display text-xl font-semibold text-gray-800 dark:text-white mb-3">{step.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-3 flex-1">{step.desc}</p>
                     {step.price && (
-                      <p className="text-emerald-600 font-bold text-lg">{step.price}</p>
+                      <p className="text-emerald-600 dark:text-emerald-400 font-bold text-lg">{step.price}</p>
                     )}
                   </div>
                 </div>
@@ -767,9 +788,9 @@ const LandingHome = () => {
       </section>
 
       {/* Top Companies Section */}
-        <section ref={topCompaniesRef} className="section-padding bg-white relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-96 h-96 rounded-full bg-emerald-100/40 blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-teal-100/40 blur-3xl" />
+        <section ref={topCompaniesRef} className="section-padding bg-white dark:bg-gray-900 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-96 h-96 rounded-full bg-emerald-100/40 dark:bg-emerald-900/20 blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-teal-100/40 dark:bg-teal-900/20 blur-3xl" />
 
           <div className="container-wide relative z-10">
             <motion.div
@@ -796,13 +817,13 @@ const LandingHome = () => {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6"
             >
               {topCompanies.length === 0 && (
-                <div className="col-span-full text-center py-8 text-gray-500">
+                <div className="col-span-full text-center py-8 text-gray-500 dark:text-gray-400">
                   Cargando empresas...
                 </div>
               )}
               {topCompanies.map((company, index) => (
                 <motion.div key={company.id} variants={fadeInUp}>
-                  <Card className="h-full bg-gradient-to-br from-white to-emerald-50 border-emerald-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <Card className="h-full bg-gradient-to-br from-white to-emerald-50 dark:from-gray-800 dark:to-gray-800 border-emerald-100 dark:border-gray-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     <CardContent className="p-6 text-center">
                       {/* Ranking Badge */}
                       <div className="flex justify-center mb-4">
@@ -810,7 +831,7 @@ const LandingHome = () => {
                           index === 0 ? 'bg-yellow-400 text-yellow-900' :
                           index === 1 ? 'bg-gray-300 text-gray-700' :
                           index === 2 ? 'bg-amber-600 text-amber-100' :
-                          'bg-emerald-100 text-emerald-700'
+                          'bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-400'
                         }`}>
                           {index < 3 ? (
                             <Trophy className="h-6 w-6" />
@@ -821,17 +842,17 @@ const LandingHome = () => {
                       </div>
 
                       {/* Company Name */}
-                      <h3 className="font-display font-bold text-lg text-gray-800 mb-3">
+                      <h3 className="font-display font-bold text-lg text-gray-800 dark:text-white mb-3">
                         {company.company_name || company.username}
                       </h3>
 
                       {/* Stats */}
                       <div className="space-y-2">
-                        <div className="flex items-center justify-center gap-2 text-emerald-600">
+                        <div className="flex items-center justify-center gap-2 text-emerald-600 dark:text-emerald-400">
                           <TreePine className="h-4 w-4" />
                           <span className="font-semibold">{company.completed_projects} proyectos</span>
                         </div>
-                        <div className="text-sm text-gray-500">
+                        <div className="text-sm text-gray-500 dark:text-gray-400">
                           {formatCurrency(company.total_raised)} recaudado
                         </div>
                       </div>
@@ -848,11 +869,11 @@ const LandingHome = () => {
               variants={fadeInUp}
               className="text-center mt-10"
             >
-              <p className="text-gray-600 mb-4">Tu empresa también puede ser parte del cambio.</p>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">Tu empresa tambien puede ser parte del cambio.</p>
               <Button
                 onClick={() => navigate('/empresas')}
                 variant="outline"
-                className="border-emerald-600 text-emerald-700 hover:bg-emerald-50"
+                className="border-emerald-600 dark:border-emerald-500 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/30"
               >
                 <Building2 className="h-4 w-4 mr-2" />
                 Conoce el programa empresarial
@@ -876,22 +897,19 @@ const LandingHome = () => {
               <TreePine className="h-20 w-20 mx-auto mb-6 text-white/90" />
             </motion.div>
             <motion.h2 variants={fadeInUp} className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
-              Planta tu Primer Árbol Hoy
+              Unite a la Comunidad
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-green-100 mb-4 max-w-2xl mx-auto">
-              Un árbol real. Con tu nombre. Para siempre.
-            </motion.p>
-            <motion.p variants={fadeInUp} className="text-3xl font-bold text-white mb-10">
-              Desde {formatCurrency(15000)}
+            <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-green-100 mb-10 max-w-2xl mx-auto">
+              Explorá la plataforma, conectá con otros y próximamente plantá tu propio árbol.
             </motion.p>
             <motion.div variants={fadeInUp}>
               <Button
-                onClick={() => window.open(`${APP_URL}/registro`, '_blank')}
+                onClick={() => window.open(`${APP_URL}/`, '_blank')}
                 size="lg"
                 className="bg-white hover:bg-gray-50 text-emerald-600 shadow-xl hover:shadow-2xl px-12 py-7 text-xl font-semibold"
               >
-                <TreePine className="h-6 w-6 mr-3" />
-                Comenzar Ahora
+                <Users className="h-6 w-6 mr-3" />
+                Entrar a la App
                 <ArrowRight className="h-6 w-6 ml-3" />
               </Button>
             </motion.div>

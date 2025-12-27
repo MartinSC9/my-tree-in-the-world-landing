@@ -4,53 +4,53 @@ import { TreePine, Mail, MapPin, Phone, Instagram, Facebook, Twitter } from 'luc
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-green-800 to-emerald-900 text-white">
+    <footer className="bg-gradient-to-br from-green-800 to-emerald-900 dark:from-gray-900 dark:to-gray-950 text-white">
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Logo y descripción */}
+          {/* Logo y descripcion */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <TreePine className="h-8 w-8" />
-              <span className="text-xl font-bold">Mi Árbol en el Mundo</span>
+              <TreePine className="h-8 w-8 text-emerald-400" />
+              <span className="text-xl font-bold">Mi Arbol en el Mundo</span>
             </div>
-            <p className="text-green-100 mb-4">
+            <p className="text-green-100 dark:text-gray-300 mb-4">
               Ayudamos a reforestar el planeta gracias al compromiso de personas como vos.
-              Cada árbol que comprás se planta realmente en el lugar elegido.
+              Cada arbol que compras se planta realmente en el lugar elegido.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-green-200 hover:text-white transition-colors">
+              <a href="#" className="text-green-200 dark:text-gray-400 hover:text-white transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="text-green-200 hover:text-white transition-colors">
+              <a href="#" className="text-green-200 dark:text-gray-400 hover:text-white transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="text-green-200 hover:text-white transition-colors">
+              <a href="#" className="text-green-200 dark:text-gray-400 hover:text-white transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
             </div>
           </div>
 
-          {/* Enlaces rápidos */}
+          {/* Enlaces rapidos */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white">Enlaces Rápidos</h3>
+            <h3 className="text-lg font-semibold mb-4 text-white">Enlaces Rapidos</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-green-200 hover:text-white transition-colors">
+                <Link to="/" className="text-green-200 dark:text-gray-400 hover:text-white transition-colors">
                   Inicio
                 </Link>
               </li>
               <li>
-                <Link to="/empresas" className="text-green-200 hover:text-white transition-colors">
+                <Link to="/empresas" className="text-green-200 dark:text-gray-400 hover:text-white transition-colors">
                   Para Empresas
                 </Link>
               </li>
               <li>
-                <Link to="/mapa" className="text-green-200 hover:text-white transition-colors">
+                <Link to="/mapa" className="text-green-200 dark:text-gray-400 hover:text-white transition-colors">
                   Mapa Global
                 </Link>
               </li>
               <li>
-                <Link to="/registro" className="text-green-200 hover:text-white transition-colors">
+                <Link to="/registro" className="text-green-200 dark:text-gray-400 hover:text-white transition-colors">
                   Registrarse
                 </Link>
               </li>
@@ -60,7 +60,7 @@ const Footer = () => {
           {/* Contacto */}
           <div>
             <h3 className="text-lg font-semibold mb-4 text-white">Contacto</h3>
-            <ul className="space-y-2 text-green-200">
+            <ul className="space-y-2 text-green-200 dark:text-gray-400">
               <li className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
                 <span>info@miarbolenelmundo.com</span>
@@ -71,24 +71,24 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4" />
-                <span>Córdoba, Argentina</span>
+                <span>Cordoba, Argentina</span>
               </li>
             </ul>
           </div>
         </div>
 
         {/* Legal Links */}
-        <div className="border-t border-green-700 mt-8 pt-8">
+        <div className="border-t border-green-700 dark:border-gray-700 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-green-200 text-center md:text-left">
-              &copy; {new Date().getFullYear()} Mi Árbol en el Mundo. Todos los derechos reservados.
+            <p className="text-green-200 dark:text-gray-400 text-center md:text-left">
+              &copy; {new Date().getFullYear()} Mi Arbol en el Mundo. Todos los derechos reservados.
             </p>
             <div className="flex gap-6">
-              <Link to="/terminos" className="text-green-200 hover:text-white transition-colors text-sm">
-                Términos y Condiciones
+              <Link to="/terminos" className="text-green-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
+                Terminos y Condiciones
               </Link>
-              <Link to="/privacidad" className="text-green-200 hover:text-white transition-colors text-sm">
-                Política de Privacidad
+              <Link to="/privacidad" className="text-green-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
+                Politica de Privacidad
               </Link>
             </div>
           </div>

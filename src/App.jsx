@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Toaster } from '@shared/components/ui/toaster';
 import { AuthProvider } from '@core/contexts/AuthContext';
 import { TreeProvider } from '@core/contexts/TreeContext';
+import { ThemeProvider } from '@core/contexts/ThemeContext';
 import DynamicMetaTags from '@shared/components/DynamicMetaTags';
 import ScrollToTop from '@shared/components/ScrollToTop';
 
@@ -28,12 +29,13 @@ import AuthenticatedLayout from '@shared/components/layout/AuthenticatedLayout';
 
 const App = () => {
   return (
-    <AuthProvider>
-      <TreeProvider>
-        <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          <ScrollToTop />
-          <DynamicMetaTags />
-          <Routes>
+    <ThemeProvider>
+      <AuthProvider>
+        <TreeProvider>
+          <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+            <ScrollToTop />
+            <DynamicMetaTags />
+            <Routes>
             {/* Landing pages (public) */}
             <Route path="/" element={
               <AuthenticatedLayout>
@@ -104,10 +106,11 @@ const App = () => {
             {/* Redirect all other routes to home */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
-          <Toaster />
-        </Router>
-      </TreeProvider>
-    </AuthProvider>
+            <Toaster />
+          </Router>
+        </TreeProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 };
 

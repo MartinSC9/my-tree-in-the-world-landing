@@ -1,5 +1,5 @@
 /* Premium Design System for Mi Arbol en el Mundo V1 */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&display=swap');
+/* Usando la misma fuente del sistema que el login */
 
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
@@ -75,7 +75,7 @@ html {
 }
 
 body {
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   background: var(--gradient-hero);
   color: hsl(var(--foreground));
   font-feature-settings: "rlig" 1, "calt" 1;
@@ -86,12 +86,13 @@ body {
 
 /* ===== Typography ===== */
 .font-display {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Fraunces', Georgia, serif;
-  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
   color: hsl(var(--foreground));
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -112,6 +113,10 @@ h1, h2, h3, h4 {
 
 .premium-gradient {
   background: linear-gradient(135deg, hsl(152 68% 95%) 0%, hsl(165 60% 92%) 35%, hsl(85 55% 95%) 70%, hsl(152 68% 97%) 100%);
+}
+
+.dark .premium-gradient {
+  background: linear-gradient(135deg, hsl(152 30% 10%) 0%, hsl(165 25% 12%) 35%, hsl(160 20% 11%) 70%, hsl(152 30% 10%) 100%);
 }
 
 .hero-gradient {
@@ -158,6 +163,12 @@ h1, h2, h3, h4 {
     var(--shadow-md),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
   position: relative;
+}
+
+.dark .stats-card {
+  background: linear-gradient(135deg, rgba(31, 41, 55, 0.9) 0%, rgba(31, 41, 55, 0.7) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
 
@@ -411,16 +422,16 @@ h1, h2, h3, h4 {
 }
 
 .section-title {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.15;
-  color: hsl(var(--foreground));
+  @apply text-gray-900 dark:text-white;
 }
 
 .section-subtitle {
   font-size: 1.125rem;
-  color: hsl(var(--muted-foreground));
+  @apply text-gray-600 dark:text-gray-300;
   max-width: 42rem;
   line-height: 1.7;
 }
