@@ -119,7 +119,7 @@ const PlantadoresPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 dark:from-gray-900 dark:to-gray-900">
       {/* Hero Section */}
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
@@ -132,10 +132,10 @@ const PlantadoresPage = () => {
             <div className="bg-amber-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
               <Shovel className="h-10 w-10 text-amber-600" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-amber-800 mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-amber-800 dark:text-amber-400 mb-4">
               Plantadores
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Convertite en parte de nuestra red de plantadores y ganá dinero mientras ayudás
               a reforestar el planeta. Trabajo flexible, al aire libre y con propósito.
             </p>
@@ -177,36 +177,36 @@ const PlantadoresPage = () => {
           >
             <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 text-center">
               <p className="text-3xl font-bold text-amber-600">150+</p>
-              <p className="text-gray-600 text-sm">Plantadores activos</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Plantadores activos</p>
             </div>
             <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 text-center">
               <p className="text-3xl font-bold text-amber-600">2.500+</p>
-              <p className="text-gray-600 text-sm">Árboles plantados</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Árboles plantados</p>
             </div>
             <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 text-center">
               <p className="text-3xl font-bold text-amber-600">4.8</p>
-              <p className="text-gray-600 text-sm">Calificación promedio</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Calificación promedio</p>
             </div>
             <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 text-center">
               <p className="text-3xl font-bold text-amber-600">$10K</p>
-              <p className="text-gray-600 text-sm">Pago promedio/árbol</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Pago promedio/árbol</p>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* Beneficios */}
-      <section className="py-12 px-4 bg-white">
+      <section className="py-12 px-4 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 mb-3 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 dark:text-amber-400 mb-3 text-center">
               ¿Por qué ser Plantador?
             </h2>
-            <p className="text-gray-600 text-center mb-10 max-w-2xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-400 text-center mb-10 max-w-2xl mx-auto">
               Más que un trabajo, una forma de vida conectada con la naturaleza
             </p>
 
@@ -214,15 +214,15 @@ const PlantadoresPage = () => {
               {benefits.map((benefit, index) => {
                 const Icon = benefit.icon;
                 return (
-                  <Card key={index} className="border-amber-200 hover:shadow-lg transition-shadow">
+                  <Card key={index} className="border-amber-200 dark:border-gray-700 dark:bg-gray-800 hover:shadow-lg transition-shadow">
                     <CardHeader className="pb-3">
                       <div className={`bg-${benefit.color}-100 w-14 h-14 rounded-full flex items-center justify-center mb-3`}>
                         <Icon className={`h-7 w-7 text-${benefit.color}-600`} />
                       </div>
-                      <CardTitle className="text-amber-800 text-lg">{benefit.title}</CardTitle>
+                      <CardTitle className="text-amber-800 dark:text-amber-400 text-lg">{benefit.title}</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-gray-600 text-sm">{benefit.description}</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm">{benefit.description}</p>
                     </CardContent>
                   </Card>
                 );
@@ -233,29 +233,29 @@ const PlantadoresPage = () => {
       </section>
 
       {/* Cómo Funciona */}
-      <section className="py-12 px-4 bg-gradient-to-br from-amber-50 to-orange-50">
+      <section className="py-12 px-4 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-800">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 mb-3 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 dark:text-amber-400 mb-3 text-center">
               ¿Cómo Funciona?
             </h2>
-            <p className="text-gray-600 text-center mb-10 max-w-2xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-400 text-center mb-10 max-w-2xl mx-auto">
               En 4 simples pasos empezás a plantar y ganar
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {howItWorks.map((item, index) => (
                 <div key={index} className="relative">
-                  <div className="bg-white rounded-xl p-6 shadow-md border border-amber-100 h-full">
+                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md border border-amber-100 dark:border-gray-700 h-full">
                     <div className="bg-amber-600 w-10 h-10 rounded-full flex items-center justify-center mb-4 text-white font-bold">
                       {item.step}
                     </div>
-                    <h3 className="font-bold text-amber-800 mb-2">{item.title}</h3>
-                    <p className="text-gray-600 text-sm">{item.description}</p>
+                    <h3 className="font-bold text-amber-800 dark:text-amber-400 mb-2">{item.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">{item.description}</p>
                   </div>
                   {index < howItWorks.length - 1 && (
                     <ArrowRight className="hidden lg:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-amber-300 h-6 w-6" />
@@ -268,41 +268,41 @@ const PlantadoresPage = () => {
       </section>
 
       {/* Testimonios */}
-      <section className="py-12 px-4 bg-white">
+      <section className="py-12 px-4 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 mb-3 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 dark:text-amber-400 mb-3 text-center">
               Lo que dicen nuestros Plantadores
             </h2>
-            <p className="text-gray-600 text-center mb-10 max-w-2xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-400 text-center mb-10 max-w-2xl mx-auto">
               Conocé las experiencias de quienes ya son parte de la comunidad
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {testimonials.map((testimonial, index) => (
-                <Card key={index} className="border-amber-200">
+                <Card key={index} className="border-amber-200 dark:border-gray-700 dark:bg-gray-800">
                   <CardContent className="p-6">
                     <div className="flex items-center gap-1 mb-3">
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <Star key={i} className="h-4 w-4 text-amber-500 fill-amber-500" />
                       ))}
                     </div>
-                    <p className="text-gray-700 mb-4 italic">"{testimonial.text}"</p>
+                    <p className="text-gray-700 dark:text-gray-300 mb-4 italic">"{testimonial.text}"</p>
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-semibold text-amber-800">{testimonial.name}</p>
-                        <p className="text-gray-500 text-sm flex items-center gap-1">
+                        <p className="font-semibold text-amber-800 dark:text-amber-400">{testimonial.name}</p>
+                        <p className="text-gray-500 dark:text-gray-400 text-sm flex items-center gap-1">
                           <MapPin className="h-3 w-3" />
                           {testimonial.location}
                         </p>
                       </div>
                       <div className="text-right">
                         <p className="text-2xl font-bold text-amber-600">{testimonial.trees}</p>
-                        <p className="text-gray-500 text-xs">árboles plantados</p>
+                        <p className="text-gray-500 dark:text-gray-400 text-xs">árboles plantados</p>
                       </div>
                     </div>
                   </CardContent>
@@ -314,17 +314,17 @@ const PlantadoresPage = () => {
       </section>
 
       {/* El día de un plantador */}
-      <section className="py-12 px-4 bg-gradient-to-br from-amber-50 to-orange-50">
+      <section className="py-12 px-4 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-800">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 mb-3 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 dark:text-amber-400 mb-3 text-center">
               Un día como Plantador
             </h2>
-            <p className="text-gray-600 text-center mb-10 max-w-2xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-400 text-center mb-10 max-w-2xl mx-auto">
               Así es la rutina típica de nuestros plantadores
             </p>
 
@@ -357,17 +357,17 @@ const PlantadoresPage = () => {
       </section>
 
       {/* Requisitos */}
-      <section className="py-12 px-4 bg-white">
+      <section className="py-12 px-4 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 mb-3 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 dark:text-amber-400 mb-3 text-center">
               Requisitos para ser Plantador
             </h2>
-            <p className="text-gray-600 text-center mb-10 max-w-2xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-400 text-center mb-10 max-w-2xl mx-auto">
               Todo lo que necesitás para empezar
             </p>
 
@@ -376,7 +376,7 @@ const PlantadoresPage = () => {
                 {requirements.map((req, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <CheckCircle className="h-6 w-6 text-amber-600 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">{req}</span>
+                    <span className="text-gray-700 dark:text-gray-300">{req}</span>
                   </li>
                 ))}
               </ul>
@@ -386,28 +386,28 @@ const PlantadoresPage = () => {
       </section>
 
       {/* FAQs */}
-      <section className="py-12 px-4 bg-gradient-to-br from-amber-50 to-orange-50">
+      <section className="py-12 px-4 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-800">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 mb-3 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 dark:text-amber-400 mb-3 text-center">
               Preguntas Frecuentes
             </h2>
-            <p className="text-gray-600 text-center mb-10 max-w-2xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-400 text-center mb-10 max-w-2xl mx-auto">
               Resolvemos tus dudas más comunes
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
               {faqs.map((faq, index) => (
-                <Card key={index} className="border-amber-200">
+                <Card key={index} className="border-amber-200 dark:border-gray-700 dark:bg-gray-800">
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-amber-800 text-base">{faq.question}</CardTitle>
+                    <CardTitle className="text-amber-800 dark:text-amber-400 text-base">{faq.question}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600 text-sm">{faq.answer}</p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">{faq.answer}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -417,7 +417,7 @@ const PlantadoresPage = () => {
       </section>
 
       {/* CTA Final */}
-      <section className="py-12 px-4 bg-white">
+      <section className="py-12 px-4 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

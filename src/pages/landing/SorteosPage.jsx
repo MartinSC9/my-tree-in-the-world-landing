@@ -23,7 +23,7 @@ const staggerContainer = {
 
 const SorteosPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white dark:from-gray-900 dark:to-gray-900">
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 opacity-90" />
@@ -90,10 +90,10 @@ const SorteosPage = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-purple-800 mb-4">
+            <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-purple-800 dark:text-purple-400 mb-4">
               Cómo Funcionan los Sorteos
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <motion.p variants={fadeInUp} className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Las empresas crean proyectos colaborativos con sorteos de cupones para sus clientes.
             </motion.p>
           </motion.div>
@@ -146,12 +146,12 @@ const SorteosPage = () => {
                   <div className={`w-20 h-20 rounded-2xl ${colors[item.color]} border-2 flex items-center justify-center mx-auto mb-4`}>
                     <item.icon className="h-10 w-10" />
                   </div>
-                  <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 flex-1 flex flex-col justify-center items-center text-center">
+                  <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700 flex-1 flex flex-col justify-center items-center text-center">
                     <span className="bg-purple-600 text-white text-sm font-bold px-4 py-1 rounded-full mb-3">
                       Paso {item.step}
                     </span>
-                    <h3 className="text-xl font-semibold text-purple-700 mb-2">{item.title}</h3>
-                    <p className="text-gray-600">{item.desc}</p>
+                    <h3 className="text-xl font-semibold text-purple-700 dark:text-purple-400 dark:text-purple-400 mb-2">{item.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400">{item.desc}</p>
                   </div>
                 </motion.div>
               );
@@ -161,7 +161,7 @@ const SorteosPage = () => {
       </section>
 
       {/* Premios */}
-      <section className="py-20 px-6 bg-gradient-to-br from-purple-50 to-pink-50">
+      <section className="py-20 px-6 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-800">
         <div className="container mx-auto max-w-6xl">
           <motion.div
             initial="hidden"
@@ -170,10 +170,10 @@ const SorteosPage = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-purple-800 mb-4">
+            <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-purple-800 dark:text-purple-400 mb-4">
               Premios Disponibles
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl text-gray-600">
+            <motion.p variants={fadeInUp} className="text-xl text-gray-600 dark:text-gray-300">
               Cada empresa configura sus propios premios y descuentos.
             </motion.p>
           </motion.div>
@@ -216,8 +216,8 @@ const SorteosPage = () => {
                     <div className="text-white/90 font-medium">DESCUENTO</div>
                   </div>
                   <CardContent className="p-6 text-center">
-                    <h3 className="text-xl font-semibold text-purple-700 mb-2">{item.title}</h3>
-                    <p className="text-gray-600">{item.desc}</p>
+                    <h3 className="text-xl font-semibold text-purple-700 dark:text-purple-400 dark:text-purple-400 mb-2">{item.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400">{item.desc}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -236,7 +236,7 @@ const SorteosPage = () => {
                 <Sparkles className="h-6 w-6 text-purple-600" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-purple-700 mb-2">Mas Aportas = Mas Chances</h3>
+                <h3 className="text-xl font-semibold text-purple-700 dark:text-purple-400 mb-2">Mas Aportas = Mas Chances</h3>
                 <p className="text-gray-600">
                   El sistema es justo: cada peso que aportas es un ticket para el sorteo.
                   Si aportas $500, tenes 500 tickets. Si otro aporta $100, tiene 100 tickets.
@@ -258,7 +258,7 @@ const SorteosPage = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-purple-800 mb-4">
+            <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-purple-800 dark:text-purple-400 mb-4">
               Todos Ganan
             </motion.h2>
           </motion.div>
@@ -271,9 +271,9 @@ const SorteosPage = () => {
             className="grid grid-cols-1 md:grid-cols-2 gap-8"
           >
             <motion.div variants={fadeInUp}>
-              <Card className="h-full bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+              <Card className="h-full bg-gradient-to-br from-purple-50 to-purple-100 dark:from-gray-800 dark:to-gray-800 border-purple-200 dark:border-gray-700">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-purple-800">
+                  <CardTitle className="flex items-center gap-3 text-purple-800 dark:text-purple-400">
                     <Users className="h-6 w-6" />
                     Para Participantes
                   </CardTitle>
@@ -287,7 +287,7 @@ const SorteosPage = () => {
                       'Apoyas el medio ambiente',
                       'Obtienes descuentos en productos'
                     ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-3 text-purple-700">
+                      <li key={i} className="flex items-start gap-3 text-purple-700 dark:text-purple-400">
                         <CheckCircle className="h-5 w-5 text-purple-500 flex-shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>
@@ -298,9 +298,9 @@ const SorteosPage = () => {
             </motion.div>
 
             <motion.div variants={fadeInUp}>
-              <Card className="h-full bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
+              <Card className="h-full bg-gradient-to-br from-orange-50 to-orange-100 dark:from-gray-800 dark:to-gray-800 border-orange-200 dark:border-gray-700">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-orange-800">
+                  <CardTitle className="flex items-center gap-3 text-orange-800 dark:text-orange-400">
                     <Trophy className="h-6 w-6" />
                     Para Empresas
                   </CardTitle>
@@ -314,7 +314,7 @@ const SorteosPage = () => {
                       'Mejora de imagen corporativa',
                       'Certificacion de RSE'
                     ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-3 text-orange-700">
+                      <li key={i} className="flex items-start gap-3 text-orange-700 dark:text-orange-400">
                         <CheckCircle className="h-5 w-5 text-orange-500 flex-shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>

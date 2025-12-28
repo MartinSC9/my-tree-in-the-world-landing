@@ -62,7 +62,7 @@ const QRProductosPage = () => {
       </section>
 
       {/* Concepto Principal */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <motion.div
             initial="hidden"
@@ -71,10 +71,10 @@ const QRProductosPage = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">
               ¿Cómo Funciona?
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <motion.p variants={fadeInUp} className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Las empresas asociadas incluyen en sus productos un sello con código QR.
               Los consumidores que escanean participan para ganar árboles gratis.
             </motion.p>
@@ -109,14 +109,14 @@ const QRProductosPage = () => {
               }
             ].map((step, i) => (
               <motion.div key={i} variants={fadeInUp}>
-                <Card className="h-full text-center hover:shadow-lg transition-shadow border-2 border-gray-100">
+                <Card className="h-full text-center hover:shadow-lg transition-shadow border-2 border-gray-100 dark:border-gray-700 dark:bg-gray-800">
                   <CardContent className="p-8">
                     <div className={`w-20 h-20 rounded-2xl ${step.color} flex items-center justify-center mx-auto mb-6`}>
                       <step.icon className="h-10 w-10" />
                     </div>
-                    <div className="text-4xl font-bold text-gray-300 mb-2">{i + 1}</div>
-                    <h3 className="font-bold text-xl text-gray-800 mb-3">{step.title}</h3>
-                    <p className="text-gray-600">{step.desc}</p>
+                    <div className="text-4xl font-bold text-gray-300 dark:text-gray-600 mb-2">{i + 1}</div>
+                    <h3 className="font-bold text-xl text-gray-800 dark:text-white mb-3">{step.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400">{step.desc}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -126,7 +126,7 @@ const QRProductosPage = () => {
       </section>
 
       {/* El Sello */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-800">
         <div className="container mx-auto px-6">
           <motion.div
             initial="hidden"
@@ -152,25 +152,25 @@ const QRProductosPage = () => {
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="h-6 w-6 text-emerald-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">{item}</span>
+                    <span className="text-gray-700 dark:text-gray-300">{item}</span>
                   </div>
                 ))}
               </div>
             </motion.div>
 
             <motion.div variants={fadeInUp}>
-              <div className="bg-white rounded-3xl shadow-2xl p-8 border-4 border-emerald-200 max-w-sm mx-auto">
+              <div className="bg-white dark:bg-gray-700 rounded-3xl shadow-2xl p-8 border-4 border-emerald-200 dark:border-emerald-700 max-w-sm mx-auto">
                 <div className="text-center">
                   <div className="flex items-center justify-center gap-2 mb-4">
                     <TreePine className="h-8 w-8 text-emerald-600" />
                     <span className="text-xl font-bold text-emerald-700">MI ÁRBOL EN EL MUNDO</span>
                   </div>
-                  <div className="bg-gray-100 rounded-2xl p-6 mb-4">
-                    <QrCode className="h-32 w-32 mx-auto text-gray-800" />
+                  <div className="bg-gray-100 dark:bg-gray-600 rounded-2xl p-6 mb-4">
+                    <QrCode className="h-32 w-32 mx-auto text-gray-800 dark:text-gray-200" />
                   </div>
-                  <p className="text-lg font-bold text-gray-800 mb-2">ESCANEÁ Y GANÁ</p>
-                  <p className="text-emerald-600 font-semibold">UN ÁRBOL GRATIS</p>
-                  <p className="text-sm text-gray-500 mt-4">#PlantemosJuntos</p>
+                  <p className="text-lg font-bold text-gray-800 dark:text-white mb-2">ESCANEÁ Y GANÁ</p>
+                  <p className="text-emerald-600 dark:text-emerald-400 font-semibold">UN ÁRBOL GRATIS</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">#PlantemosJuntos</p>
                 </div>
               </div>
             </motion.div>
@@ -179,7 +179,7 @@ const QRProductosPage = () => {
       </section>
 
       {/* Beneficios para cada parte */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <motion.div
             initial="hidden"
@@ -188,7 +188,7 @@ const QRProductosPage = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">
               Beneficios para Todos
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-xl text-gray-600">
@@ -205,12 +205,12 @@ const QRProductosPage = () => {
           >
             {/* Empresa */}
             <motion.div variants={fadeInUp}>
-              <Card className="h-full border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-white">
+              <Card className="h-full border-2 border-blue-200 dark:border-gray-700 bg-gradient-to-br from-blue-50 to-white dark:from-gray-800 dark:to-gray-800">
                 <CardContent className="p-8">
                   <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center mb-6">
                     <Building2 className="h-8 w-8 text-blue-600" />
                   </div>
-                  <h3 className="text-2xl font-bold text-blue-800 mb-4">Para la Empresa</h3>
+                  <h3 className="text-2xl font-bold text-blue-800 dark:text-blue-400 mb-4">Para la Empresa</h3>
                   <ul className="space-y-3">
                     {[
                       'Marketing verde genuino (no greenwashing)',
@@ -219,7 +219,7 @@ const QRProductosPage = () => {
                       'Métricas de engagement reales',
                       'RSE verificable'
                     ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-gray-700">
+                      <li key={i} className="flex items-start gap-2 text-gray-700 dark:text-gray-300">
                         <CheckCircle className="h-5 w-5 text-blue-500 flex-shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>
@@ -231,12 +231,12 @@ const QRProductosPage = () => {
 
             {/* Consumidor */}
             <motion.div variants={fadeInUp}>
-              <Card className="h-full border-2 border-green-200 bg-gradient-to-br from-green-50 to-white">
+              <Card className="h-full border-2 border-green-200 dark:border-gray-700 bg-gradient-to-br from-green-50 to-white dark:from-gray-800 dark:to-gray-800">
                 <CardContent className="p-8">
                   <div className="w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center mb-6">
                     <Users className="h-8 w-8 text-green-600" />
                   </div>
-                  <h3 className="text-2xl font-bold text-green-800 mb-4">Para el Consumidor</h3>
+                  <h3 className="text-2xl font-bold text-green-800 dark:text-green-400 mb-4">Para el Consumidor</h3>
                   <ul className="space-y-3">
                     {[
                       'Posibilidad de ganar algo valioso',
@@ -245,7 +245,7 @@ const QRProductosPage = () => {
                       'Descubrir nuestra plataforma',
                       'Sentirse parte del cambio'
                     ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-gray-700">
+                      <li key={i} className="flex items-start gap-2 text-gray-700 dark:text-gray-300">
                         <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>
@@ -257,12 +257,12 @@ const QRProductosPage = () => {
 
             {/* Planeta */}
             <motion.div variants={fadeInUp}>
-              <Card className="h-full border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-white">
+              <Card className="h-full border-2 border-emerald-200 dark:border-gray-700 bg-gradient-to-br from-emerald-50 to-white dark:from-gray-800 dark:to-gray-800">
                 <CardContent className="p-8">
                   <div className="w-16 h-16 rounded-2xl bg-emerald-100 flex items-center justify-center mb-6">
                     <TreePine className="h-8 w-8 text-emerald-600" />
                   </div>
-                  <h3 className="text-2xl font-bold text-emerald-800 mb-4">Para el Planeta</h3>
+                  <h3 className="text-2xl font-bold text-emerald-800 dark:text-emerald-400 mb-4">Para el Planeta</h3>
                   <ul className="space-y-3">
                     {[
                       'Más árboles plantados',
@@ -271,7 +271,7 @@ const QRProductosPage = () => {
                       'Comunidad ambiental creciente',
                       'Impacto real y medible'
                     ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-gray-700">
+                      <li key={i} className="flex items-start gap-2 text-gray-700 dark:text-gray-300">
                         <CheckCircle className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>
@@ -285,7 +285,7 @@ const QRProductosPage = () => {
       </section>
 
       {/* Qué incluye el Partnership */}
-      <section className="py-20 bg-gradient-to-br from-emerald-50 to-teal-50">
+      <section className="py-20 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-gray-800 dark:to-gray-800">
         <div className="container mx-auto px-6">
           <motion.div
             initial="hidden"
@@ -295,9 +295,9 @@ const QRProductosPage = () => {
             className="text-center mb-16"
           >
             <motion.div variants={fadeInUp}>
-              <Award className="h-14 w-14 mx-auto mb-4 text-emerald-600" />
+              <Award className="h-14 w-14 mx-auto mb-4 text-emerald-600 dark:text-emerald-400" />
             </motion.div>
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">
               ¿Qué Incluye ser Partner?
             </motion.h2>
           </motion.div>
@@ -318,15 +318,15 @@ const QRProductosPage = () => {
               { icon: Users, title: 'Soporte dedicado', desc: 'Equipo disponible para ayudarte' }
             ].map((item, i) => (
               <motion.div key={i} variants={fadeInUp}>
-                <Card className="h-full hover:shadow-lg transition-shadow">
+                <Card className="h-full hover:shadow-lg transition-shadow dark:bg-gray-800 dark:border-gray-700">
                   <CardContent className="p-6">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center flex-shrink-0">
                         <item.icon className="h-6 w-6 text-emerald-600" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-gray-800 mb-1">{item.title}</h3>
-                        <p className="text-gray-600 text-sm">{item.desc}</p>
+                        <h3 className="font-bold text-gray-800 dark:text-white mb-1">{item.title}</h3>
+                        <p className="text-gray-600 dark:text-gray-400 text-sm">{item.desc}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -338,7 +338,7 @@ const QRProductosPage = () => {
       </section>
 
       {/* Empresas Target */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <motion.div
             initial="hidden"
@@ -347,10 +347,10 @@ const QRProductosPage = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">
               ¿Qué Empresas Pueden Participar?
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <motion.p variants={fadeInUp} className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Ideal para empresas que quieren diferenciarse con un compromiso ambiental real
             </motion.p>
           </motion.div>
@@ -377,7 +377,7 @@ const QRProductosPage = () => {
               <motion.div
                 key={i}
                 variants={fadeInUp}
-                className="px-6 py-3 bg-gradient-to-r from-emerald-100 to-teal-100 rounded-full text-emerald-700 font-medium"
+                className="px-6 py-3 bg-gradient-to-r from-emerald-100 to-teal-100 dark:from-emerald-900/50 dark:to-teal-900/50 rounded-full text-emerald-700 dark:text-emerald-400 font-medium"
               >
                 {category}
               </motion.div>

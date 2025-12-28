@@ -60,7 +60,7 @@ const ReferidosPage = () => {
       </section>
 
       {/* Cómo Funciona */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <motion.div
             initial="hidden"
@@ -69,10 +69,10 @@ const ReferidosPage = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">
               ¿Cómo Funciona?
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <motion.p variants={fadeInUp} className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Un sistema simple que premia tu participación
             </motion.p>
           </motion.div>
@@ -91,13 +91,13 @@ const ReferidosPage = () => {
               { icon: Coins, title: 'Canjeá tus puntos', desc: 'Usá tus puntos para descuentos o árboles gratis', color: 'bg-amber-100 text-amber-600' }
             ].map((step, i) => (
               <motion.div key={i} variants={fadeInUp}>
-                <Card className="h-full text-center hover:shadow-lg transition-shadow">
+                <Card className="h-full text-center hover:shadow-lg transition-shadow dark:bg-gray-800 dark:border-gray-700">
                   <CardContent className="p-6">
                     <div className={`w-16 h-16 rounded-2xl ${step.color} flex items-center justify-center mx-auto mb-4`}>
                       <step.icon className="h-8 w-8" />
                     </div>
-                    <h3 className="font-bold text-lg text-gray-800 mb-2">{step.title}</h3>
-                    <p className="text-gray-600">{step.desc}</p>
+                    <h3 className="font-bold text-lg text-gray-800 dark:text-white mb-2">{step.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400">{step.desc}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -107,7 +107,7 @@ const ReferidosPage = () => {
       </section>
 
       {/* Sistema de Puntos */}
-      <section className="py-20 bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50">
+      <section className="py-20 bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-800">
         <div className="container mx-auto px-6">
           <motion.div
             initial="hidden"
@@ -117,12 +117,12 @@ const ReferidosPage = () => {
             className="text-center mb-16"
           >
             <motion.div variants={fadeInUp}>
-              <Coins className="h-14 w-14 mx-auto mb-4 text-purple-600" />
+              <Coins className="h-14 w-14 mx-auto mb-4 text-purple-600 dark:text-purple-400" />
             </motion.div>
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">
               Sistema de EcoPoints
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <motion.p variants={fadeInUp} className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Ganá puntos por cada acción y canjeálos por beneficios reales
             </motion.p>
           </motion.div>
@@ -135,28 +135,28 @@ const ReferidosPage = () => {
               viewport={{ once: true }}
               variants={fadeInUp}
             >
-              <Card className="h-full">
+              <Card className="h-full dark:bg-gray-800 dark:border-gray-700">
                 <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold text-purple-700 mb-6 flex items-center">
+                  <h3 className="text-2xl font-bold text-purple-700 dark:text-purple-400 mb-6 flex items-center">
                     <Target className="h-7 w-7 mr-3" />
                     Cómo Ganar Puntos
                   </h3>
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between p-4 bg-yellow-50 rounded-xl">
+                    <div className="flex items-center justify-between p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-xl">
                       <div className="flex items-center gap-3">
                         <Users className="h-6 w-6 text-yellow-600" />
                         <span className="font-medium">Amigo se registra</span>
                       </div>
                       <span className="text-sm font-medium text-yellow-600">Se vincula</span>
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-green-50 rounded-xl border-2 border-green-200">
+                    <div className="flex items-center justify-between p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border-2 border-green-200">
                       <div className="flex items-center gap-3">
                         <TreePine className="h-6 w-6 text-green-600" />
                         <span className="font-medium">Amigo planta un árbol</span>
                       </div>
                       <span className="text-2xl font-bold text-green-600">+500 pts</span>
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-purple-50 rounded-xl">
+                    <div className="flex items-center justify-between p-4 bg-purple-50 dark:bg-purple-900/20 rounded-xl">
                       <div className="flex items-center gap-3">
                         <Gift className="h-6 w-6 text-purple-600" />
                         <span className="font-medium">Amigo colabora en proyecto</span>
@@ -175,18 +175,18 @@ const ReferidosPage = () => {
               viewport={{ once: true }}
               variants={fadeInUp}
             >
-              <Card className="h-full">
+              <Card className="h-full dark:bg-gray-800 dark:border-gray-700">
                 <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold text-green-700 mb-6 flex items-center">
+                  <h3 className="text-2xl font-bold text-green-700 dark:text-green-400 mb-6 flex items-center">
                     <Gift className="h-7 w-7 mr-3" />
                     Qué Podés Canjear
                   </h3>
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                    <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
                       <span className="font-medium">15% de descuento</span>
                       <span className="text-xl font-bold text-gray-600">500 pts</span>
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                    <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
                       <span className="font-medium">30% de descuento</span>
                       <span className="text-xl font-bold text-gray-600">1,000 pts</span>
                     </div>
@@ -206,7 +206,7 @@ const ReferidosPage = () => {
       </section>
 
       {/* Escenarios de Ejemplo */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <motion.div
             initial="hidden"
@@ -215,10 +215,10 @@ const ReferidosPage = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">
               Ejemplos Reales
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <motion.p variants={fadeInUp} className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Mirá cuánto podés ganar invitando amigos
             </motion.p>
           </motion.div>
@@ -276,7 +276,7 @@ const ReferidosPage = () => {
       </section>
 
       {/* Beneficios */}
-      <section className="py-20 bg-gradient-to-br from-green-50 to-emerald-50">
+      <section className="py-20 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-gray-800 dark:to-gray-800">
         <div className="container mx-auto px-6">
           <motion.div
             initial="hidden"
@@ -285,7 +285,7 @@ const ReferidosPage = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">
               Beneficios del Sistema
             </motion.h2>
           </motion.div>
@@ -306,9 +306,9 @@ const ReferidosPage = () => {
               'Seguimiento en tiempo real de tus referidos'
             ].map((benefit, i) => (
               <motion.div key={i} variants={fadeInUp}>
-                <div className="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm">
+                <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-700 rounded-xl shadow-sm">
                   <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">{benefit}</span>
+                  <span className="text-gray-700 dark:text-gray-300">{benefit}</span>
                 </div>
               </motion.div>
             ))}

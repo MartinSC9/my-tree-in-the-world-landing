@@ -99,10 +99,10 @@ const LandingHome = () => {
   }, [user, authLoading, getRedirectPath, navigate]);
 
   const stats = [
-    { icon: TreePine, label: 'Árboles Comprados', value: landingStats.totalTrees, color: 'hsl(152 68% 38%)', bgColor: 'hsl(152 68% 92%)' },
-    { icon: Leaf, label: 'Ya Plantados', value: landingStats.plantedTrees, color: 'hsl(165 60% 40%)', bgColor: 'hsl(165 60% 90%)' },
-    { icon: Globe, label: 'Países', value: landingStats.totalCountries, color: 'hsl(200 85% 45%)', bgColor: 'hsl(200 85% 92%)' },
-    { icon: Users, label: 'Árboles Colaborativos', value: landingStats.collaborativeTrees || 0, color: 'hsl(280 60% 50%)', bgColor: 'hsl(280 60% 92%)' }
+    { icon: TreePine, label: 'Árboles Comprados', value: landingStats.totalTrees, colorClass: 'text-emerald-600 dark:text-emerald-400', bgClass: 'bg-emerald-100 dark:bg-emerald-900/50' },
+    { icon: Leaf, label: 'Ya Plantados', value: landingStats.plantedTrees, colorClass: 'text-teal-600 dark:text-teal-400', bgClass: 'bg-teal-100 dark:bg-teal-900/50' },
+    { icon: Globe, label: 'Países', value: landingStats.totalCountries, colorClass: 'text-sky-600 dark:text-sky-400', bgClass: 'bg-sky-100 dark:bg-sky-900/50' },
+    { icon: Users, label: 'Árboles Colaborativos', value: landingStats.collaborativeTrees || 0, colorClass: 'text-purple-600 dark:text-purple-400', bgClass: 'bg-purple-100 dark:bg-purple-900/50' }
   ];
 
   // Section refs for scroll animations
@@ -395,14 +395,12 @@ const LandingHome = () => {
               <motion.div key={index} variants={scaleIn}>
                 <div className="stats-card rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
                   <div
-                    className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 feature-icon"
-                    style={{ background: stat.bgColor }}
+                    className={`w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 ${stat.bgClass}`}
                   >
-                    <stat.icon className="h-10 w-10" style={{ color: stat.color }} />
+                    <stat.icon className={`h-10 w-10 ${stat.colorClass}`} />
                   </div>
                   <motion.div
-                    className="font-display text-5xl font-bold mb-2"
-                    style={{ color: stat.color }}
+                    className={`font-display text-5xl font-bold mb-2 ${stat.colorClass}`}
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={statsInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ duration: 0.5, delay: index * 0.2 + 0.3 }}
@@ -925,7 +923,7 @@ const LandingHome = () => {
               className="text-center mb-12"
             >
               <motion.div variants={fadeInUp}>
-                <Building2 className="h-14 w-14 mx-auto mb-4 text-emerald-600" />
+                <Building2 className="h-14 w-14 mx-auto mb-4 text-emerald-600 dark:text-emerald-400" />
               </motion.div>
               <motion.h2 variants={fadeInUp} className="section-title mb-4">
                 Empresas que Hacen la Diferencia

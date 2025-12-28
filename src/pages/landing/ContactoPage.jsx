@@ -46,19 +46,19 @@ const ContactoPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-900">
       <div className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Contacto Corporativo
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             ¿Tu empresa quiere ser parte del cambio? Contáctanos para conocer nuestras soluciones de compensación de carbono y reforestación corporativa.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          <Card className="shadow-xl">
+          <Card className="shadow-xl dark:bg-gray-800 dark:border-gray-700">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Building2 className="h-6 w-6 text-green-600" />
@@ -127,7 +127,7 @@ const ContactoPage = () => {
                     name="tipoConsulta"
                     value={formData.tipoConsulta}
                     onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   >
                     <option value="corporativo">Compensación de carbono corporativa</option>
                     <option value="reforestación">Proyectos de reforestación</option>
@@ -159,7 +159,7 @@ const ContactoPage = () => {
           </Card>
 
           <div className="space-y-8">
-            <Card className="shadow-xl">
+            <Card className="shadow-xl dark:bg-gray-800 dark:border-gray-700">
               <CardHeader>
                 <CardTitle>Información de contacto</CardTitle>
                 <CardDescription>
@@ -168,41 +168,41 @@ const ContactoPage = () => {
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-center gap-4">
-                  <div className="bg-green-100 p-3 rounded-full">
+                  <div className="bg-green-100 dark:bg-green-900/50 p-3 rounded-full">
                     <Mail className="h-6 w-6 text-green-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">Email</h3>
-                    <p className="text-gray-600">info@miarbolenelmundo.com</p>
+                    <h3 className="font-semibold dark:text-white">Email</h3>
+                    <p className="text-gray-600 dark:text-gray-400">info@miarbolenelmundo.com</p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <div className="bg-green-100 p-3 rounded-full">
+                  <div className="bg-green-100 dark:bg-green-900/50 p-3 rounded-full">
                     <Phone className="h-6 w-6 text-green-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">Teléfono</h3>
-                    <p className="text-gray-600">+54 11 1234-5678</p>
+                    <h3 className="font-semibold dark:text-white">Teléfono</h3>
+                    <p className="text-gray-600 dark:text-gray-400">+54 11 1234-5678</p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <div className="bg-green-100 p-3 rounded-full">
+                  <div className="bg-green-100 dark:bg-green-900/50 p-3 rounded-full">
                     <MapPin className="h-6 w-6 text-green-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">Oficina</h3>
-                    <p className="text-gray-600">Córdoba, Argentina</p>
+                    <h3 className="font-semibold dark:text-white">Oficina</h3>
+                    <p className="text-gray-600 dark:text-gray-400">Córdoba, Argentina</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="shadow-xl bg-green-50">
+            <Card className="shadow-xl bg-green-50 dark:bg-green-900/20 dark:border-gray-700">
               <CardContent className="p-6">
-                <h3 className="font-bold text-lg mb-4 text-green-800">¿Por qué elegir nuestras soluciones?</h3>
-                <ul className="space-y-3 text-green-700">
+                <h3 className="font-bold text-lg mb-4 text-green-800 dark:text-green-400">¿Por qué elegir nuestras soluciones?</h3>
+                <ul className="space-y-3 text-green-700 dark:text-green-400">
                   <li className="flex items-start gap-2">
                     <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
                     <span>Compensación verificada de huella de carbono</span>
