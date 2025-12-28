@@ -73,48 +73,42 @@ const PlantadoresPage = () => {
 
   const faqs = [
     {
-      question: '¿Cuánto puedo ganar?',
-      answer: 'El pago por cada plantación varía según la ubicación y complejidad. En promedio, se paga entre $5.000 y $15.000 ARS por árbol plantado.'
+      question: '¿Cuándo empiezo a recibir asignaciones?',
+      answer: 'Estamos en etapa de pre-registro. Te notificaremos cuando lancemos en tu zona y comenzarás a recibir asignaciones según tu disponibilidad.'
     },
     {
-      question: '¿Cómo recibo los pagos?',
-      answer: 'Una vez que el usuario confirma la plantación, el pago se libera a tu cuenta en 48-72 horas vía transferencia bancaria.'
+      question: '¿Cuánto voy a ganar por árbol?',
+      answer: 'El pago varía según ubicación y tipo de árbol. Estimamos entre $5.000 y $15.000 ARS por plantación, con pago garantizado en 48hs.'
     },
     {
       question: '¿Necesito experiencia previa?',
-      answer: 'No es obligatorio, pero sí valoramos conocimientos de jardinería. Ofrecemos guías y capacitación para asegurar plantaciones exitosas.'
+      answer: 'No es obligatorio, pero valoramos conocimientos de jardinería. Ofreceremos guías y capacitación para asegurar plantaciones exitosas.'
     },
     {
       question: '¿Puedo rechazar asignaciones?',
-      answer: 'Sí, tenés control total de tu agenda. Podés aceptar o rechazar trabajos según tu disponibilidad.'
+      answer: 'Sí, tendrás control total de tu agenda. Podrás aceptar o rechazar trabajos según tu disponibilidad y zona.'
     },
     {
-      question: '¿Qué pasa si el árbol no sobrevive?',
-      answer: 'Si seguiste las instrucciones correctamente y documentaste todo, no sos responsable. Trabajamos con garantía del vivero.'
+      question: '¿Tiene costo registrarse?',
+      answer: 'No, el registro es 100% gratuito. Solo necesitás cumplir los requisitos básicos y completar tu perfil.'
     }
   ];
 
-  const testimonials = [
+  const pioneerBenefits = [
     {
-      name: 'Carlos M.',
-      location: 'Córdoba Capital',
-      rating: 5,
-      trees: 47,
-      text: 'Empecé como hobby y ahora es mi segunda fuente de ingresos. Me encanta ver crecer los árboles que planté.'
+      icon: Award,
+      title: 'Sé de los Primeros',
+      description: 'Formá parte del grupo fundador de plantadores y construí tu reputación desde el inicio.'
     },
     {
-      name: 'Laura G.',
-      location: 'Villa Carlos Paz',
-      rating: 5,
-      trees: 32,
-      text: 'La flexibilidad es increíble. Trabajo cuando puedo y siento que hago algo bueno por el planeta.'
+      icon: MapPin,
+      title: 'Elegí tu Zona',
+      description: 'Los primeros plantadores tienen prioridad para elegir las zonas donde quieren trabajar.'
     },
     {
-      name: 'Martín R.',
-      location: 'Alta Gracia',
-      rating: 5,
-      trees: 89,
-      text: 'En 6 meses ya soy uno de los plantadores mejor calificados de mi zona. La comunidad es genial.'
+      icon: Users,
+      title: 'Comunidad Fundadora',
+      description: 'Participá en las decisiones y ayudanos a mejorar la plataforma con tu feedback.'
     }
   ];
 
@@ -129,15 +123,18 @@ const PlantadoresPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <div className="bg-amber-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Shovel className="h-10 w-10 text-amber-600" />
+            <div className="bg-amber-100 dark:bg-amber-900/50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Shovel className="h-10 w-10 text-amber-600 dark:text-amber-400" />
+            </div>
+            <div className="inline-block bg-amber-600 text-white text-sm font-semibold px-4 py-1 rounded-full mb-4">
+              Próximo lanzamiento en Córdoba
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-amber-800 dark:text-amber-400 mb-4">
-              Plantadores
+              Sé Plantador
             </h1>
             <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Convertite en parte de nuestra red de plantadores y ganá dinero mientras ayudás
-              a reforestar el planeta. Trabajo flexible, al aire libre y con propósito.
+              Estamos armando nuestra red de plantadores en Córdoba. Registrate ahora para ser
+              de los primeros y ganá dinero mientras ayudás a reforestar el planeta.
             </p>
           </motion.div>
 
@@ -154,13 +151,13 @@ const PlantadoresPage = () => {
               onClick={() => window.open(`${APP_URL}/registro/plantador`, '_blank')}
             >
               <Shovel className="h-5 w-5 mr-2" />
-              Quiero ser Plantador
+              Pre-registrarme como Plantador
             </Button>
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="border-amber-600 text-amber-700 hover:bg-amber-50 px-8 py-6 text-lg"
+              className="border-amber-600 text-amber-700 hover:bg-amber-50 dark:text-amber-400 dark:border-amber-500 dark:hover:bg-amber-900/30 px-8 py-6 text-lg"
             >
               <Link to="/contacto">
                 Más información
@@ -168,28 +165,28 @@ const PlantadoresPage = () => {
             </Button>
           </motion.div>
 
-          {/* Stats rápidos */}
+          {/* Propuesta de valor */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
           >
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 text-center">
-              <p className="text-3xl font-bold text-amber-600">150+</p>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">Plantadores activos</p>
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 text-center border border-white/50 dark:border-gray-700">
+              <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">Córdoba</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Primera zona</p>
             </div>
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 text-center">
-              <p className="text-3xl font-bold text-amber-600">2.500+</p>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">Árboles plantados</p>
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 text-center border border-white/50 dark:border-gray-700">
+              <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">100%</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Trabajo flexible</p>
             </div>
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 text-center">
-              <p className="text-3xl font-bold text-amber-600">4.8</p>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">Calificación promedio</p>
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 text-center border border-white/50 dark:border-gray-700">
+              <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">48hs</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Pago garantizado</p>
             </div>
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 text-center">
-              <p className="text-3xl font-bold text-amber-600">$10K</p>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">Pago promedio/árbol</p>
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 text-center border border-white/50 dark:border-gray-700">
+              <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">Gratis</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Registro sin costo</p>
             </div>
           </motion.div>
         </div>
@@ -213,11 +210,23 @@ const PlantadoresPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {benefits.map((benefit, index) => {
                 const Icon = benefit.icon;
+                const bgColors = {
+                  amber: 'bg-amber-100 dark:bg-amber-900/50',
+                  rose: 'bg-rose-100 dark:bg-rose-900/50',
+                  orange: 'bg-orange-100 dark:bg-orange-900/50',
+                  yellow: 'bg-yellow-100 dark:bg-yellow-900/50'
+                };
+                const iconColors = {
+                  amber: 'text-amber-600 dark:text-amber-400',
+                  rose: 'text-rose-600 dark:text-rose-400',
+                  orange: 'text-orange-600 dark:text-orange-400',
+                  yellow: 'text-yellow-600 dark:text-yellow-400'
+                };
                 return (
                   <Card key={index} className="border-amber-200 dark:border-gray-700 dark:bg-gray-800 hover:shadow-lg transition-shadow">
                     <CardHeader className="pb-3">
-                      <div className={`bg-${benefit.color}-100 w-14 h-14 rounded-full flex items-center justify-center mb-3`}>
-                        <Icon className={`h-7 w-7 text-${benefit.color}-600`} />
+                      <div className={`w-14 h-14 rounded-full flex items-center justify-center mb-3 ${bgColors[benefit.color]}`}>
+                        <Icon className={`h-7 w-7 ${iconColors[benefit.color]}`} />
                       </div>
                       <CardTitle className="text-amber-800 dark:text-amber-400 text-lg">{benefit.title}</CardTitle>
                     </CardHeader>
@@ -267,7 +276,7 @@ const PlantadoresPage = () => {
         </div>
       </section>
 
-      {/* Testimonios */}
+      {/* ¿Por qué unirte ahora? */}
       <section className="py-12 px-4 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -276,38 +285,33 @@ const PlantadoresPage = () => {
             transition={{ duration: 0.6, delay: 0.5 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-amber-800 dark:text-amber-400 mb-3 text-center">
-              Lo que dicen nuestros Plantadores
+              ¿Por qué unirte ahora?
             </h2>
             <p className="text-gray-600 dark:text-gray-400 text-center mb-10 max-w-2xl mx-auto">
-              Conocé las experiencias de quienes ya son parte de la comunidad
+              Ventajas exclusivas para los primeros plantadores
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {testimonials.map((testimonial, index) => (
-                <Card key={index} className="border-amber-200 dark:border-gray-700 dark:bg-gray-800">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-1 mb-3">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 text-amber-500 fill-amber-500" />
-                      ))}
-                    </div>
-                    <p className="text-gray-700 dark:text-gray-300 mb-4 italic">"{testimonial.text}"</p>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-semibold text-amber-800 dark:text-amber-400">{testimonial.name}</p>
-                        <p className="text-gray-500 dark:text-gray-400 text-sm flex items-center gap-1">
-                          <MapPin className="h-3 w-3" />
-                          {testimonial.location}
-                        </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              {pioneerBenefits.map((benefit, index) => {
+                const Icon = benefit.icon;
+                return (
+                  <Card key={index} className="border-amber-200 dark:border-gray-700 dark:bg-gray-800 text-center">
+                    <CardContent className="p-6">
+                      <div className="bg-amber-100 dark:bg-amber-900/50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Icon className="h-8 w-8 text-amber-600 dark:text-amber-400" />
                       </div>
-                      <div className="text-right">
-                        <p className="text-2xl font-bold text-amber-600">{testimonial.trees}</p>
-                        <p className="text-gray-500 dark:text-gray-400 text-xs">árboles plantados</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                      <h3 className="font-bold text-amber-800 dark:text-amber-400 text-lg mb-2">{benefit.title}</h3>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm">{benefit.description}</p>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+
+            <div className="mt-10 bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 rounded-xl p-6 max-w-2xl mx-auto text-center border border-amber-200 dark:border-amber-800">
+              <p className="text-amber-800 dark:text-amber-400 font-medium">
+                Estamos en etapa de pre-registro. Cuando lancemos en tu zona, serás de los primeros en recibir asignaciones.
+              </p>
             </div>
           </motion.div>
         </div>
@@ -322,33 +326,33 @@ const PlantadoresPage = () => {
             transition={{ duration: 0.6, delay: 0.5 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-amber-800 dark:text-amber-400 mb-3 text-center">
-              Un día como Plantador
+              El proceso de plantación
             </h2>
             <p className="text-gray-600 dark:text-gray-400 text-center mb-10 max-w-2xl mx-auto">
-              Así es la rutina típica de nuestros plantadores
+              Vos elegís cuándo hacerlo, solo necesitás luz del día para las fotos
             </p>
 
-            <div className="bg-gradient-to-br from-amber-600 to-orange-600 rounded-2xl p-8 text-white">
+            <div className="bg-gradient-to-br from-amber-600 to-orange-600 dark:from-amber-700 dark:to-orange-700 rounded-2xl p-8 text-white shadow-xl">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div className="bg-white/10 rounded-xl p-5 backdrop-blur-sm">
-                  <Clock className="h-8 w-8 mb-3" />
-                  <h3 className="font-bold text-lg mb-1">8:00 AM</h3>
-                  <p className="text-amber-100 text-sm">Revisás las notificaciones y aceptás una asignación cerca de tu zona</p>
+                <div className="bg-white/10 dark:bg-white/15 rounded-xl p-5 backdrop-blur-sm border border-white/10 dark:border-white/20 hover:bg-white/15 dark:hover:bg-white/20 transition-colors">
+                  <Clock className="h-8 w-8 mb-3 text-amber-200" />
+                  <h3 className="font-bold text-lg mb-1 text-white">Paso 1</h3>
+                  <p className="text-amber-100 dark:text-amber-200 text-sm">Revisás las notificaciones y aceptás una asignación cerca de tu zona</p>
                 </div>
-                <div className="bg-white/10 rounded-xl p-5 backdrop-blur-sm">
-                  <TreePine className="h-8 w-8 mb-3" />
-                  <h3 className="font-bold text-lg mb-1">9:30 AM</h3>
-                  <p className="text-amber-100 text-sm">Retirás el árbol del vivero asignado con todas las instrucciones</p>
+                <div className="bg-white/10 dark:bg-white/15 rounded-xl p-5 backdrop-blur-sm border border-white/10 dark:border-white/20 hover:bg-white/15 dark:hover:bg-white/20 transition-colors">
+                  <TreePine className="h-8 w-8 mb-3 text-amber-200" />
+                  <h3 className="font-bold text-lg mb-1 text-white">Paso 2</h3>
+                  <p className="text-amber-100 dark:text-amber-200 text-sm">Retirás el árbol del vivero asignado con todas las instrucciones</p>
                 </div>
-                <div className="bg-white/10 rounded-xl p-5 backdrop-blur-sm">
-                  <Shovel className="h-8 w-8 mb-3" />
-                  <h3 className="font-bold text-lg mb-1">11:00 AM</h3>
-                  <p className="text-amber-100 text-sm">Llegás a la ubicación, preparás el terreno y plantás el árbol</p>
+                <div className="bg-white/10 dark:bg-white/15 rounded-xl p-5 backdrop-blur-sm border border-white/10 dark:border-white/20 hover:bg-white/15 dark:hover:bg-white/20 transition-colors">
+                  <Shovel className="h-8 w-8 mb-3 text-amber-200" />
+                  <h3 className="font-bold text-lg mb-1 text-white">Paso 3</h3>
+                  <p className="text-amber-100 dark:text-amber-200 text-sm">Llegás a la ubicación, preparás el terreno y plantás el árbol</p>
                 </div>
-                <div className="bg-white/10 rounded-xl p-5 backdrop-blur-sm">
-                  <Camera className="h-8 w-8 mb-3" />
-                  <h3 className="font-bold text-lg mb-1">12:00 PM</h3>
-                  <p className="text-amber-100 text-sm">Documentás con fotos, subís el reporte y recibís tu pago en 48hs</p>
+                <div className="bg-white/10 dark:bg-white/15 rounded-xl p-5 backdrop-blur-sm border border-white/10 dark:border-white/20 hover:bg-white/15 dark:hover:bg-white/20 transition-colors">
+                  <Camera className="h-8 w-8 mb-3 text-amber-200" />
+                  <h3 className="font-bold text-lg mb-1 text-white">Paso 4</h3>
+                  <p className="text-amber-100 dark:text-amber-200 text-sm">Documentás con fotos durante el día, subís el reporte y recibís tu pago en 48hs</p>
                 </div>
               </div>
             </div>
@@ -371,11 +375,11 @@ const PlantadoresPage = () => {
               Todo lo que necesitás para empezar
             </p>
 
-            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-8 shadow-lg max-w-3xl mx-auto">
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-800 rounded-xl p-8 shadow-lg max-w-3xl mx-auto border border-amber-100 dark:border-gray-700">
               <ul className="space-y-4">
                 {requirements.map((req, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <CheckCircle className="h-6 w-6 text-amber-600 flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="h-6 w-6 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
                     <span className="text-gray-700 dark:text-gray-300">{req}</span>
                   </li>
                 ))}
@@ -427,10 +431,10 @@ const PlantadoresPage = () => {
           >
             <Shovel className="h-12 w-12 mx-auto mb-4" />
             <h2 className="text-2xl md:text-3xl font-bold mb-3 text-white">
-              ¿Listo para empezar a plantar?
+              ¿Querés ser de los primeros?
             </h2>
             <p className="text-lg mb-6 max-w-2xl mx-auto text-amber-100">
-              Unite a la comunidad de plantadores y empezá a generar ingresos mientras cuidás el planeta
+              Registrate ahora y asegurá tu lugar como plantador fundador en Córdoba
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -439,7 +443,7 @@ const PlantadoresPage = () => {
                 onClick={() => window.open(`${APP_URL}/registro/plantador`, '_blank')}
               >
                 <Shovel className="h-5 w-5 mr-2" />
-                Registrarme como Plantador
+                Quiero ser Plantador Fundador
               </Button>
               <Button
                 asChild

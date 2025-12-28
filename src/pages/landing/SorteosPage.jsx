@@ -136,10 +136,10 @@ const SorteosPage = () => {
               }
             ].map((item, i) => {
               const colors = {
-                purple: 'bg-purple-100 text-purple-600 border-purple-200',
-                pink: 'bg-pink-100 text-pink-600 border-pink-200',
-                orange: 'bg-orange-100 text-orange-600 border-orange-200',
-                yellow: 'bg-yellow-100 text-yellow-600 border-yellow-200'
+                purple: 'bg-purple-100 dark:bg-purple-900/50 text-purple-600 dark:text-purple-400 border-purple-200 dark:border-purple-700',
+                pink: 'bg-pink-100 dark:bg-pink-900/50 text-pink-600 dark:text-pink-400 border-pink-200 dark:border-pink-700',
+                orange: 'bg-orange-100 dark:bg-orange-900/50 text-orange-600 dark:text-orange-400 border-orange-200 dark:border-orange-700',
+                yellow: 'bg-yellow-100 dark:bg-yellow-900/50 text-yellow-600 dark:text-yellow-400 border-yellow-200 dark:border-yellow-700'
               };
               return (
                 <motion.div key={i} variants={fadeInUp} className="text-center flex flex-col">
@@ -150,7 +150,7 @@ const SorteosPage = () => {
                     <span className="bg-purple-600 text-white text-sm font-bold px-4 py-1 rounded-full mb-3">
                       Paso {item.step}
                     </span>
-                    <h3 className="text-xl font-semibold text-purple-700 dark:text-purple-400 dark:text-purple-400 mb-2">{item.title}</h3>
+                    <h3 className="text-xl font-semibold text-purple-700 dark:text-purple-400 mb-2">{item.title}</h3>
                     <p className="text-gray-600 dark:text-gray-400">{item.desc}</p>
                   </div>
                 </motion.div>
@@ -209,14 +209,14 @@ const SorteosPage = () => {
               }
             ].map((item, i) => (
               <motion.div key={i} variants={fadeInUp}>
-                <Card className="h-full overflow-hidden hover:shadow-xl transition-shadow">
+                <Card className="h-full overflow-hidden hover:shadow-xl transition-shadow dark:bg-gray-800 dark:border-gray-700">
                   <div className={`bg-gradient-to-r ${item.color} p-6 text-center`}>
                     <span className="text-5xl">{item.icon}</span>
                     <div className="text-4xl font-bold text-white mt-2">{item.discount}</div>
                     <div className="text-white/90 font-medium">DESCUENTO</div>
                   </div>
                   <CardContent className="p-6 text-center">
-                    <h3 className="text-xl font-semibold text-purple-700 dark:text-purple-400 dark:text-purple-400 mb-2">{item.title}</h3>
+                    <h3 className="text-xl font-semibold text-purple-700 dark:text-purple-400 mb-2">{item.title}</h3>
                     <p className="text-gray-600 dark:text-gray-400">{item.desc}</p>
                   </CardContent>
                 </Card>
@@ -229,15 +229,15 @@ const SorteosPage = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="mt-12 bg-white rounded-2xl p-8 shadow-lg border border-purple-100"
+            className="mt-12 bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-purple-100 dark:border-gray-700"
           >
             <div className="flex items-start gap-4">
-              <div className="bg-purple-100 p-3 rounded-xl">
-                <Sparkles className="h-6 w-6 text-purple-600" />
+              <div className="bg-purple-100 dark:bg-purple-900/50 p-3 rounded-xl">
+                <Sparkles className="h-6 w-6 text-purple-600 dark:text-purple-400" />
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-purple-700 dark:text-purple-400 mb-2">Mas Aportas = Mas Chances</h3>
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-400">
                   El sistema es justo: cada peso que aportas es un ticket para el sorteo.
                   Si aportas $500, tenes 500 tickets. Si otro aporta $100, tiene 100 tickets.
                   Cuanto mas aportas, mas probabilidades tenes de ganar.

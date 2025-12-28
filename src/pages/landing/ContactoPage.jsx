@@ -4,21 +4,19 @@ import { Input } from '@shared/components/ui/input';
 import { Textarea } from '@shared/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@shared/components/ui/card';
 import { Label } from '@shared/components/ui/label';
-import { Mail, Phone, MapPin, Send, Building2 } from 'lucide-react';
+import { Mail, MapPin, Send, Loader2 } from 'lucide-react';
 import { useToast } from '@shared/components/ui/use-toast';
-import { Link } from 'react-router-dom';
 import Footer from '@shared/components/layout/Footer';
+import { API_BASE_URL, API_ENDPOINTS } from '@core/config/api.config';
 
 const ContactoPage = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
-    empresa: '',
     nombre: '',
     email: '',
-    telefono: '',
-    mensaje: '',
-    tipoConsulta: 'corporativo'
+    mensaje: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -28,21 +26,44 @@ const ContactoPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    toast({
-      title: "Mensaje enviado",
-      description: "Nos pondremos en contacto contigo pronto.",
-    });
-    
-    setFormData({
-      empresa: '',
-      nombre: '',
-      email: '',
-      telefono: '',
-      mensaje: '',
-      tipoConsulta: 'corporativo'
-    });
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.CONTACT}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Error al enviar el mensaje');
+      }
+
+      toast({
+        title: "Mensaje enviado",
+        description: "Nos pondremos en contacto contigo pronto.",
+      });
+
+      setFormData({
+        nombre: '',
+        email: '',
+        mensaje: ''
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error.message || "No se pudo enviar el mensaje. Intenta nuevamente.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -50,109 +71,83 @@ const ContactoPage = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            Contacto Corporativo
+            Contacto
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            ¿Tu empresa quiere ser parte del cambio? Contáctanos para conocer nuestras soluciones de compensación de carbono y reforestación corporativa.
+            ¿Tenés dudas o consultas? Escribinos y te responderemos a la brevedad.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
           <Card className="shadow-xl dark:bg-gray-800 dark:border-gray-700">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Building2 className="h-6 w-6 text-green-600" />
-                Solicitar Información
+              <CardTitle className="flex items-center gap-2 dark:text-white">
+                <Mail className="h-6 w-6 text-green-600 dark:text-green-400" />
+                Envianos tu consulta
               </CardTitle>
-              <CardDescription>
-                Completa el formulario y nos pondremos en contacto contigo para diseñar una solución personalizada para tu empresa.
+              <CardDescription className="dark:text-gray-400">
+                Completa el formulario y te responderemos a la brevedad.
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="empresa">Empresa *</Label>
-                    <Input
-                      id="empresa"
-                      name="empresa"
-                      value={formData.empresa}
-                      onChange={handleInputChange}
-                      placeholder="Nombre de tu empresa"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="nombre">Nombre completo *</Label>
-                    <Input
-                      id="nombre"
-                      name="nombre"
-                      value={formData.nombre}
-                      onChange={handleInputChange}
-                      placeholder="Tu nombre completo"
-                      required
-                    />
-                  </div>
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email corporativo *</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="email@empresa.com"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="telefono">Teléfono</Label>
-                    <Input
-                      id="telefono"
-                      name="telefono"
-                      value={formData.telefono}
-                      onChange={handleInputChange}
-                      placeholder="+54 11 1234-5678"
-                    />
-                  </div>
-                </div>
-
                 <div className="space-y-2">
-                  <Label htmlFor="tipoConsulta">Tipo de consulta</Label>
-                  <select
-                    id="tipoConsulta"
-                    name="tipoConsulta"
-                    value={formData.tipoConsulta}
+                  <Label htmlFor="nombre" className="dark:text-gray-200">Nombre *</Label>
+                  <Input
+                    id="nombre"
+                    name="nombre"
+                    value={formData.nombre}
                     onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                  >
-                    <option value="corporativo">Compensación de carbono corporativa</option>
-                    <option value="reforestación">Proyectos de reforestación</option>
-                    <option value="certificacion">Certificación ambiental</option>
-                    <option value="partnership">Partnership empresarial</option>
-                    <option value="otro">Otro</option>
-                  </select>
+                    placeholder="Tu nombre"
+                    required
+                    className="dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
+                  />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="mensaje">Mensaje *</Label>
+                  <Label htmlFor="email" className="dark:text-gray-200">Email *</Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="tu@email.com"
+                    required
+                    className="dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="mensaje" className="dark:text-gray-200">Mensaje *</Label>
                   <Textarea
                     id="mensaje"
                     name="mensaje"
                     value={formData.mensaje}
                     onChange={handleInputChange}
-                    placeholder="Cuéntanos sobre tu empresa y qué tipo de solución ambiental estás buscando..."
+                    placeholder="Escribí tu consulta o duda..."
                     rows={5}
                     required
+                    className="dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
                   />
                 </div>
 
-                <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
-                  <Send className="h-4 w-4 mr-2" />
-                  Enviar consulta
+                <Button
+                  type="submit"
+                  className="w-full bg-green-600 hover:bg-green-700"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      Enviando...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4 mr-2" />
+                      Enviar mensaje
+                    </>
+                  )}
                 </Button>
               </form>
             </CardContent>
@@ -161,15 +156,15 @@ const ContactoPage = () => {
           <div className="space-y-8">
             <Card className="shadow-xl dark:bg-gray-800 dark:border-gray-700">
               <CardHeader>
-                <CardTitle>Información de contacto</CardTitle>
-                <CardDescription>
+                <CardTitle className="dark:text-white">Información de contacto</CardTitle>
+                <CardDescription className="dark:text-gray-400">
                   También puedes contactarnos directamente a través de estos medios
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-center gap-4">
                   <div className="bg-green-100 dark:bg-green-900/50 p-3 rounded-full">
-                    <Mail className="h-6 w-6 text-green-600" />
+                    <Mail className="h-6 w-6 text-green-600 dark:text-green-400" />
                   </div>
                   <div>
                     <h3 className="font-semibold dark:text-white">Email</h3>
@@ -179,44 +174,34 @@ const ContactoPage = () => {
 
                 <div className="flex items-center gap-4">
                   <div className="bg-green-100 dark:bg-green-900/50 p-3 rounded-full">
-                    <Phone className="h-6 w-6 text-green-600" />
+                    <MapPin className="h-6 w-6 text-green-600 dark:text-green-400" />
                   </div>
                   <div>
-                    <h3 className="font-semibold dark:text-white">Teléfono</h3>
-                    <p className="text-gray-600 dark:text-gray-400">+54 11 1234-5678</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div className="bg-green-100 dark:bg-green-900/50 p-3 rounded-full">
-                    <MapPin className="h-6 w-6 text-green-600" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold dark:text-white">Oficina</h3>
+                    <h3 className="font-semibold dark:text-white">Ubicación</h3>
                     <p className="text-gray-600 dark:text-gray-400">Córdoba, Argentina</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="shadow-xl bg-green-50 dark:bg-green-900/20 dark:border-gray-700">
+            <Card className="shadow-xl bg-green-50 dark:bg-gray-800 border-green-200 dark:border-green-800">
               <CardContent className="p-6">
                 <h3 className="font-bold text-lg mb-4 text-green-800 dark:text-green-400">¿Por qué elegir nuestras soluciones?</h3>
-                <ul className="space-y-3 text-green-700 dark:text-green-400">
+                <ul className="space-y-3 text-green-700 dark:text-green-300">
                   <li className="flex items-start gap-2">
-                    <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div className="w-2 h-2 bg-green-600 dark:bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
                     <span>Compensación verificada de huella de carbono</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div className="w-2 h-2 bg-green-600 dark:bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
                     <span>Proyectos de reforestación con impacto real</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div className="w-2 h-2 bg-green-600 dark:bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
                     <span>Certificaciones ambientales reconocidas</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div className="w-2 h-2 bg-green-600 dark:bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
                     <span>Reportes de impacto detallados</span>
                   </li>
                 </ul>

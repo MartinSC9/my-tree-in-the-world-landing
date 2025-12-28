@@ -72,5 +72,8 @@ export const API_ENDPOINTS = {
   // Profile Approval (Admin)
   PROFILE_PENDING_APPROVALS: '/users/pending-approvals',
   PROFILE_APPROVE: (id) => `/users/${id}/approve-profile`,
-  PROFILE_REJECT: (id) => `/users/${id}/reject-profile`
+  PROFILE_REJECT: (id) => `/users/${id}/reject-profile`,
+
+  // Contact
+  CONTACT: '/contact'
 };

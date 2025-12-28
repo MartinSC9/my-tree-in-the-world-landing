@@ -136,10 +136,10 @@ const QRProductosPage = () => {
             className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
           >
             <motion.div variants={fadeInUp}>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-6">
                 El Sello Oficial
               </h2>
-              <p className="text-lg text-gray-600 mb-8">
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
                 Cada empresa partner recibe sellos oficiales con código QR único para incluir en sus productos.
                 El diseño es atractivo y genera curiosidad en los consumidores.
               </p>
@@ -162,8 +162,8 @@ const QRProductosPage = () => {
               <div className="bg-white dark:bg-gray-700 rounded-3xl shadow-2xl p-8 border-4 border-emerald-200 dark:border-emerald-700 max-w-sm mx-auto">
                 <div className="text-center">
                   <div className="flex items-center justify-center gap-2 mb-4">
-                    <TreePine className="h-8 w-8 text-emerald-600" />
-                    <span className="text-xl font-bold text-emerald-700">MI ÁRBOL EN EL MUNDO</span>
+                    <TreePine className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />
+                    <span className="text-xl font-bold text-emerald-700 dark:text-emerald-400">MI ÁRBOL EN EL MUNDO</span>
                   </div>
                   <div className="bg-gray-100 dark:bg-gray-600 rounded-2xl p-6 mb-4">
                     <QrCode className="h-32 w-32 mx-auto text-gray-800 dark:text-gray-200" />

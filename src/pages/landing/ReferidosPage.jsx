@@ -85,10 +85,10 @@ const ReferidosPage = () => {
             className="grid grid-cols-1 md:grid-cols-4 gap-8"
           >
             {[
-              { icon: Share2, title: 'Compartí tu código', desc: 'Cada usuario tiene un código único para compartir', color: 'bg-purple-100 text-purple-600' },
-              { icon: Users, title: 'Tu amigo se registra', desc: 'Se vincula a tu cuenta usando tu código', color: 'bg-blue-100 text-blue-600' },
-              { icon: TreePine, title: 'Tu amigo planta', desc: 'Cuando planta su primer árbol, vos ganás 500 pts', color: 'bg-green-100 text-green-600' },
-              { icon: Coins, title: 'Canjeá tus puntos', desc: 'Usá tus puntos para descuentos o árboles gratis', color: 'bg-amber-100 text-amber-600' }
+              { icon: Share2, title: 'Compartí tu código', desc: 'Cada usuario tiene un código único para compartir', color: 'bg-purple-100 dark:bg-purple-900/50 text-purple-600 dark:text-purple-400' },
+              { icon: Users, title: 'Tu amigo se registra', desc: 'Se vincula a tu cuenta usando tu código', color: 'bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400' },
+              { icon: TreePine, title: 'Tu amigo planta', desc: 'Cuando planta su primer árbol, vos ganás 500 pts', color: 'bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400' },
+              { icon: Coins, title: 'Canjeá tus puntos', desc: 'Usá tus puntos para descuentos o árboles gratis', color: 'bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400' }
             ].map((step, i) => (
               <motion.div key={i} variants={fadeInUp}>
                 <Card className="h-full text-center hover:shadow-lg transition-shadow dark:bg-gray-800 dark:border-gray-700">
@@ -144,24 +144,24 @@ const ReferidosPage = () => {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-xl">
                       <div className="flex items-center gap-3">
-                        <Users className="h-6 w-6 text-yellow-600" />
-                        <span className="font-medium">Amigo se registra</span>
+                        <Users className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
+                        <span className="font-medium text-gray-800 dark:text-white">Amigo se registra</span>
                       </div>
-                      <span className="text-sm font-medium text-yellow-600">Se vincula</span>
+                      <span className="text-sm font-medium text-yellow-600 dark:text-yellow-400">Se vincula</span>
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border-2 border-green-200">
+                    <div className="flex items-center justify-between p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border-2 border-green-200 dark:border-green-700">
                       <div className="flex items-center gap-3">
-                        <TreePine className="h-6 w-6 text-green-600" />
-                        <span className="font-medium">Amigo planta un árbol</span>
+                        <TreePine className="h-6 w-6 text-green-600 dark:text-green-400" />
+                        <span className="font-medium text-gray-800 dark:text-white">Amigo planta un árbol</span>
                       </div>
-                      <span className="text-2xl font-bold text-green-600">+500 pts</span>
+                      <span className="text-2xl font-bold text-green-600 dark:text-green-400">+500 pts</span>
                     </div>
                     <div className="flex items-center justify-between p-4 bg-purple-50 dark:bg-purple-900/20 rounded-xl">
                       <div className="flex items-center gap-3">
-                        <Gift className="h-6 w-6 text-purple-600" />
-                        <span className="font-medium">Amigo colabora en proyecto</span>
+                        <Gift className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                        <span className="font-medium text-gray-800 dark:text-white">Amigo colabora en proyecto</span>
                       </div>
-                      <span className="text-2xl font-bold text-purple-600">+200 pts</span>
+                      <span className="text-2xl font-bold text-purple-600 dark:text-purple-400">+200 pts</span>
                     </div>
                   </div>
                 </CardContent>
@@ -183,19 +183,19 @@ const ReferidosPage = () => {
                   </h3>
                   <div className="space-y-4">
                     <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
-                      <span className="font-medium">15% de descuento</span>
-                      <span className="text-xl font-bold text-gray-600">500 pts</span>
+                      <span className="font-medium text-gray-800 dark:text-white">15% de descuento</span>
+                      <span className="text-xl font-bold text-gray-600 dark:text-gray-300">500 pts</span>
                     </div>
                     <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
-                      <span className="font-medium">30% de descuento</span>
-                      <span className="text-xl font-bold text-gray-600">1,000 pts</span>
+                      <span className="font-medium text-gray-800 dark:text-white">30% de descuento</span>
+                      <span className="text-xl font-bold text-gray-600 dark:text-gray-300">1,000 pts</span>
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-100 to-emerald-100 rounded-xl border-2 border-green-300">
+                    <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 rounded-xl border-2 border-green-300 dark:border-green-700">
                       <div className="flex items-center gap-2">
-                        <TreePine className="h-6 w-6 text-green-600" />
-                        <span className="font-bold text-green-700">ÁRBOL GRATIS</span>
+                        <TreePine className="h-6 w-6 text-green-600 dark:text-green-400" />
+                        <span className="font-bold text-green-700 dark:text-green-400">ÁRBOL GRATIS</span>
                       </div>
-                      <span className="text-xl font-bold text-green-600">2,500 pts</span>
+                      <span className="text-xl font-bold text-green-600 dark:text-green-400">2,500 pts</span>
                     </div>
                   </div>
                 </CardContent>
@@ -236,35 +236,35 @@ const ReferidosPage = () => {
                 compras: 'su primer árbol',
                 puntos: '500 pts',
                 beneficio: '15% de descuento',
-                color: 'border-gray-200 bg-gray-50'
+                color: 'border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800'
               },
               {
                 scenario: '2 amigos plantan',
                 compras: 'su primer árbol',
                 puntos: '1,000 pts',
                 beneficio: '30% de descuento',
-                color: 'border-blue-200 bg-blue-50'
+                color: 'border-blue-200 dark:border-blue-700 bg-blue-50 dark:bg-blue-900/20'
               },
               {
                 scenario: '5 amigos plantan',
                 compras: 'su primer árbol',
                 puntos: '2,500 pts',
                 beneficio: '¡ÁRBOL GRATIS!',
-                color: 'border-green-300 bg-green-50',
+                color: 'border-green-300 dark:border-green-700 bg-green-50 dark:bg-green-900/20',
                 highlight: true
               }
             ].map((example, i) => (
               <motion.div key={i} variants={fadeInUp}>
-                <Card className={`h-full border-2 ${example.color} ${example.highlight ? 'ring-2 ring-green-400' : ''}`}>
+                <Card className={`h-full border-2 ${example.color} ${example.highlight ? 'ring-2 ring-green-400 dark:ring-green-500' : ''}`}>
                   <CardContent className="p-6 text-center">
                     <div className="mb-4">
-                      <p className="font-semibold text-gray-800">{example.scenario}</p>
-                      <p className="text-gray-600">{example.compras}</p>
+                      <p className="font-semibold text-gray-800 dark:text-white">{example.scenario}</p>
+                      <p className="text-gray-600 dark:text-gray-400">{example.compras}</p>
                     </div>
-                    <div className="py-4 border-t border-b border-gray-200 my-4">
-                      <p className="text-3xl font-bold text-purple-600">{example.puntos}</p>
+                    <div className="py-4 border-t border-b border-gray-200 dark:border-gray-600 my-4">
+                      <p className="text-3xl font-bold text-purple-600 dark:text-purple-400">{example.puntos}</p>
                     </div>
-                    <p className={`text-lg font-bold ${example.highlight ? 'text-green-600' : 'text-gray-700'}`}>
+                    <p className={`text-lg font-bold ${example.highlight ? 'text-green-600 dark:text-green-400' : 'text-gray-700 dark:text-gray-300'}`}>
                       {example.beneficio}
                     </p>
                   </CardContent>

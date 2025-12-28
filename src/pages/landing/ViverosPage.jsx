@@ -104,8 +104,8 @@ const ViverosPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <div className="bg-emerald-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Store className="h-10 w-10 text-emerald-600" />
+            <div className="bg-emerald-100 dark:bg-emerald-900/50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Store className="h-10 w-10 text-emerald-600 dark:text-emerald-400" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-emerald-800 dark:text-emerald-400 mb-4">
               Viveros
@@ -135,7 +135,7 @@ const ViverosPage = () => {
               asChild
               size="lg"
               variant="outline"
-              className="border-emerald-600 text-emerald-700 hover:bg-emerald-50 px-8 py-6 text-lg"
+              className="border-emerald-600 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-400 dark:border-emerald-500 dark:hover:bg-emerald-900/30 px-8 py-6 text-lg"
             >
               <Link to="/contacto">
                 Tengo dudas, quiero hablar
@@ -163,11 +163,23 @@ const ViverosPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {benefits.map((benefit, index) => {
                 const Icon = benefit.icon;
+                const bgColors = {
+                  green: 'bg-green-100 dark:bg-green-900/50',
+                  emerald: 'bg-emerald-100 dark:bg-emerald-900/50',
+                  teal: 'bg-teal-100 dark:bg-teal-900/50',
+                  blue: 'bg-blue-100 dark:bg-blue-900/50'
+                };
+                const iconColors = {
+                  green: 'text-green-600 dark:text-green-400',
+                  emerald: 'text-emerald-600 dark:text-emerald-400',
+                  teal: 'text-teal-600 dark:text-teal-400',
+                  blue: 'text-blue-600 dark:text-blue-400'
+                };
                 return (
                   <Card key={index} className="border-emerald-200 dark:border-gray-700 dark:bg-gray-800 hover:shadow-lg transition-shadow">
                     <CardHeader className="pb-3">
-                      <div className={`bg-${benefit.color}-100 w-14 h-14 rounded-full flex items-center justify-center mb-3`}>
-                        <Icon className={`h-7 w-7 text-${benefit.color}-600`} />
+                      <div className={`w-14 h-14 rounded-full flex items-center justify-center mb-3 ${bgColors[benefit.color]}`}>
+                        <Icon className={`h-7 w-7 ${iconColors[benefit.color]}`} />
                       </div>
                       <CardTitle className="text-emerald-800 dark:text-emerald-400 text-lg">{benefit.title}</CardTitle>
                     </CardHeader>
@@ -208,7 +220,7 @@ const ViverosPage = () => {
                     <p className="text-gray-600 dark:text-gray-400 text-sm">{item.description}</p>
                   </div>
                   {index < howItWorks.length - 1 && (
-                    <ArrowRight className="hidden lg:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-emerald-300 h-6 w-6" />
+                    <ArrowRight className="hidden lg:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-emerald-300 dark:text-emerald-600 h-6 w-6" />
                   )}
                 </div>
               ))}
@@ -232,41 +244,41 @@ const ViverosPage = () => {
               Todo lo que necesitás para gestionar tu vivero en un solo lugar
             </p>
 
-            <div className="bg-gradient-to-br from-emerald-600 to-green-700 rounded-2xl p-8 text-white">
+            <div className="bg-gradient-to-br from-emerald-600 to-green-700 dark:from-emerald-700 dark:to-green-800 rounded-2xl p-8 text-white shadow-xl">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div className="bg-white/10 rounded-xl p-5 backdrop-blur-sm">
-                  <Package className="h-8 w-8 mb-3" />
-                  <h3 className="font-bold text-lg mb-1">Gestión de Inventario</h3>
-                  <p className="text-emerald-100 text-sm">Controlá stock, precios y disponibilidad de cada especie</p>
+                <div className="bg-white/10 dark:bg-white/15 rounded-xl p-5 backdrop-blur-sm border border-white/10 dark:border-white/20 hover:bg-white/15 dark:hover:bg-white/20 transition-colors">
+                  <Package className="h-8 w-8 mb-3 text-emerald-200" />
+                  <h3 className="font-bold text-lg mb-1 text-white">Gestión de Inventario</h3>
+                  <p className="text-emerald-100 dark:text-emerald-200 text-sm">Controlá stock, precios y disponibilidad de cada especie</p>
                 </div>
-                <div className="bg-white/10 rounded-xl p-5 backdrop-blur-sm">
-                  <Truck className="h-8 w-8 mb-3" />
-                  <h3 className="font-bold text-lg mb-1">Pedidos en Tiempo Real</h3>
-                  <p className="text-emerald-100 text-sm">Recibí notificaciones y gestioná entregas fácilmente</p>
+                <div className="bg-white/10 dark:bg-white/15 rounded-xl p-5 backdrop-blur-sm border border-white/10 dark:border-white/20 hover:bg-white/15 dark:hover:bg-white/20 transition-colors">
+                  <Truck className="h-8 w-8 mb-3 text-emerald-200" />
+                  <h3 className="font-bold text-lg mb-1 text-white">Pedidos en Tiempo Real</h3>
+                  <p className="text-emerald-100 dark:text-emerald-200 text-sm">Recibí notificaciones y gestioná entregas fácilmente</p>
                 </div>
-                <div className="bg-white/10 rounded-xl p-5 backdrop-blur-sm">
-                  <TrendingUp className="h-8 w-8 mb-3" />
-                  <h3 className="font-bold text-lg mb-1">Reportes y Estadísticas</h3>
-                  <p className="text-emerald-100 text-sm">Visualizá ventas, ingresos y tendencias de tu negocio</p>
+                <div className="bg-white/10 dark:bg-white/15 rounded-xl p-5 backdrop-blur-sm border border-white/10 dark:border-white/20 hover:bg-white/15 dark:hover:bg-white/20 transition-colors">
+                  <TrendingUp className="h-8 w-8 mb-3 text-emerald-200" />
+                  <h3 className="font-bold text-lg mb-1 text-white">Reportes y Estadísticas</h3>
+                  <p className="text-emerald-100 dark:text-emerald-200 text-sm">Visualizá ventas, ingresos y tendencias de tu negocio</p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                <div>
-                  <p className="text-3xl font-bold">$0</p>
-                  <p className="text-emerald-200 text-sm">Costo de registro</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center border-t border-white/20 pt-6">
+                <div className="p-3">
+                  <p className="text-3xl md:text-4xl font-bold text-white">$0</p>
+                  <p className="text-emerald-200 dark:text-emerald-300 text-sm">Costo de registro</p>
                 </div>
-                <div>
-                  <p className="text-3xl font-bold">15%</p>
-                  <p className="text-emerald-200 text-sm">Comisión por venta</p>
+                <div className="p-3">
+                  <p className="text-3xl md:text-4xl font-bold text-white">15%</p>
+                  <p className="text-emerald-200 dark:text-emerald-300 text-sm">Comisión por venta</p>
                 </div>
-                <div>
-                  <p className="text-3xl font-bold">7 días</p>
-                  <p className="text-emerald-200 text-sm">Plazo de pago</p>
+                <div className="p-3">
+                  <p className="text-3xl md:text-4xl font-bold text-white">7 días</p>
+                  <p className="text-emerald-200 dark:text-emerald-300 text-sm">Plazo de pago</p>
                 </div>
-                <div>
-                  <p className="text-3xl font-bold">24/7</p>
-                  <p className="text-emerald-200 text-sm">Soporte disponible</p>
+                <div className="p-3">
+                  <p className="text-3xl md:text-4xl font-bold text-white">24/7</p>
+                  <p className="text-emerald-200 dark:text-emerald-300 text-sm">Soporte disponible</p>
                 </div>
               </div>
             </div>
@@ -293,7 +305,7 @@ const ViverosPage = () => {
               <ul className="space-y-4">
                 {requirements.map((req, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <CheckCircle className="h-6 w-6 text-emerald-600 flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="h-6 w-6 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5" />
                     <span className="text-gray-700 dark:text-gray-300">{req}</span>
                   </li>
                 ))}
@@ -320,7 +332,7 @@ const ViverosPage = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
               {faqs.map((faq, index) => (
-                <Card key={index} className="border-emerald-200">
+                <Card key={index} className="border-emerald-200 dark:border-emerald-800 dark:bg-gray-800">
                   <CardHeader className="pb-2">
                     <CardTitle className="text-emerald-800 dark:text-emerald-400 text-base">{faq.question}</CardTitle>
                   </CardHeader>

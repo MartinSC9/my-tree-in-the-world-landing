@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TreePine, Mail, MapPin, Phone, Instagram, Facebook, Twitter } from 'lucide-react';
+import { TreePine, Mail, MapPin, Instagram, Facebook, Twitter } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -51,7 +51,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/registro" className="text-green-200 dark:text-gray-400 hover:text-white transition-colors">
-                  Registrarse
+                  Ingresar a la App
                 </Link>
               </li>
             </ul>
@@ -64,10 +64,6 @@ const Footer = () => {
               <li className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
                 <span>info@miarbolenelmundo.com</span>
-              </li>
-              <li className="flex items-center space-x-2">
-                <Phone className="h-4 w-4" />
-                <span>+54 11 1234-5678</span>
               </li>
               <li className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4" />
