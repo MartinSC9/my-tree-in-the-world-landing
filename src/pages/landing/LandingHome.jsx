@@ -752,8 +752,7 @@ const LandingHome = () => {
               {
                 image: '/images/1.png',
                 title: '1. Compra tu Árbol',
-                desc: 'Elige ubicación, nombre y especie.',
-                price: `Desde ${formatCurrency(15000)}`
+                desc: 'Elige ubicación, nombre y especie.'
               },
               {
                 image: '/images/2.png',
@@ -845,17 +844,6 @@ const LandingHome = () => {
                   Comparte tu código. Cuando 5 amigos planten, tienes un <span className="font-semibold text-emerald-600 dark:text-emerald-400">árbol gratis</span>.
                 </p>
 
-                {/* Info box */}
-                <div className="bg-emerald-50 dark:bg-emerald-900/30 rounded-xl p-3 space-y-2">
-                  <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 text-sm">
-                    <CheckCircle className="h-4 w-4 flex-shrink-0" />
-                    <span>500 pts por cada amigo</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 text-sm font-semibold">
-                    <Trophy className="h-4 w-4 flex-shrink-0" />
-                    <span>2,500 pts = Árbol GRATIS</span>
-                  </div>
-                </div>
               </div>
             </motion.div>
 
@@ -890,17 +878,6 @@ const LandingHome = () => {
                   Crea un proyecto y compártelo. Tus amigos <span className="font-semibold text-white">aportan lo que puedan</span> para completar la meta.
                 </p>
 
-                {/* Info box */}
-                <div className="bg-white/15 rounded-xl p-3 space-y-2 border border-white/20">
-                  <div className="flex items-center gap-2 text-white text-sm">
-                    <CheckCircle className="h-4 w-4 flex-shrink-0" />
-                    <span>Desde {formatCurrency(500)} por persona</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-white text-sm font-semibold">
-                    <Users className="h-4 w-4 flex-shrink-0" />
-                    <span>30 personas × {formatCurrency(500)} = 1 árbol</span>
-                  </div>
-                </div>
               </div>
             </motion.div>
 
@@ -928,17 +905,6 @@ const LandingHome = () => {
                   Productos de empresas partner tienen QR. Escanea y <span className="font-semibold text-emerald-600 dark:text-emerald-400">participa en sorteos</span> de árboles.
                 </p>
 
-                {/* Info box */}
-                <div className="bg-emerald-50 dark:bg-emerald-900/30 rounded-xl p-3 space-y-2">
-                  <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 text-sm">
-                    <CheckCircle className="h-4 w-4 flex-shrink-0" />
-                    <span>Sin costo, solo escanea</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 text-sm font-semibold">
-                    <Gift className="h-4 w-4 flex-shrink-0" />
-                    <span>Sorteos mensuales</span>
-                  </div>
-                </div>
               </div>
             </motion.div>
           </div>
@@ -1051,12 +1017,14 @@ const LandingHome = () => {
         </section>
 
       {/* CTA FINAL */}
-      <section ref={ctaRef} className="section-padding bg-emerald-600 relative overflow-hidden">
+      <section ref={ctaRef} className="section-padding bg-emerald-600 dark:bg-gray-900 relative overflow-hidden">
         {/* Decoraciones de fondo */}
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-emerald-500/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-80 h-80 bg-emerald-700/30 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+          <div className="absolute top-0 left-0 w-96 h-96 bg-emerald-500/30 dark:bg-emerald-600/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 right-0 w-80 h-80 bg-emerald-700/30 dark:bg-emerald-500/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
         </div>
+        {/* Borde superior verde en dark mode */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent dark:block hidden" />
 
         <div className="container-wide relative z-10">
           <motion.div
@@ -1077,13 +1045,13 @@ const LandingHome = () => {
             <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
               Únete a la Comunidad
             </h2>
-            <p className="text-xl md:text-2xl text-emerald-100 mb-10 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-emerald-100 dark:text-gray-300 mb-10 max-w-2xl mx-auto">
               Explora la plataforma, conecta con otros y próximamente planta tu propio árbol.
             </p>
             <Button
               onClick={() => window.open(`${APP_URL}/`, '_blank')}
               size="lg"
-              className="bg-white hover:bg-emerald-50 text-emerald-600 shadow-xl hover:shadow-2xl px-12 py-7 text-xl font-semibold transition-all duration-300 hover:scale-105"
+              className="bg-white hover:bg-emerald-50 text-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-500 dark:text-white shadow-xl hover:shadow-2xl px-12 py-7 text-xl font-semibold transition-all duration-300 hover:scale-105"
             >
               <Users className="h-6 w-6 mr-3" />
               Entrar a la App
