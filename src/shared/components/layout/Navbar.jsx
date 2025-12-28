@@ -116,8 +116,8 @@ const Navbar = () => {
             {/* Logo */}
             <Link to="/" onClick={scrollToTop} className="flex items-center space-x-2 flex-shrink-0" aria-label="Ir a pagina de inicio">
               <TreePine className="h-7 w-7 text-green-600 dark:text-emerald-400" />
-              <span className="text-lg font-bold text-green-800 dark:text-white hidden xl:block">Mi Arbol en el Mundo</span>
-              <span className="text-lg font-bold text-green-800 dark:text-white xl:hidden hidden md:block">Mi Arbol</span>
+              <span className="text-lg font-bold text-green-800 dark:text-white hidden xl:block">Mi Árbol en el Mundo</span>
+              <span className="text-lg font-bold text-green-800 dark:text-white xl:hidden hidden md:block">Mi Árbol</span>
             </Link>
 
             {/* Desktop Navigation - Solo visible en landing (sin autenticacion) */}

@@ -11,11 +11,11 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <TreePine className="h-8 w-8 text-emerald-400" />
-              <span className="text-xl font-bold">Mi Arbol en el Mundo</span>
+              <span className="text-xl font-bold">Mi Árbol en el Mundo</span>
             </div>
             <p className="text-green-100 dark:text-gray-300 mb-4">
-              Ayudamos a reforestar el planeta gracias al compromiso de personas como vos.
-              Cada arbol que compras se planta realmente en el lugar elegido.
+              Ayudamos a reforestar el planeta gracias al compromiso de personas como tú.
+              Cada árbol que compras se planta realmente en el lugar elegido.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-green-200 dark:text-gray-400 hover:text-white transition-colors">
@@ -32,7 +32,7 @@ const Footer = () => {
 
           {/* Enlaces rapidos */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white">Enlaces Rapidos</h3>
+            <h3 className="text-lg font-semibold mb-4 text-white">Enlaces Rápidos</h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/" className="text-green-200 dark:text-gray-400 hover:text-white transition-colors">
@@ -71,7 +71,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4" />
-                <span>Cordoba, Argentina</span>
+                <span>Córdoba, Argentina</span>
               </li>
             </ul>
           </div>
@@ -81,14 +81,14 @@ const Footer = () => {
         <div className="border-t border-green-700 dark:border-gray-700 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-green-200 dark:text-gray-400 text-center md:text-left">
-              &copy; {new Date().getFullYear()} Mi Arbol en el Mundo. Todos los derechos reservados.
+              &copy; {new Date().getFullYear()} Mi Árbol en el Mundo. Todos los derechos reservados.
             </p>
             <div className="flex gap-6">
               <Link to="/terminos" className="text-green-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
-                Terminos y Condiciones
+                Términos y Condiciones
               </Link>
               <Link to="/privacidad" className="text-green-200 dark:text-gray-400 hover:text-white transition-colors text-sm">
-                Politica de Privacidad
+                Política de Privacidad
               </Link>
             </div>
           </div>
