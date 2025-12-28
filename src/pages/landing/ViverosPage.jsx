@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import {
   Store, TreePine, Truck, BarChart3, Shield, Clock,
   CheckCircle, ArrowRight, Leaf, MapPin, DollarSign,
-  Package, Users, Star, TrendingUp
+  Package, Users, Star, TrendingUp, Award, Sparkles, BadgeCheck
 } from 'lucide-react';
 import { Button } from '@shared/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@shared/components/ui/card';
@@ -16,7 +16,7 @@ const ViverosPage = () => {
     {
       icon: Users,
       title: 'Acceso a Nuevos Clientes',
-      description: 'Conectate con miles de personas que quieren plantar árboles pero no saben dónde conseguirlos.',
+      description: 'Conectá con personas que quieren plantar árboles pero no saben dónde conseguirlos.',
       color: 'green'
     },
     {
@@ -36,6 +36,24 @@ const ViverosPage = () => {
       title: 'Pagos Garantizados',
       description: 'Recibí el pago de cada árbol vendido de forma segura y puntual vía transferencia bancaria.',
       color: 'blue'
+    }
+  ];
+
+  const pioneerBenefits = [
+    {
+      icon: Award,
+      title: 'Vivero Fundador',
+      description: 'Sé parte del grupo inicial de viveros que lanzarán la plataforma en Córdoba.'
+    },
+    {
+      icon: Sparkles,
+      title: 'Condiciones Especiales',
+      description: 'Los primeros viveros tendrán comisiones reducidas durante los primeros 6 meses.'
+    },
+    {
+      icon: BadgeCheck,
+      title: 'Visibilidad Destacada',
+      description: 'Tu vivero aparecerá destacado como "Vivero Fundador" en la plataforma.'
     }
   ];
 
@@ -72,24 +90,24 @@ const ViverosPage = () => {
 
   const faqs = [
     {
-      question: '¿Cuánto cuesta registrarse?',
-      answer: 'El registro es 100% gratuito. Solo cobramos una pequeña comisión por cada venta realizada a través de la plataforma.'
+      question: '¿Cuándo comienzan las operaciones?',
+      answer: 'Estamos en etapa de pre-registro. Comenzaremos operaciones en Córdoba durante el primer trimestre. Te contactaremos cuando estemos listos para activar tu vivero.'
+    },
+    {
+      question: '¿Cuánto cuesta el pre-registro?',
+      answer: 'El pre-registro es 100% gratuito y sin compromiso. Solo cobramos una comisión cuando se concrete una venta.'
     },
     {
       question: '¿Qué comisión cobra la plataforma?',
-      answer: 'La comisión es del 15% sobre el precio de venta. Vos definís el precio de tus árboles y eso es lo que recibís menos la comisión.'
+      answer: 'La comisión estándar será del 15% sobre el precio de venta. Los viveros fundadores tendrán condiciones especiales durante los primeros meses.'
     },
     {
       question: '¿Cómo recibo los pagos?',
-      answer: 'Los pagos se realizan semanalmente por transferencia bancaria. Podés ver el detalle de cada transacción en tu panel.'
+      answer: 'Los pagos se realizarán semanalmente por transferencia bancaria. Podrás ver el detalle de cada transacción en tu panel.'
     },
     {
-      question: '¿Puedo elegir qué pedidos aceptar?',
-      answer: 'Sí, tenés control total. Podés pausar tu cuenta si estás sin stock o rechazar pedidos específicos.'
-    },
-    {
-      question: '¿Qué pasa si un árbol tiene problemas?',
-      answer: 'Tenemos un sistema de garantía. Si el árbol no prospera en los primeros 30 días, trabajamos juntos para reponerlo.'
+      question: '¿Qué pasa si me pre-registro y luego no quiero participar?',
+      answer: 'No hay ningún compromiso. El pre-registro solo significa que te contactaremos cuando lancemos. Podés decidir en ese momento si querés participar.'
     }
   ];
 
@@ -104,6 +122,12 @@ const ViverosPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
+            {/* Badge de pre-registro */}
+            <div className="inline-flex items-center gap-2 bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <MapPin className="h-4 w-4" />
+              Pre-registro abierto para Córdoba
+            </div>
+
             <div className="bg-emerald-100 dark:bg-emerald-900/50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
               <Store className="h-10 w-10 text-emerald-600 dark:text-emerald-400" />
             </div>
@@ -111,8 +135,9 @@ const ViverosPage = () => {
               Viveros
             </h1>
             <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Unite a nuestra red de viveros y vendé tus árboles a personas que realmente
-              quieren plantar y cuidar el medio ambiente. Sin intermediarios, con pagos garantizados.
+              Estamos armando la red de viveros para lanzar en Córdoba.
+              Pre-registrate ahora y sé de los primeros en vender tus árboles a personas
+              que realmente quieren plantar y cuidar el medio ambiente.
             </p>
           </motion.div>
 
@@ -125,11 +150,11 @@ const ViverosPage = () => {
           >
             <Button
               size="lg"
-              className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg"
+              className="bg-brand hover:bg-brand-dark text-white px-8 py-6 text-lg"
               onClick={() => window.open(`${APP_URL}/registro/vivero`, '_blank')}
             >
               <Store className="h-5 w-5 mr-2" />
-              Registrar mi Vivero
+              Pre-registrar mi Vivero
             </Button>
             <Button
               asChild
@@ -229,7 +254,7 @@ const ViverosPage = () => {
         </div>
       </section>
 
-      {/* Panel de Control Preview */}
+      {/* ¿Por qué unirte ahora? - Pioneer Benefits */}
       <section className="py-12 px-4 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -238,9 +263,36 @@ const ViverosPage = () => {
             transition={{ duration: 0.6, delay: 0.5 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 dark:text-emerald-400 mb-3 text-center">
-              Tu Panel de Control
+              ¿Por qué unirte ahora?
             </h2>
             <p className="text-gray-600 dark:text-gray-400 text-center mb-10 max-w-2xl mx-auto">
+              Los primeros viveros tendrán ventajas exclusivas
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+              {pioneerBenefits.map((benefit, index) => {
+                const Icon = benefit.icon;
+                return (
+                  <Card key={index} className="border-amber-200 dark:border-amber-800 dark:bg-gray-800 bg-amber-50/50">
+                    <CardHeader className="pb-3">
+                      <div className="w-14 h-14 rounded-full flex items-center justify-center mb-3 bg-amber-100 dark:bg-amber-900/50">
+                        <Icon className="h-7 w-7 text-amber-600 dark:text-amber-400" />
+                      </div>
+                      <CardTitle className="text-amber-800 dark:text-amber-400 text-lg">{benefit.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm">{benefit.description}</p>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+
+            {/* Panel de Control Preview */}
+            <h3 className="text-2xl font-bold text-emerald-800 dark:text-emerald-400 mb-3 text-center">
+              Tu Panel de Control
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 text-center mb-8 max-w-2xl mx-auto">
               Todo lo que necesitás para gestionar tu vivero en un solo lugar
             </p>
 
@@ -265,20 +317,20 @@ const ViverosPage = () => {
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center border-t border-white/20 pt-6">
                 <div className="p-3">
+                  <p className="text-3xl md:text-4xl font-bold text-white">Córdoba</p>
+                  <p className="text-emerald-200 dark:text-emerald-300 text-sm">Primera zona</p>
+                </div>
+                <div className="p-3">
                   <p className="text-3xl md:text-4xl font-bold text-white">$0</p>
                   <p className="text-emerald-200 dark:text-emerald-300 text-sm">Costo de registro</p>
                 </div>
                 <div className="p-3">
                   <p className="text-3xl md:text-4xl font-bold text-white">15%</p>
-                  <p className="text-emerald-200 dark:text-emerald-300 text-sm">Comisión por venta</p>
+                  <p className="text-emerald-200 dark:text-emerald-300 text-sm">Comisión estándar</p>
                 </div>
                 <div className="p-3">
                   <p className="text-3xl md:text-4xl font-bold text-white">7 días</p>
                   <p className="text-emerald-200 dark:text-emerald-300 text-sm">Plazo de pago</p>
-                </div>
-                <div className="p-3">
-                  <p className="text-3xl md:text-4xl font-bold text-white">24/7</p>
-                  <p className="text-emerald-200 dark:text-emerald-300 text-sm">Soporte disponible</p>
                 </div>
               </div>
             </div>
@@ -357,10 +409,10 @@ const ViverosPage = () => {
           >
             <Store className="h-12 w-12 mx-auto mb-4" />
             <h2 className="text-2xl md:text-3xl font-bold mb-3 text-white">
-              ¿Listo para vender tus árboles?
+              ¿Tenés un vivero en Córdoba?
             </h2>
             <p className="text-lg mb-6 max-w-2xl mx-auto text-emerald-100">
-              Unite a la red de viveros que están ayudando a reforestar Argentina
+              Pre-registrate ahora y sé de los primeros viveros en vender a través de nuestra plataforma
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -369,7 +421,7 @@ const ViverosPage = () => {
                 onClick={() => window.open(`${APP_URL}/registro/vivero`, '_blank')}
               >
                 <Store className="h-5 w-5 mr-2" />
-                Registrar mi Vivero Gratis
+                Pre-registrar mi Vivero
               </Button>
               <Button
                 asChild
@@ -377,7 +429,7 @@ const ViverosPage = () => {
                 className="bg-transparent border-2 border-white text-white hover:bg-white/20"
               >
                 <Link to="/contacto">
-                  Contactar al Equipo
+                  Tengo dudas
                 </Link>
               </Button>
             </div>
