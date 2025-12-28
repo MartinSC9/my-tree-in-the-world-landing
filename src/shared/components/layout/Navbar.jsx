@@ -315,7 +315,7 @@ const Navbar = () => {
                 <Button
                   onClick={() => window.open(`${APP_URL}/`, '_blank')}
                   size="sm"
-                  className="bg-emerald-500 hover:bg-emerald-600 text-white"
+                  className="bg-brand hover:bg-brand-dark text-white"
                 >
                   <LogIn className="h-4 w-4 mr-1" />
                   Entrar
@@ -411,7 +411,7 @@ const Navbar = () => {
                     <div className="grid grid-cols-2 gap-2">
                       <Button
                         onClick={() => handleNavigation(getDashboardPath())}
-                        className="bg-green-600 hover:bg-green-700 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white"
+                        className="bg-brand hover:bg-brand-dark text-white"
                         size="sm"
                       >
                         <User className="h-4 w-4 mr-2" />
@@ -432,7 +432,7 @@ const Navbar = () => {
                   <div className="mb-6">
                     <Button
                       onClick={() => window.open(`${APP_URL}/`, '_blank')}
-                      className="w-full bg-emerald-500 hover:bg-emerald-600 text-white"
+                      className="w-full bg-brand hover:bg-brand-dark text-white"
                     >
                       <LogIn className="h-4 w-4 mr-2" />
                       Entrar a la App

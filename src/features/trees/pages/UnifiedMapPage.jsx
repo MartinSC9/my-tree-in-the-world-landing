@@ -269,7 +269,7 @@ const UnifiedMapPage = () => {
           >
             <Button
               onClick={handlePlantClick}
-              className="bg-green-600 hover:bg-green-700 text-white rounded-full px-6 py-4 shadow-2xl flex items-center justify-center gap-2"
+              className="bg-brand hover:bg-brand-dark text-white rounded-full px-6 py-4 shadow-2xl flex items-center justify-center gap-2"
               size="lg"
             >
               <TreePine className="h-5 w-5" />

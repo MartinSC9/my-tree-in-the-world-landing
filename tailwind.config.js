@@ -22,6 +22,13 @@ module.exports = {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				// Brand colors - usar estos en toda la app
+				brand: {
+					DEFAULT: '#10b981', // emerald-500 - color principal
+					light: '#34d399',   // emerald-400
+					dark: '#059669',    // emerald-600
+					darker: '#047857',  // emerald-700
+				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))',
