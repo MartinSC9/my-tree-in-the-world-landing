@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Toaster } from '@shared/components/ui/toaster';
 import { AuthProvider } from '@core/contexts/AuthContext';
 import { TreeProvider } from '@core/contexts/TreeContext';
 import { ThemeProvider } from '@core/contexts/ThemeContext';
@@ -106,7 +105,6 @@ const App = () => {
             {/* Redirect all other routes to home */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
-            <Toaster />
           </Router>
         </TreeProvider>
       </AuthProvider>
