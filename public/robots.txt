@@ -10,7 +10,7 @@ Disallow: /api/
 Disallow: /*.json$
 
 # Sitemap
-Sitemap: https://my-tree-in-the-world-front.vercel.app/sitemap.xml
+Sitemap: https://app.miarbolenelmundo.com/sitemap.xml
 
 # Bots específicos
 User-agent: Googlebot

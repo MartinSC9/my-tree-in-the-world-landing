@@ -6,7 +6,7 @@
 
   <!-- Homepage -->
   <url>
-    <loc>https://my-tree-in-the-world-front.vercel.app/</loc>
+    <loc>https://app.miarbolenelmundo.com/</loc>
     <lastmod>2025-10-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -14,7 +14,7 @@
 
   <!-- Login -->
   <url>
-    <loc>https://my-tree-in-the-world-front.vercel.app/login</loc>
+    <loc>https://app.miarbolenelmundo.com/login</loc>
     <lastmod>2025-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -22,7 +22,7 @@
 
   <!-- Register -->
   <url>
-    <loc>https://my-tree-in-the-world-front.vercel.app/register</loc>
+    <loc>https://app.miarbolenelmundo.com/register</loc>
     <lastmod>2025-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -30,7 +30,7 @@
 
   <!-- Dashboard -->
   <url>
-    <loc>https://my-tree-in-the-world-front.vercel.app/dashboard</loc>
+    <loc>https://app.miarbolenelmundo.com/dashboard</loc>
     <lastmod>2025-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -38,7 +38,7 @@
 
   <!-- Trees -->
   <url>
-    <loc>https://my-tree-in-the-world-front.vercel.app/trees</loc>
+    <loc>https://app.miarbolenelmundo.com/trees</loc>
     <lastmod>2025-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -46,7 +46,7 @@
 
   <!-- Mapa -->
   <url>
-    <loc>https://my-tree-in-the-world-front.vercel.app/mapa</loc>
+    <loc>https://app.miarbolenelmundo.com/mapa</loc>
     <lastmod>2025-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -54,7 +54,7 @@
 
   <!-- Calculadora de Carbono -->
   <url>
-    <loc>https://my-tree-in-the-world-front.vercel.app/calculadora</loc>
+    <loc>https://app.miarbolenelmundo.com/calculadora</loc>
     <lastmod>2025-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -62,7 +62,7 @@
 
   <!-- Comunidad -->
   <url>
-    <loc>https://my-tree-in-the-world-front.vercel.app/comunidad</loc>
+    <loc>https://app.miarbolenelmundo.com/comunidad</loc>
     <lastmod>2025-10-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -70,7 +70,7 @@
 
   <!-- Perfil -->
   <url>
-    <loc>https://my-tree-in-the-world-front.vercel.app/perfil</loc>
+    <loc>https://app.miarbolenelmundo.com/perfil</loc>
     <lastmod>2025-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
