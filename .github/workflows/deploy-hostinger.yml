@@ -59,7 +59,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
-          server-dir: /home/u614395487/domains/miarbolenelmundo.com/public_html/
+          server-dir: domains/miarbolenelmundo.com/public_html/
           exclude: |
             **/app/**
           log-level: verbose
