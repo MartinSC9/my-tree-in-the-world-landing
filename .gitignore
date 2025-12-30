@@ -34,3 +34,7 @@ lerna-debug.log*
 # Claude Code
 .claude/settings.local.json
 nul
+
+# Build artifacts
+dist/
+*.zip
