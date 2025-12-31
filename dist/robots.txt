@@ -1,0 +1,27 @@
+# robots.txt para My Tree in the World
+
+# Permitir acceso a todos los bots
+User-agent: *
+Allow: /
+
+# Bloquear solo rutas privadas/admin
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*.json$
+
+# Sitemap
+Sitemap: https://app.miarbolenelmundo.com/sitemap.xml
+
+# Bots específicos
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Crawl-delay para bots agresivos
+User-agent: *
+Crawl-delay: 10
