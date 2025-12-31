@@ -201,6 +201,31 @@
     <link rel="preconnect" href="https://my-tree-in-the-world-back.onrender.com" />
     <link rel="dns-prefetch" href="https://my-tree-in-the-world-back.onrender.com" />
 
+    <!-- Microsoft Clarity (solo producción) -->
+    <script type="text/javascript">
+      if (window.location.hostname === 'miarbolenelmundo.com') {
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "uu6v6q9kla");
+      }
+    </script>
+
+    <!-- Google Analytics (solo producción) -->
+    <script>
+      if (window.location.hostname === 'miarbolenelmundo.com') {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-ZQS4HJDSPG';
+        document.head.appendChild(script);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZQS4HJDSPG');
+      }
+    </script>
+
     <!-- Prevenir flash blanco: aplicar tema oscuro ANTES de que se renderice -->
     <script>
       (function() {
