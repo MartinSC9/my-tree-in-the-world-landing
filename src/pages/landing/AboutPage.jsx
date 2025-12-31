@@ -8,42 +8,46 @@ const AboutPage = () => {
     {
       icon: Heart,
       title: 'Compromiso Real',
-      description: 'Cada árbol que se compra en nuestra plataforma se planta realmente. No es solo una promesa, es nuestra garantía.'
+      description:
+        'Cada árbol que se compra en nuestra plataforma se planta realmente. No es solo una promesa, es nuestra garantía.',
     },
     {
       icon: Shield,
       title: 'Transparencia Total',
-      description: 'Seguimiento completo con códigos QR, coordenadas GPS y actualizaciones del crecimiento de tu árbol.'
+      description:
+        'Seguimiento completo con códigos QR, coordenadas GPS y actualizaciones del crecimiento de tu árbol.',
     },
     {
       icon: Leaf,
       title: 'Conciencia Ecológica',
-      description: 'Trabajamos con botánicos y especialistas para plantar las especies correctas en los lugares correctos.'
+      description:
+        'Trabajamos con botánicos y especialistas para plantar las especies correctas en los lugares correctos.',
     },
     {
       icon: Globe,
       title: 'Impacto Global',
-      description: 'Presencia en múltiples países, colaborando con comunidades locales para maximizar el impacto positivo.'
-    }
+      description:
+        'Presencia en múltiples países, colaborando con comunidades locales para maximizar el impacto positivo.',
+    },
   ];
 
   const team = [
     {
       role: 'Botánicos',
-      description: 'Seleccionan las especies ideales para cada ecosistema'
+      description: 'Seleccionan las especies ideales para cada ecosistema',
     },
     {
       role: 'Ecologistas',
-      description: 'Evalúan el impacto ambiental y biodiversidad'
+      description: 'Evalúan el impacto ambiental y biodiversidad',
     },
     {
       role: 'Comunidades Locales',
-      description: 'Plantan y cuidan los árboles en el terreno'
+      description: 'Plantan y cuidan los árboles en el terreno',
     },
     {
       role: 'Equipo Técnico',
-      description: 'Desarrollan la plataforma y sistemas de seguimiento'
-    }
+      description: 'Desarrollan la plataforma y sistemas de seguimiento',
+    },
   ];
 
   return (
@@ -62,8 +66,8 @@ const AboutPage = () => {
               Sobre Nosotros
             </h1>
             <p className="text-xl md:text-2xl text-green-700 mb-8 max-w-4xl mx-auto leading-relaxed">
-              Somos una plataforma que conecta el deseo de ayudar con acciones reales de reforestación.
-              Cada árbol cuenta, cada persona importa.
+              Somos una plataforma que conecta el deseo de ayudar con acciones reales de
+              reforestación. Cada árbol cuenta, cada persona importa.
             </p>
           </motion.div>
         </div>
@@ -84,16 +88,19 @@ const AboutPage = () => {
               </div>
               <h2 className="text-4xl font-bold text-green-800 mb-6">Nuestra Misión</h2>
               <p className="text-lg text-green-700 leading-relaxed mb-4">
-                En "Mi Árbol en el Mundo" creemos que cada persona puede hacer una diferencia tangible
-                en la lucha contra el cambio climático y la deforestación.
+                En "Mi Árbol en el Mundo" creemos que cada persona puede hacer una diferencia
+                tangible en la lucha contra el cambio climático y la deforestación.
               </p>
               <p className="text-lg text-green-700 leading-relaxed mb-4">
-                Nuestra misión es simple pero poderosa: <strong>hacer que plantar árboles sea accesible,
-                transparente y significativo para todos</strong>.
+                Nuestra misión es simple pero poderosa:{' '}
+                <strong>
+                  hacer que plantar árboles sea accesible, transparente y significativo para todos
+                </strong>
+                .
               </p>
               <p className="text-lg text-green-700 leading-relaxed">
-                No solo vendemos árboles, creamos conexiones emocionales entre las personas y el planeta,
-                permitiendo que cada usuario sea parte activa de la solución ambiental.
+                No solo vendemos árboles, creamos conexiones emocionales entre las personas y el
+                planeta, permitiendo que cada usuario sea parte activa de la solución ambiental.
               </p>
             </div>
             <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl p-8 lg:p-12">
@@ -105,7 +112,8 @@ const AboutPage = () => {
                   <div>
                     <h3 className="text-xl font-semibold text-green-800 mb-2">Para Todos</h3>
                     <p className="text-green-700">
-                      Desde individuos hasta empresas, todos pueden contribuir a la reforestación global.
+                      Desde individuos hasta empresas, todos pueden contribuir a la reforestación
+                      global.
                     </p>
                   </div>
                 </div>
@@ -116,7 +124,8 @@ const AboutPage = () => {
                   <div>
                     <h3 className="text-xl font-semibold text-green-800 mb-2">Impacto Real</h3>
                     <p className="text-green-700">
-                      Cada árbol se planta físicamente y puedes seguir su crecimiento con tecnología GPS y QR.
+                      Cada árbol se planta físicamente y puedes seguir su crecimiento con tecnología
+                      GPS y QR.
                     </p>
                   </div>
                 </div>
@@ -208,9 +217,7 @@ const AboutPage = () => {
                     <CardTitle className="text-center text-green-800">{member.role}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-center text-green-700 text-sm">
-                      {member.description}
-                    </p>
+                    <p className="text-center text-green-700 text-sm">{member.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -232,20 +239,22 @@ const AboutPage = () => {
             <h2 className="text-4xl font-bold mb-6">Cómo Trabajamos</h2>
             <div className="max-w-4xl mx-auto space-y-6 text-lg leading-relaxed">
               <p>
-                Trabajamos directamente con <strong>viveros locales</strong> y <strong>equipos de plantación</strong> en
-                diferentes países para garantizar que cada árbol se plante correctamente.
+                Trabajamos directamente con <strong>viveros locales</strong> y{' '}
+                <strong>equipos de plantación</strong> en diferentes países para garantizar que cada
+                árbol se plante correctamente.
               </p>
               <p>
-                Nuestros <strong>botánicos y ecologistas</strong> seleccionan cuidadosamente las especies nativas
-                apropiadas para cada región, considerando el clima, el suelo y el ecosistema local.
+                Nuestros <strong>botánicos y ecologistas</strong> seleccionan cuidadosamente las
+                especies nativas apropiadas para cada región, considerando el clima, el suelo y el
+                ecosistema local.
               </p>
               <p>
-                Cada árbol plantado recibe un <strong>código QR único</strong> instalado en el lugar,
-                permitiendo total trazabilidad y seguimiento del crecimiento.
+                Cada árbol plantado recibe un <strong>código QR único</strong> instalado en el
+                lugar, permitiendo total trazabilidad y seguimiento del crecimiento.
               </p>
               <p className="text-green-100">
-                No plantamos cualquier árbol en cualquier lado. <strong>Plantamos con ciencia,
-                conciencia y compromiso ambiental.</strong>
+                No plantamos cualquier árbol en cualquier lado.{' '}
+                <strong>Plantamos con ciencia, conciencia y compromiso ambiental.</strong>
               </p>
             </div>
           </motion.div>

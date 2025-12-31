@@ -8,15 +8,15 @@ import Footer from '@shared/components/layout/Footer';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.2 }
-  }
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+  },
 };
 
 const SorteosPage = () => {
@@ -44,10 +44,16 @@ const SorteosPage = () => {
             <motion.div variants={fadeInUp} className="mb-6">
               <Gift className="h-20 w-20 mx-auto text-yellow-300" />
             </motion.div>
-            <motion.h1 variants={fadeInUp} className="text-5xl md:text-6xl font-bold mb-6 text-white">
+            <motion.h1
+              variants={fadeInUp}
+              className="text-5xl md:text-6xl font-bold mb-6 text-white"
+            >
               Sorteos de Cupones
             </motion.h1>
-            <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-purple-100 max-w-2xl mx-auto mb-4">
+            <motion.p
+              variants={fadeInUp}
+              className="text-xl md:text-2xl text-purple-100 max-w-2xl mx-auto mb-4"
+            >
               Participá en proyectos colaborativos de empresas y ganá cupones de descuento.
             </motion.p>
             <motion.p variants={fadeInUp} className="text-lg text-yellow-300 font-semibold mb-8">
@@ -79,10 +85,16 @@ const SorteosPage = () => {
             variants={staggerContainer}
             className="text-center mb-12"
           >
-            <motion.h2 variants={fadeInUp} className="text-4xl font-bold text-purple-800 dark:text-purple-400 mb-4">
+            <motion.h2
+              variants={fadeInUp}
+              className="text-4xl font-bold text-purple-800 dark:text-purple-400 mb-4"
+            >
               ¿Cómo funciona?
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <motion.p
+              variants={fadeInUp}
+              className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+            >
               Un sistema simple y transparente
             </motion.p>
           </motion.div>
@@ -107,7 +119,8 @@ const SorteosPage = () => {
                         Empresas crean proyectos colaborativos
                       </h3>
                       <p className="text-gray-600 dark:text-gray-400">
-                        Una empresa sponsor crea un proyecto para plantar árboles y ofrece cupones de descuento como incentivo.
+                        Una empresa sponsor crea un proyecto para plantar árboles y ofrece cupones
+                        de descuento como incentivo.
                       </p>
                     </div>
                   </div>
@@ -127,7 +140,8 @@ const SorteosPage = () => {
                         Vos participás aportando lo que quieras
                       </h3>
                       <p className="text-gray-600 dark:text-gray-400">
-                        Cada peso que aportás es un ticket para el sorteo. Aportás $500 = 500 tickets. Simple y justo.
+                        Cada peso que aportás es un ticket para el sorteo. Aportás $500 = 500
+                        tickets. Simple y justo.
                       </p>
                     </div>
                   </div>
@@ -147,7 +161,8 @@ const SorteosPage = () => {
                         Se plantan los árboles y se sortean los cupones
                       </h3>
                       <p className="text-gray-600 dark:text-gray-400">
-                        Cuando se completa el proyecto, se plantan los árboles y se sortean cupones de descuento entre los participantes.
+                        Cuando se completa el proyecto, se plantan los árboles y se sortean cupones
+                        de descuento entre los participantes.
                       </p>
                     </div>
                   </div>
@@ -175,15 +190,21 @@ const SorteosPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
               <div className="flex items-start gap-3">
                 <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
-                <span className="text-gray-700 dark:text-gray-300">Ayudás a plantar árboles reales</span>
+                <span className="text-gray-700 dark:text-gray-300">
+                  Ayudás a plantar árboles reales
+                </span>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
-                <span className="text-gray-700 dark:text-gray-300">Participás en sorteos de cupones</span>
+                <span className="text-gray-700 dark:text-gray-300">
+                  Participás en sorteos de cupones
+                </span>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
-                <span className="text-gray-700 dark:text-gray-300">Aparecés en el certificado del árbol</span>
+                <span className="text-gray-700 dark:text-gray-300">
+                  Aparecés en el certificado del árbol
+                </span>
               </div>
             </div>
           </motion.div>
@@ -199,35 +220,40 @@ const SorteosPage = () => {
             viewport={{ once: true }}
             variants={staggerContainer}
           >
-            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <motion.div
+              variants={fadeInUp}
+              className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-6"
+            >
               <MapPin className="h-4 w-4" />
               Comenzamos en Córdoba
             </motion.div>
             <motion.h2 variants={fadeInUp} className="text-4xl font-bold mb-6 text-white">
               Próximamente
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
-              Estamos preparando los primeros sorteos con empresas de Córdoba.
-              Dejanos tu contacto y te avisamos cuando lancemos.
+            <motion.p
+              variants={fadeInUp}
+              className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto"
+            >
+              Estamos preparando los primeros sorteos con empresas de Córdoba. Dejanos tu contacto y
+              te avisamos cuando lancemos.
             </motion.p>
-            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.div
+              variants={fadeInUp}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
               <Button
                 asChild
                 size="lg"
                 className="bg-white hover:bg-gray-100 text-purple-600 font-semibold px-10 py-6 text-lg shadow-xl"
               >
-                <Link to="/contacto">
-                  Avisarme cuando arranquen
-                </Link>
+                <Link to="/contacto">Avisarme cuando arranquen</Link>
               </Button>
               <Button
                 asChild
                 size="lg"
                 className="bg-transparent border-2 border-white text-white hover:bg-white/20 px-10 py-6 text-lg"
               >
-                <Link to="/empresas">
-                  Soy empresa, quiero participar
-                </Link>
+                <Link to="/empresas">Soy empresa, quiero participar</Link>
               </Button>
             </motion.div>
           </motion.div>

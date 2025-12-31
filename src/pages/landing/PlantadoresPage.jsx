@@ -2,9 +2,22 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  Shovel, TreePine, MapPin, Calendar, Star, Clock,
-  CheckCircle, ArrowRight, Leaf, DollarSign, Sun,
-  Heart, Users, Camera, Award, Compass
+  Shovel,
+  TreePine,
+  MapPin,
+  Calendar,
+  Star,
+  Clock,
+  CheckCircle,
+  ArrowRight,
+  Leaf,
+  DollarSign,
+  Sun,
+  Heart,
+  Users,
+  Camera,
+  Award,
+  Compass,
 } from 'lucide-react';
 import { Button } from '@shared/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@shared/components/ui/card';
@@ -16,50 +29,55 @@ const PlantadoresPage = () => {
     {
       icon: DollarSign,
       title: 'Ingresos Flexibles',
-      description: 'Ganá dinero plantando árboles en tu tiempo libre. Vos elegís cuándo y dónde trabajar.',
-      color: 'amber'
+      description:
+        'Ganá dinero plantando árboles en tu tiempo libre. Vos elegís cuándo y dónde trabajar.',
+      color: 'amber',
     },
     {
       icon: Heart,
       title: 'Impacto Real',
-      description: 'Cada árbol que plantás contribuye a un planeta más verde. Tu trabajo tiene significado.',
-      color: 'rose'
+      description:
+        'Cada árbol que plantás contribuye a un planeta más verde. Tu trabajo tiene significado.',
+      color: 'rose',
     },
     {
       icon: Sun,
       title: 'Trabajo al Aire Libre',
       description: 'Dejá la oficina atrás. Trabajá en contacto con la naturaleza y el aire libre.',
-      color: 'orange'
+      color: 'orange',
     },
     {
       icon: Star,
       title: 'Construí tu Reputación',
-      description: 'Recibí calificaciones de usuarios y destacate como plantador experto en tu zona.',
-      color: 'yellow'
-    }
+      description:
+        'Recibí calificaciones de usuarios y destacate como plantador experto en tu zona.',
+      color: 'yellow',
+    },
   ];
 
   const howItWorks = [
     {
       step: 1,
       title: 'Registrate como Plantador',
-      description: 'Creá tu cuenta gratuita y completá tu perfil con tu zona de trabajo y disponibilidad.'
+      description:
+        'Creá tu cuenta gratuita y completá tu perfil con tu zona de trabajo y disponibilidad.',
     },
     {
       step: 2,
       title: 'Recibí Asignaciones',
-      description: 'Cuando hay un árbol para plantar en tu zona, te notificamos con todos los detalles.'
+      description:
+        'Cuando hay un árbol para plantar en tu zona, te notificamos con todos los detalles.',
     },
     {
       step: 3,
       title: 'Retirá el Árbol',
-      description: 'Coordiná con el vivero asignado para retirar el árbol listo para plantar.'
+      description: 'Coordiná con el vivero asignado para retirar el árbol listo para plantar.',
     },
     {
       step: 4,
       title: 'Plantá y Documentá',
-      description: 'Plantá el árbol en la ubicación indicada y subí fotos del proceso. ¡Listo!'
-    }
+      description: 'Plantá el árbol en la ubicación indicada y subí fotos del proceso. ¡Listo!',
+    },
   ];
 
   const requirements = [
@@ -68,48 +86,56 @@ const PlantadoresPage = () => {
     'Contar con herramientas básicas (pala, regadera, guantes)',
     'Disponer de movilidad propia para traslados',
     'Smartphone con cámara para documentar plantaciones',
-    'Disponibilidad mínima de 4 horas semanales'
+    'Disponibilidad mínima de 4 horas semanales',
   ];
 
   const faqs = [
     {
       question: '¿Cuándo empiezo a recibir asignaciones?',
-      answer: 'Estamos en etapa de pre-registro. Te notificaremos cuando lancemos en tu zona y comenzarás a recibir asignaciones según tu disponibilidad.'
+      answer:
+        'Estamos en etapa de pre-registro. Te notificaremos cuando lancemos en tu zona y comenzarás a recibir asignaciones según tu disponibilidad.',
     },
     {
       question: '¿Cuánto voy a ganar por árbol?',
-      answer: 'El pago varía según ubicación y tipo de árbol. Estimamos entre $5.000 y $15.000 ARS por plantación, con pago garantizado en 48hs.'
+      answer:
+        'El pago varía según ubicación y tipo de árbol. Estimamos entre $5.000 y $15.000 ARS por plantación, con pago garantizado en 48hs.',
     },
     {
       question: '¿Necesito experiencia previa?',
-      answer: 'No es obligatorio, pero valoramos conocimientos de jardinería. Ofreceremos guías y capacitación para asegurar plantaciones exitosas.'
+      answer:
+        'No es obligatorio, pero valoramos conocimientos de jardinería. Ofreceremos guías y capacitación para asegurar plantaciones exitosas.',
     },
     {
       question: '¿Puedo rechazar asignaciones?',
-      answer: 'Sí, tendrás control total de tu agenda. Podrás aceptar o rechazar trabajos según tu disponibilidad y zona.'
+      answer:
+        'Sí, tendrás control total de tu agenda. Podrás aceptar o rechazar trabajos según tu disponibilidad y zona.',
     },
     {
       question: '¿Tiene costo registrarse?',
-      answer: 'No, el registro es 100% gratuito. Solo necesitás cumplir los requisitos básicos y completar tu perfil.'
-    }
+      answer:
+        'No, el registro es 100% gratuito. Solo necesitás cumplir los requisitos básicos y completar tu perfil.',
+    },
   ];
 
   const pioneerBenefits = [
     {
       icon: Award,
       title: 'Sé de los Primeros',
-      description: 'Formá parte del grupo fundador de plantadores y construí tu reputación desde el inicio.'
+      description:
+        'Formá parte del grupo fundador de plantadores y construí tu reputación desde el inicio.',
     },
     {
       icon: MapPin,
       title: 'Elegí tu Zona',
-      description: 'Los primeros plantadores tienen prioridad para elegir las zonas donde quieren trabajar.'
+      description:
+        'Los primeros plantadores tienen prioridad para elegir las zonas donde quieren trabajar.',
     },
     {
       icon: Users,
       title: 'Comunidad Fundadora',
-      description: 'Participá en las decisiones y ayudanos a mejorar la plataforma con tu feedback.'
-    }
+      description:
+        'Participá en las decisiones y ayudanos a mejorar la plataforma con tu feedback.',
+    },
   ];
 
   return (
@@ -133,8 +159,8 @@ const PlantadoresPage = () => {
               Sé Plantador
             </h1>
             <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Estamos armando nuestra red de plantadores en Córdoba. Registrate ahora para ser
-              de los primeros y ganá dinero mientras ayudás a reforestar el planeta.
+              Estamos armando nuestra red de plantadores en Córdoba. Registrate ahora para ser de
+              los primeros y ganá dinero mientras ayudás a reforestar el planeta.
             </p>
           </motion.div>
 
@@ -159,9 +185,7 @@ const PlantadoresPage = () => {
               variant="outline"
               className="border-amber-600 text-amber-700 hover:bg-amber-50 dark:text-amber-400 dark:border-amber-500 dark:hover:bg-amber-900/30 px-8 py-6 text-lg"
             >
-              <Link to="/contacto">
-                Más información
-              </Link>
+              <Link to="/contacto">Más información</Link>
             </Button>
           </motion.div>
 
@@ -214,24 +238,33 @@ const PlantadoresPage = () => {
                   amber: 'bg-amber-100 dark:bg-amber-900/50',
                   rose: 'bg-rose-100 dark:bg-rose-900/50',
                   orange: 'bg-orange-100 dark:bg-orange-900/50',
-                  yellow: 'bg-yellow-100 dark:bg-yellow-900/50'
+                  yellow: 'bg-yellow-100 dark:bg-yellow-900/50',
                 };
                 const iconColors = {
                   amber: 'text-amber-600 dark:text-amber-400',
                   rose: 'text-rose-600 dark:text-rose-400',
                   orange: 'text-orange-600 dark:text-orange-400',
-                  yellow: 'text-yellow-600 dark:text-yellow-400'
+                  yellow: 'text-yellow-600 dark:text-yellow-400',
                 };
                 return (
-                  <Card key={index} className="border-amber-200 dark:border-gray-700 dark:bg-gray-800 hover:shadow-lg transition-shadow">
+                  <Card
+                    key={index}
+                    className="border-amber-200 dark:border-gray-700 dark:bg-gray-800 hover:shadow-lg transition-shadow"
+                  >
                     <CardHeader className="pb-3">
-                      <div className={`w-14 h-14 rounded-full flex items-center justify-center mb-3 ${bgColors[benefit.color]}`}>
+                      <div
+                        className={`w-14 h-14 rounded-full flex items-center justify-center mb-3 ${bgColors[benefit.color]}`}
+                      >
                         <Icon className={`h-7 w-7 ${iconColors[benefit.color]}`} />
                       </div>
-                      <CardTitle className="text-amber-800 dark:text-amber-400 text-lg">{benefit.title}</CardTitle>
+                      <CardTitle className="text-amber-800 dark:text-amber-400 text-lg">
+                        {benefit.title}
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm">{benefit.description}</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm">
+                        {benefit.description}
+                      </p>
                     </CardContent>
                   </Card>
                 );
@@ -263,7 +296,9 @@ const PlantadoresPage = () => {
                     <div className="bg-amber-600 w-10 h-10 rounded-full flex items-center justify-center mb-4 text-white font-bold">
                       {item.step}
                     </div>
-                    <h3 className="font-bold text-amber-800 dark:text-amber-400 mb-2">{item.title}</h3>
+                    <h3 className="font-bold text-amber-800 dark:text-amber-400 mb-2">
+                      {item.title}
+                    </h3>
                     <p className="text-gray-600 dark:text-gray-400 text-sm">{item.description}</p>
                   </div>
                   {index < howItWorks.length - 1 && (
@@ -295,13 +330,20 @@ const PlantadoresPage = () => {
               {pioneerBenefits.map((benefit, index) => {
                 const Icon = benefit.icon;
                 return (
-                  <Card key={index} className="border-amber-200 dark:border-gray-700 dark:bg-gray-800 text-center">
+                  <Card
+                    key={index}
+                    className="border-amber-200 dark:border-gray-700 dark:bg-gray-800 text-center"
+                  >
                     <CardContent className="p-6">
                       <div className="bg-amber-100 dark:bg-amber-900/50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <Icon className="h-8 w-8 text-amber-600 dark:text-amber-400" />
                       </div>
-                      <h3 className="font-bold text-amber-800 dark:text-amber-400 text-lg mb-2">{benefit.title}</h3>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm">{benefit.description}</p>
+                      <h3 className="font-bold text-amber-800 dark:text-amber-400 text-lg mb-2">
+                        {benefit.title}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm">
+                        {benefit.description}
+                      </p>
                     </CardContent>
                   </Card>
                 );
@@ -310,7 +352,8 @@ const PlantadoresPage = () => {
 
             <div className="mt-10 bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 rounded-xl p-6 max-w-2xl mx-auto text-center border border-amber-200 dark:border-amber-800">
               <p className="text-amber-800 dark:text-amber-400 font-medium">
-                Estamos en etapa de pre-registro. Cuando lancemos en tu zona, serás de los primeros en recibir asignaciones.
+                Estamos en etapa de pre-registro. Cuando lancemos en tu zona, serás de los primeros
+                en recibir asignaciones.
               </p>
             </div>
           </motion.div>
@@ -337,22 +380,30 @@ const PlantadoresPage = () => {
                 <div className="bg-white/10 dark:bg-white/15 rounded-xl p-5 backdrop-blur-sm border border-white/10 dark:border-white/20 hover:bg-white/15 dark:hover:bg-white/20 transition-colors">
                   <Clock className="h-8 w-8 mb-3 text-amber-200" />
                   <h3 className="font-bold text-lg mb-1 text-white">Paso 1</h3>
-                  <p className="text-amber-100 dark:text-amber-200 text-sm">Revisás las notificaciones y aceptás una asignación cerca de tu zona</p>
+                  <p className="text-amber-100 dark:text-amber-200 text-sm">
+                    Revisás las notificaciones y aceptás una asignación cerca de tu zona
+                  </p>
                 </div>
                 <div className="bg-white/10 dark:bg-white/15 rounded-xl p-5 backdrop-blur-sm border border-white/10 dark:border-white/20 hover:bg-white/15 dark:hover:bg-white/20 transition-colors">
                   <TreePine className="h-8 w-8 mb-3 text-amber-200" />
                   <h3 className="font-bold text-lg mb-1 text-white">Paso 2</h3>
-                  <p className="text-amber-100 dark:text-amber-200 text-sm">Retirás el árbol del vivero asignado con todas las instrucciones</p>
+                  <p className="text-amber-100 dark:text-amber-200 text-sm">
+                    Retirás el árbol del vivero asignado con todas las instrucciones
+                  </p>
                 </div>
                 <div className="bg-white/10 dark:bg-white/15 rounded-xl p-5 backdrop-blur-sm border border-white/10 dark:border-white/20 hover:bg-white/15 dark:hover:bg-white/20 transition-colors">
                   <Shovel className="h-8 w-8 mb-3 text-amber-200" />
                   <h3 className="font-bold text-lg mb-1 text-white">Paso 3</h3>
-                  <p className="text-amber-100 dark:text-amber-200 text-sm">Llegás a la ubicación, preparás el terreno y plantás el árbol</p>
+                  <p className="text-amber-100 dark:text-amber-200 text-sm">
+                    Llegás a la ubicación, preparás el terreno y plantás el árbol
+                  </p>
                 </div>
                 <div className="bg-white/10 dark:bg-white/15 rounded-xl p-5 backdrop-blur-sm border border-white/10 dark:border-white/20 hover:bg-white/15 dark:hover:bg-white/20 transition-colors">
                   <Camera className="h-8 w-8 mb-3 text-amber-200" />
                   <h3 className="font-bold text-lg mb-1 text-white">Paso 4</h3>
-                  <p className="text-amber-100 dark:text-amber-200 text-sm">Documentás con fotos durante el día, subís el reporte y recibís tu pago en 48hs</p>
+                  <p className="text-amber-100 dark:text-amber-200 text-sm">
+                    Documentás con fotos durante el día, subís el reporte y recibís tu pago en 48hs
+                  </p>
                 </div>
               </div>
             </div>
@@ -406,9 +457,14 @@ const PlantadoresPage = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
               {faqs.map((faq, index) => (
-                <Card key={index} className="border-amber-200 dark:border-gray-700 dark:bg-gray-800">
+                <Card
+                  key={index}
+                  className="border-amber-200 dark:border-gray-700 dark:bg-gray-800"
+                >
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-amber-800 dark:text-amber-400 text-base">{faq.question}</CardTitle>
+                    <CardTitle className="text-amber-800 dark:text-amber-400 text-base">
+                      {faq.question}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-600 dark:text-gray-400 text-sm">{faq.answer}</p>
@@ -450,9 +506,7 @@ const PlantadoresPage = () => {
                 size="lg"
                 className="bg-transparent border-2 border-white text-white hover:bg-white/20"
               >
-                <Link to="/contacto">
-                  Tengo más preguntas
-                </Link>
+                <Link to="/contacto">Tengo más preguntas</Link>
               </Button>
             </div>
           </motion.div>

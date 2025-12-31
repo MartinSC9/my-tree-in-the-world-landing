@@ -7,9 +7,9 @@ let carbonConfig = {
     flight: 0.25, // kg CO2 por km
     waste: 0.5, // kg CO2 por kg
     paper: 3.3, // kg CO2 por kg
-    employee: 2000 // kg CO2 por empleado por año
+    employee: 2000, // kg CO2 por empleado por año
   },
-  treeAbsorption: 22 // kg CO2 por árbol por año
+  treeAbsorption: 22, // kg CO2 por árbol por año
 };
 
 export const getCarbonConfig = () => {
@@ -40,9 +40,9 @@ export const resetCarbonConfig = () => {
       flight: 0.25,
       waste: 0.5,
       paper: 3.3,
-      employee: 2000
+      employee: 2000,
     },
-    treeAbsorption: 22
+    treeAbsorption: 22,
   };
   carbonConfig = defaultConfig;
   localStorage.setItem('carbonConfig', JSON.stringify(carbonConfig));

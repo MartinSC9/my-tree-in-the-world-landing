@@ -4,7 +4,30 @@ import { Button } from '@shared/components/ui/button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuth } from '@core/contexts/AuthContext';
 import { useTheme } from '@core/contexts/ThemeContext';
-import { TreePine, Menu, X, Home, Gift, Sprout, Globe, User, Users, LogOut, LogIn, UserPlus, Settings, ShoppingCart, Bell, ChevronDown, QrCode, Share2, Store, Shovel, Sun, Moon } from 'lucide-react';
+import {
+  TreePine,
+  Menu,
+  X,
+  Home,
+  Gift,
+  Sprout,
+  Globe,
+  User,
+  Users,
+  LogOut,
+  LogIn,
+  UserPlus,
+  Settings,
+  ShoppingCart,
+  Bell,
+  ChevronDown,
+  QrCode,
+  Share2,
+  Store,
+  Shovel,
+  Sun,
+  Moon,
+} from 'lucide-react';
 import { APP_URL } from '@core/config/app.config';
 
 const Navbar = () => {
@@ -96,12 +119,22 @@ const Navbar = () => {
   const programsItems = [
     { name: 'Sorteos', path: '/sorteos', icon: Gift, desc: 'Participa y gana arboles' },
     { name: 'Referidos', path: '/referidos', icon: Share2, desc: 'Invita amigos y gana puntos' },
-    { name: 'QR Empresas', path: '/qr-productos', icon: QrCode, desc: 'Programa para empresas partner' },
+    {
+      name: 'QR Empresas',
+      path: '/qr-productos',
+      icon: QrCode,
+      desc: 'Programa para empresas partner',
+    },
   ];
 
   const sociosItems = [
     { name: 'Viveros', path: '/viveros', icon: Store, desc: 'Vende tus arboles con nosotros' },
-    { name: 'Plantadores', path: '/plantadores', icon: Shovel, desc: 'Gana dinero plantando arboles' },
+    {
+      name: 'Plantadores',
+      path: '/plantadores',
+      icon: Shovel,
+      desc: 'Gana dinero plantando arboles',
+    },
   ];
 
   return (
@@ -114,21 +147,30 @@ const Navbar = () => {
         <div className="w-full px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 gap-4">
             {/* Logo */}
-            <Link to="/" onClick={scrollToTop} className="flex items-center space-x-2 flex-shrink-0" aria-label="Ir a pagina de inicio">
+            <Link
+              to="/"
+              onClick={scrollToTop}
+              className="flex items-center space-x-2 flex-shrink-0"
+              aria-label="Ir a pagina de inicio"
+            >
               <TreePine className="h-7 w-7 text-green-600 dark:text-emerald-400" />
-              <span className="text-lg font-bold text-green-800 dark:text-white hidden xl:block">Mi Árbol en el Mundo</span>
-              <span className="text-lg font-bold text-green-800 dark:text-white xl:hidden hidden md:block">Mi Árbol</span>
+              <span className="text-lg font-bold text-green-800 dark:text-white hidden xl:block">
+                Mi Árbol en el Mundo
+              </span>
+              <span className="text-lg font-bold text-green-800 dark:text-white xl:hidden hidden md:block">
+                Mi Árbol
+              </span>
             </Link>
 
             {/* Desktop Navigation - Solo visible en landing (sin autenticacion) */}
             {!user && (
               <div className="hidden lg:flex items-center gap-1 flex-1 justify-center max-w-2xl">
-                {navigationItems.map((item) => (
+                {navigationItems.map((item) =>
                   item.isInternal ? (
                     <Link
                       key={item.name}
                       to={item.path}
-                      onClick={item.path === "/" ? scrollToTop : undefined}
+                      onClick={item.path === '/' ? scrollToTop : undefined}
                       className="text-green-700 dark:text-gray-300 hover:text-green-900 dark:hover:text-white hover:bg-green-50 dark:hover:bg-gray-800 transition-all flex items-center gap-1.5 font-medium px-3 py-2 rounded-lg"
                     >
                       <item.icon className="h-4 w-4" />
@@ -144,7 +186,7 @@ const Navbar = () => {
                       <span className="text-sm">{item.name}</span>
                     </button>
                   )
-                ))}
+                )}
 
                 {/* Dropdown Programas */}
                 <div className="relative" ref={programsDropdownRef}>
@@ -154,7 +196,9 @@ const Navbar = () => {
                   >
                     <Gift className="h-4 w-4" />
                     <span className="text-sm">Programas</span>
-                    <ChevronDown className={`h-4 w-4 transition-transform ${isProgramsDropdownOpen ? 'rotate-180' : ''}`} />
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform ${isProgramsDropdownOpen ? 'rotate-180' : ''}`}
+                    />
                   </button>
 
                   <AnimatePresence>
@@ -177,8 +221,12 @@ const Navbar = () => {
                               <item.icon className="h-4 w-4 text-green-600 dark:text-emerald-400" />
                             </div>
                             <div>
-                              <p className="text-sm font-medium text-gray-900 dark:text-white">{item.name}</p>
-                              <p className="text-xs text-gray-500 dark:text-gray-400">{item.desc}</p>
+                              <p className="text-sm font-medium text-gray-900 dark:text-white">
+                                {item.name}
+                              </p>
+                              <p className="text-xs text-gray-500 dark:text-gray-400">
+                                {item.desc}
+                              </p>
                             </div>
                           </Link>
                         ))}
@@ -195,7 +243,9 @@ const Navbar = () => {
                   >
                     <Users className="h-4 w-4" />
                     <span className="text-sm">Socios</span>
-                    <ChevronDown className={`h-4 w-4 transition-transform ${isSociosDropdownOpen ? 'rotate-180' : ''}`} />
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform ${isSociosDropdownOpen ? 'rotate-180' : ''}`}
+                    />
                   </button>
 
                   <AnimatePresence>
@@ -218,8 +268,12 @@ const Navbar = () => {
                               <item.icon className="h-4 w-4 text-green-600 dark:text-emerald-400" />
                             </div>
                             <div>
-                              <p className="text-sm font-medium text-gray-900 dark:text-white">{item.name}</p>
-                              <p className="text-xs text-gray-500 dark:text-gray-400">{item.desc}</p>
+                              <p className="text-sm font-medium text-gray-900 dark:text-white">
+                                {item.name}
+                              </p>
+                              <p className="text-xs text-gray-500 dark:text-gray-400">
+                                {item.desc}
+                              </p>
                             </div>
                           </Link>
                         ))}
@@ -282,8 +336,12 @@ const Navbar = () => {
                         >
                           {/* User Info */}
                           <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-                            <p className="text-sm font-medium text-gray-900 dark:text-white">{user.username}</p>
-                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 truncate">{user.email}</p>
+                            <p className="text-sm font-medium text-gray-900 dark:text-white">
+                              {user.username}
+                            </p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 truncate">
+                              {user.email}
+                            </p>
                           </div>
 
                           {/* Menu Items */}
@@ -475,7 +533,9 @@ const Navbar = () => {
                           <item.icon className="h-5 w-5" />
                           <div>
                             <span className="font-medium block">{item.name}</span>
-                            <span className="text-xs text-gray-500 dark:text-gray-400">{item.desc}</span>
+                            <span className="text-xs text-gray-500 dark:text-gray-400">
+                              {item.desc}
+                            </span>
                           </div>
                         </button>
                       ))}
@@ -495,7 +555,9 @@ const Navbar = () => {
                           <item.icon className="h-5 w-5" />
                           <div>
                             <span className="font-medium block">{item.name}</span>
-                            <span className="text-xs text-gray-500 dark:text-gray-400">{item.desc}</span>
+                            <span className="text-xs text-gray-500 dark:text-gray-400">
+                              {item.desc}
+                            </span>
                           </div>
                         </button>
                       ))}

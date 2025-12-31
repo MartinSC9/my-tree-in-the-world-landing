@@ -4,10 +4,10 @@
 
 // Límites de Córdoba Capital
 const CORDOBA_BOUNDS = {
-  south: -31.50,
+  south: -31.5,
   west: -64.25,
   north: -31.33,
-  east: -64.10
+  east: -64.1,
 };
 
 /**
@@ -44,8 +44,8 @@ export const fetchGreenSpaces = async (retries = 3, delay = 1000) => {
       method: 'POST',
       body: `data=${encodeURIComponent(query)}`,
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
     });
 
     if (!response.ok) {
@@ -59,7 +59,7 @@ export const fetchGreenSpaces = async (retries = 3, delay = 1000) => {
 
     // Si no se obtuvieron espacios y quedan reintentos, reintentar
     if (spaces.length === 0 && retries > 0) {
-      await new Promise(resolve => setTimeout(resolve, delay));
+      await new Promise((resolve) => setTimeout(resolve, delay));
       return fetchGreenSpaces(retries - 1, delay * 2); // Delay exponencial
     }
 
@@ -69,7 +69,7 @@ export const fetchGreenSpaces = async (retries = 3, delay = 1000) => {
 
     // Si quedan reintentos, intentar de nuevo
     if (retries > 0) {
-      await new Promise(resolve => setTimeout(resolve, delay));
+      await new Promise((resolve) => setTimeout(resolve, delay));
       return fetchGreenSpaces(retries - 1, delay * 2); // Delay exponencial
     }
 
@@ -87,31 +87,36 @@ const processGreenSpaces = (data) => {
   const greenSpaces = [];
   // Primero, indexar todos los nodos por ID
   let nodeCount = 0;
-  data.elements.forEach(element => {
+  data.elements.forEach((element) => {
     if (element.type === 'node') {
       nodes[element.id] = {
         lat: element.lat,
-        lng: element.lon
+        lng: element.lon,
       };
       nodeCount++;
     }
   });
   // Luego, procesar ways (polígonos)
   let wayCount = 0;
-  data.elements.forEach(element => {
+  data.elements.forEach((element) => {
     if (element.type === 'way' && element.nodes && element.nodes.length > 0) {
       wayCount++;
       const coordinates = element.nodes
-        .map(nodeId => nodes[nodeId])
-        .filter(coord => coord !== undefined);
+        .map((nodeId) => nodes[nodeId])
+        .filter((coord) => coord !== undefined);
 
       // Solo incluir polígonos válidos (mínimo 3 puntos)
       if (coordinates.length >= 3) {
         const space = {
           id: element.id,
           name: element.tags?.name || 'Espacio verde',
-          type: element.tags?.leisure || element.tags?.landuse || element.tags?.natural || element.tags?.highway || 'green_space',
-          coordinates: coordinates
+          type:
+            element.tags?.leisure ||
+            element.tags?.landuse ||
+            element.tags?.natural ||
+            element.tags?.highway ||
+            'green_space',
+          coordinates: coordinates,
         };
         greenSpaces.push(space);
       } else {
@@ -138,8 +143,7 @@ export const isPointInPolygon = (point, polygon) => {
     const xj = polygon[j].lng;
     const yj = polygon[j].lat;
 
-    const intersect = ((yi > lat) !== (yj > lat)) &&
-      (lng < (xj - xi) * (lat - yi) / (yj - yi) + xi);
+    const intersect = yi > lat !== yj > lat && lng < ((xj - xi) * (lat - yi)) / (yj - yi) + xi;
 
     if (intersect) inside = !inside;
   }
@@ -158,13 +162,13 @@ export const isPointInGreenSpace = (lat, lng, greenSpaces) => {
       return {
         isInside: true,
         spaceName: space.name,
-        spaceType: space.type
+        spaceType: space.type,
       };
     }
   }
 
   return {
-    isInside: false
+    isInside: false,
   };
 };
 
@@ -195,7 +199,7 @@ const loadFromLocalStorage = () => {
     const now = Date.now();
 
     // Verificar si el cache ha expirado
-    if ((now - timestamp) >= CACHE_DURATION) {
+    if (now - timestamp >= CACHE_DURATION) {
       // Limpiar cache expirado
       localStorage.removeItem(CACHE_KEY);
       localStorage.removeItem(CACHE_TIMESTAMP_KEY);
@@ -208,7 +212,7 @@ const loadFromLocalStorage = () => {
     const remainingMinutes = Math.floor(remainingMs / (1000 * 60));
     return {
       data: greenSpaces,
-      timestamp: timestamp
+      timestamp: timestamp,
     };
   } catch (error) {
     console.error('❌ Error al cargar cache desde localStorage:', error);
@@ -239,7 +243,12 @@ export const getGreenSpaces = async () => {
   const now = Date.now();
 
   // 1. Intentar cargar desde cache en memoria (más rápido)
-  if (cachedGreenSpaces && cachedGreenSpaces.length > 0 && cacheTimestamp && (now - cacheTimestamp) < CACHE_DURATION) {
+  if (
+    cachedGreenSpaces &&
+    cachedGreenSpaces.length > 0 &&
+    cacheTimestamp &&
+    now - cacheTimestamp < CACHE_DURATION
+  ) {
     return cachedGreenSpaces;
   }
 

@@ -19,7 +19,7 @@ export const TreeProvider = ({ children }) => {
     totalTrees: 0,
     totalCountries: 0,
     plantedTrees: 0,
-    inProgressTrees: 0
+    inProgressTrees: 0,
   });
   const [loadingTrees, setLoadingTrees] = useState(false);
   const [treeMarkers, setTreeMarkers] = useState([]);
@@ -28,21 +28,23 @@ export const TreeProvider = ({ children }) => {
   const cacheRef = useRef({
     loaded: false,
     lastFilters: null,
-    isLoading: false // Evitar llamadas concurrentes
+    isLoading: false, // Evitar llamadas concurrentes
   });
 
   const { user } = useAuth();
 
   const updateStats = (treeList) => {
-    const countries = new Set(treeList.map(tree => tree.country).filter(Boolean));
-    const planted = treeList.filter(tree => tree.status === 'plantado' || tree.status === 'verificado').length;
-    const inProgress = treeList.filter(tree => tree.status === 'en_proceso').length;
+    const countries = new Set(treeList.map((tree) => tree.country).filter(Boolean));
+    const planted = treeList.filter(
+      (tree) => tree.status === 'plantado' || tree.status === 'verificado'
+    ).length;
+    const inProgress = treeList.filter((tree) => tree.status === 'en_proceso').length;
 
     setStats({
       totalTrees: treeList.length,
       totalCountries: countries.size,
       plantedTrees: planted,
-      inProgressTrees: inProgress
+      inProgressTrees: inProgress,
     });
   };
 
@@ -75,9 +77,9 @@ export const TreeProvider = ({ children }) => {
     } catch (error) {
       console.error('Error loading trees:', error);
       toast({
-        title: "Error",
+        title: 'Error',
         description: `No se pudieron cargar los árboles: ${error.response?.data?.error || error.message}`,
-        variant: "destructive"
+        variant: 'destructive',
       });
       setTrees([]);
       return [];
@@ -86,7 +88,6 @@ export const TreeProvider = ({ children }) => {
       setLoadingTrees(false);
     }
   };
-
 
   // Cargar solo marcadores (optimizado para mapas)
   const loadTreeMarkers = async (forceReload = false) => {
@@ -111,7 +112,7 @@ export const TreeProvider = ({ children }) => {
       const newTree = response.tree;
 
       // Actualizar la lista de árboles
-      setTrees(prevTrees => [newTree, ...prevTrees]);
+      setTrees((prevTrees) => [newTree, ...prevTrees]);
       updateStats([...trees, newTree]);
 
       // Invalidar caché usando ref
@@ -122,9 +123,9 @@ export const TreeProvider = ({ children }) => {
     } catch (error) {
       console.error('Error planting tree:', error);
       toast({
-        title: "Error",
+        title: 'Error',
         description: `No se pudo plantar el árbol: ${error.response?.data?.error || error.message}`,
-        variant: "destructive"
+        variant: 'destructive',
       });
       throw error;
     }
@@ -135,14 +136,10 @@ export const TreeProvider = ({ children }) => {
       const updatedTree = await treeService.updateTree(treeId, { status });
 
       // Actualizar la lista de árboles
-      setTrees(prevTrees => prevTrees.map(tree =>
-        tree.id === treeId ? updatedTree : tree
-      ));
+      setTrees((prevTrees) => prevTrees.map((tree) => (tree.id === treeId ? updatedTree : tree)));
 
       // Actualizar estadísticas
-      const updatedTrees = trees.map(tree =>
-        tree.id === treeId ? updatedTree : tree
-      );
+      const updatedTrees = trees.map((tree) => (tree.id === treeId ? updatedTree : tree));
       updateStats(updatedTrees);
 
       // Invalidar caché usando ref
@@ -153,9 +150,9 @@ export const TreeProvider = ({ children }) => {
     } catch (error) {
       console.error('Error updating tree status:', error);
       toast({
-        title: "Error",
+        title: 'Error',
         description: `No se pudo actualizar el árbol: ${error.response?.data?.error || error.message}`,
-        variant: "destructive"
+        variant: 'destructive',
       });
       throw error;
     }
@@ -170,9 +167,9 @@ export const TreeProvider = ({ children }) => {
     } catch (error) {
       console.error('Error getting trees by email:', error);
       toast({
-        title: "Error",
+        title: 'Error',
         description: `No se pudieron buscar los árboles: ${error.response?.data?.error || error.message}`,
-        variant: "destructive"
+        variant: 'destructive',
       });
       throw error;
     }
@@ -184,7 +181,7 @@ export const TreeProvider = ({ children }) => {
     } catch (error) {
       console.error('Error getting tree by id:', error);
       // Fallback a buscar en el estado local
-      return trees.find(tree => tree.id === id);
+      return trees.find((tree) => tree.id === id);
     }
   };
 
@@ -198,12 +195,8 @@ export const TreeProvider = ({ children }) => {
     getTreeById,
     loadTreeMarkers,
     treeMarkers,
-    stats
+    stats,
   };
 
-  return (
-    <TreeContext.Provider value={value}>
-      {children}
-    </TreeContext.Provider>
-  );
+  return <TreeContext.Provider value={value}>{children}</TreeContext.Provider>;
 };

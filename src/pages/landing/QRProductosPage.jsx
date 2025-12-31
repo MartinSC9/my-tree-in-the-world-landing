@@ -1,6 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { QrCode, Building2, TreePine, ArrowRight, CheckCircle, Gift, ShoppingBag, Smartphone, Award, TrendingUp, Users, Package } from 'lucide-react';
+import {
+  QrCode,
+  Building2,
+  TreePine,
+  ArrowRight,
+  CheckCircle,
+  Gift,
+  ShoppingBag,
+  Smartphone,
+  Award,
+  TrendingUp,
+  Users,
+  Package,
+} from 'lucide-react';
 import { Button } from '@shared/components/ui/button';
 import { Card, CardContent } from '@shared/components/ui/card';
 import Footer from '@shared/components/layout/Footer';
@@ -8,15 +21,15 @@ import { useNavigate } from 'react-router-dom';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.2 }
-  }
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+  },
 };
 
 const QRProductosPage = () => {
@@ -40,7 +53,10 @@ const QRProductosPage = () => {
             <motion.div variants={fadeInUp}>
               <QrCode className="h-20 w-20 mx-auto mb-6 text-white/90" />
             </motion.div>
-            <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl font-bold text-white mb-6">
+            <motion.h1
+              variants={fadeInUp}
+              className="text-4xl md:text-6xl font-bold text-white mb-6"
+            >
               QR en Productos de Empresas
             </motion.h1>
             <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-green-100 mb-8">
@@ -71,12 +87,18 @@ const QRProductosPage = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">
+            <motion.h2
+              variants={fadeInUp}
+              className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4"
+            >
               ¿Cómo Funciona?
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Las empresas asociadas incluyen en sus productos un sello con código QR.
-              Los consumidores que escanean participan para ganar árboles gratis.
+            <motion.p
+              variants={fadeInUp}
+              className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
+            >
+              Las empresas asociadas incluyen en sus productos un sello con código QR. Los
+              consumidores que escanean participan para ganar árboles gratis.
             </motion.p>
           </motion.div>
 
@@ -93,29 +115,35 @@ const QRProductosPage = () => {
                 icon: ShoppingBag,
                 title: 'Cliente compra producto',
                 desc: 'El producto tiene el sello "Mi Árbol en el Mundo" con código QR',
-                color: 'bg-blue-100 text-blue-600'
+                color: 'bg-blue-100 text-blue-600',
               },
               {
                 icon: Smartphone,
                 title: 'Escanea el código QR',
                 desc: 'Accede a nuestra plataforma y participa automáticamente',
-                color: 'bg-purple-100 text-purple-600'
+                color: 'bg-purple-100 text-purple-600',
               },
               {
                 icon: TreePine,
                 title: '¡Puede ganar un árbol!',
                 desc: 'Sorteo de árboles entre los participantes o sistema de puntos',
-                color: 'bg-green-100 text-green-600'
-              }
+                color: 'bg-green-100 text-green-600',
+              },
             ].map((step, i) => (
               <motion.div key={i} variants={fadeInUp}>
                 <Card className="h-full text-center hover:shadow-lg transition-shadow border-2 border-gray-100 dark:border-gray-700 dark:bg-gray-800">
                   <CardContent className="p-8">
-                    <div className={`w-20 h-20 rounded-2xl ${step.color} flex items-center justify-center mx-auto mb-6`}>
+                    <div
+                      className={`w-20 h-20 rounded-2xl ${step.color} flex items-center justify-center mx-auto mb-6`}
+                    >
                       <step.icon className="h-10 w-10" />
                     </div>
-                    <div className="text-4xl font-bold text-gray-300 dark:text-gray-600 mb-2">{i + 1}</div>
-                    <h3 className="font-bold text-xl text-gray-800 dark:text-white mb-3">{step.title}</h3>
+                    <div className="text-4xl font-bold text-gray-300 dark:text-gray-600 mb-2">
+                      {i + 1}
+                    </div>
+                    <h3 className="font-bold text-xl text-gray-800 dark:text-white mb-3">
+                      {step.title}
+                    </h3>
                     <p className="text-gray-600 dark:text-gray-400">{step.desc}</p>
                   </CardContent>
                 </Card>
@@ -140,15 +168,15 @@ const QRProductosPage = () => {
                 El Sello Oficial
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-                Cada empresa partner recibe sellos oficiales con código QR único para incluir en sus productos.
-                El diseño es atractivo y genera curiosidad en los consumidores.
+                Cada empresa partner recibe sellos oficiales con código QR único para incluir en sus
+                productos. El diseño es atractivo y genera curiosidad en los consumidores.
               </p>
               <div className="space-y-4">
                 {[
                   'Diseño premium que destaca en el packaging',
                   'QR único trackeable por producto o lote',
                   'Mensaje claro: "Escaneá y ganá un árbol"',
-                  'Variantes: premium, compacto y etiqueta adhesiva'
+                  'Variantes: premium, compacto y etiqueta adhesiva',
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="h-6 w-6 text-emerald-500 flex-shrink-0 mt-0.5" />
@@ -163,13 +191,19 @@ const QRProductosPage = () => {
                 <div className="text-center">
                   <div className="flex items-center justify-center gap-2 mb-4">
                     <TreePine className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />
-                    <span className="text-xl font-bold text-emerald-700 dark:text-emerald-400">MI ÁRBOL EN EL MUNDO</span>
+                    <span className="text-xl font-bold text-emerald-700 dark:text-emerald-400">
+                      MI ÁRBOL EN EL MUNDO
+                    </span>
                   </div>
                   <div className="bg-gray-100 dark:bg-gray-600 rounded-2xl p-6 mb-4">
                     <QrCode className="h-32 w-32 mx-auto text-gray-800 dark:text-gray-200" />
                   </div>
-                  <p className="text-lg font-bold text-gray-800 dark:text-white mb-2">ESCANEÁ Y GANÁ</p>
-                  <p className="text-emerald-600 dark:text-emerald-400 font-semibold">UN ÁRBOL GRATIS</p>
+                  <p className="text-lg font-bold text-gray-800 dark:text-white mb-2">
+                    ESCANEÁ Y GANÁ
+                  </p>
+                  <p className="text-emerald-600 dark:text-emerald-400 font-semibold">
+                    UN ÁRBOL GRATIS
+                  </p>
                   <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">#PlantemosJuntos</p>
                 </div>
               </div>
@@ -188,7 +222,10 @@ const QRProductosPage = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">
+            <motion.h2
+              variants={fadeInUp}
+              className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4"
+            >
               Beneficios para Todos
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-xl text-gray-600">
@@ -210,16 +247,21 @@ const QRProductosPage = () => {
                   <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center mb-6">
                     <Building2 className="h-8 w-8 text-blue-600" />
                   </div>
-                  <h3 className="text-2xl font-bold text-blue-800 dark:text-blue-400 mb-4">Para la Empresa</h3>
+                  <h3 className="text-2xl font-bold text-blue-800 dark:text-blue-400 mb-4">
+                    Para la Empresa
+                  </h3>
                   <ul className="space-y-3">
                     {[
                       'Marketing verde genuino (no greenwashing)',
                       'Diferenciación en góndola',
                       'Conexión emocional con el consumidor',
                       'Métricas de engagement reales',
-                      'RSE verificable'
+                      'RSE verificable',
                     ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-gray-700 dark:text-gray-300">
+                      <li
+                        key={i}
+                        className="flex items-start gap-2 text-gray-700 dark:text-gray-300"
+                      >
                         <CheckCircle className="h-5 w-5 text-blue-500 flex-shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>
@@ -236,16 +278,21 @@ const QRProductosPage = () => {
                   <div className="w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center mb-6">
                     <Users className="h-8 w-8 text-green-600" />
                   </div>
-                  <h3 className="text-2xl font-bold text-green-800 dark:text-green-400 mb-4">Para el Consumidor</h3>
+                  <h3 className="text-2xl font-bold text-green-800 dark:text-green-400 mb-4">
+                    Para el Consumidor
+                  </h3>
                   <ul className="space-y-3">
                     {[
                       'Posibilidad de ganar algo valioso',
                       'Participar en causa ambiental sin costo',
                       'Experiencia interactiva con el producto',
                       'Descubrir nuestra plataforma',
-                      'Sentirse parte del cambio'
+                      'Sentirse parte del cambio',
                     ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-gray-700 dark:text-gray-300">
+                      <li
+                        key={i}
+                        className="flex items-start gap-2 text-gray-700 dark:text-gray-300"
+                      >
                         <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>
@@ -262,16 +309,21 @@ const QRProductosPage = () => {
                   <div className="w-16 h-16 rounded-2xl bg-emerald-100 flex items-center justify-center mb-6">
                     <TreePine className="h-8 w-8 text-emerald-600" />
                   </div>
-                  <h3 className="text-2xl font-bold text-emerald-800 dark:text-emerald-400 mb-4">Para el Planeta</h3>
+                  <h3 className="text-2xl font-bold text-emerald-800 dark:text-emerald-400 mb-4">
+                    Para el Planeta
+                  </h3>
                   <ul className="space-y-3">
                     {[
                       'Más árboles plantados',
                       'Consumo consciente promovido',
                       'Empresas comprometidas con el ambiente',
                       'Comunidad ambiental creciente',
-                      'Impacto real y medible'
+                      'Impacto real y medible',
                     ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-gray-700 dark:text-gray-300">
+                      <li
+                        key={i}
+                        className="flex items-start gap-2 text-gray-700 dark:text-gray-300"
+                      >
                         <CheckCircle className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>
@@ -297,7 +349,10 @@ const QRProductosPage = () => {
             <motion.div variants={fadeInUp}>
               <Award className="h-14 w-14 mx-auto mb-4 text-emerald-600 dark:text-emerald-400" />
             </motion.div>
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">
+            <motion.h2
+              variants={fadeInUp}
+              className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4"
+            >
               ¿Qué Incluye ser Partner?
             </motion.h2>
           </motion.div>
@@ -310,12 +365,32 @@ const QRProductosPage = () => {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {[
-              { icon: QrCode, title: 'Sello oficial con QR', desc: 'Diseño premium para tu packaging' },
-              { icon: TrendingUp, title: 'Dashboard de métricas', desc: 'Escaneos, participantes y ganadores en tiempo real' },
-              { icon: Award, title: 'Certificado de impacto', desc: 'Documento verificable de tu aporte ambiental' },
-              { icon: Building2, title: 'Mención en la app', desc: 'Tu empresa aparece como "Empresa Amiga del Bosque"' },
-              { icon: Package, title: 'Variantes de sello', desc: 'Premium, compacto o etiqueta según tu producto' },
-              { icon: Users, title: 'Soporte dedicado', desc: 'Equipo disponible para ayudarte' }
+              {
+                icon: QrCode,
+                title: 'Sello oficial con QR',
+                desc: 'Diseño premium para tu packaging',
+              },
+              {
+                icon: TrendingUp,
+                title: 'Dashboard de métricas',
+                desc: 'Escaneos, participantes y ganadores en tiempo real',
+              },
+              {
+                icon: Award,
+                title: 'Certificado de impacto',
+                desc: 'Documento verificable de tu aporte ambiental',
+              },
+              {
+                icon: Building2,
+                title: 'Mención en la app',
+                desc: 'Tu empresa aparece como "Empresa Amiga del Bosque"',
+              },
+              {
+                icon: Package,
+                title: 'Variantes de sello',
+                desc: 'Premium, compacto o etiqueta según tu producto',
+              },
+              { icon: Users, title: 'Soporte dedicado', desc: 'Equipo disponible para ayudarte' },
             ].map((item, i) => (
               <motion.div key={i} variants={fadeInUp}>
                 <Card className="h-full hover:shadow-lg transition-shadow dark:bg-gray-800 dark:border-gray-700">
@@ -325,7 +400,9 @@ const QRProductosPage = () => {
                         <item.icon className="h-6 w-6 text-emerald-600" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-gray-800 dark:text-white mb-1">{item.title}</h3>
+                        <h3 className="font-bold text-gray-800 dark:text-white mb-1">
+                          {item.title}
+                        </h3>
                         <p className="text-gray-600 dark:text-gray-400 text-sm">{item.desc}</p>
                       </div>
                     </div>
@@ -347,10 +424,16 @@ const QRProductosPage = () => {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">
+            <motion.h2
+              variants={fadeInUp}
+              className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4"
+            >
               ¿Qué Empresas Pueden Participar?
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <motion.p
+              variants={fadeInUp}
+              className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+            >
               Ideal para empresas que quieren diferenciarse con un compromiso ambiental real
             </motion.p>
           </motion.div>
@@ -372,7 +455,7 @@ const QRProductosPage = () => {
               'Supermercados',
               'Librerías',
               'Papelerías',
-              'Tiendas eco-friendly'
+              'Tiendas eco-friendly',
             ].map((category, i) => (
               <motion.div
                 key={i}
@@ -399,13 +482,20 @@ const QRProductosPage = () => {
             <motion.div variants={fadeInUp}>
               <Building2 className="h-16 w-16 mx-auto mb-6 text-white/90" />
             </motion.div>
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <motion.h2
+              variants={fadeInUp}
+              className="text-3xl md:text-4xl font-bold text-white mb-4"
+            >
               ¿Tu Empresa Quiere Ser Partner?
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
-              Contactanos para conocer los planes disponibles y empezar a incluir el sello en tus productos.
+              Contactanos para conocer los planes disponibles y empezar a incluir el sello en tus
+              productos.
             </motion.p>
-            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.div
+              variants={fadeInUp}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
               <Button
                 onClick={() => navigate('/contacto')}
                 size="lg"

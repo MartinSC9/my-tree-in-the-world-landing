@@ -51,29 +51,28 @@ const UnifiedMapPage = () => {
   }, []);
 
   // Derivar datos de allMarkers
-  const regularTrees = useMemo(() =>
-    allMarkers.filter(t => t.type === 'regular'),
-    [allMarkers]
-  );
+  const regularTrees = useMemo(() => allMarkers.filter((t) => t.type === 'regular'), [allMarkers]);
 
-  const collaborativeTrees = useMemo(() =>
-    allMarkers.filter(t => t.type === 'collaborative'),
+  const collaborativeTrees = useMemo(
+    () => allMarkers.filter((t) => t.type === 'collaborative'),
     [allMarkers]
   );
 
   const myTrees = useMemo(() => {
     if (!user) return [];
-    return allMarkers.filter(t => t.type === 'regular' && t.user_id === user.id);
+    return allMarkers.filter((t) => t.type === 'regular' && t.user_id === user.id);
   }, [allMarkers, user]);
 
   // Estadísticas globales
   const stats = useMemo(() => {
-    const planted = regularTrees.filter(t => t.status === 'plantado' || t.status === 'verificado').length;
-    const inProgress = regularTrees.filter(t => t.status === 'en_proceso').length;
+    const planted = regularTrees.filter(
+      (t) => t.status === 'plantado' || t.status === 'verificado'
+    ).length;
+    const inProgress = regularTrees.filter((t) => t.status === 'en_proceso').length;
     return {
       totalTrees: regularTrees.length,
       plantedTrees: planted,
-      inProgressTrees: inProgress
+      inProgressTrees: inProgress,
     };
   }, [regularTrees]);
 
@@ -91,15 +90,18 @@ const UnifiedMapPage = () => {
 
   // Filtrar árboles
   const filteredTrees = useMemo(() => {
-    return displayedTrees.filter(tree => {
+    return displayedTrees.filter((tree) => {
       const treeName = tree.name || tree.tree_name || '';
-      if (filters.name && !treeName.toLowerCase().includes(filters.name.toLowerCase())) return false;
+      if (filters.name && !treeName.toLowerCase().includes(filters.name.toLowerCase()))
+        return false;
       if (filters.status !== 'all' && tree.status !== filters.status) return false;
 
       // Filtro por stats card
       if (statsFilter === 'planted') {
         // Solo plantados (regulares con status plantado/verificado)
-        return tree.type === 'regular' && (tree.status === 'plantado' || tree.status === 'verificado');
+        return (
+          tree.type === 'regular' && (tree.status === 'plantado' || tree.status === 'verificado')
+        );
       } else if (statsFilter === 'inProgress') {
         // En progreso: regulares en_proceso + todos los colaborativos
         if (tree.type === 'collaborative') return true;
@@ -111,7 +113,7 @@ const UnifiedMapPage = () => {
   }, [displayedTrees, filters.name, filters.status, statsFilter]);
 
   const handleFilterChange = (key, value) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
   // Redirigir al front app para plantar
@@ -127,15 +129,18 @@ const UnifiedMapPage = () => {
   const viewStats = useMemo(() => {
     const totalAll = regularTrees.length + collaborativeTrees.length;
     // Solo contar como plantado los que realmente están plantados
-    const planted = regularTrees.filter(t => t.status === 'plantado' || t.status === 'verificado').length;
+    const planted = regularTrees.filter(
+      (t) => t.status === 'plantado' || t.status === 'verificado'
+    ).length;
     // En progreso: regulares en proceso + TODOS los colaborativos (active y completed)
     // porque "completed" solo significa financiado, no plantado
-    const inProgress = regularTrees.filter(t => t.status === 'en_proceso').length + collaborativeTrees.length;
+    const inProgress =
+      regularTrees.filter((t) => t.status === 'en_proceso').length + collaborativeTrees.length;
 
     return {
       total: totalAll,
       planted: planted,
-      inProgress: inProgress
+      inProgress: inProgress,
     };
   }, [regularTrees, collaborativeTrees]);
 
@@ -158,9 +163,7 @@ const UnifiedMapPage = () => {
             <h1 className="text-3xl md:text-4xl font-bold text-green-800 mb-2">
               Mapa Global de Árboles
             </h1>
-            <p className="text-base text-green-600">
-              Explora y sigue árboles alrededor del mundo
-            </p>
+            <p className="text-base text-green-600">Explora y sigue árboles alrededor del mundo</p>
           </div>
 
           {/* Stats Cards - Clickeables para filtrar */}
@@ -177,7 +180,9 @@ const UnifiedMapPage = () => {
                     <div className="text-sm opacity-90">Total</div>
                   </div>
                 </div>
-                <div className={`w-6 h-6 rounded-full border-2 border-white/60 flex items-center justify-center transition-all ${statsFilter === 'all' ? 'bg-white' : 'bg-transparent'}`}>
+                <div
+                  className={`w-6 h-6 rounded-full border-2 border-white/60 flex items-center justify-center transition-all ${statsFilter === 'all' ? 'bg-white' : 'bg-transparent'}`}
+                >
                   {statsFilter === 'all' && <Check className="h-4 w-4 text-blue-600" />}
                 </div>
               </div>
@@ -198,7 +203,9 @@ const UnifiedMapPage = () => {
                     <div className="text-sm opacity-90">Plantados</div>
                   </div>
                 </div>
-                <div className={`w-6 h-6 rounded-full border-2 border-white/60 flex items-center justify-center transition-all ${statsFilter === 'planted' ? 'bg-white' : 'bg-transparent'}`}>
+                <div
+                  className={`w-6 h-6 rounded-full border-2 border-white/60 flex items-center justify-center transition-all ${statsFilter === 'planted' ? 'bg-white' : 'bg-transparent'}`}
+                >
                   {statsFilter === 'planted' && <Check className="h-4 w-4 text-green-600" />}
                 </div>
               </div>
@@ -219,7 +226,9 @@ const UnifiedMapPage = () => {
                     <div className="text-sm opacity-90">En Progreso</div>
                   </div>
                 </div>
-                <div className={`w-6 h-6 rounded-full border-2 border-white/60 flex items-center justify-center transition-all ${statsFilter === 'inProgress' ? 'bg-white' : 'bg-transparent'}`}>
+                <div
+                  className={`w-6 h-6 rounded-full border-2 border-white/60 flex items-center justify-center transition-all ${statsFilter === 'inProgress' ? 'bg-white' : 'bg-transparent'}`}
+                >
                   {statsFilter === 'inProgress' && <Check className="h-4 w-4 text-amber-600" />}
                 </div>
               </div>
@@ -230,11 +239,7 @@ const UnifiedMapPage = () => {
           <Card className="shadow-xl border-green-200 relative overflow-visible">
             <CardContent className="p-0">
               <div className="relative">
-                <TreeMap
-                  trees={filteredTrees}
-                  height="700px"
-                  defaultOpenTreeId={randomTreeId}
-                />
+                <TreeMap trees={filteredTrees} height="700px" defaultOpenTreeId={randomTreeId} />
 
                 {/* Leyenda de colores */}
                 <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-3 border border-gray-200 z-[10]">

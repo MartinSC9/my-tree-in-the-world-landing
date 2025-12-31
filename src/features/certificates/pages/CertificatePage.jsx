@@ -34,18 +34,18 @@ const CertificatePage = () => {
           }
         } else {
           toast({
-            title: "Árbol no encontrado",
-            description: "El árbol que buscas no existe",
-            variant: "destructive"
+            title: 'Árbol no encontrado',
+            description: 'El árbol que buscas no existe',
+            variant: 'destructive',
           });
           navigate('/');
         }
       } catch (error) {
         console.error('Error fetching tree:', error);
         toast({
-          title: "Error",
-          description: "No se pudo cargar el árbol",
-          variant: "destructive"
+          title: 'Error',
+          description: 'No se pudo cargar el árbol',
+          variant: 'destructive',
         });
         navigate('/');
       }
@@ -59,13 +59,13 @@ const CertificatePage = () => {
       navigator.share({
         title: `Mi Árbol: ${tree.name}`,
         text: `¡He plantado un árbol en ${tree.country}! Únete a la causa ambiental.`,
-        url: window.location.href
+        url: window.location.href,
       });
     } else {
       navigator.clipboard.writeText(window.location.href);
       toast({
-        title: "Enlace copiado",
-        description: "El enlace del certificado se ha copiado al portapapeles",
+        title: 'Enlace copiado',
+        description: 'El enlace del certificado se ha copiado al portapapeles',
       });
     }
   };
@@ -87,12 +87,8 @@ const CertificatePage = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="text-center mb-6">
-            <h1 className="text-3xl md:text-4xl font-bold text-green-800 mb-2">
-              ¡Felicitaciones!
-            </h1>
-            <p className="text-lg text-green-600">
-              Has contribuido exitosamente al planeta
-            </p>
+            <h1 className="text-3xl md:text-4xl font-bold text-green-800 mb-2">¡Felicitaciones!</h1>
+            <p className="text-lg text-green-600">Has contribuido exitosamente al planeta</p>
           </div>
 
           <Card className="certificate-border p-2 shadow-2xl mb-6">
@@ -100,7 +96,7 @@ const CertificatePage = () => {
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ duration: 0.8, type: "spring" }}
+                transition={{ duration: 0.8, type: 'spring' }}
                 className="mb-6"
               >
                 <Award className="h-16 w-16 text-yellow-500 mx-auto mb-3" />
@@ -146,7 +142,9 @@ const CertificatePage = () => {
                       <div>
                         <div className="text-xs text-green-600">Fecha de Plantación</div>
                         <div className="font-semibold text-green-800 text-sm">
-                          {tree.planted_at ? new Date(tree.planted_at).toLocaleDateString('es-ES') : 'No disponible'}
+                          {tree.planted_at
+                            ? new Date(tree.planted_at).toLocaleDateString('es-ES')
+                            : 'No disponible'}
                         </div>
                       </div>
                     </div>
@@ -162,8 +160,8 @@ const CertificatePage = () => {
                 </div>
 
                 <p className="text-center text-green-700 text-sm">
-                  ha plantado exitosamente un árbol que contribuye a la
-                  conservación del medio ambiente y la lucha contra el cambio climático.
+                  ha plantado exitosamente un árbol que contribuye a la conservación del medio
+                  ambiente y la lucha contra el cambio climático.
                 </p>
 
                 <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white p-4 rounded-lg text-center">
@@ -181,11 +179,13 @@ const CertificatePage = () => {
                 </div>
 
                 <div className="text-center pt-4">
-                  <p className="text-green-600 mb-3 text-sm">
-                    Certificado ID: {tree.id}
-                  </p>
+                  <p className="text-green-600 mb-3 text-sm">Certificado ID: {tree.id}</p>
                   <div className="flex items-center justify-center space-x-3">
-                    <img  alt="Logo Mi Árbol en el Mundo" className="h-10" src="https://images.unsplash.com/photo-1701593246649-12244687b73d" />
+                    <img
+                      alt="Logo Mi Árbol en el Mundo"
+                      className="h-10"
+                      src="https://images.unsplash.com/photo-1701593246649-12244687b73d"
+                    />
                     <div className="text-left">
                       <div className="font-bold text-green-800 text-sm">Mi Árbol en el Mundo</div>
                       <div className="text-xs text-green-600">Certificado Digital</div>
@@ -203,10 +203,7 @@ const CertificatePage = () => {
                 fileName={`certificado-${tree.name?.replace(/\s+/g, '-') || 'arbol'}-${tree.id}.pdf`}
               >
                 {({ loading }) => (
-                  <Button
-                    disabled={loading}
-                    className="nature-gradient text-white px-6 py-2"
-                  >
+                  <Button disabled={loading} className="nature-gradient text-white px-6 py-2">
                     <Download className="h-4 w-4 mr-2" />
                     {loading ? 'Generando PDF...' : 'Descargar PDF'}
                   </Button>

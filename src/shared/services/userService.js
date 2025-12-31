@@ -6,7 +6,7 @@ export const userService = {
   async getUserById(id) {
     const response = await api.get(API_ENDPOINTS.USER_BY_ID(id));
     return response.data.user;
-  }
+  },
 };
 
 export default userService;

@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import { Button } from '@shared/components/ui/button';
 import { Input } from '@shared/components/ui/input';
 import { Textarea } from '@shared/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@shared/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@shared/components/ui/card';
 import { Label } from '@shared/components/ui/label';
 import { Mail, MapPin, Send, Loader2 } from 'lucide-react';
 import { useToast } from '@shared/components/ui/use-toast';
@@ -14,15 +20,15 @@ const ContactoPage = () => {
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
-    mensaje: ''
+    mensaje: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -46,20 +52,20 @@ const ContactoPage = () => {
       }
 
       toast({
-        title: "Mensaje enviado",
-        description: "Nos pondremos en contacto contigo pronto.",
+        title: 'Mensaje enviado',
+        description: 'Nos pondremos en contacto contigo pronto.',
       });
 
       setFormData({
         nombre: '',
         email: '',
-        mensaje: ''
+        mensaje: '',
       });
     } catch (error) {
       toast({
-        title: "Error",
-        description: error.message || "No se pudo enviar el mensaje. Intenta nuevamente.",
-        variant: "destructive",
+        title: 'Error',
+        description: error.message || 'No se pudo enviar el mensaje. Intenta nuevamente.',
+        variant: 'destructive',
       });
     } finally {
       setIsSubmitting(false);
@@ -92,7 +98,9 @@ const ContactoPage = () => {
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="nombre" className="dark:text-gray-200">Nombre *</Label>
+                  <Label htmlFor="nombre" className="dark:text-gray-200">
+                    Nombre *
+                  </Label>
                   <Input
                     id="nombre"
                     name="nombre"
@@ -105,7 +113,9 @@ const ContactoPage = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="dark:text-gray-200">Email *</Label>
+                  <Label htmlFor="email" className="dark:text-gray-200">
+                    Email *
+                  </Label>
                   <Input
                     id="email"
                     name="email"
@@ -119,7 +129,9 @@ const ContactoPage = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="mensaje" className="dark:text-gray-200">Mensaje *</Label>
+                  <Label htmlFor="mensaje" className="dark:text-gray-200">
+                    Mensaje *
+                  </Label>
                   <Textarea
                     id="mensaje"
                     name="mensaje"
@@ -186,7 +198,9 @@ const ContactoPage = () => {
 
             <Card className="shadow-xl bg-green-50 dark:bg-gray-800 border-green-200 dark:border-green-800">
               <CardContent className="p-6">
-                <h3 className="font-bold text-lg mb-4 text-green-800 dark:text-green-400">¿Por qué elegir nuestras soluciones?</h3>
+                <h3 className="font-bold text-lg mb-4 text-green-800 dark:text-green-400">
+                  ¿Por qué elegir nuestras soluciones?
+                </h3>
                 <ul className="space-y-3 text-green-700 dark:text-green-300">
                   <li className="flex items-start gap-2">
                     <div className="w-2 h-2 bg-green-600 dark:bg-green-400 rounded-full mt-2 flex-shrink-0"></div>

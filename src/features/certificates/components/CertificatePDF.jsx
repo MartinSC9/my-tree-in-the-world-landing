@@ -186,7 +186,7 @@ const CertificatePDF = ({ tree, treeOwner }) => {
     return date.toLocaleDateString('es-ES', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     });
   };
 
@@ -195,9 +195,10 @@ const CertificatePDF = ({ tree, treeOwner }) => {
   const treeCountry = tree?.country || 'Ubicación no especificada';
   const treePlantedAt = tree?.planted_at || new Date().toISOString();
   const treeId = tree?.id || 0;
-  const ownerName = treeOwner?.first_name || treeOwner?.last_name
-    ? `${treeOwner.first_name || ''} ${treeOwner.last_name || ''}`.trim()
-    : 'Un usuario';
+  const ownerName =
+    treeOwner?.first_name || treeOwner?.last_name
+      ? `${treeOwner.first_name || ''} ${treeOwner.last_name || ''}`.trim()
+      : 'Un usuario';
 
   return (
     <Document>
@@ -214,17 +215,14 @@ const CertificatePDF = ({ tree, treeOwner }) => {
 
               {/* Body */}
               <View style={styles.body}>
-                <Text style={styles.certificationText}>
-                  Por la presente se certifica que
-                </Text>
+                <Text style={styles.certificationText}>Por la presente se certifica que</Text>
 
-                <Text style={styles.userName}>
-                  {ownerName}
-                </Text>
+                <Text style={styles.userName}>{ownerName}</Text>
 
                 <Text style={styles.certificationText}>
                   ha contribuido exitosamente a la conservación del medio ambiente mediante{'\n'}
-                  la plantación de un árbol que apoya la reforestación y la lucha contra el cambio climático.
+                  la plantación de un árbol que apoya la reforestación y la lucha contra el cambio
+                  climático.
                 </Text>
 
                 {/* Información del Árbol */}

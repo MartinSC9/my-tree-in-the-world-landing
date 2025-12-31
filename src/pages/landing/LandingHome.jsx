@@ -1,7 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { TreePine, Globe, Users, Award, Leaf, Heart, QrCode, Shield, CheckCircle, ArrowRight, MapPin, TrendingUp, FileText, Building2, Trophy, Gift, Share2, ChevronDown } from 'lucide-react';
+import {
+  TreePine,
+  Globe,
+  Users,
+  Award,
+  Leaf,
+  Heart,
+  QrCode,
+  Shield,
+  CheckCircle,
+  ArrowRight,
+  MapPin,
+  TrendingUp,
+  FileText,
+  Building2,
+  Trophy,
+  Gift,
+  Share2,
+  ChevronDown,
+} from 'lucide-react';
 import { Button } from '@shared/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@shared/components/ui/card';
 import { useTree } from '@core/contexts/TreeContext';
@@ -23,26 +42,23 @@ import carousel7 from '@/assets/images/carousel/7.png';
 import carousel8 from '@/assets/images/carousel/8.png';
 import carousel9 from '@/assets/images/carousel/9.png';
 
-
-
-
 // Animation variants
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.2 }
-  }
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+  },
 };
 
 const scaleIn = {
   hidden: { opacity: 0, scale: 0.8 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: "easeOut" } }
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: 'easeOut' } },
 };
 
 const LandingHome = () => {
@@ -50,7 +66,7 @@ const LandingHome = () => {
   const { user, loading: authLoading, getRedirectPath } = useAuth();
   const navigate = useNavigate();
   const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
 
@@ -59,12 +75,11 @@ const LandingHome = () => {
     totalTrees: 0,
     plantedTrees: 0,
     totalCountries: 0,
-    totalCompanies: 0
+    totalCompanies: 0,
   });
 
   // Estado para top empresas
   const [topCompanies, setTopCompanies] = useState([]);
-
 
   // Cargar stats y top empresas al montar el componente
   useEffect(() => {
@@ -99,10 +114,34 @@ const LandingHome = () => {
   }, [user, authLoading, getRedirectPath, navigate]);
 
   const stats = [
-    { icon: TreePine, label: 'Árboles Comprados', value: landingStats.totalTrees, colorClass: 'text-emerald-600 dark:text-emerald-400', bgClass: 'bg-emerald-100 dark:bg-emerald-900/50' },
-    { icon: Leaf, label: 'Ya Plantados', value: landingStats.plantedTrees, colorClass: 'text-teal-600 dark:text-teal-400', bgClass: 'bg-teal-100 dark:bg-teal-900/50' },
-    { icon: Globe, label: 'Países', value: landingStats.totalCountries, colorClass: 'text-sky-600 dark:text-sky-400', bgClass: 'bg-sky-100 dark:bg-sky-900/50' },
-    { icon: Users, label: 'Árboles Colaborativos', value: landingStats.collaborativeTrees || 0, colorClass: 'text-purple-600 dark:text-purple-400', bgClass: 'bg-purple-100 dark:bg-purple-900/50' }
+    {
+      icon: TreePine,
+      label: 'Árboles Comprados',
+      value: landingStats.totalTrees,
+      colorClass: 'text-emerald-600 dark:text-emerald-400',
+      bgClass: 'bg-emerald-100 dark:bg-emerald-900/50',
+    },
+    {
+      icon: Leaf,
+      label: 'Ya Plantados',
+      value: landingStats.plantedTrees,
+      colorClass: 'text-teal-600 dark:text-teal-400',
+      bgClass: 'bg-teal-100 dark:bg-teal-900/50',
+    },
+    {
+      icon: Globe,
+      label: 'Países',
+      value: landingStats.totalCountries,
+      colorClass: 'text-sky-600 dark:text-sky-400',
+      bgClass: 'bg-sky-100 dark:bg-sky-900/50',
+    },
+    {
+      icon: Users,
+      label: 'Árboles Colaborativos',
+      value: landingStats.collaborativeTrees || 0,
+      colorClass: 'text-purple-600 dark:text-purple-400',
+      bgClass: 'bg-purple-100 dark:bg-purple-900/50',
+    },
   ];
 
   // Section refs for scroll animations
@@ -115,22 +154,22 @@ const LandingHome = () => {
   const topCompaniesRef = useRef(null);
   const ctaRef = useRef(null);
 
-  const statsInView = useInView(statsRef, { once: true, margin: "-100px" });
-  const uniqueInView = useInView(uniqueRef, { once: true, margin: "-100px" });
-  const impactInView = useInView(impactRef, { once: true, margin: "-100px" });
-  const howItWorksInView = useInView(howItWorksRef, { once: true, margin: "-100px" });
-  const topCompaniesInView = useInView(topCompaniesRef, { once: true, margin: "-100px" });
-  const ctaInView = useInView(ctaRef, { once: true, margin: "-100px" });
+  const statsInView = useInView(statsRef, { once: true, margin: '-100px' });
+  const uniqueInView = useInView(uniqueRef, { once: true, margin: '-100px' });
+  const impactInView = useInView(impactRef, { once: true, margin: '-100px' });
+  const howItWorksInView = useInView(howItWorksRef, { once: true, margin: '-100px' });
+  const topCompaniesInView = useInView(topCompaniesRef, { once: true, margin: '-100px' });
+  const ctaInView = useInView(ctaRef, { once: true, margin: '-100px' });
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section ref={heroRef} className="hero-section relative min-h-screen flex items-center overflow-hidden">
+      <section
+        ref={heroRef}
+        className="hero-section relative min-h-screen flex items-center overflow-hidden"
+      >
         {/* Parallax Background */}
-        <motion.div
-          className="absolute inset-0 z-0"
-          style={{ scale: heroScale }}
-        >
+        <motion.div className="absolute inset-0 z-0" style={{ scale: heroScale }}>
           <img
             src={heroBackground}
             alt="Bosque"
@@ -159,15 +198,22 @@ const LandingHome = () => {
                 </span>
               </motion.div>
 
-              <motion.h1 variants={fadeInUp} className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white">
+              <motion.h1
+                variants={fadeInUp}
+                className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white"
+              >
                 Tu Árbol,{' '}
                 <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400 bg-clip-text text-transparent">
                   Tu Legado
                 </span>
               </motion.h1>
 
-              <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-green-100/90 mb-8 leading-relaxed max-w-xl">
-                Entra gratis, explora la plataforma y únete a nuestra comunidad. Próximamente podrás plantar tu propio árbol.
+              <motion.p
+                variants={fadeInUp}
+                className="text-xl md:text-2xl text-green-100/90 mb-8 leading-relaxed max-w-xl"
+              >
+                Entra gratis, explora la plataforma y únete a nuestra comunidad. Próximamente podrás
+                plantar tu propio árbol.
               </motion.p>
 
               <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 mb-10">
@@ -194,7 +240,10 @@ const LandingHome = () => {
               </motion.div>
 
               {/* Trust indicators */}
-              <motion.div variants={fadeInUp} className="flex flex-wrap gap-6 text-sm text-green-100/70">
+              <motion.div
+                variants={fadeInUp}
+                className="flex flex-wrap gap-6 text-sm text-green-100/70"
+              >
                 <div className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-emerald-400" />
                   <span>Red social integrada</span>
@@ -270,7 +319,7 @@ const LandingHome = () => {
             className="flex flex-col items-center cursor-pointer mt-12"
             onClick={() => carouselRef.current?.scrollIntoView({ behavior: 'smooth' })}
             animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           >
             <span className="text-white/60 text-sm mb-2">Descubre más</span>
             <div className="border-2 border-white/40 rounded-full p-2">
@@ -281,7 +330,10 @@ const LandingHome = () => {
       </section>
 
       {/* CAROUSEL: App Social Preview */}
-      <section ref={carouselRef} className="py-16 md:py-24 px-4 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
+      <section
+        ref={carouselRef}
+        className="py-16 md:py-24 px-4 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden"
+      >
         {/* Background decorations */}
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/20 rounded-full blur-3xl" />
@@ -301,10 +353,14 @@ const LandingHome = () => {
               <span>Nuestra Comunidad</span>
             </div>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-              Descubre la <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">App Social</span>
+              Descubre la{' '}
+              <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                App Social
+              </span>
             </h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              Conecta con otros plantadores, comparte tu progreso y sigue el crecimiento de tu árbol en tiempo real.
+              Conecta con otros plantadores, comparte tu progreso y sigue el crecimiento de tu árbol
+              en tiempo real.
             </p>
           </motion.div>
 
@@ -322,16 +378,26 @@ const LandingHome = () => {
                 transition={{
                   x: {
                     repeat: Infinity,
-                    repeatType: "loop",
+                    repeatType: 'loop',
                     duration: 40,
-                    ease: "linear",
+                    ease: 'linear',
                   },
                 }}
               >
                 {/* App Screenshots - duplicated for seamless loop */}
                 {[...Array(2)].map((_, setIndex) => (
                   <React.Fragment key={setIndex}>
-                    {[carousel1, carousel2, carousel3, carousel4, carousel5, carousel6, carousel7, carousel8, carousel9].map((img, index) => (
+                    {[
+                      carousel1,
+                      carousel2,
+                      carousel3,
+                      carousel4,
+                      carousel5,
+                      carousel6,
+                      carousel7,
+                      carousel8,
+                      carousel9,
+                    ].map((img, index) => (
                       <div key={`${setIndex}-${index}`} className="flex-shrink-0">
                         <div className="relative group">
                           {/* Phone frame effect */}
@@ -380,14 +446,17 @@ const LandingHome = () => {
       </section>
 
       {/* Stats Section */}
-      <section ref={statsRef} className="section-padding relative overflow-hidden bg-white dark:bg-gray-900">
+      <section
+        ref={statsRef}
+        className="section-padding relative overflow-hidden bg-white dark:bg-gray-900"
+      >
         <div className="absolute top-0 right-0 w-96 h-96 blob-shape nature-blob" />
         <div className="absolute bottom-0 left-0 w-80 h-80 blob-shape earth-blob" />
 
         <div className="container-wide relative z-10">
           <motion.div
             initial="hidden"
-            animate={statsInView ? "visible" : "hidden"}
+            animate={statsInView ? 'visible' : 'hidden'}
             variants={staggerContainer}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
           >
@@ -407,7 +476,9 @@ const LandingHome = () => {
                   >
                     {stat.value}
                   </motion.div>
-                  <div className="text-lg font-semibold text-gray-700 dark:text-gray-300">{stat.label}</div>
+                  <div className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+                    {stat.label}
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -429,7 +500,7 @@ const LandingHome = () => {
         <div className="container-wide relative z-10">
           <motion.div
             initial="hidden"
-            animate={uniqueInView ? "visible" : "hidden"}
+            animate={uniqueInView ? 'visible' : 'hidden'}
             variants={staggerContainer}
             className="text-center mb-16"
           >
@@ -442,14 +513,17 @@ const LandingHome = () => {
                 Identidad
               </span>
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-green-100/90 max-w-3xl mx-auto leading-relaxed">
+            <motion.p
+              variants={fadeInUp}
+              className="text-xl md:text-2xl text-green-100/90 max-w-3xl mx-auto leading-relaxed"
+            >
               Cuando plantas con nosotros, tu árbol recibe una identidad única y verificable.
             </motion.p>
           </motion.div>
 
           <motion.div
             initial="hidden"
-            animate={uniqueInView ? "visible" : "hidden"}
+            animate={uniqueInView ? 'visible' : 'hidden'}
             variants={fadeInUp}
             className="glass-dark rounded-3xl p-8 md:p-12"
           >
@@ -470,7 +544,7 @@ const LandingHome = () => {
                     'Acero inoxidable anti-oxidación',
                     'Durabilidad garantizada 10+ años',
                     'Tu nombre grabado en la chapa',
-                    'Instalada junto al árbol'
+                    'Instalada junto al árbol',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm">
                       <CheckCircle className="h-5 w-5 text-emerald-400 flex-shrink-0 mt-0.5" />
@@ -495,7 +569,7 @@ const LandingHome = () => {
                     'Foto real de tu árbol plantado',
                     'Ubicación exacta con GPS',
                     'Especie y fecha de plantación',
-                    'Información de quién lo plantó'
+                    'Información de quién lo plantó',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm">
                       <CheckCircle className="h-5 w-5 text-emerald-400 flex-shrink-0 mt-0.5" />
@@ -520,7 +594,7 @@ const LandingHome = () => {
                     'Coordenadas GPS exactas',
                     'Descargable en formato PDF',
                     'Compartible en redes sociales',
-                    'Verificable online con QR'
+                    'Verificable online con QR',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm">
                       <CheckCircle className="h-5 w-5 text-emerald-400 flex-shrink-0 mt-0.5" />
@@ -530,17 +604,22 @@ const LandingHome = () => {
                 </ul>
               </div>
             </div>
-
           </motion.div>
         </div>
       </section>
 
       {/* CADENA DE IMPACTO - Con animaciones y colores vibrantes */}
-      <section ref={impactRef} className="py-24 md:py-32 px-4 bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 relative overflow-hidden">
+      <section
+        ref={impactRef}
+        className="py-24 md:py-32 px-4 bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 relative overflow-hidden"
+      >
         {/* Decoraciones de fondo animadas */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div
+            className="absolute bottom-20 right-10 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl animate-pulse"
+            style={{ animationDelay: '1s' }}
+          />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-teal-500/5 rounded-full blur-3xl" />
         </div>
 
@@ -588,7 +667,7 @@ const LandingHome = () => {
                   <motion.div
                     className="text-4xl md:text-5xl mb-3"
                     animate={{ rotate: [0, 10, -10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                   >
                     🌱
                   </motion.div>
@@ -613,7 +692,7 @@ const LandingHome = () => {
                   <motion.div
                     className="text-4xl md:text-5xl mb-3"
                     animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
                   >
                     🏡
                   </motion.div>
@@ -638,7 +717,7 @@ const LandingHome = () => {
                   <motion.div
                     className="text-4xl md:text-5xl mb-3"
                     animate={{ y: [0, -5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
                   >
                     👷
                   </motion.div>
@@ -663,7 +742,7 @@ const LandingHome = () => {
                   <motion.div
                     className="text-4xl md:text-5xl mb-3"
                     animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
                   >
                     🌍
                   </motion.div>
@@ -723,11 +802,14 @@ const LandingHome = () => {
       </section>
 
       {/* COMO FUNCIONA - Simplificado con precios */}
-      <section ref={howItWorksRef} className="section-padding premium-gradient relative overflow-hidden">
+      <section
+        ref={howItWorksRef}
+        className="section-padding premium-gradient relative overflow-hidden"
+      >
         <div className="container-wide relative z-10">
           <motion.div
             initial="hidden"
-            animate={howItWorksInView ? "visible" : "hidden"}
+            animate={howItWorksInView ? 'visible' : 'hidden'}
             variants={staggerContainer}
             className="text-center mb-16"
           >
@@ -742,7 +824,7 @@ const LandingHome = () => {
           {/* Steps */}
           <motion.div
             initial="hidden"
-            animate={howItWorksInView ? "visible" : "hidden"}
+            animate={howItWorksInView ? 'visible' : 'hidden'}
             variants={staggerContainer}
             className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12"
           >
@@ -750,18 +832,18 @@ const LandingHome = () => {
               {
                 image: '/images/1.png',
                 title: '1. Compra tu Árbol',
-                desc: 'Elige ubicación, nombre y especie.'
+                desc: 'Elige ubicación, nombre y especie.',
               },
               {
                 image: '/images/2.png',
                 title: '2. Plantación Real',
-                desc: 'Viveros locales preparan tu árbol. Plantadores profesionales lo plantan. Recibirás fotos del proceso.'
+                desc: 'Viveros locales preparan tu árbol. Plantadores profesionales lo plantan. Recibirás fotos del proceso.',
               },
               {
                 image: '/images/3.png',
                 title: '3. Tu Árbol, Tu Legado',
-                desc: 'Chapa QR instalada junto al árbol. Certificado digital descargable. Visítalo cuando quieras.'
-              }
+                desc: 'Chapa QR instalada junto al árbol. Certificado digital descargable. Visítalo cuando quieras.',
+              },
             ].map((step, i) => (
               <motion.div key={i} variants={fadeInUp} className="text-center flex w-full">
                 <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full w-full border border-gray-100 dark:border-gray-700">
@@ -773,10 +855,16 @@ const LandingHome = () => {
                     />
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="font-display text-xl font-semibold text-gray-800 dark:text-white mb-3">{step.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-3 flex-1">{step.desc}</p>
+                    <h3 className="font-display text-xl font-semibold text-gray-800 dark:text-white mb-3">
+                      {step.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-3 flex-1">
+                      {step.desc}
+                    </p>
                     {step.price && (
-                      <p className="text-emerald-600 dark:text-emerald-400 font-bold text-lg">{step.price}</p>
+                      <p className="text-emerald-600 dark:text-emerald-400 font-bold text-lg">
+                        {step.price}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -787,7 +875,10 @@ const LandingHome = () => {
       </section>
 
       {/* Planta Sin Plata Section */}
-      <section ref={plantaSinPlataRef} className="py-16 md:py-24 px-4 bg-gradient-to-br from-gray-50 via-white to-emerald-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900 relative overflow-hidden">
+      <section
+        ref={plantaSinPlataRef}
+        className="py-16 md:py-24 px-4 bg-gradient-to-br from-gray-50 via-white to-emerald-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900 relative overflow-hidden"
+      >
         {/* Elementos decorativos sutiles */}
         <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-emerald-100/30 dark:bg-emerald-900/20 blur-3xl" />
         <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-gray-200/30 dark:bg-gray-800/30 blur-3xl" />
@@ -829,7 +920,9 @@ const LandingHome = () => {
               <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 h-full flex flex-col group-hover:-translate-y-1">
                 {/* Numero de opcion */}
                 <div className="absolute top-4 right-4 w-7 h-7 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
-                  <span className="text-emerald-600 dark:text-emerald-400 font-bold text-xs">1</span>
+                  <span className="text-emerald-600 dark:text-emerald-400 font-bold text-xs">
+                    1
+                  </span>
                 </div>
 
                 {/* Icono */}
@@ -837,11 +930,16 @@ const LandingHome = () => {
                   <Users className="h-7 w-7 text-white" />
                 </div>
 
-                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">Invita 5 Amigos</h3>
+                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
+                  Invita 5 Amigos
+                </h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-4 flex-1 text-sm leading-relaxed">
-                  Comparte tu código. Cuando 5 amigos planten, tienes un <span className="font-semibold text-emerald-600 dark:text-emerald-400">árbol gratis</span>.
+                  Comparte tu código. Cuando 5 amigos planten, tienes un{' '}
+                  <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+                    árbol gratis
+                  </span>
+                  .
                 </p>
-
               </div>
             </motion.div>
 
@@ -873,9 +971,10 @@ const LandingHome = () => {
 
                 <h3 className="text-xl font-bold text-white mb-2">Árbol Colaborativo</h3>
                 <p className="text-emerald-100 mb-4 flex-1 text-sm leading-relaxed">
-                  Crea un proyecto y compártelo. Tus amigos <span className="font-semibold text-white">aportan lo que puedan</span> para completar la meta.
+                  Crea un proyecto y compártelo. Tus amigos{' '}
+                  <span className="font-semibold text-white">aportan lo que puedan</span> para
+                  completar la meta.
                 </p>
-
               </div>
             </motion.div>
 
@@ -890,7 +989,9 @@ const LandingHome = () => {
               <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 h-full flex flex-col group-hover:-translate-y-1">
                 {/* Numero de opcion */}
                 <div className="absolute top-4 right-4 w-7 h-7 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
-                  <span className="text-emerald-600 dark:text-emerald-400 font-bold text-xs">3</span>
+                  <span className="text-emerald-600 dark:text-emerald-400 font-bold text-xs">
+                    3
+                  </span>
                 </div>
 
                 {/* Icono */}
@@ -898,124 +999,147 @@ const LandingHome = () => {
                   <QrCode className="h-7 w-7 text-white" />
                 </div>
 
-                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">Escanea y Gana</h3>
+                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
+                  Escanea y Gana
+                </h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-4 flex-1 text-sm leading-relaxed">
-                  Productos de empresas partner tienen QR. Escanea y <span className="font-semibold text-emerald-600 dark:text-emerald-400">participa en sorteos</span> de árboles.
+                  Productos de empresas partner tienen QR. Escanea y{' '}
+                  <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+                    participa en sorteos
+                  </span>{' '}
+                  de árboles.
                 </p>
-
               </div>
             </motion.div>
           </div>
-
         </div>
       </section>
 
       {/* Top Companies Section */}
-        <section ref={topCompaniesRef} className="section-padding bg-white dark:bg-gray-900 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-96 h-96 rounded-full bg-emerald-100/40 dark:bg-emerald-900/20 blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-teal-100/40 dark:bg-teal-900/20 blur-3xl" />
+      <section
+        ref={topCompaniesRef}
+        className="section-padding bg-white dark:bg-gray-900 relative overflow-hidden"
+      >
+        <div className="absolute top-0 left-0 w-96 h-96 rounded-full bg-emerald-100/40 dark:bg-emerald-900/20 blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-teal-100/40 dark:bg-teal-900/20 blur-3xl" />
 
-          <div className="container-wide relative z-10">
-            <motion.div
-              initial="hidden"
-              animate={topCompaniesInView ? "visible" : "hidden"}
-              variants={staggerContainer}
-              className="text-center mb-12"
-            >
-              <motion.div variants={fadeInUp}>
-                <Building2 className="h-14 w-14 mx-auto mb-4 text-emerald-600 dark:text-emerald-400" />
+        <div className="container-wide relative z-10">
+          <motion.div
+            initial="hidden"
+            animate={topCompaniesInView ? 'visible' : 'hidden'}
+            variants={staggerContainer}
+            className="text-center mb-12"
+          >
+            <motion.div variants={fadeInUp}>
+              <Building2 className="h-14 w-14 mx-auto mb-4 text-emerald-600 dark:text-emerald-400" />
+            </motion.div>
+            <motion.h2 variants={fadeInUp} className="section-title mb-4">
+              Empresas que Hacen la Diferencia
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="section-subtitle mx-auto">
+              Estas empresas lideran el cambio con proyectos de reforestación.
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            animate={topCompaniesInView ? 'visible' : 'hidden'}
+            variants={staggerContainer}
+            className={`grid gap-6 ${
+              topCompanies.length === 1
+                ? 'grid-cols-1 max-w-sm mx-auto'
+                : topCompanies.length === 2
+                  ? 'grid-cols-1 md:grid-cols-2 max-w-2xl mx-auto'
+                  : topCompanies.length === 3
+                    ? 'grid-cols-1 md:grid-cols-3 max-w-4xl mx-auto'
+                    : topCompanies.length === 4
+                      ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto'
+                      : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-5'
+            }`}
+          >
+            {topCompanies.length === 0 && (
+              <div className="col-span-full text-center py-12">
+                <Building2 className="h-16 w-16 mx-auto mb-4 text-gray-300 dark:text-gray-600" />
+                <p className="text-gray-500 dark:text-gray-400 text-lg">
+                  Pronto verás aquí a las empresas que lideran el cambio
+                </p>
+              </div>
+            )}
+            {topCompanies.map((company, index) => (
+              <motion.div key={company.id} variants={fadeInUp}>
+                <Card className="h-full bg-gradient-to-br from-white to-emerald-50 dark:from-gray-800 dark:to-gray-800 border-emerald-100 dark:border-gray-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <CardContent className="p-6 text-center">
+                    {/* Ranking Badge */}
+                    <div className="flex justify-center mb-4">
+                      <div
+                        className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                          index === 0
+                            ? 'bg-yellow-400 text-yellow-900'
+                            : index === 1
+                              ? 'bg-gray-300 text-gray-700'
+                              : index === 2
+                                ? 'bg-amber-600 text-amber-100'
+                                : 'bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-400'
+                        }`}
+                      >
+                        {index < 3 ? (
+                          <Trophy className="h-6 w-6" />
+                        ) : (
+                          <span className="font-bold text-lg">#{index + 1}</span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Company Name */}
+                    <h3 className="font-display font-bold text-lg text-gray-800 dark:text-white mb-3">
+                      {company.company_name || company.username}
+                    </h3>
+
+                    {/* Stats */}
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-center gap-2 text-emerald-600 dark:text-emerald-400">
+                        <TreePine className="h-4 w-4" />
+                        <span className="font-semibold">
+                          {company.completed_projects} proyectos
+                        </span>
+                      </div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">
+                        {formatCurrency(company.total_raised)} recaudado
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </motion.div>
-              <motion.h2 variants={fadeInUp} className="section-title mb-4">
-                Empresas que Hacen la Diferencia
-              </motion.h2>
-              <motion.p variants={fadeInUp} className="section-subtitle mx-auto">
-                Estas empresas lideran el cambio con proyectos de reforestación.
-              </motion.p>
-            </motion.div>
+            ))}
+          </motion.div>
 
-            <motion.div
-              initial="hidden"
-              animate={topCompaniesInView ? "visible" : "hidden"}
-              variants={staggerContainer}
-              className={`grid gap-6 ${
-                topCompanies.length === 1 ? 'grid-cols-1 max-w-sm mx-auto' :
-                topCompanies.length === 2 ? 'grid-cols-1 md:grid-cols-2 max-w-2xl mx-auto' :
-                topCompanies.length === 3 ? 'grid-cols-1 md:grid-cols-3 max-w-4xl mx-auto' :
-                topCompanies.length === 4 ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto' :
-                'grid-cols-1 md:grid-cols-2 lg:grid-cols-5'
-              }`}
+          {/* CTA for companies */}
+          <motion.div
+            initial="hidden"
+            animate={topCompaniesInView ? 'visible' : 'hidden'}
+            variants={fadeInUp}
+            className="text-center mt-10"
+          >
+            <p className="text-gray-600 dark:text-gray-300 mb-4">
+              Tu empresa también puede ser parte del cambio.
+            </p>
+            <Button
+              onClick={() => navigate('/empresas')}
+              variant="outline"
+              className="border-emerald-600 dark:border-emerald-500 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/30"
             >
-              {topCompanies.length === 0 && (
-                <div className="col-span-full text-center py-12">
-                  <Building2 className="h-16 w-16 mx-auto mb-4 text-gray-300 dark:text-gray-600" />
-                  <p className="text-gray-500 dark:text-gray-400 text-lg">
-                    Pronto verás aquí a las empresas que lideran el cambio
-                  </p>
-                </div>
-              )}
-              {topCompanies.map((company, index) => (
-                <motion.div key={company.id} variants={fadeInUp}>
-                  <Card className="h-full bg-gradient-to-br from-white to-emerald-50 dark:from-gray-800 dark:to-gray-800 border-emerald-100 dark:border-gray-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <CardContent className="p-6 text-center">
-                      {/* Ranking Badge */}
-                      <div className="flex justify-center mb-4">
-                        <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                          index === 0 ? 'bg-yellow-400 text-yellow-900' :
-                          index === 1 ? 'bg-gray-300 text-gray-700' :
-                          index === 2 ? 'bg-amber-600 text-amber-100' :
-                          'bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-400'
-                        }`}>
-                          {index < 3 ? (
-                            <Trophy className="h-6 w-6" />
-                          ) : (
-                            <span className="font-bold text-lg">#{index + 1}</span>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Company Name */}
-                      <h3 className="font-display font-bold text-lg text-gray-800 dark:text-white mb-3">
-                        {company.company_name || company.username}
-                      </h3>
-
-                      {/* Stats */}
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-center gap-2 text-emerald-600 dark:text-emerald-400">
-                          <TreePine className="h-4 w-4" />
-                          <span className="font-semibold">{company.completed_projects} proyectos</span>
-                        </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">
-                          {formatCurrency(company.total_raised)} recaudado
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            {/* CTA for companies */}
-            <motion.div
-              initial="hidden"
-              animate={topCompaniesInView ? "visible" : "hidden"}
-              variants={fadeInUp}
-              className="text-center mt-10"
-            >
-              <p className="text-gray-600 dark:text-gray-300 mb-4">Tu empresa también puede ser parte del cambio.</p>
-              <Button
-                onClick={() => navigate('/empresas')}
-                variant="outline"
-                className="border-emerald-600 dark:border-emerald-500 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/30"
-              >
-                <Building2 className="h-4 w-4 mr-2" />
-                Conoce el programa empresarial
-              </Button>
-            </motion.div>
-          </div>
-        </section>
+              <Building2 className="h-4 w-4 mr-2" />
+              Conoce el programa empresarial
+            </Button>
+          </motion.div>
+        </div>
+      </section>
 
       {/* CTA FINAL */}
-      <section ref={ctaRef} className="section-padding bg-emerald-600 dark:bg-gray-900 relative overflow-hidden">
+      <section
+        ref={ctaRef}
+        className="section-padding bg-emerald-600 dark:bg-gray-900 relative overflow-hidden"
+      >
         {/* Decoraciones de fondo */}
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-96 h-96 bg-emerald-500/30 dark:bg-emerald-600/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
@@ -1036,7 +1160,7 @@ const LandingHome = () => {
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, type: "spring" }}
+              transition={{ duration: 0.5, type: 'spring' }}
             >
               <TreePine className="h-20 w-20 mx-auto mb-6 text-white" />
             </motion.div>
@@ -1066,4 +1190,3 @@ const LandingHome = () => {
 };
 
 export default LandingHome;
-

@@ -86,7 +86,7 @@ function updateSchemaOrg(baseUrl) {
 
   // Actualizar Organization schema
   const scripts = document.querySelectorAll('script[type="application/ld+json"]');
-  scripts.forEach(script => {
+  scripts.forEach((script) => {
     try {
       const data = JSON.parse(script.textContent);
       if (data['@type'] === 'Organization') {

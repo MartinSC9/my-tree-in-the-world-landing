@@ -14,7 +14,8 @@ export const pageGradients = {
 // Gradientes para botones
 export const buttonGradients = {
   green: 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700',
-  purple: 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700',
+  purple:
+    'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700',
   blue: 'bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700',
   amber: 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600',
   red: 'bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700',
@@ -60,9 +61,12 @@ export const getInputClass = (color = 'green') => {
 
 // Estilos de botones base
 export const buttonBase = {
-  primary: 'w-full h-12 text-white font-semibold rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed',
-  secondary: 'w-full h-12 border-2 font-semibold rounded-lg transition-all duration-200 hover:bg-gray-50',
-  ghost: 'px-4 py-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors',
+  primary:
+    'w-full h-12 text-white font-semibold rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed',
+  secondary:
+    'w-full h-12 border-2 font-semibold rounded-lg transition-all duration-200 hover:bg-gray-50',
+  ghost:
+    'px-4 py-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors',
 };
 
 // Combinar estilos de botón

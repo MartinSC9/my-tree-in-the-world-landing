@@ -35,76 +35,112 @@ const App = () => {
             <ScrollToTop />
             <DynamicMetaTags />
             <Routes>
-            {/* Landing pages (public) */}
-            <Route path="/" element={
-              <AuthenticatedLayout>
-                <LandingHome />
-              </AuthenticatedLayout>
-            } />
-            <Route path="/sobre-nosotros" element={
-              <AuthenticatedLayout>
-                <AboutPage />
-              </AuthenticatedLayout>
-            } />
-            <Route path="/empresas" element={
-              <AuthenticatedLayout>
-                <EmpresasPage />
-              </AuthenticatedLayout>
-            } />
-            <Route path="/sorteos" element={
-              <AuthenticatedLayout>
-                <SorteosPage />
-              </AuthenticatedLayout>
-            } />
-            <Route path="/contacto" element={
-              <AuthenticatedLayout>
-                <ContactoPage />
-              </AuthenticatedLayout>
-            } />
-            <Route path="/referidos" element={
-              <AuthenticatedLayout>
-                <ReferidosPage />
-              </AuthenticatedLayout>
-            } />
-            <Route path="/qr-productos" element={
-              <AuthenticatedLayout>
-                <QRProductosPage />
-              </AuthenticatedLayout>
-            } />
-            <Route path="/viveros" element={
-              <AuthenticatedLayout>
-                <ViverosPage />
-              </AuthenticatedLayout>
-            } />
-            <Route path="/plantadores" element={
-              <AuthenticatedLayout>
-                <PlantadoresPage />
-              </AuthenticatedLayout>
-            } />
-            <Route path="/mapa" element={
-              <AuthenticatedLayout>
-                <UnifiedMapPage />
-              </AuthenticatedLayout>
-            } />
+              {/* Landing pages (public) */}
+              <Route
+                path="/"
+                element={
+                  <AuthenticatedLayout>
+                    <LandingHome />
+                  </AuthenticatedLayout>
+                }
+              />
+              <Route
+                path="/sobre-nosotros"
+                element={
+                  <AuthenticatedLayout>
+                    <AboutPage />
+                  </AuthenticatedLayout>
+                }
+              />
+              <Route
+                path="/empresas"
+                element={
+                  <AuthenticatedLayout>
+                    <EmpresasPage />
+                  </AuthenticatedLayout>
+                }
+              />
+              <Route
+                path="/sorteos"
+                element={
+                  <AuthenticatedLayout>
+                    <SorteosPage />
+                  </AuthenticatedLayout>
+                }
+              />
+              <Route
+                path="/contacto"
+                element={
+                  <AuthenticatedLayout>
+                    <ContactoPage />
+                  </AuthenticatedLayout>
+                }
+              />
+              <Route
+                path="/referidos"
+                element={
+                  <AuthenticatedLayout>
+                    <ReferidosPage />
+                  </AuthenticatedLayout>
+                }
+              />
+              <Route
+                path="/qr-productos"
+                element={
+                  <AuthenticatedLayout>
+                    <QRProductosPage />
+                  </AuthenticatedLayout>
+                }
+              />
+              <Route
+                path="/viveros"
+                element={
+                  <AuthenticatedLayout>
+                    <ViverosPage />
+                  </AuthenticatedLayout>
+                }
+              />
+              <Route
+                path="/plantadores"
+                element={
+                  <AuthenticatedLayout>
+                    <PlantadoresPage />
+                  </AuthenticatedLayout>
+                }
+              />
+              <Route
+                path="/mapa"
+                element={
+                  <AuthenticatedLayout>
+                    <UnifiedMapPage />
+                  </AuthenticatedLayout>
+                }
+              />
 
-            {/* Legal pages (public) */}
-            <Route path="/terminos" element={
-              <AuthenticatedLayout>
-                <TerminosPage />
-              </AuthenticatedLayout>
-            } />
-            <Route path="/privacidad" element={
-              <AuthenticatedLayout>
-                <PrivacidadPage />
-              </AuthenticatedLayout>
-            } />
+              {/* Legal pages (public) */}
+              <Route
+                path="/terminos"
+                element={
+                  <AuthenticatedLayout>
+                    <TerminosPage />
+                  </AuthenticatedLayout>
+                }
+              />
+              <Route
+                path="/privacidad"
+                element={
+                  <AuthenticatedLayout>
+                    <PrivacidadPage />
+                  </AuthenticatedLayout>
+                }
+              />
 
-            {/* Certificate page (public) */}
-            <Route path="/certificado/:treeId" element={<CertificatePage />} />
+              {/* Certificate page (public) */}
+              <Route path="/certificado/:treeId" element={<CertificatePage />} />
 
-            {/* Redirect all other routes to home */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+              {/* Redirect all other routes to home */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
           </Router>
         </TreeProvider>
       </AuthProvider>

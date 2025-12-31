@@ -89,9 +89,7 @@ const Modal = ({
                 <div className="sticky top-0 bg-gradient-to-r from-green-600 to-emerald-600 text-white p-5 rounded-t-lg z-10">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      {headerContent || (
-                        title && <h2 className="text-2xl font-bold">{title}</h2>
-                      )}
+                      {headerContent || (title && <h2 className="text-2xl font-bold">{title}</h2>)}
                     </div>
                     {showCloseButton && (
                       <button
@@ -107,9 +105,7 @@ const Modal = ({
               )}
 
               {/* Content */}
-              <div className="p-6">
-                {children}
-              </div>
+              <div className="p-6">{children}</div>
             </motion.div>
           </motion.div>
         </>

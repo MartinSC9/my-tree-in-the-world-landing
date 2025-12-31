@@ -59,7 +59,12 @@
   --shadow-glow: 0 0 30px -5px hsl(152 68% 38% / 0.4);
 
   /* Gradients */
-  --gradient-hero: linear-gradient(135deg, hsl(152 68% 95%) 0%, hsl(165 60% 94%) 50%, hsl(85 55% 95%) 100%);
+  --gradient-hero: linear-gradient(
+    135deg,
+    hsl(152 68% 95%) 0%,
+    hsl(165 60% 94%) 50%,
+    hsl(85 55% 95%) 100%
+  );
   --gradient-nature: linear-gradient(135deg, hsl(152 68% 38%) 0%, hsl(165 60% 45%) 100%);
   --gradient-earth: linear-gradient(135deg, hsl(25 40% 35%) 0%, hsl(38 35% 45%) 100%);
   --gradient-radial: radial-gradient(ellipse at top, hsl(152 68% 95%) 0%, transparent 60%);
@@ -75,10 +80,13 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   background: var(--gradient-hero);
   color: hsl(var(--foreground));
-  font-feature-settings: "rlig" 1, "calt" 1;
+  font-feature-settings:
+    'rlig' 1,
+    'calt' 1;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -92,12 +100,17 @@ body.dark {
 
 /* ===== Typography ===== */
 .font-display {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
 }
 
-h1, h2, h3, h4 {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+h1,
+h2,
+h3,
+h4 {
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
   color: hsl(var(--foreground));
   letter-spacing: -0.02em;
@@ -106,29 +119,55 @@ h1, h2, h3, h4 {
 
 /* ===== Premium Gradients ===== */
 .nature-gradient {
-  background: linear-gradient(135deg, hsl(152 68% 38%) 0%, hsl(165 60% 45%) 50%, hsl(152 68% 32%) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(152 68% 38%) 0%,
+    hsl(165 60% 45%) 50%,
+    hsl(152 68% 32%) 100%
+  );
 }
 
 .earth-gradient {
-  background: linear-gradient(135deg, hsl(25 40% 35%) 0%, hsl(38 35% 45%) 50%, hsl(25 40% 30%) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(25 40% 35%) 0%,
+    hsl(38 35% 45%) 50%,
+    hsl(25 40% 30%) 100%
+  );
 }
 
 .sky-gradient {
-  background: linear-gradient(135deg, hsl(200 85% 55%) 0%, hsl(200 85% 45%) 50%, hsl(200 85% 40%) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(200 85% 55%) 0%,
+    hsl(200 85% 45%) 50%,
+    hsl(200 85% 40%) 100%
+  );
 }
 
 .premium-gradient {
-  background: linear-gradient(135deg, hsl(152 68% 95%) 0%, hsl(165 60% 92%) 35%, hsl(85 55% 95%) 70%, hsl(152 68% 97%) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(152 68% 95%) 0%,
+    hsl(165 60% 92%) 35%,
+    hsl(85 55% 95%) 70%,
+    hsl(152 68% 97%) 100%
+  );
 }
 
 .dark .premium-gradient {
-  background: linear-gradient(135deg, hsl(152 30% 10%) 0%, hsl(165 25% 12%) 35%, hsl(160 20% 11%) 70%, hsl(152 30% 10%) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(152 30% 10%) 0%,
+    hsl(165 25% 12%) 35%,
+    hsl(160 20% 11%) 70%,
+    hsl(152 30% 10%) 100%
+  );
 }
 
 .hero-gradient {
   background:
-    var(--gradient-radial),
-    linear-gradient(180deg, hsl(152 68% 97%) 0%, hsl(165 60% 96%) 100%);
+    var(--gradient-radial), linear-gradient(180deg, hsl(152 68% 97%) 0%, hsl(165 60% 96%) 100%);
 }
 
 /* ===== Glass Effects ===== */
@@ -204,7 +243,8 @@ h1, h2, h3, h4 {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
   25% {
@@ -250,7 +290,8 @@ h1, h2, h3, h4 {
 }
 
 @keyframes gradientShift {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -259,7 +300,8 @@ h1, h2, h3, h4 {
 }
 
 @keyframes breathe {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 1;
   }
@@ -270,7 +312,8 @@ h1, h2, h3, h4 {
 }
 
 @keyframes leaf-sway {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(-3deg);
   }
   50% {
@@ -306,12 +349,7 @@ h1, h2, h3, h4 {
 }
 
 .shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
 }
@@ -330,11 +368,21 @@ h1, h2, h3, h4 {
 }
 
 /* Staggered animations */
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-.stagger-5 { animation-delay: 0.5s; }
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+.stagger-4 {
+  animation-delay: 0.4s;
+}
+.stagger-5 {
+  animation-delay: 0.5s;
+}
 
 /* ===== Premium Buttons ===== */
 .btn-primary {
@@ -344,7 +392,9 @@ h1, h2, h3, h4 {
   padding: 0.875rem 2rem;
   border-radius: var(--radius);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: var(--shadow-md), 0 4px 14px -3px hsl(152 68% 38% / 0.4);
+  box-shadow:
+    var(--shadow-md),
+    0 4px 14px -3px hsl(152 68% 38% / 0.4);
   position: relative;
   overflow: hidden;
 }
@@ -353,14 +403,16 @@ h1, h2, h3, h4 {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
   opacity: 0;
   transition: opacity 0.3s;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg), 0 8px 25px -5px hsl(152 68% 38% / 0.5);
+  box-shadow:
+    var(--shadow-lg),
+    0 8px 25px -5px hsl(152 68% 38% / 0.5);
 }
 
 .btn-primary:hover::before {
@@ -428,7 +480,8 @@ h1, h2, h3, h4 {
 }
 
 .section-title {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
   line-height: 1.15;
@@ -444,7 +497,13 @@ h1, h2, h3, h4 {
 
 /* ===== Certificate Border ===== */
 .certificate-border {
-  background: linear-gradient(45deg, hsl(152 68% 38%), hsl(165 60% 45%), hsl(85 55% 50%), hsl(152 68% 38%));
+  background: linear-gradient(
+    45deg,
+    hsl(152 68% 38%),
+    hsl(165 60% 45%),
+    hsl(85 55% 50%),
+    hsl(152 68% 38%)
+  );
   background-size: 400% 400%;
   animation: gradientShift 4s ease infinite;
   padding: 4px;
@@ -622,7 +681,11 @@ h1, h2, h3, h4 {
 }
 
 /* Smooth transitions for interactive elements */
-button, a, input, select, textarea {
+button,
+a,
+input,
+select,
+textarea {
   transition: all 0.2s ease;
 }
 

@@ -1,6 +1,13 @@
-
 import React, { useRef, useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents, Rectangle, Polygon } from 'react-leaflet';
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMapEvents,
+  Rectangle,
+  Polygon,
+} from 'react-leaflet';
 import L from 'leaflet';
 import { TreePine, Loader2 } from 'lucide-react';
 import { treeService } from '../services';
@@ -9,9 +16,9 @@ import { getGreenSpaces, isPointInGreenSpace } from '../../../services/greenSpac
 // Límites geográficos de Córdoba Capital, Argentina
 const CORDOBA_BOUNDS = {
   north: -31.33,
-  south: -31.50,
+  south: -31.5,
   west: -64.25,
-  east: -64.10
+  east: -64.1,
 };
 
 // Función para verificar si una coordenada está dentro de Córdoba Capital
@@ -46,32 +53,34 @@ const createTreeIcon = (status, type = 'regular') => {
 
   // Definir colores según estado del árbol
   const statusColors = {
-    'en_proceso': 'bg-yellow-500',
-    'active': 'bg-yellow-500',
-    'completed': 'bg-yellow-500',  // Financiado pero no plantado aún
-    'plantado': 'bg-green-600',
-    'verificado': 'bg-green-800',
-    'cancelado': 'bg-gray-500'
+    en_proceso: 'bg-yellow-500',
+    active: 'bg-yellow-500',
+    completed: 'bg-yellow-500', // Financiado pero no plantado aún
+    plantado: 'bg-green-600',
+    verificado: 'bg-green-800',
+    cancelado: 'bg-gray-500',
   };
 
   // Color basado en estado para todos (incluido colaborativos)
   const color = statusColors[status] || 'bg-yellow-500';
 
   // Icono de árbol para todos los marcadores
-  const iconSvg = (type === 'collaborative' || type === 'myProject')
-    ? `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+  const iconSvg =
+    type === 'collaborative' || type === 'myProject'
+      ? `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
          <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
        </svg>`
-    : `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 448 512">
+      : `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 448 512">
          <path d="M210.6 5.9L62 169.4c-3.9 4.2-6 9.8-6 15.5C56 197.7 66.3 208 79.1 208H104L30.6 281.4c-4.2 4.2-6.6 10-6.6 16C24 309.9 34.1 320 46.6 320H80L5.4 409.5C1.9 413.7 0 419 0 424.5c0 13 10.5 23.5 23.5 23.5H192v32c0 17.7 14.3 32 32 32s32-14.3 32-32V448H424.5c13 0 23.5-10.5 23.5-23.5c0-5.5-1.9-10.8-5.4-15L368 320h33.4c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16L344 208h24.9c12.8 0 23.1-10.3 23.1-23.1c0-5.7-2.1-11.3-6-15.5L237.4 5.9C234 2.1 229.1 0 224 0s-10 2.1-13.4 5.9z"/>
        </svg>`;
 
   // Añadir borde diferente según tipo
-  const borderClass = type === 'myProject'
-    ? 'ring-4 ring-yellow-400 shadow-2xl' // Mi proyecto: borde amarillo resaltado
-    : type === 'collaborative'
-    ? 'ring-2 ring-purple-400' // Otros proyectos colaborativos
-    : '';
+  const borderClass =
+    type === 'myProject'
+      ? 'ring-4 ring-yellow-400 shadow-2xl' // Mi proyecto: borde amarillo resaltado
+      : type === 'collaborative'
+        ? 'ring-2 ring-purple-400' // Otros proyectos colaborativos
+        : '';
 
   const icon = L.divIcon({
     html: `<div class="flex items-center justify-center w-8 h-8 rounded-full ${color} ${borderClass} text-white shadow-lg">
@@ -89,10 +98,10 @@ const createTreeIcon = (status, type = 'regular') => {
 
 // Mapeo de estados a texto legible (mover fuera del render)
 const statusLabels = {
-  'en_proceso': 'En Progreso',
-  'plantado': 'Plantado',
-  'verificado': 'Verificado',
-  'cancelado': 'Cancelado'
+  en_proceso: 'En Progreso',
+  plantado: 'Plantado',
+  verificado: 'Verificado',
+  cancelado: 'Cancelado',
 };
 
 // Componente para manejar eventos de clic en el mapa
@@ -102,7 +111,7 @@ const MapEvents = ({
   restrictToGreenSpaces = false,
   greenSpaces = [],
   onOutOfBounds,
-  onNotInGreenSpace
+  onNotInGreenSpace,
 }) => {
   useMapEvents({
     click(e) {
@@ -141,7 +150,7 @@ const MapEvents = ({
 
 const TreeMap = ({
   trees,
-  height = "400px",
+  height = '400px',
   showFilters = false,
   onMapClick,
   center: centerProp,
@@ -153,7 +162,7 @@ const TreeMap = ({
   onOutOfBounds,
   onProjectClick,
   onNotInGreenSpace,
-  defaultOpenTreeId = null
+  defaultOpenTreeId = null,
 }) => {
   const mapRef = useRef();
   const markerRefs = useRef({});
@@ -168,7 +177,7 @@ const TreeMap = ({
   const loadTreeDetails = async (treeId, treeType = 'regular') => {
     if (loadedDetails[treeId] || loadingDetails[treeId]) return;
 
-    setLoadingDetails(prev => ({ ...prev, [treeId]: true }));
+    setLoadingDetails((prev) => ({ ...prev, [treeId]: true }));
     try {
       let details;
       if (treeType === 'collaborative') {
@@ -176,11 +185,11 @@ const TreeMap = ({
       } else {
         details = await treeService.getTreeById(treeId);
       }
-      setLoadedDetails(prev => ({ ...prev, [treeId]: details }));
+      setLoadedDetails((prev) => ({ ...prev, [treeId]: details }));
     } catch (error) {
       console.error('Error loading tree details:', error);
     } finally {
-      setLoadingDetails(prev => ({ ...prev, [treeId]: false }));
+      setLoadingDetails((prev) => ({ ...prev, [treeId]: false }));
     }
   };
 
@@ -196,7 +205,7 @@ const TreeMap = ({
       setLoadingGreenSpaces(true);
       setErrorGreenSpaces(false);
       getGreenSpaces()
-        .then(spaces => {
+        .then((spaces) => {
           setGreenSpaces(spaces);
           setLoadingGreenSpaces(false);
           // Si no hay espacios verdes, marcar como error
@@ -204,7 +213,7 @@ const TreeMap = ({
             setErrorGreenSpaces(true);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.error('Error loading green spaces:', err);
           setLoadingGreenSpaces(false);
           setErrorGreenSpaces(true);
@@ -222,7 +231,7 @@ const TreeMap = ({
           markerRef.openPopup();
           setDefaultPopupOpened(true);
           // Cargar detalles del árbol
-          const tree = trees.find(t => t.id === defaultOpenTreeId);
+          const tree = trees.find((t) => t.id === defaultOpenTreeId);
           if (tree) {
             loadTreeDetails(tree.id, tree.type);
           }
@@ -239,11 +248,13 @@ const TreeMap = ({
   const calculatedBounds = React.useMemo(() => {
     if (restrictToGreenSpaces && greenSpaces.length > 0) {
       // Calcular límites basados en todas las coordenadas de los espacios verdes
-      let minLat = Infinity, maxLat = -Infinity;
-      let minLng = Infinity, maxLng = -Infinity;
+      let minLat = Infinity,
+        maxLat = -Infinity;
+      let minLng = Infinity,
+        maxLng = -Infinity;
 
-      greenSpaces.forEach(space => {
-        space.coordinates.forEach(coord => {
+      greenSpaces.forEach((space) => {
+        space.coordinates.forEach((coord) => {
           minLat = Math.min(minLat, coord.lat);
           maxLat = Math.max(maxLat, coord.lat);
           minLng = Math.min(minLng, coord.lng);
@@ -255,7 +266,7 @@ const TreeMap = ({
         south: minLat,
         north: maxLat,
         west: minLng,
-        east: maxLng
+        east: maxLng,
       };
     }
 
@@ -264,20 +275,31 @@ const TreeMap = ({
   }, [restrictToGreenSpaces, greenSpaces]);
 
   // Configurar bounds de Córdoba para limitar el mapa
-  const cordobaBounds = (restrictToCordoba || restrictToGreenSpaces) ? [
-    [calculatedBounds.south, calculatedBounds.west], // esquina suroeste
-    [calculatedBounds.north, calculatedBounds.east]  // esquina noreste
-  ] : undefined;
+  const cordobaBounds =
+    restrictToCordoba || restrictToGreenSpaces
+      ? [
+          [calculatedBounds.south, calculatedBounds.west], // esquina suroeste
+          [calculatedBounds.north, calculatedBounds.east], // esquina noreste
+        ]
+      : undefined;
 
   return (
-    <div style={{ height, position: 'relative', width: '100%' }} className="rounded-lg overflow-hidden">
+    <div
+      style={{ height, position: 'relative', width: '100%' }}
+      className="rounded-lg overflow-hidden"
+    >
       {/* Mensaje informativo cuando está restringido */}
       {restrictToGreenSpaces ? (
-        <div className={`absolute top-2 left-1/2 transform -translate-x-1/2 z-10 ${errorGreenSpaces ? 'bg-red-600' : 'bg-green-600'} text-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium max-w-md text-center`}>
+        <div
+          className={`absolute top-2 left-1/2 transform -translate-x-1/2 z-10 ${errorGreenSpaces ? 'bg-red-600' : 'bg-green-600'} text-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium max-w-md text-center`}
+        >
           {loadingGreenSpaces ? (
             <>🔄 Cargando espacios verdes...</>
           ) : errorGreenSpaces ? (
-            <>❌ No se pudieron cargar los espacios verdes. Por favor, recarga la página o inténtalo más tarde.</>
+            <>
+              ❌ No se pudieron cargar los espacios verdes. Por favor, recarga la página o inténtalo
+              más tarde.
+            </>
           ) : (
             <>🌳 Solo puedes plantar árboles en espacios verdes</>
           )}
@@ -311,46 +333,52 @@ const TreeMap = ({
               weight: 3,
               opacity: 0.8,
               fillOpacity: 0.05,
-              dashArray: '10, 10'
+              dashArray: '10, 10',
             }}
           />
         )}
 
         {/* Polígonos de espacios verdes */}
-        {showGreenSpaces && greenSpaces.length > 0 && greenSpaces.map((space, index) => {
-          // Calcular el centro del polígono para usar como coordenadas al hacer clic
-          const centerLat = space.coordinates.reduce((sum, coord) => sum + coord.lat, 0) / space.coordinates.length;
-          const centerLng = space.coordinates.reduce((sum, coord) => sum + coord.lng, 0) / space.coordinates.length;
+        {showGreenSpaces &&
+          greenSpaces.length > 0 &&
+          greenSpaces.map((space, index) => {
+            // Calcular el centro del polígono para usar como coordenadas al hacer clic
+            const centerLat =
+              space.coordinates.reduce((sum, coord) => sum + coord.lat, 0) /
+              space.coordinates.length;
+            const centerLng =
+              space.coordinates.reduce((sum, coord) => sum + coord.lng, 0) /
+              space.coordinates.length;
 
-          return (
-            <Polygon
-              key={`green-space-${space.id || index}`}
-              positions={space.coordinates.map(coord => [coord.lat, coord.lng])}
-              pathOptions={{
-                color: '#15803d',
-                weight: 3,
-                opacity: 1,
-                fillColor: '#4ade80',
-                fillOpacity: 0.35
-              }}
-              eventHandlers={{
-                click: (e) => {
-                  // Usar las coordenadas del clic exacto
-                  if (onMapClick) {
-                    onMapClick(e.latlng.lat, e.latlng.lng);
-                  }
-                }
-              }}
-            >
-              <Popup>
-                <div className="p-2">
-                  <h3 className="font-semibold text-green-800">🌳 {space.name}</h3>
-                  <p className="text-xs text-gray-600">Aquí plantarás tu árbol</p>
-                </div>
-              </Popup>
-            </Polygon>
-          );
-        })}
+            return (
+              <Polygon
+                key={`green-space-${space.id || index}`}
+                positions={space.coordinates.map((coord) => [coord.lat, coord.lng])}
+                pathOptions={{
+                  color: '#15803d',
+                  weight: 3,
+                  opacity: 1,
+                  fillColor: '#4ade80',
+                  fillOpacity: 0.35,
+                }}
+                eventHandlers={{
+                  click: (e) => {
+                    // Usar las coordenadas del clic exacto
+                    if (onMapClick) {
+                      onMapClick(e.latlng.lat, e.latlng.lng);
+                    }
+                  },
+                }}
+              >
+                <Popup>
+                  <div className="p-2">
+                    <h3 className="font-semibold text-green-800">🌳 {space.name}</h3>
+                    <p className="text-xs text-gray-600">Aquí plantarás tu árbol</p>
+                  </div>
+                </Popup>
+              </Polygon>
+            );
+          })}
 
         {/* Agregar manejo de clics si se proporciona onMapClick */}
         {onMapClick && (
@@ -392,54 +420,55 @@ const TreeMap = ({
           </Marker>
         )}
 
-        {trees && trees.length > 0 && trees.map((tree) => {
-          // Verificar que el árbol tenga coordenadas válidas
-          if (!tree.latitude || !tree.longitude) return null;
+        {trees &&
+          trees.length > 0 &&
+          trees.map((tree) => {
+            // Verificar que el árbol tenga coordenadas válidas
+            if (!tree.latitude || !tree.longitude) return null;
 
-          // Convertir coordenadas a números
-          const lat = parseFloat(tree.latitude);
-          const lng = parseFloat(tree.longitude);
+            // Convertir coordenadas a números
+            const lat = parseFloat(tree.latitude);
+            const lng = parseFloat(tree.longitude);
 
-          // Verificar que las coordenadas sean válidas después de la conversión
-          if (isNaN(lat) || isNaN(lng)) return null;
+            // Verificar que las coordenadas sean válidas después de la conversión
+            if (isNaN(lat) || isNaN(lng)) return null;
 
-          // Determinar el tipo de marcador
-          const markerType = tree.isMyProject ? 'myProject' : (tree.type || 'regular');
+            // Determinar el tipo de marcador
+            const markerType = tree.isMyProject ? 'myProject' : tree.type || 'regular';
 
-          // Z-index mayor para árboles plantados (aparecen encima)
-          const zIndex = (tree.status === 'plantado' || tree.status === 'verificado') ? 1000 : 100;
+            // Z-index mayor para árboles plantados (aparecen encima)
+            const zIndex = tree.status === 'plantado' || tree.status === 'verificado' ? 1000 : 100;
 
-          return (
-            <Marker
-              key={`${markerType}-${tree.id}`}
-              position={[lat, lng]}
-              icon={createTreeIcon(tree.status, markerType)}
-              zIndexOffset={zIndex}
-              ref={(ref) => {
-                if (ref) {
-                  markerRefs.current[tree.id] = ref;
-                }
-              }}
-              eventHandlers={{
-                popupopen: () => loadTreeDetails(tree.id, tree.type)
-              }}
-            >
-              <Popup>
-                <TreePopupContent
-                  tree={tree}
-                  loadedDetails={loadedDetails}
-                  loadingDetails={loadingDetails}
-                  statusLabels={statusLabels}
-                />
-              </Popup>
-            </Marker>
-          );
-        })}
+            return (
+              <Marker
+                key={`${markerType}-${tree.id}`}
+                position={[lat, lng]}
+                icon={createTreeIcon(tree.status, markerType)}
+                zIndexOffset={zIndex}
+                ref={(ref) => {
+                  if (ref) {
+                    markerRefs.current[tree.id] = ref;
+                  }
+                }}
+                eventHandlers={{
+                  popupopen: () => loadTreeDetails(tree.id, tree.type),
+                }}
+              >
+                <Popup>
+                  <TreePopupContent
+                    tree={tree}
+                    loadedDetails={loadedDetails}
+                    loadingDetails={loadingDetails}
+                    statusLabels={statusLabels}
+                  />
+                </Popup>
+              </Marker>
+            );
+          })}
       </MapContainer>
     </div>
   );
 };
-
 
 // Componente para el contenido del popup con carga bajo demanda
 const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels }) => {
@@ -467,7 +496,9 @@ const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels })
           </span>
         )}
       </div>
-      <p className="text-sm text-gray-600">{details.country || details.city || 'Ubicación desconocida'}</p>
+      <p className="text-sm text-gray-600">
+        {details.country || details.city || 'Ubicación desconocida'}
+      </p>
       {tree.type === 'collaborative' ? (
         <>
           <p className="text-xs text-gray-500 mt-1">
@@ -488,39 +519,44 @@ const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels })
             </div>
           )}
           {details.creator_name && (
-            <p className="text-xs text-gray-500 mt-1">
-              Creador: {details.creator_name}
-            </p>
+            <p className="text-xs text-gray-500 mt-1">Creador: {details.creator_name}</p>
           )}
           {details.status && (
             <p className="text-xs mt-1">
-              <span className={`inline-block w-2 h-2 rounded-full mr-1 ${
-                details.status === 'plantado' || details.status === 'verificado' ? 'bg-green-600' : 'bg-yellow-500'
-              }`}></span>
+              <span
+                className={`inline-block w-2 h-2 rounded-full mr-1 ${
+                  details.status === 'plantado' || details.status === 'verificado'
+                    ? 'bg-green-600'
+                    : 'bg-yellow-500'
+                }`}
+              ></span>
               {statusLabels[details.status] || details.status}
             </p>
           )}
           {details.message && (
-            <p className="text-xs text-gray-600 mt-1 italic">
-              "{details.message}"
-            </p>
+            <p className="text-xs text-gray-600 mt-1 italic">"{details.message}"</p>
           )}
         </>
       ) : (
         <>
           <p className="text-xs text-gray-500">
-            Creado: {details.planted_at ? new Date(details.planted_at).toLocaleDateString() : 'Fecha desconocida'}
+            Creado:{' '}
+            {details.planted_at
+              ? new Date(details.planted_at).toLocaleDateString()
+              : 'Fecha desconocida'}
           </p>
           <p className="text-xs mt-1">
-            <span className={`inline-block w-2 h-2 rounded-full mr-1 ${
-              details.status === 'plantado' || details.status === 'verificado' ? 'bg-green-600' : 'bg-yellow-500'
-            }`}></span>
+            <span
+              className={`inline-block w-2 h-2 rounded-full mr-1 ${
+                details.status === 'plantado' || details.status === 'verificado'
+                  ? 'bg-green-600'
+                  : 'bg-yellow-500'
+              }`}
+            ></span>
             {statusLabels[details.status] || details.status}
           </p>
           {details.message && (
-            <p className="text-xs text-gray-600 mt-1 italic">
-              "{details.message}"
-            </p>
+            <p className="text-xs text-gray-600 mt-1 italic">"{details.message}"</p>
           )}
         </>
       )}
@@ -540,7 +576,8 @@ const areEqual = (prevProps, nextProps) => {
 
   // Comparar arrays de center y selectedLocation
   if (JSON.stringify(prevProps.center) !== JSON.stringify(nextProps.center)) return false;
-  if (JSON.stringify(prevProps.selectedLocation) !== JSON.stringify(nextProps.selectedLocation)) return false;
+  if (JSON.stringify(prevProps.selectedLocation) !== JSON.stringify(nextProps.selectedLocation))
+    return false;
 
   // Comparar zoom
   if (prevProps.zoom !== nextProps.zoom) return false;

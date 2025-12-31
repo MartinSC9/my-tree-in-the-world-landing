@@ -6,8 +6,8 @@ const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 30000, // Aumentado a 30 segundos para operaciones que pueden tardar más
   headers: {
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
 });
 
 // Interceptor para agregar token a todas las requests
@@ -38,7 +38,7 @@ api.interceptors.response.use(
         const refreshToken = localStorage.getItem('refreshToken');
         if (refreshToken) {
           const response = await axios.post(`${API_BASE_URL}/auth/refresh`, {
-            refreshToken
+            refreshToken,
           });
 
           const { token } = response.data;
@@ -55,10 +55,10 @@ api.interceptors.response.use(
 
         // Mostrar notificación de sesión expirada
         toast({
-          title: "Sesión expirada",
-          description: "Tu sesión ha caducado. Por favor, inicia sesión nuevamente.",
-          variant: "destructive",
-          duration: 5000
+          title: 'Sesión expirada',
+          description: 'Tu sesión ha caducado. Por favor, inicia sesión nuevamente.',
+          variant: 'destructive',
+          duration: 5000,
         });
 
         // Redirigir al login después de un breve delay

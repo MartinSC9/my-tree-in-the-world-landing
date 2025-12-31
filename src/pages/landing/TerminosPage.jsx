@@ -5,7 +5,7 @@ import Footer from '@shared/components/layout/Footer';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
 const TerminosPage = () => {
@@ -18,12 +18,15 @@ const TerminosPage = () => {
             <div className="bg-white/20 backdrop-blur-sm p-3 rounded-xl">
               <FileText className="h-8 w-8 text-white" />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-white">
-              Términos y Condiciones
-            </h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-white">Términos y Condiciones</h1>
           </div>
           <p className="text-green-100">
-            Última actualización: {new Date().toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' })}
+            Última actualización:{' '}
+            {new Date().toLocaleDateString('es-AR', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })}
           </p>
         </div>
       </div>
@@ -36,21 +39,22 @@ const TerminosPage = () => {
         className="max-w-4xl mx-auto px-6 py-12"
       >
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 md:p-12 space-y-8">
-
           <section>
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
               <TreePine className="h-6 w-6 text-green-600" />
               1. Aceptación de los Términos
             </h2>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              Al acceder y utilizar la plataforma "Mi Árbol en el Mundo" (en adelante, "la Plataforma"),
-              usted acepta cumplir con estos Términos y Condiciones. Si no está de acuerdo con alguna
-              parte de estos términos, no debe utilizar nuestros servicios.
+              Al acceder y utilizar la plataforma "Mi Árbol en el Mundo" (en adelante, "la
+              Plataforma"), usted acepta cumplir con estos Términos y Condiciones. Si no está de
+              acuerdo con alguna parte de estos términos, no debe utilizar nuestros servicios.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">2. Descripción del Servicio</h2>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
+              2. Descripción del Servicio
+            </h2>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
               Mi Árbol en el Mundo es una plataforma que permite a los usuarios:
             </p>
@@ -64,10 +68,12 @@ const TerminosPage = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">3. Registro de Usuario</h2>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
+              3. Registro de Usuario
+            </h2>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-              Para utilizar ciertos servicios de la Plataforma, deberá crear una cuenta proporcionando
-              información precisa y completa. Usted es responsable de:
+              Para utilizar ciertos servicios de la Plataforma, deberá crear una cuenta
+              proporcionando información precisa y completa. Usted es responsable de:
             </p>
             <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2 ml-4">
               <li>Mantener la confidencialidad de su contraseña</li>
@@ -77,7 +83,9 @@ const TerminosPage = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">4. Compra de Árboles</h2>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
+              4. Compra de Árboles
+            </h2>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
               Al realizar una compra en la Plataforma:
             </p>
@@ -91,28 +99,41 @@ const TerminosPage = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">5. Política de Reembolsos</h2>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
+              5. Política de Reembolsos
+            </h2>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
               Dado que nuestro servicio implica la plantación física de árboles:
             </p>
             <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2 ml-4">
-              <li>Las solicitudes de reembolso deben realizarse dentro de las 48 horas posteriores a la compra</li>
+              <li>
+                Las solicitudes de reembolso deben realizarse dentro de las 48 horas posteriores a
+                la compra
+              </li>
               <li>No se aceptan reembolsos una vez iniciado el proceso de plantación</li>
-              <li>En caso de que un árbol no sobreviva durante el primer año, nos comprometemos a plantar uno nuevo sin costo adicional</li>
+              <li>
+                En caso de que un árbol no sobreviva durante el primer año, nos comprometemos a
+                plantar uno nuevo sin costo adicional
+              </li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">6. Propiedad Intelectual</h2>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
+              6. Propiedad Intelectual
+            </h2>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              Todo el contenido de la Plataforma, incluyendo textos, gráficos, logos, íconos, imágenes,
-              clips de audio y software, es propiedad de Mi Árbol en el Mundo o de sus proveedores de
-              contenido y está protegido por las leyes de propiedad intelectual argentinas e internacionales.
+              Todo el contenido de la Plataforma, incluyendo textos, gráficos, logos, íconos,
+              imágenes, clips de audio y software, es propiedad de Mi Árbol en el Mundo o de sus
+              proveedores de contenido y está protegido por las leyes de propiedad intelectual
+              argentinas e internacionales.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">7. Uso Aceptable</h2>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
+              7. Uso Aceptable
+            </h2>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
               Los usuarios se comprometen a no:
             </p>
@@ -126,31 +147,39 @@ const TerminosPage = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">8. Limitación de Responsabilidad</h2>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
+              8. Limitación de Responsabilidad
+            </h2>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              Mi Árbol en el Mundo no será responsable por daños indirectos, incidentales, especiales
-              o consecuentes que resulten del uso o la imposibilidad de usar la Plataforma.
-              Hacemos nuestro mejor esfuerzo para garantizar la supervivencia de los árboles plantados,
-              pero no podemos garantizar resultados específicos debido a factores ambientales externos.
+              Mi Árbol en el Mundo no será responsable por daños indirectos, incidentales,
+              especiales o consecuentes que resulten del uso o la imposibilidad de usar la
+              Plataforma. Hacemos nuestro mejor esfuerzo para garantizar la supervivencia de los
+              árboles plantados, pero no podemos garantizar resultados específicos debido a factores
+              ambientales externos.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">9. Modificaciones</h2>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
+              9. Modificaciones
+            </h2>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              Nos reservamos el derecho de modificar estos Términos y Condiciones en cualquier momento.
-              Los cambios entrarán en vigor inmediatamente después de su publicación en la Plataforma.
-              El uso continuado de nuestros servicios después de dichos cambios constituye su aceptación
-              de los nuevos términos.
+              Nos reservamos el derecho de modificar estos Términos y Condiciones en cualquier
+              momento. Los cambios entrarán en vigor inmediatamente después de su publicación en la
+              Plataforma. El uso continuado de nuestros servicios después de dichos cambios
+              constituye su aceptación de los nuevos términos.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">10. Ley Aplicable</h2>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
+              10. Ley Aplicable
+            </h2>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
               Estos Términos y Condiciones se rigen por las leyes de la República Argentina.
               Cualquier disputa que surja en relación con estos términos se someterá a la
-              jurisdicción exclusiva de los tribunales ordinarios de la Ciudad de Córdoba, Argentina.
+              jurisdicción exclusiva de los tribunales ordinarios de la Ciudad de Córdoba,
+              Argentina.
             </p>
           </section>
 
@@ -160,12 +189,17 @@ const TerminosPage = () => {
               Si tiene preguntas sobre estos Términos y Condiciones, puede contactarnos en:
             </p>
             <ul className="text-gray-600 dark:text-gray-300 mt-2 space-y-1">
-              <li><strong>Email:</strong> info@miarbolenelmundo.com</li>
-              <li><strong>Teléfono:</strong> +54 11 1234-5678</li>
-              <li><strong>Dirección:</strong> Córdoba, Argentina</li>
+              <li>
+                <strong>Email:</strong> info@miarbolenelmundo.com
+              </li>
+              <li>
+                <strong>Teléfono:</strong> +54 11 1234-5678
+              </li>
+              <li>
+                <strong>Dirección:</strong> Córdoba, Argentina
+              </li>
             </ul>
           </section>
-
         </div>
       </motion.div>
 

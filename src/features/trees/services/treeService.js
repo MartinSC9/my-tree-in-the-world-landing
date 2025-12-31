@@ -16,7 +16,7 @@ export const statsService = {
   async getTopContributors(limit = 6) {
     const response = await api.get(`${API_ENDPOINTS.STATS_TOP_CONTRIBUTORS}?limit=${limit}`);
     return response.data.contributors;
-  }
+  },
 };
 
 export const treeService = {
@@ -44,7 +44,7 @@ export const treeService = {
   async getCollaborativeTreeById(id) {
     const response = await api.get(API_ENDPOINTS.COLLABORATIVE_TREE_BY_ID(id));
     return response.data.project;
-  }
+  },
 };
 
 export default treeService;

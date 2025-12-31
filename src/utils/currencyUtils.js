@@ -14,7 +14,7 @@ export const formatCurrency = (amount) => {
     style: 'currency',
     currency: 'ARS',
     minimumFractionDigits: 2,
-    maximumFractionDigits: 2
+    maximumFractionDigits: 2,
   }).format(value);
 };
 
