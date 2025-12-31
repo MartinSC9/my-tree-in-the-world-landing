@@ -5,8 +5,20 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-/* ===== Design Tokens ===== */
+/* ===== Sistema de Colores Global - Mi Árbol en el Mundo ===== */
+/* Estos colores deben coincidir con el frontend (app) */
+
 :root {
+  /* Fondos globales - compartidos con frontend */
+  --bg-base: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-elevated: #f1f5f9;
+
+  /* Brand colors - compartidos con frontend */
+  --brand-primary: #10b981;
+  --brand-primary-light: #d1fae5;
+  --brand-dark: #059669;
+
   /* Core Colors */
   --background: 120 20% 98%;
   --foreground: 150 20% 12%;
@@ -92,10 +104,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Dark mode - gray-900 (#111827) para consistencia con frontend */
 .dark body,
 body.dark {
-  background: linear-gradient(135deg, hsl(220 15% 10%) 0%, hsl(220 15% 8%) 100%);
+  background: var(--bg-base);
   color: hsl(0 0% 90%);
+}
+
+.dark {
+  /* Fondos globales dark - compartidos con frontend */
+  --bg-base: #111827;
+  --bg-surface: #1f2937;
+  --bg-elevated: #374151;
+
+  /* Brand colors en dark */
+  --brand-primary: #34d399;
+  --brand-primary-light: #065f46;
+  --brand-dark: #10b981;
 }
 
 /* ===== Typography ===== */
