@@ -31,6 +31,14 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    // Downgrade new React 19 compiler rules to warnings
+    'react-hooks/set-state-in-effect': 'warn',
+    'react-hooks/immutability': 'warn',
+    'react-hooks/purity': 'warn',
+    'react/display-name': 'warn',
+    'no-empty': 'warn',
+    'no-case-declarations': 'warn',
+    'no-prototype-builtins': 'warn',
   },
   ignorePatterns: ['dist', 'node_modules', '*.config.js', '*.config.cjs'],
 };

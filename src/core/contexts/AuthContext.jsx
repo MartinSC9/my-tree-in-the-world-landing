@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { APP_URL } from '@core/config/app.config';
 
 const AuthContext = createContext();
@@ -20,17 +20,14 @@ const isAuthenticated = () => {
   return !!localStorage.getItem('token');
 };
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+const getInitialUser = () => {
+  const storedUser = getStoredUser();
+  return storedUser && isAuthenticated() ? storedUser : null;
+};
 
-  useEffect(() => {
-    const storedUser = getStoredUser();
-    if (storedUser && isAuthenticated()) {
-      setUser(storedUser);
-    }
-    setLoading(false);
-  }, []);
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(getInitialUser);
+  const [loading] = useState(false);
 
   const getRedirectPath = (role) => {
     switch (role) {

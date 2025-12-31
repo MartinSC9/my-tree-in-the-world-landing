@@ -119,12 +119,9 @@ const processGreenSpaces = (data) => {
           coordinates: coordinates,
         };
         greenSpaces.push(space);
-      } else {
       }
     }
   });
-  if (greenSpaces.length > 0) {
-  }
 
   return greenSpaces;
 };
