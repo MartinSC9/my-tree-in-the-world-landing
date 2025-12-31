@@ -113,9 +113,9 @@ body.dark {
 
 .dark {
   /* Fondos globales dark - compartidos con frontend */
-  --bg-base: #111827;
-  --bg-surface: #1f2937;
-  --bg-elevated: #374151;
+  --bg-base: #030712;
+  --bg-surface: #111827;
+  --bg-elevated: #1f2937;
 
   /* Brand colors en dark */
   --brand-primary: #34d399;
