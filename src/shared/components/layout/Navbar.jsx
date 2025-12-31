@@ -171,7 +171,7 @@ const Navbar = () => {
                       key={item.name}
                       to={item.path}
                       onClick={item.path === '/' ? scrollToTop : undefined}
-                      className="text-green-700 dark:text-gray-300 hover:text-green-900 dark:hover:text-white hover:bg-green-50 dark:hover:bg-gray-900 transition-all flex items-center gap-1.5 font-medium px-3 py-2 rounded-lg"
+                      className="text-green-700 dark:text-gray-300 hover:text-green-900 dark:hover:text-white hover:bg-green-50 dark:hover:bg-gray-800 transition-all flex items-center gap-1.5 font-medium px-3 py-2 rounded-lg"
                     >
                       <item.icon className="h-4 w-4" />
                       <span className="text-sm">{item.name}</span>
@@ -180,7 +180,7 @@ const Navbar = () => {
                     <button
                       key={item.name}
                       onClick={() => window.open(item.path, '_blank')}
-                      className="text-green-700 dark:text-gray-300 hover:text-green-900 dark:hover:text-white hover:bg-green-50 dark:hover:bg-gray-900 transition-all flex items-center gap-1.5 font-medium px-3 py-2 rounded-lg"
+                      className="text-green-700 dark:text-gray-300 hover:text-green-900 dark:hover:text-white hover:bg-green-50 dark:hover:bg-gray-800 transition-all flex items-center gap-1.5 font-medium px-3 py-2 rounded-lg"
                     >
                       <item.icon className="h-4 w-4" />
                       <span className="text-sm">{item.name}</span>
@@ -192,7 +192,7 @@ const Navbar = () => {
                 <div className="relative" ref={programsDropdownRef}>
                   <button
                     onClick={() => setIsProgramsDropdownOpen(!isProgramsDropdownOpen)}
-                    className="text-green-700 dark:text-gray-300 hover:text-green-900 dark:hover:text-white hover:bg-green-50 dark:hover:bg-gray-900 transition-all flex items-center gap-1.5 font-medium px-3 py-2 rounded-lg"
+                    className="text-green-700 dark:text-gray-300 hover:text-green-900 dark:hover:text-white hover:bg-green-50 dark:hover:bg-gray-800 transition-all flex items-center gap-1.5 font-medium px-3 py-2 rounded-lg"
                   >
                     <Gift className="h-4 w-4" />
                     <span className="text-sm">Programas</span>
@@ -215,7 +215,7 @@ const Navbar = () => {
                             key={item.name}
                             to={item.path}
                             onClick={() => setIsProgramsDropdownOpen(false)}
-                            className="flex items-start gap-3 px-4 py-3 hover:bg-green-50 dark:hover:bg-gray-800 transition-colors"
+                            className="flex items-start gap-3 px-4 py-3 hover:bg-green-50 dark:hover:bg-gray-700 transition-colors"
                           >
                             <div className="w-8 h-8 rounded-lg bg-green-100 dark:bg-emerald-900/50 flex items-center justify-center flex-shrink-0">
                               <item.icon className="h-4 w-4 text-green-600 dark:text-emerald-400" />
@@ -239,7 +239,7 @@ const Navbar = () => {
                 <div className="relative" ref={sociosDropdownRef}>
                   <button
                     onClick={() => setIsSociosDropdownOpen(!isSociosDropdownOpen)}
-                    className="text-green-700 dark:text-gray-300 hover:text-green-900 dark:hover:text-white hover:bg-green-50 dark:hover:bg-gray-900 transition-all flex items-center gap-1.5 font-medium px-3 py-2 rounded-lg"
+                    className="text-green-700 dark:text-gray-300 hover:text-green-900 dark:hover:text-white hover:bg-green-50 dark:hover:bg-gray-800 transition-all flex items-center gap-1.5 font-medium px-3 py-2 rounded-lg"
                   >
                     <Users className="h-4 w-4" />
                     <span className="text-sm">Socios</span>
@@ -262,7 +262,7 @@ const Navbar = () => {
                             key={item.name}
                             to={item.path}
                             onClick={() => setIsSociosDropdownOpen(false)}
-                            className="flex items-start gap-3 px-4 py-3 hover:bg-green-50 dark:hover:bg-gray-800 transition-colors"
+                            className="flex items-start gap-3 px-4 py-3 hover:bg-green-50 dark:hover:bg-gray-700 transition-colors"
                           >
                             <div className="w-8 h-8 rounded-lg bg-green-100 dark:bg-emerald-900/50 flex items-center justify-center flex-shrink-0">
                               <item.icon className="h-4 w-4 text-green-600 dark:text-emerald-400" />
@@ -289,7 +289,7 @@ const Navbar = () => {
               {/* Theme Toggle Button */}
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-lg hover:bg-green-50 dark:hover:bg-gray-900 transition-colors"
+                className="p-2 rounded-lg hover:bg-green-50 dark:hover:bg-gray-800 transition-colors"
                 aria-label={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
               >
                 {isDark ? (
@@ -304,7 +304,7 @@ const Navbar = () => {
                   {/* Boton de notificaciones */}
                   <button
                     onClick={() => navigate(`/usuario/${user.id}/notificaciones`)}
-                    className="relative p-2 hover:bg-green-50 dark:hover:bg-gray-900 rounded-lg transition-colors group"
+                    className="relative p-2 hover:bg-green-50 dark:hover:bg-gray-800 rounded-lg transition-colors group"
                     aria-label="Notificaciones"
                   >
                     <Bell className="h-5 w-5 text-green-700 dark:text-gray-300 group-hover:text-green-900 dark:group-hover:text-white" />
@@ -313,7 +313,7 @@ const Navbar = () => {
                   <div className="relative" ref={profileDropdownRef}>
                     <button
                       onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-                      className="flex items-center gap-2 px-3 py-2 hover:bg-green-50 dark:hover:bg-gray-900 rounded-lg transition-colors group"
+                      className="flex items-center gap-2 px-3 py-2 hover:bg-green-50 dark:hover:bg-gray-800 rounded-lg transition-colors group"
                     >
                       <div className="h-8 w-8 rounded-full bg-green-600 dark:bg-emerald-600 flex items-center justify-center text-white font-semibold text-sm group-hover:bg-green-700 dark:group-hover:bg-emerald-500 transition-colors">
                         {user.username?.charAt(0).toUpperCase() || 'U'}
@@ -351,7 +351,7 @@ const Navbar = () => {
                                 navigate(getDashboardPath());
                                 setIsProfileDropdownOpen(false);
                               }}
-                              className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-800 flex items-center gap-2"
+                              className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-700 flex items-center gap-2"
                             >
                               <User className="h-4 w-4" />
                               {user.role === 'user' ? 'Ver mi perfil' : 'Ver panel'}
@@ -386,7 +386,7 @@ const Navbar = () => {
               {/* Theme Toggle - Mobile */}
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-lg hover:bg-green-50 dark:hover:bg-gray-900 transition-colors"
+                className="p-2 rounded-lg hover:bg-green-50 dark:hover:bg-gray-800 transition-colors"
                 aria-label={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
               >
                 {isDark ? (
@@ -398,7 +398,7 @@ const Navbar = () => {
 
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="p-2 rounded-lg hover:bg-green-50 dark:hover:bg-gray-900 transition-colors flex-shrink-0"
+                className="p-2 rounded-lg hover:bg-green-50 dark:hover:bg-gray-800 transition-colors flex-shrink-0"
                 aria-label="Abrir menu de navegacion"
               >
                 {isMenuOpen ? (
@@ -443,7 +443,7 @@ const Navbar = () => {
                   </div>
                   <button
                     onClick={() => setIsMenuOpen(false)}
-                    className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900"
+                    className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
                     aria-label="Cerrar menu"
                   >
                     <X className="h-5 w-5 text-gray-600 dark:text-gray-300" />
@@ -478,7 +478,7 @@ const Navbar = () => {
                       <Button
                         onClick={() => handleNavigation(`/usuario/${user.id}/notificaciones`)}
                         variant="outline"
-                        className="border-green-600 dark:border-emerald-600 text-green-700 dark:text-emerald-400 hover:bg-green-50 dark:hover:bg-gray-900"
+                        className="border-green-600 dark:border-emerald-600 text-green-700 dark:text-emerald-400 hover:bg-green-50 dark:hover:bg-gray-800"
                         size="sm"
                       >
                         <Bell className="h-4 w-4 mr-2" />
@@ -512,7 +512,7 @@ const Navbar = () => {
                             setIsMenuOpen(false);
                           }
                         }}
-                        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-900 hover:text-green-900 dark:hover:text-white transition-colors"
+                        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-800 hover:text-green-900 dark:hover:text-white transition-colors"
                       >
                         <item.icon className="h-5 w-5" />
                         <span className="font-medium">{item.name}</span>
@@ -528,7 +528,7 @@ const Navbar = () => {
                         <button
                           key={item.name}
                           onClick={() => handleNavigation(item.path)}
-                          className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-900 hover:text-green-900 dark:hover:text-white transition-colors"
+                          className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-800 hover:text-green-900 dark:hover:text-white transition-colors"
                         >
                           <item.icon className="h-5 w-5" />
                           <div>
@@ -550,7 +550,7 @@ const Navbar = () => {
                         <button
                           key={item.name}
                           onClick={() => handleNavigation(item.path)}
-                          className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-900 hover:text-green-900 dark:hover:text-white transition-colors"
+                          className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-800 hover:text-green-900 dark:hover:text-white transition-colors"
                         >
                           <item.icon className="h-5 w-5" />
                           <div>

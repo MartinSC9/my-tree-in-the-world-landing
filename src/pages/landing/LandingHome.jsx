@@ -611,7 +611,7 @@ const LandingHome = () => {
       {/* CADENA DE IMPACTO - Con animaciones y colores vibrantes */}
       <section
         ref={impactRef}
-        className="py-24 md:py-32 px-4 bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 relative overflow-hidden"
+        className="py-24 md:py-32 px-4 bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 relative overflow-hidden"
       >
         {/* Decoraciones de fondo animadas */}
         <div className="absolute inset-0 overflow-hidden">
