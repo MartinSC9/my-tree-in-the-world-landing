@@ -217,6 +217,22 @@
     <link rel="preconnect" href="https://my-tree-in-the-world-back.onrender.com" />
     <link rel="dns-prefetch" href="https://my-tree-in-the-world-back.onrender.com" />
 
+    <!-- Prevenir flash blanco: aplicar tema oscuro ANTES de que se renderice -->
+    <script>
+      (function() {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+    <style>
+      /* Fondo inicial mientras carga - evita flash blanco */
+      html.dark { background-color: #030712; }
+      html:not(.dark) { background-color: #f8fafc; }
+      html, body { margin: 0; padding: 0; }
+    </style>
+
     <!-- SPA GitHub Pages Redirect Handler -->
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages
