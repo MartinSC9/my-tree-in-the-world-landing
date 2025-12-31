@@ -38,3 +38,4 @@ nul
 # Build artifacts
 dist/
 *.zip
+package-lock.json
