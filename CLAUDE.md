@@ -64,19 +64,31 @@ The platform has **5 distinct user roles**, each with dedicated dashboards and w
 
 Trees progress through a **work order system** with status transitions:
 
-1. `sin_plantar` → User creates virtual tree
-2. `en_proceso` → Work order created
-3. Work order states:
-   - `pendiente_autorizacion` → Awaiting admin authorization
-   - `autorizada` → Admin approves
-   - `asignada_vivero` → Assigned to nursery
-   - `vivero_preparando` → Nursery preparing physical tree
-   - `planta_lista` → Tree ready for planting
-   - `entregada_plantador` → Delivered to planter
-   - `plantador_en_camino` → Planter traveling to location
-   - `plantando` → Planting in progress
-   - `plantada` → Planted successfully
-4. `plantado` / `verificado` → Tree status updated
+**Tree statuses** (trees.status): `en_proceso` → `plantado` → `verificado`
+- Note: `sin_plantar` exists in schema but is not used - trees are created directly as `en_proceso`
+
+**Work order states** (work_orders.status):
+
+For **public spaces** (auto-approved, app has municipal permit):
+```
+Payment → autorizada → asignada_vivero → vivero_preparando →
+planta_lista → entregada_plantador → plantador_en_camino → plantando → plantada
+```
+
+For **private property** ("Mi Domicilio", requires DNI verification):
+```
+Payment → pendiente_autorizacion → [Admin verifies DNI] → autorizada →
+asignada_vivero → vivero_preparando → planta_lista →
+entregada_plantador → plantador_en_camino → plantando → plantada
+```
+
+**User-visible timeline** (6 steps):
+1. Preparando (vivero_preparando)
+2. Planta Lista (planta_lista)
+3. Con Plantador (entregada_plantador)
+4. En Camino (plantador_en_camino)
+5. Plantando (plantando)
+6. Plantada (plantada)
 
 ### Address Verification System (Own Property Trees)
 
