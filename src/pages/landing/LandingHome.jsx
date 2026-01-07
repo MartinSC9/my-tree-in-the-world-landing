@@ -543,7 +543,7 @@ const LandingHome = () => {
                   {[
                     'Acero inoxidable anti-oxidación',
                     'Durabilidad garantizada 10+ años',
-                    'Tu nombre grabado en la chapa',
+                    'QR que muestra tu nombre y mensaje',
                     'Instalada junto al árbol',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm">
