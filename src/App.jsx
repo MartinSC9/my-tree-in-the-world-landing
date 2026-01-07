@@ -18,6 +18,7 @@ import TerminosPage from '@/pages/landing/TerminosPage';
 import PrivacidadPage from '@/pages/landing/PrivacidadPage';
 import ViverosPage from '@/pages/landing/ViverosPage';
 import PlantadoresPage from '@/pages/landing/PlantadoresPage';
+import ChapistasPage from '@/pages/landing/ChapistasPage';
 
 // Public pages
 import UnifiedMapPage from '@features/trees/pages/UnifiedMapPage';
@@ -105,6 +106,14 @@ const App = () => {
                 element={
                   <AuthenticatedLayout>
                     <PlantadoresPage />
+                  </AuthenticatedLayout>
+                }
+              />
+              <Route
+                path="/chapistas"
+                element={
+                  <AuthenticatedLayout>
+                    <ChapistasPage />
                   </AuthenticatedLayout>
                 }
               />
