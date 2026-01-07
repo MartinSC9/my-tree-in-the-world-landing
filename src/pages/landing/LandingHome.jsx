@@ -647,11 +647,11 @@ const LandingHome = () => {
           </motion.div>
 
           {/* Cadena de impacto - Cards con animaciones */}
-          <div className="relative max-w-5xl mx-auto">
+          <div className="relative max-w-6xl mx-auto">
             {/* Línea conectora (desktop) */}
-            <div className="hidden md:block absolute top-1/2 left-[10%] right-[10%] h-1 bg-gradient-to-r from-emerald-500 via-amber-500 via-orange-500 to-teal-500 -translate-y-1/2 rounded-full opacity-30" />
+            <div className="hidden md:block absolute top-1/2 left-[8%] right-[8%] h-1 bg-gradient-to-r from-emerald-500 via-amber-500 via-purple-500 via-rose-500 to-cyan-500 -translate-y-1/2 rounded-full opacity-30" />
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-5">
               {/* Card 1 - Tú Plantas */}
               <motion.div
                 initial={{ opacity: 0, y: 50, scale: 0.9 }}
@@ -662,18 +662,18 @@ const LandingHome = () => {
                 className="relative group"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
-                <div className="relative bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-6 text-center text-white shadow-2xl overflow-hidden">
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+                <div className="relative bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-5 text-center text-white shadow-2xl overflow-hidden">
+                  <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
                   <motion.div
-                    className="text-4xl md:text-5xl mb-3"
+                    className="text-3xl md:text-4xl mb-2"
                     animate={{ rotate: [0, 10, -10, 0] }}
                     transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                   >
                     🌱
                   </motion.div>
-                  <h4 className="font-display text-lg md:text-xl font-bold">Tú</h4>
-                  <h4 className="font-display text-lg md:text-xl font-bold">Plantas</h4>
-                  <div className="mt-3 text-xs text-emerald-100 opacity-80">Paso 1</div>
+                  <h4 className="font-display text-base md:text-lg font-bold">Tú</h4>
+                  <h4 className="font-display text-base md:text-lg font-bold">Plantas</h4>
+                  <div className="mt-2 text-xs text-emerald-100 opacity-80">Paso 1</div>
                 </div>
               </motion.div>
 
@@ -687,22 +687,47 @@ const LandingHome = () => {
                 className="relative group"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
-                <div className="relative bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl p-6 text-center text-white shadow-2xl overflow-hidden">
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+                <div className="relative bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl p-5 text-center text-white shadow-2xl overflow-hidden">
+                  <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
                   <motion.div
-                    className="text-4xl md:text-5xl mb-3"
+                    className="text-3xl md:text-4xl mb-2"
                     animate={{ scale: [1, 1.1, 1] }}
                     transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
                   >
                     🏡
                   </motion.div>
-                  <h4 className="font-display text-lg md:text-xl font-bold">Viveros</h4>
-                  <h4 className="font-display text-lg md:text-xl font-bold">Venden</h4>
-                  <div className="mt-3 text-xs text-amber-100 opacity-80">Paso 2</div>
+                  <h4 className="font-display text-base md:text-lg font-bold">Viveros</h4>
+                  <h4 className="font-display text-base md:text-lg font-bold">Preparan</h4>
+                  <div className="mt-2 text-xs text-amber-100 opacity-80">Paso 2</div>
                 </div>
               </motion.div>
 
-              {/* Card 3 - Empleo */}
+              {/* Card 3 - Chapistas */}
+              <motion.div
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.25 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="relative group"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
+                <div className="relative bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl p-5 text-center text-white shadow-2xl overflow-hidden">
+                  <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+                  <motion.div
+                    className="text-3xl md:text-4xl mb-2"
+                    animate={{ rotateY: [0, 180, 360] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+                  >
+                    🏷️
+                  </motion.div>
+                  <h4 className="font-display text-base md:text-lg font-bold">Chapistas</h4>
+                  <h4 className="font-display text-base md:text-lg font-bold">Crean QR</h4>
+                  <div className="mt-2 text-xs text-purple-100 opacity-80">Paso 3</div>
+                </div>
+              </motion.div>
+
+              {/* Card 4 - Empleo */}
               <motion.div
                 initial={{ opacity: 0, y: 50, scale: 0.9 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -712,43 +737,43 @@ const LandingHome = () => {
                 className="relative group"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-rose-500 to-pink-600 rounded-2xl blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
-                <div className="relative bg-gradient-to-br from-rose-500 to-pink-600 rounded-2xl p-6 text-center text-white shadow-2xl overflow-hidden">
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+                <div className="relative bg-gradient-to-br from-rose-500 to-pink-600 rounded-2xl p-5 text-center text-white shadow-2xl overflow-hidden">
+                  <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
                   <motion.div
-                    className="text-4xl md:text-5xl mb-3"
+                    className="text-3xl md:text-4xl mb-2"
                     animate={{ y: [0, -5, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
                   >
                     👷
                   </motion.div>
-                  <h4 className="font-display text-lg md:text-xl font-bold">Generas</h4>
-                  <h4 className="font-display text-lg md:text-xl font-bold">Empleo</h4>
-                  <div className="mt-3 text-xs text-rose-100 opacity-80">Paso 3</div>
+                  <h4 className="font-display text-base md:text-lg font-bold">Generas</h4>
+                  <h4 className="font-display text-base md:text-lg font-bold">Empleo</h4>
+                  <div className="mt-2 text-xs text-rose-100 opacity-80">Paso 4</div>
                 </div>
               </motion.div>
 
-              {/* Card 4 - Planeta */}
+              {/* Card 5 - Planeta */}
               <motion.div
                 initial={{ opacity: 0, y: 50, scale: 0.9 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.4 }}
                 whileHover={{ y: -8, scale: 1.02 }}
-                className="relative group"
+                className="relative group col-span-2 md:col-span-1"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
-                <div className="relative bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl p-6 text-center text-white shadow-2xl overflow-hidden">
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+                <div className="relative bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl p-5 text-center text-white shadow-2xl overflow-hidden">
+                  <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
                   <motion.div
-                    className="text-4xl md:text-5xl mb-3"
+                    className="text-3xl md:text-4xl mb-2"
                     animate={{ rotate: 360 }}
                     transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
                   >
                     🌍
                   </motion.div>
-                  <h4 className="font-display text-lg md:text-xl font-bold">Planeta</h4>
-                  <h4 className="font-display text-lg md:text-xl font-bold">Más Verde</h4>
-                  <div className="mt-3 text-xs text-cyan-100 opacity-80">Resultado</div>
+                  <h4 className="font-display text-base md:text-lg font-bold">Planeta</h4>
+                  <h4 className="font-display text-base md:text-lg font-bold">Más Verde</h4>
+                  <div className="mt-2 text-xs text-cyan-100 opacity-80">Resultado</div>
                 </div>
               </motion.div>
             </div>
@@ -771,28 +796,34 @@ const LandingHome = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto"
+            className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 max-w-6xl mx-auto"
           >
             <div className="bg-white/5 backdrop-blur-sm border border-emerald-500/30 rounded-xl p-4 text-center">
-              <p className="text-white">
+              <p className="text-white text-sm">
                 <span className="font-bold text-emerald-400">Tú plantas</span>
                 <span className="text-gray-300"> un árbol con tu nombre.</span>
               </p>
             </div>
             <div className="bg-white/5 backdrop-blur-sm border border-amber-500/30 rounded-xl p-4 text-center">
-              <p className="text-white">
+              <p className="text-white text-sm">
                 <span className="font-bold text-amber-400">Viveros</span>
-                <span className="text-gray-300"> venden y generan ingresos.</span>
+                <span className="text-gray-300"> preparan el árbol físico.</span>
+              </p>
+            </div>
+            <div className="bg-white/5 backdrop-blur-sm border border-purple-500/30 rounded-xl p-4 text-center">
+              <p className="text-white text-sm">
+                <span className="font-bold text-purple-400">Chapistas</span>
+                <span className="text-gray-300"> fabrican la chapa QR.</span>
               </p>
             </div>
             <div className="bg-white/5 backdrop-blur-sm border border-rose-500/30 rounded-xl p-4 text-center">
-              <p className="text-white">
-                <span className="font-bold text-rose-400">Trabajo digno</span>
-                <span className="text-gray-300"> para familias locales.</span>
+              <p className="text-white text-sm">
+                <span className="font-bold text-rose-400">Plantadores</span>
+                <span className="text-gray-300"> instalan árbol y chapa.</span>
               </p>
             </div>
             <div className="bg-white/5 backdrop-blur-sm border border-cyan-500/30 rounded-xl p-4 text-center">
-              <p className="text-white">
+              <p className="text-white text-sm">
                 <span className="font-bold text-cyan-400">Planeta más verde</span>
                 <span className="text-gray-300"> para todos.</span>
               </p>
@@ -832,17 +863,17 @@ const LandingHome = () => {
               {
                 image: '/images/1.png',
                 title: '1. Compra tu Árbol',
-                desc: 'Elige ubicación, nombre y especie.',
+                desc: 'Elige la ubicación en el mapa, ponle un nombre y selecciona la especie que más te guste.',
               },
               {
                 image: '/images/2.png',
                 title: '2. Plantación Real',
-                desc: 'Viveros locales preparan tu árbol. Plantadores profesionales lo plantan. Recibirás fotos del proceso.',
+                desc: 'Viveros preparan tu árbol mientras chapistas fabrican tu placa QR. Plantadores profesionales lo plantan con fotos.',
               },
               {
                 image: '/images/3.png',
                 title: '3. Tu Árbol, Tu Legado',
-                desc: 'Chapa QR instalada junto al árbol. Certificado digital descargable. Visítalo cuando quieras.',
+                desc: 'Chapa de acero con QR instalada junto al árbol. Escanea y accede a tu página única. Certificado digital incluido.',
               },
             ].map((step, i) => (
               <motion.div key={i} variants={fadeInUp} className="text-center flex w-full">
