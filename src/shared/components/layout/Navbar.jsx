@@ -25,6 +25,7 @@ import {
   Share2,
   Store,
   Shovel,
+  Tag,
   Sun,
   Moon,
 } from 'lucide-react';
@@ -134,6 +135,12 @@ const Navbar = () => {
       path: '/plantadores',
       icon: Shovel,
       desc: 'Gana dinero plantando arboles',
+    },
+    {
+      name: 'Chapistas',
+      path: '/chapistas',
+      icon: Tag,
+      desc: 'Fabrica chapas QR para arboles',
     },
   ];
 
