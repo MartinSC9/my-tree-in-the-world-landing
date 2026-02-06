@@ -8,8 +8,10 @@ import { treeService } from '@features/trees/services';
 import { useAuth } from '@core/contexts/AuthContext';
 import Footer from '@shared/components/layout/Footer';
 import { APP_URL } from '@core/config/app.config';
+import { useTheme } from '@core/contexts/ThemeContext';
 
 const UnifiedMapPage = () => {
+  const { isDark } = useTheme();
   const { user, getRedirectPath } = useAuth();
   const [allMarkers, setAllMarkers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -151,7 +153,9 @@ const UnifiedMapPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
+    <div
+      className={`min-h-screen ${isDark ? 'bg-gray-900' : 'bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50'}`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -160,10 +164,14 @@ const UnifiedMapPage = () => {
         >
           {/* Header */}
           <div className="text-center mb-6">
-            <h1 className="text-3xl md:text-4xl font-bold text-green-800 mb-2">
+            <h1
+              className={`text-3xl md:text-4xl font-bold mb-2 ${isDark ? 'text-white' : 'text-green-800'}`}
+            >
               Mapa Global de Árboles
             </h1>
-            <p className="text-base text-green-600">Explora y sigue árboles alrededor del mundo</p>
+            <p className={`text-base ${isDark ? 'text-gray-400' : 'text-green-600'}`}>
+              Explora y sigue árboles alrededor del mundo
+            </p>
           </div>
 
           {/* Stats Cards - Clickeables para filtrar */}
@@ -236,27 +244,39 @@ const UnifiedMapPage = () => {
           </div>
 
           {/* Map */}
-          <Card className="shadow-xl border-green-200 relative overflow-visible">
+          <Card
+            className={`shadow-xl relative overflow-visible ${isDark ? 'bg-gray-800 border-gray-700' : 'border-green-200'}`}
+          >
             <CardContent className="p-0">
               <div className="relative">
                 <TreeMap trees={filteredTrees} height="700px" defaultOpenTreeId={randomTreeId} />
 
                 {/* Leyenda de colores */}
-                <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-3 border border-gray-200 z-[10]">
-                  <div className="text-xs font-semibold text-gray-700 mb-2">Leyenda</div>
+                <div
+                  className={`absolute top-4 right-4 backdrop-blur-sm rounded-lg shadow-lg p-3 border z-[10] ${isDark ? 'bg-gray-800/95 border-gray-700' : 'bg-white/95 border-gray-200'}`}
+                >
+                  <div
+                    className={`text-xs font-semibold mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
+                  >
+                    Leyenda
+                  </div>
                   <div className="space-y-1.5 text-xs">
                     <div className="flex items-center space-x-2">
                       <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                      <span>En Progreso</span>
+                      <span className={isDark ? 'text-gray-400' : ''}>En Progreso</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <div className="w-3 h-3 bg-green-600 rounded-full"></div>
-                      <span>Plantado</span>
+                      <span className={isDark ? 'text-gray-400' : ''}>Plantado</span>
                     </div>
-                    <div className="border-t border-gray-200 pt-1.5 mt-1.5">
+                    <div
+                      className={`border-t pt-1.5 mt-1.5 ${isDark ? 'border-gray-700' : 'border-gray-200'}`}
+                    >
                       <div className="flex items-center space-x-2">
-                        <Users className="w-3 h-3 text-gray-600" />
-                        <span>= Colaborativo</span>
+                        <Users
+                          className={`w-3 h-3 ${isDark ? 'text-gray-500' : 'text-gray-600'}`}
+                        />
+                        <span className={isDark ? 'text-gray-400' : ''}>= Colaborativo</span>
                       </div>
                     </div>
                   </div>
@@ -270,7 +290,7 @@ const UnifiedMapPage = () => {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.5, type: 'spring' }}
-            className="fixed bottom-8 right-8 z-50"
+            className="fixed bottom-24 right-8 z-50"
           >
             <Button
               onClick={handlePlantClick}

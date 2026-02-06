@@ -216,7 +216,7 @@ const LandingHome = () => {
 
               <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 mb-10">
                 <Button
-                  onClick={() => window.open(`${APP_URL}/`, '_blank')}
+                  onClick={() => window.open(`${APP_URL}/feed`, '_blank')}
                   size="lg"
                   className="btn-primary group text-lg px-8 bg-emerald-500 hover:bg-emerald-600"
                 >
@@ -431,7 +431,7 @@ const LandingHome = () => {
             className="text-center mt-12"
           >
             <Button
-              onClick={() => window.open(`${APP_URL}/`, '_blank')}
+              onClick={() => window.open(`${APP_URL}/feed`, '_blank')}
               size="lg"
               className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white text-lg px-8 shadow-lg shadow-emerald-500/30"
             >
@@ -976,7 +976,7 @@ const LandingHome = () => {
               Explora la plataforma, conecta con otros y próximamente planta tu propio árbol.
             </p>
             <Button
-              onClick={() => window.open(`${APP_URL}/`, '_blank')}
+              onClick={() => window.open(`${APP_URL}/feed`, '_blank')}
               size="lg"
               className="bg-white hover:bg-emerald-50 text-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-500 dark:text-white shadow-xl hover:shadow-2xl px-12 py-7 text-xl font-semibold transition-all duration-300 hover:scale-105"
             >

@@ -12,6 +12,7 @@ import L from 'leaflet';
 import { TreePine, Loader2 } from 'lucide-react';
 import { treeService } from '../services';
 import { getGreenSpaces, isPointInGreenSpace } from '../../../services/greenSpacesService';
+import { useTheme } from '../../../core/contexts/ThemeContext';
 
 // Límites geográficos de Córdoba Capital, Argentina
 const CORDOBA_BOUNDS = {
@@ -164,6 +165,7 @@ const TreeMap = ({
   onNotInGreenSpace,
   defaultOpenTreeId = null,
 }) => {
+  const { isDark } = useTheme();
   const mapRef = useRef();
   const markerRefs = useRef({});
   const [loadedDetails, setLoadedDetails] = useState({});
@@ -322,6 +324,7 @@ const TreeMap = ({
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          className={isDark ? 'map-tiles-dark' : ''}
         />
 
         {/* Rectángulo visual mostrando los límites de Córdoba */}

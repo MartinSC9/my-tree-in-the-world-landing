@@ -26,6 +26,7 @@ import CertificatePage from '@features/certificates/pages/CertificatePage';
 
 // Components
 import AuthenticatedLayout from '@shared/components/layout/AuthenticatedLayout';
+import ChatBot from '@shared/components/ChatBot/ChatBot';
 
 const App = () => {
   return (
@@ -150,6 +151,8 @@ const App = () => {
               {/* Redirect all other routes to home */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
+            {/* Chatbot flotante */}
+            <ChatBot />
           </Router>
         </TreeProvider>
       </AuthProvider>

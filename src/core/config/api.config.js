@@ -76,4 +76,7 @@ export const API_ENDPOINTS = {
 
   // Contact
   CONTACT: '/contact',
+
+  // Chat
+  CHAT: '/chat',
 };

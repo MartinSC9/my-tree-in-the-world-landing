@@ -378,7 +378,7 @@ const Navbar = () => {
                 </>
               ) : (
                 <Button
-                  onClick={() => window.open(`${APP_URL}/`, '_blank')}
+                  onClick={() => window.open(`${APP_URL}/feed`, '_blank')}
                   size="sm"
                   className="bg-brand hover:bg-brand-dark text-white"
                 >
@@ -496,7 +496,7 @@ const Navbar = () => {
                 ) : (
                   <div className="mb-6">
                     <Button
-                      onClick={() => window.open(`${APP_URL}/`, '_blank')}
+                      onClick={() => window.open(`${APP_URL}/feed`, '_blank')}
                       className="w-full bg-brand hover:bg-brand-dark text-white"
                     >
                       <LogIn className="h-4 w-4 mr-2" />
