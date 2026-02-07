@@ -28,6 +28,7 @@ import {
   Tag,
   Sun,
   Moon,
+  Info,
 } from 'lucide-react';
 import { APP_URL } from '@core/config/app.config';
 
@@ -115,6 +116,7 @@ const Navbar = () => {
   const navigationItems = [
     { name: 'Inicio', path: '/', icon: Home, isInternal: true },
     { name: 'Mapa Global', path: '/mapa', icon: Globe, isInternal: true },
+    { name: 'Sobre Nosotros', path: '/sobre-nosotros', icon: Info, isInternal: true },
   ];
 
   const programsItems = [

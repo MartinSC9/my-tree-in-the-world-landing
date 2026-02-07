@@ -1,153 +1,187 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { TreePine, Heart, Globe, Users, Target, Leaf, Award, Shield } from 'lucide-react';
+import {
+  TreePine,
+  Heart,
+  Globe,
+  Users,
+  Target,
+  Leaf,
+  Eye,
+  Shield,
+  Handshake,
+  Lightbulb,
+  Sprout,
+  CheckCircle2,
+  Camera,
+  Bell,
+  MapPin,
+  BadgeCheck,
+  TrendingUp,
+} from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@shared/components/ui/card';
+import { useTheme } from '@core/contexts/ThemeContext';
 
 const AboutPage = () => {
+  const { isDark } = useTheme();
+
   const values = [
     {
-      icon: Heart,
-      title: 'Compromiso Real',
-      description:
-        'Cada árbol que se compra en nuestra plataforma se planta realmente. No es solo una promesa, es nuestra garantía.',
-    },
-    {
       icon: Shield,
-      title: 'Transparencia Total',
+      title: 'Transparencia',
       description:
-        'Seguimiento completo con códigos QR, coordenadas GPS y actualizaciones del crecimiento de tu árbol.',
+        'Mostramos en tiempo real el estado de cada árbol plantado, desde el vivero hasta su ubicación final. Cada usuario puede seguir el ciclo completo de su árbol con información verificable.',
     },
     {
-      icon: Leaf,
-      title: 'Conciencia Ecológica',
+      icon: Target,
+      title: 'Impacto Real',
       description:
-        'Trabajamos con botánicos y especialistas para plantar las especies correctas en los lugares correctos.',
+        'No somos una plataforma de árboles virtuales: cada árbol que se planta en nuestra app corresponde a un árbol físico plantado por un profesional, en un lugar real, con coordenadas GPS verificables.',
     },
     {
-      icon: Globe,
-      title: 'Impacto Global',
+      icon: Heart,
+      title: 'Accesibilidad',
       description:
-        'Presencia en múltiples países, colaborando con comunidades locales para maximizar el impacto positivo.',
+        'Creemos que cuidar el planeta debe estar al alcance de todos. Nuestra plataforma elimina las barreras geográficas y económicas para que cualquier persona pueda contribuir a la reforestación.',
+    },
+    {
+      icon: Handshake,
+      title: 'Colaboración',
+      description:
+        'Conectamos usuarios, empresas, viveros y plantadores en un ecosistema donde cada rol es esencial. El trabajo en equipo multiplica nuestro impacto ambiental.',
+    },
+    {
+      icon: Lightbulb,
+      title: 'Innovación con Propósito',
+      description:
+        'Utilizamos la tecnología como herramienta para resolver problemas ambientales reales. Cada funcionalidad que desarrollamos tiene como objetivo facilitar y amplificar el impacto positivo.',
+    },
+    {
+      icon: Sprout,
+      title: 'Responsabilidad Ambiental',
+      description:
+        'Nos comprometemos con prácticas sostenibles en toda nuestra operación. Seleccionamos especies nativas, respetamos los ecosistemas locales y priorizamos la biodiversidad.',
+    },
+    {
+      icon: Users,
+      title: 'Comunidad',
+      description:
+        'Fomentamos una comunidad activa de personas comprometidas con el medio ambiente, donde cada árbol plantado es un lazo que une a quienes comparten el deseo de un planeta más verde.',
     },
   ];
 
-  const team = [
+  const commitments = [
     {
-      role: 'Botánicos',
-      description: 'Seleccionan las especies ideales para cada ecosistema',
+      icon: Camera,
+      text: 'Verificar cada árbol plantado con fotografías y ubicación GPS',
     },
     {
-      role: 'Ecologistas',
-      description: 'Evalúan el impacto ambiental y biodiversidad',
+      icon: Bell,
+      text: 'Informar periódicamente sobre el estado de los árboles',
     },
     {
-      role: 'Comunidades Locales',
-      description: 'Plantan y cuidan los árboles en el terreno',
+      icon: MapPin,
+      text: 'Seleccionar especies apropiadas para cada región',
     },
     {
-      role: 'Equipo Técnico',
-      description: 'Desarrollan la plataforma y sistemas de seguimiento',
+      icon: BadgeCheck,
+      text: 'Trabajar con viveros y plantadores locales certificados',
+    },
+    {
+      icon: TrendingUp,
+      text: 'Reinvertir en la mejora continua de nuestra plataforma y operaciones',
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
+    <div
+      className={`min-h-screen ${isDark ? 'bg-gray-900' : 'bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50'}`}
+    >
       {/* Hero Section */}
       <section className="relative overflow-hidden py-24 md:py-32 px-4">
-        <div className="absolute inset-0 bg-gradient-to-br from-green-600/10 via-emerald-500/5 to-teal-600/10"></div>
+        <div
+          className={`absolute inset-0 ${isDark ? 'bg-gradient-to-br from-green-900/20 via-emerald-900/10 to-teal-900/20' : 'bg-gradient-to-br from-green-600/10 via-emerald-500/5 to-teal-600/10'}`}
+        ></div>
         <div className="relative max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <TreePine className="h-20 w-20 mx-auto mb-6 text-green-600" />
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-green-800 mb-8 leading-tight">
+            <TreePine
+              className={`h-20 w-20 mx-auto mb-6 ${isDark ? 'text-emerald-400' : 'text-green-600'}`}
+            />
+            <h1
+              className={`text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight ${isDark ? 'text-white' : 'text-green-800'}`}
+            >
               Sobre Nosotros
             </h1>
-            <p className="text-xl md:text-2xl text-green-700 mb-8 max-w-4xl mx-auto leading-relaxed">
-              Somos una plataforma que conecta el deseo de ayudar con acciones reales de
-              reforestación. Cada árbol cuenta, cada persona importa.
+            <p
+              className={`text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed ${isDark ? 'text-gray-300' : 'text-green-700'}`}
+            >
+              Conectamos a personas y empresas con la naturaleza a través de una plataforma que
+              facilita la plantación de árboles reales, democratizando el acceso a la reforestación.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Mission Section */}
-      <section className="py-20 px-4 bg-white">
+      {/* Misión y Visión */}
+      <section className={`py-20 px-4 ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-12"
           >
+            {/* Misión */}
             <div>
-              <div className="inline-block bg-green-100 p-4 rounded-2xl mb-6">
-                <Target className="h-12 w-12 text-green-600" />
+              <div
+                className={`inline-block p-4 rounded-2xl mb-6 ${isDark ? 'bg-emerald-900/50' : 'bg-green-100'}`}
+              >
+                <Target className={`h-12 w-12 ${isDark ? 'text-emerald-400' : 'text-green-600'}`} />
               </div>
-              <h2 className="text-4xl font-bold text-green-800 mb-6">Nuestra Misión</h2>
-              <p className="text-lg text-green-700 leading-relaxed mb-4">
-                En "Mi Árbol en el Mundo" creemos que cada persona puede hacer una diferencia
-                tangible en la lucha contra el cambio climático y la deforestación.
-              </p>
-              <p className="text-lg text-green-700 leading-relaxed mb-4">
-                Nuestra misión es simple pero poderosa:{' '}
-                <strong>
-                  hacer que plantar árboles sea accesible, transparente y significativo para todos
-                </strong>
-                .
-              </p>
-              <p className="text-lg text-green-700 leading-relaxed">
-                No solo vendemos árboles, creamos conexiones emocionales entre las personas y el
-                planeta, permitiendo que cada usuario sea parte activa de la solución ambiental.
+              <h2 className={`text-4xl font-bold mb-6 ${isDark ? 'text-white' : 'text-green-800'}`}>
+                Nuestra Misión
+              </h2>
+              <p
+                className={`text-lg leading-relaxed ${isDark ? 'text-gray-300' : 'text-green-700'}`}
+              >
+                Conectar a personas y empresas con la naturaleza a través de una plataforma
+                tecnológica que facilita la plantación de árboles reales, democratizando el acceso a
+                la reforestación y permitiendo que cada individuo contribuya activamente a la
+                regeneración del medio ambiente desde cualquier lugar del mundo.
               </p>
             </div>
-            <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl p-8 lg:p-12">
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-green-600 text-white p-3 rounded-full flex-shrink-0">
-                    <Users className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-green-800 mb-2">Para Todos</h3>
-                    <p className="text-green-700">
-                      Desde individuos hasta empresas, todos pueden contribuir a la reforestación
-                      global.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="bg-green-600 text-white p-3 rounded-full flex-shrink-0">
-                    <Globe className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-green-800 mb-2">Impacto Real</h3>
-                    <p className="text-green-700">
-                      Cada árbol se planta físicamente y puedes seguir su crecimiento con tecnología
-                      GPS y QR.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="bg-green-600 text-white p-3 rounded-full flex-shrink-0">
-                    <Award className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-green-800 mb-2">Certificación</h3>
-                    <p className="text-green-700">
-                      Recibe certificados digitales que comprueban tu contribución ambiental.
-                    </p>
-                  </div>
-                </div>
+
+            {/* Visión */}
+            <div>
+              <div
+                className={`inline-block p-4 rounded-2xl mb-6 ${isDark ? 'bg-emerald-900/50' : 'bg-green-100'}`}
+              >
+                <Eye className={`h-12 w-12 ${isDark ? 'text-emerald-400' : 'text-green-600'}`} />
               </div>
+              <h2 className={`text-4xl font-bold mb-6 ${isDark ? 'text-white' : 'text-green-800'}`}>
+                Nuestra Visión
+              </h2>
+              <p
+                className={`text-lg leading-relaxed ${isDark ? 'text-gray-300' : 'text-green-700'}`}
+              >
+                Ser la plataforma líder en América Latina para la plantación colaborativa de
+                árboles, creando un movimiento global donde cada persona pueda ver el impacto
+                tangible de su contribución ambiental, logrando plantar un millón de árboles y
+                estableciendo un nuevo estándar en la conexión entre tecnología y sostenibilidad.
+              </p>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-green-50 to-emerald-50">
+      {/* Valores */}
+      <section
+        className={`py-20 px-4 ${isDark ? 'bg-gray-900' : 'bg-gradient-to-br from-green-50 to-emerald-50'}`}
+      >
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -155,29 +189,53 @@ const AboutPage = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-green-800 mb-6">Nuestros Valores</h2>
-            <p className="text-xl text-green-700 max-w-3xl mx-auto">
+            <h2
+              className={`text-4xl md:text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-green-800'}`}
+            >
+              Nuestros Valores
+            </h2>
+            <p
+              className={`text-xl max-w-3xl mx-auto ${isDark ? 'text-gray-400' : 'text-green-700'}`}
+            >
               Los principios que guían cada decisión que tomamos
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {values.map((value, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                transition={{ duration: 0.6, delay: 0.4 + index * 0.08 }}
               >
-                <Card className="h-full bg-white border-green-200 hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <Card
+                  className={`h-full hover:shadow-xl transition-all duration-300 hover:scale-[1.03] ${
+                    isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-green-200'
+                  }`}
+                >
                   <CardHeader>
-                    <div className="bg-gradient-to-br from-green-100 to-emerald-100 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                      <value.icon className="h-8 w-8 text-green-600" />
+                    <div
+                      className={`w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 ${
+                        isDark
+                          ? 'bg-emerald-900/50'
+                          : 'bg-gradient-to-br from-green-100 to-emerald-100'
+                      }`}
+                    >
+                      <value.icon
+                        className={`h-7 w-7 ${isDark ? 'text-emerald-400' : 'text-green-600'}`}
+                      />
                     </div>
-                    <CardTitle className="text-center text-green-800">{value.title}</CardTitle>
+                    <CardTitle
+                      className={`text-center text-base ${isDark ? 'text-white' : 'text-green-800'}`}
+                    >
+                      {value.title}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-center text-green-700 text-sm leading-relaxed">
+                    <p
+                      className={`text-center text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-green-700'}`}
+                    >
                       {value.description}
                     </p>
                   </CardContent>
@@ -188,45 +246,56 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
+      {/* Nuestro Compromiso */}
+      <section className={`py-20 px-4 ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+        <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
-            <Users className="h-16 w-16 mx-auto mb-6 text-green-600" />
-            <h2 className="text-4xl font-bold text-green-800 mb-6">Nuestro Equipo</h2>
-            <p className="text-xl text-green-700 max-w-3xl mx-auto">
-              Un equipo multidisciplinario comprometido con la reforestación responsable
+            <CheckCircle2
+              className={`h-16 w-16 mx-auto mb-6 ${isDark ? 'text-emerald-400' : 'text-green-600'}`}
+            />
+            <h2 className={`text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-green-800'}`}>
+              Nuestro Compromiso
+            </h2>
+            <p className={`text-lg ${isDark ? 'text-gray-400' : 'text-green-700'}`}>
+              En Mi Árbol en el Mundo nos comprometemos a:
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member, index) => (
+          <div className="space-y-4">
+            {commitments.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                className={`flex items-center gap-4 p-5 rounded-xl transition-all ${
+                  isDark
+                    ? 'bg-gray-700/50 hover:bg-gray-700'
+                    : 'bg-gradient-to-r from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100'
+                }`}
               >
-                <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 hover:shadow-lg transition-all duration-300">
-                  <CardHeader>
-                    <CardTitle className="text-center text-green-800">{member.role}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-center text-green-700 text-sm">{member.description}</p>
-                  </CardContent>
-                </Card>
+                <div
+                  className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
+                    isDark ? 'bg-emerald-900/50' : 'bg-green-600'
+                  }`}
+                >
+                  <item.icon className={`h-6 w-6 ${isDark ? 'text-emerald-400' : 'text-white'}`} />
+                </div>
+                <p className={`text-lg font-medium ${isDark ? 'text-gray-200' : 'text-green-800'}`}>
+                  {item.text}
+                </p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* How We Work Section */}
+      {/* Cómo Trabajamos */}
       <section className="py-20 px-4 bg-gradient-to-br from-green-600 to-emerald-700">
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -240,21 +309,21 @@ const AboutPage = () => {
             <div className="max-w-4xl mx-auto space-y-6 text-lg leading-relaxed">
               <p>
                 Trabajamos directamente con <strong>viveros locales</strong> y{' '}
-                <strong>equipos de plantación</strong> en diferentes países para garantizar que cada
-                árbol se plante correctamente.
+                <strong>equipos de plantación</strong> para garantizar que cada árbol se plante
+                correctamente.
               </p>
               <p>
-                Nuestros <strong>botánicos y ecologistas</strong> seleccionan cuidadosamente las
-                especies nativas apropiadas para cada región, considerando el clima, el suelo y el
-                ecosistema local.
+                Seleccionamos cuidadosamente las{' '}
+                <strong>especies nativas apropiadas para cada región</strong>, considerando el
+                clima, el suelo y el ecosistema local.
               </p>
               <p>
                 Cada árbol plantado recibe un <strong>código QR único</strong> instalado en el
                 lugar, permitiendo total trazabilidad y seguimiento del crecimiento.
               </p>
-              <p className="text-green-100">
-                No plantamos cualquier árbol en cualquier lado.{' '}
-                <strong>Plantamos con ciencia, conciencia y compromiso ambiental.</strong>
+              <p className="text-green-100 italic text-xl mt-8">
+                &ldquo;Cada árbol que plantamos es una semilla de esperanza para las futuras
+                generaciones.&rdquo;
               </p>
             </div>
           </motion.div>
