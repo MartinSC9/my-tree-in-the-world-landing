@@ -9,7 +9,7 @@ import {
   Leaf,
   Eye,
   Shield,
-  Handshake,
+  Link2,
   Lightbulb,
   Sprout,
   CheckCircle2,
@@ -45,7 +45,7 @@ const AboutPage = () => {
         'Creemos que cuidar el planeta debe estar al alcance de todos. Nuestra plataforma elimina las barreras geográficas y económicas para que cualquier persona pueda contribuir a la reforestación.',
     },
     {
-      icon: Handshake,
+      icon: Link2,
       title: 'Colaboración',
       description:
         'Conectamos usuarios, empresas, viveros y plantadores en un ecosistema donde cada rol es esencial. El trabajo en equipo multiplica nuestro impacto ambiental.',
