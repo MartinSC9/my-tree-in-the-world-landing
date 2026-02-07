@@ -212,8 +212,9 @@ const LandingHome = () => {
                 variants={fadeInUp}
                 className="text-xl md:text-2xl text-green-100/90 mb-8 leading-relaxed max-w-xl"
               >
-                Entra gratis, explora la plataforma y únete a nuestra comunidad. Próximamente podrás
-                plantar tu propio árbol.
+                Conectamos personas y empresas con la naturaleza facilitando la plantación de
+                árboles reales. Cada árbol tiene identidad propia, ubicación GPS y seguimiento
+                verificable.
               </motion.p>
 
               <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 mb-10">
@@ -245,20 +246,20 @@ const LandingHome = () => {
                 className="flex flex-wrap gap-6 text-sm text-green-100/70"
               >
                 <div className="flex items-center gap-2">
-                  <Users className="h-4 w-4 text-emerald-400" />
-                  <span>Red social integrada</span>
+                  <Shield className="h-4 w-4 text-emerald-400" />
+                  <span>Transparencia total</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-emerald-400" />
-                  <span>Árboles verificados</span>
+                  <span>Árboles reales verificados</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-emerald-400" />
-                  <span>GPS exacto</span>
+                  <Leaf className="h-4 w-4 text-emerald-400" />
+                  <span>Especies nativas</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Shield className="h-4 w-4 text-emerald-400" />
-                  <span>Certificado digital</span>
+                  <Users className="h-4 w-4 text-emerald-400" />
+                  <span>Comunidad activa</span>
                 </div>
               </motion.div>
             </motion.div>
@@ -275,25 +276,27 @@ const LandingHome = () => {
                 <div className="glass-dark rounded-3xl p-8 transform rotate-2 hover:rotate-0 transition-transform duration-500">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="bg-emerald-500/20 p-3 rounded-xl">
-                      <Users className="h-8 w-8 text-emerald-400" />
+                      <TreePine className="h-8 w-8 text-emerald-400" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-white">Comunidad</p>
-                      <p className="text-green-200/70">Únete ahora</p>
+                      <p className="text-2xl font-bold text-white">Impacto Real</p>
+                      <p className="text-green-200/70">No árboles virtuales</p>
                     </div>
                   </div>
                   <div className="space-y-3">
                     <div className="bg-white/5 rounded-xl p-4 flex items-center gap-3">
-                      <Heart className="h-5 w-5 text-emerald-400" />
-                      <p className="text-sm text-white">Comparte tu pasión por el ambiente</p>
+                      <Shield className="h-5 w-5 text-emerald-400" />
+                      <p className="text-sm text-white">Seguimiento transparente en tiempo real</p>
                     </div>
                     <div className="bg-white/5 rounded-xl p-4 flex items-center gap-3">
-                      <Globe className="h-5 w-5 text-emerald-400" />
-                      <p className="text-sm text-white">Explora el mapa global de árboles</p>
+                      <MapPin className="h-5 w-5 text-emerald-400" />
+                      <p className="text-sm text-white">Ubicación GPS y chapa QR en cada árbol</p>
                     </div>
                     <div className="bg-white/5 rounded-xl p-4 flex items-center gap-3">
-                      <TreePine className="h-5 w-5 text-emerald-400" />
-                      <p className="text-sm text-white">Próximamente: planta tu árbol</p>
+                      <Users className="h-5 w-5 text-emerald-400" />
+                      <p className="text-sm text-white">
+                        Usuarios, viveros y plantadores conectados
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -302,11 +305,13 @@ const LandingHome = () => {
                 <div className="absolute -bottom-6 -left-6 glass rounded-2xl p-4 transform -rotate-3 hover:rotate-0 transition-transform duration-500">
                   <div className="flex items-center gap-3">
                     <div className="bg-emerald-500 p-2 rounded-lg">
-                      <Leaf className="h-5 w-5 text-white" />
+                      <Heart className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <p className="font-semibold text-white">100% Gratis</p>
-                      <p className="text-xs text-green-200/70">Regístrate sin costo</p>
+                      <p className="font-semibold text-white">Accesible para Todos</p>
+                      <p className="text-xs text-green-200/70">
+                        Cuidar el planeta al alcance de todos
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -559,12 +564,68 @@ const LandingHome = () => {
             </motion.div>
           </div>
 
+          {/* Valores destacados */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mb-10"
+          >
+            <h3 className="text-center text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-8">
+              Nuestros Valores
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+              {[
+                {
+                  icon: Shield,
+                  title: 'Transparencia',
+                  desc: 'Estado de cada árbol en tiempo real, desde el vivero hasta su ubicación final.',
+                },
+                {
+                  icon: Target,
+                  title: 'Impacto Real',
+                  desc: 'Cada árbol es físico, plantado por un profesional, con coordenadas GPS verificables.',
+                },
+                {
+                  icon: Heart,
+                  title: 'Accesibilidad',
+                  desc: 'Cuidar el planeta al alcance de todos, sin barreras geográficas ni económicas.',
+                },
+                {
+                  icon: Users,
+                  title: 'Colaboración',
+                  desc: 'Usuarios, empresas, viveros y plantadores conectados en un mismo ecosistema.',
+                },
+              ].map((value, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
+                  className="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow text-center"
+                >
+                  <div className="w-11 h-11 bg-emerald-100 dark:bg-emerald-900/50 rounded-xl flex items-center justify-center mx-auto mb-3">
+                    <value.icon className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                  <h4 className="font-semibold text-gray-800 dark:text-white mb-1.5 text-sm">
+                    {value.title}
+                  </h4>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                    {value.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
           {/* CTA a Sobre Nosotros */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
             className="text-center"
           >
             <Button
@@ -573,7 +634,7 @@ const LandingHome = () => {
               className="border-emerald-600 dark:border-emerald-500 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/30"
             >
               <Link to="/sobre-nosotros">
-                Conoce nuestros valores y compromiso
+                Ver todos nuestros valores y compromiso
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Link>
             </Button>
