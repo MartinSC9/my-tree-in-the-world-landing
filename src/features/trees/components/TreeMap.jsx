@@ -604,7 +604,27 @@ const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels })
         </>
       ) : (
         <>
-          <p className="text-xs text-gray-500 mt-2">
+          {details.owner && details.owner.first_name && (
+            <div className="flex items-center gap-1.5 mt-2">
+              {details.owner.avatar ? (
+                <img
+                  src={details.owner.avatar}
+                  alt={details.owner.first_name}
+                  className="w-4 h-4 rounded-full object-cover"
+                />
+              ) : (
+                <div className="w-4 h-4 rounded-full bg-green-100 flex items-center justify-center">
+                  <span className="text-[8px] font-bold text-green-700">
+                    {details.owner.first_name[0]}
+                  </span>
+                </div>
+              )}
+              <span className="text-xs text-gray-600">
+                {`${details.owner.first_name} ${details.owner.last_name || ''}`.trim()}
+              </span>
+            </div>
+          )}
+          <p className="text-xs text-gray-500 mt-1">
             Creado:{' '}
             {details.planted_at
               ? new Date(details.planted_at).toLocaleDateString()

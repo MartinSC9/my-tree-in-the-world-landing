@@ -7,6 +7,7 @@ import { Button } from '@shared/components/ui/button';
 import { toast } from '@shared/components/ui/use-toast';
 import { useTree } from '@core/contexts/TreeContext';
 import { useTheme } from '@core/contexts/ThemeContext';
+import { APP_URL } from '@core/config/app.config';
 import CertificatePDF from '@features/certificates/components/CertificatePDF';
 
 const CertificatePage = () => {
@@ -211,21 +212,38 @@ const CertificatePage = () => {
                 <p className={`text-sm mb-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                   Por la presente se certifica que
                 </p>
-                <p
-                  className={`text-2xl font-bold mb-2 ${
-                    isPlanted
-                      ? isDark
-                        ? 'text-amber-300'
-                        : 'text-amber-700'
-                      : isDark
-                        ? 'text-white'
-                        : 'text-gray-800'
-                  }`}
-                >
-                  {treeOwner?.first_name || treeOwner?.last_name
-                    ? `${treeOwner.first_name || ''} ${treeOwner.last_name || ''}`.trim()
-                    : 'Un usuario'}
-                </p>
+                {treeOwner?.id ? (
+                  <a
+                    href={`${APP_URL}/perfil/${treeOwner.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-2xl font-bold mb-2 block hover:underline transition-colors ${
+                      isPlanted
+                        ? isDark
+                          ? 'text-amber-300 hover:text-amber-200'
+                          : 'text-amber-700 hover:text-amber-600'
+                        : isDark
+                          ? 'text-white hover:text-gray-200'
+                          : 'text-gray-800 hover:text-gray-600'
+                    }`}
+                  >
+                    {`${treeOwner.first_name || ''} ${treeOwner.last_name || ''}`.trim()}
+                  </a>
+                ) : (
+                  <p
+                    className={`text-2xl font-bold mb-2 ${
+                      isPlanted
+                        ? isDark
+                          ? 'text-amber-300'
+                          : 'text-amber-700'
+                        : isDark
+                          ? 'text-white'
+                          : 'text-gray-800'
+                    }`}
+                  >
+                    Un usuario
+                  </p>
+                )}
                 <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                   {isPlanted
                     ? 'ha plantado exitosamente un árbol que contribuye a la conservación del medio ambiente.'
