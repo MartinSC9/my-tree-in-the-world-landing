@@ -7,7 +7,6 @@ import { Button } from '@shared/components/ui/button';
 import { toast } from '@shared/components/ui/use-toast';
 import { useTree } from '@core/contexts/TreeContext';
 import { useTheme } from '@core/contexts/ThemeContext';
-import { userService } from '@shared/services/userService';
 import CertificatePDF from '@features/certificates/components/CertificatePDF';
 
 const CertificatePage = () => {
@@ -24,13 +23,9 @@ const CertificatePage = () => {
         const foundTree = await getTreeById(treeId);
         if (foundTree) {
           setTree(foundTree);
-          if (foundTree.user_id) {
-            try {
-              const owner = await userService.getUserById(foundTree.user_id);
-              setTreeOwner(owner);
-            } catch (err) {
-              console.error('Error fetching tree owner:', err);
-            }
+          // El owner ya viene incluido en la respuesta del árbol
+          if (foundTree.owner) {
+            setTreeOwner(foundTree.owner);
           }
         } else {
           toast({
