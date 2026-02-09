@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import {
   MapContainer,
   TileLayer,
@@ -9,7 +10,7 @@ import {
   Polygon,
 } from 'react-leaflet';
 import L from 'leaflet';
-import { TreePine, Loader2 } from 'lucide-react';
+import { TreePine, Loader2, X, ZoomIn, ExternalLink } from 'lucide-react';
 import { treeService } from '../services';
 import { getGreenSpaces, isPointInGreenSpace } from '../../../services/greenSpacesService';
 import { useTheme } from '../../../core/contexts/ThemeContext';
@@ -164,6 +165,8 @@ const TreeMap = ({
   onProjectClick,
   onNotInGreenSpace,
   defaultOpenTreeId = null,
+  onTreeSelect,
+  onTreeDeselect,
 }) => {
   const { isDark } = useTheme();
   const mapRef = useRef();
@@ -454,7 +457,13 @@ const TreeMap = ({
                   }
                 }}
                 eventHandlers={{
-                  popupopen: () => loadTreeDetails(tree.id, tree.type),
+                  popupopen: () => {
+                    loadTreeDetails(tree.id, tree.type);
+                    onTreeSelect?.(tree.id);
+                  },
+                  popupclose: () => {
+                    onTreeDeselect?.();
+                  },
                 }}
               >
                 <Popup>
@@ -473,11 +482,39 @@ const TreeMap = ({
   );
 };
 
+// Lightbox para ampliar imagen del árbol
+const ImageLightbox = ({ src, alt, onClose }) => {
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 p-2 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"
+      >
+        <X className="h-6 w-6" />
+      </button>
+      <img
+        src={src}
+        alt={alt}
+        className="max-w-[90vw] max-h-[85vh] object-contain rounded-lg shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      />
+    </div>,
+    document.body
+  );
+};
+
 // Componente para el contenido del popup con carga bajo demanda
 const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels }) => {
+  const [showLightbox, setShowLightbox] = useState(false);
+
   // Usar detalles cargados si existen, sino usar datos del tree
   const details = loadedDetails[tree.id] || tree;
   const isLoading = loadingDetails[tree.id];
+
+  const imageUrl = details.species_image_url || details.image_url;
 
   // Si está cargando y no hay datos completos
   if (isLoading && !details.name) {
@@ -491,17 +528,42 @@ const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels })
 
   return (
     <div className="p-2">
-      <div className="flex items-center gap-2 mb-1">
-        <h3 className="font-semibold text-green-800">{details.name || 'Árbol'}</h3>
-        {tree.type === 'collaborative' && (
-          <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">
-            Colaborativo
-          </span>
+      <div className="flex items-start gap-3">
+        {/* Thumbnail de la imagen del árbol */}
+        {imageUrl && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowLightbox(true);
+            }}
+            className="relative flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden group cursor-pointer shadow-sm border border-gray-200"
+          >
+            <img
+              src={imageUrl}
+              alt={details.name || 'Árbol'}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-200"
+            />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+              <ZoomIn className="h-4 w-4 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow" />
+            </div>
+          </button>
         )}
+
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-1">
+            <h3 className="font-semibold text-green-800 truncate">{details.name || 'Árbol'}</h3>
+            {tree.type === 'collaborative' && (
+              <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full flex-shrink-0">
+                Colaborativo
+              </span>
+            )}
+          </div>
+          <p className="text-sm text-gray-600">
+            {details.country || details.city || 'Ubicación desconocida'}
+          </p>
+        </div>
       </div>
-      <p className="text-sm text-gray-600">
-        {details.country || details.city || 'Ubicación desconocida'}
-      </p>
+
       {tree.type === 'collaborative' ? (
         <>
           <p className="text-xs text-gray-500 mt-1">
@@ -542,7 +604,7 @@ const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels })
         </>
       ) : (
         <>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-gray-500 mt-2">
             Creado:{' '}
             {details.planted_at
               ? new Date(details.planted_at).toLocaleDateString()
@@ -562,6 +624,26 @@ const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels })
             <p className="text-xs text-gray-600 mt-1 italic">"{details.message}"</p>
           )}
         </>
+      )}
+
+      {/* Ver certificado */}
+      <a
+        href={`/certificado/${tree.id}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center gap-1.5 mt-3 pt-2 border-t border-gray-200 text-xs font-medium text-green-700 hover:text-green-800 transition-colors"
+      >
+        <ExternalLink className="h-3 w-3" />
+        Ver certificado
+      </a>
+
+      {/* Lightbox para ampliar imagen */}
+      {showLightbox && imageUrl && (
+        <ImageLightbox
+          src={imageUrl}
+          alt={details.name || 'Árbol'}
+          onClose={() => setShowLightbox(false)}
+        />
       )}
     </div>
   );

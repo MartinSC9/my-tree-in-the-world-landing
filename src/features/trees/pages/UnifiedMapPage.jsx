@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { TreePine, Globe, Users, User, Check, Clock } from 'lucide-react';
 import { Button } from '@shared/components/ui/button';
@@ -13,9 +14,11 @@ import { useTheme } from '@core/contexts/ThemeContext';
 const UnifiedMapPage = () => {
   const { isDark } = useTheme();
   const { user, getRedirectPath } = useAuth();
+  const { treeId: urlTreeId } = useParams();
+  const navigate = useNavigate();
   const [allMarkers, setAllMarkers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [randomTreeId, setRandomTreeId] = useState(null);
+  const [defaultTreeId, setDefaultTreeId] = useState(null);
 
   // Vista activa: 'all', 'my-trees', 'collaborative'
   const [activeView, setActiveView] = useState('all');
@@ -35,10 +38,19 @@ const UnifiedMapPage = () => {
       const markers = await treeService.getTreeMarkers();
       setAllMarkers(markers || []);
 
-      // Seleccionar un árbol aleatorio para mostrar su popup abierto
+      // Seleccionar árbol por defecto: el de la URL o uno aleatorio
       if (markers && markers.length > 0) {
-        const randomIndex = Math.floor(Math.random() * markers.length);
-        setRandomTreeId(markers[randomIndex].id);
+        if (urlTreeId) {
+          const parsedId = parseInt(urlTreeId, 10);
+          const exists = markers.some((m) => m.id === parsedId);
+          if (exists) {
+            setDefaultTreeId(parsedId);
+          }
+          // Si no existe, no abrir ningún popup
+        } else {
+          const randomIndex = Math.floor(Math.random() * markers.length);
+          setDefaultTreeId(markers[randomIndex].id);
+        }
       }
     } catch (error) {
       console.error('Error loading tree markers:', error);
@@ -117,6 +129,17 @@ const UnifiedMapPage = () => {
   const handleFilterChange = (key, value) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
   };
+
+  const handleTreeSelect = useCallback(
+    (id) => {
+      navigate(`/mapa/${id}`, { replace: true });
+    },
+    [navigate]
+  );
+
+  const handleTreeDeselect = useCallback(() => {
+    navigate('/mapa', { replace: true });
+  }, [navigate]);
 
   // Redirigir al front app para plantar
   const handlePlantClick = () => {
@@ -249,7 +272,13 @@ const UnifiedMapPage = () => {
           >
             <CardContent className="p-0">
               <div className="relative">
-                <TreeMap trees={filteredTrees} height="700px" defaultOpenTreeId={randomTreeId} />
+                <TreeMap
+                  trees={filteredTrees}
+                  height="700px"
+                  defaultOpenTreeId={defaultTreeId}
+                  onTreeSelect={handleTreeSelect}
+                  onTreeDeselect={handleTreeDeselect}
+                />
 
                 {/* Leyenda de colores */}
                 <div

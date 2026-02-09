@@ -119,7 +119,7 @@ const App = () => {
                 }
               />
               <Route
-                path="/mapa"
+                path="/mapa/:treeId?"
                 element={
                   <AuthenticatedLayout>
                     <UnifiedMapPage />
