@@ -224,7 +224,7 @@ const LandingHome = () => {
                   className="btn-primary group text-lg px-8 bg-emerald-500 hover:bg-emerald-600"
                 >
                   <Users className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
-                  Entrar a la App
+                  Ir a la App
                   <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Button
@@ -1139,7 +1139,7 @@ const LandingHome = () => {
               className="bg-white hover:bg-emerald-50 text-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-500 dark:text-white shadow-xl hover:shadow-2xl px-12 py-7 text-xl font-semibold transition-all duration-300 hover:scale-105"
             >
               <Users className="h-6 w-6 mr-3" />
-              Entrar a la App
+              Ir a la App
               <ArrowRight className="h-6 w-6 ml-3" />
             </Button>
           </motion.div>

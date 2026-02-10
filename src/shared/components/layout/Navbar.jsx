@@ -385,7 +385,7 @@ const Navbar = () => {
                   className="bg-brand hover:bg-brand-dark text-white"
                 >
                   <LogIn className="h-4 w-4 mr-1" />
-                  Entrar
+                  Ingresar
                 </Button>
               )}
             </div>
@@ -502,7 +502,7 @@ const Navbar = () => {
                       className="w-full bg-brand hover:bg-brand-dark text-white"
                     >
                       <LogIn className="h-4 w-4 mr-2" />
-                      Entrar a la App
+                      Ir a la App
                     </Button>
                   </div>
                 )}
