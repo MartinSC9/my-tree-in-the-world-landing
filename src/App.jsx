@@ -16,6 +16,7 @@ import ReferidosPage from '@/pages/landing/ReferidosPage';
 import QRProductosPage from '@/pages/landing/QRProductosPage';
 import TerminosPage from '@/pages/landing/TerminosPage';
 import PrivacidadPage from '@/pages/landing/PrivacidadPage';
+import SeguridadInfantilPage from '@/pages/landing/SeguridadInfantilPage';
 import ViverosPage from '@/pages/landing/ViverosPage';
 import PlantadoresPage from '@/pages/landing/PlantadoresPage';
 import ChapistasPage from '@/pages/landing/ChapistasPage';
@@ -141,6 +142,15 @@ const App = () => {
                 element={
                   <AuthenticatedLayout>
                     <PrivacidadPage />
+                  </AuthenticatedLayout>
+                }
+              />
+
+              <Route
+                path="/seguridad-infantil"
+                element={
+                  <AuthenticatedLayout>
+                    <SeguridadInfantilPage />
                   </AuthenticatedLayout>
                 }
               />

@@ -113,6 +113,12 @@ const Footer = () => {
               >
                 Política de Privacidad
               </Link>
+              <Link
+                to="/seguridad-infantil"
+                className="text-green-200 dark:text-gray-400 hover:text-white transition-colors text-sm"
+              >
+                Seguridad Infantil
+              </Link>
             </div>
           </div>
         </div>
