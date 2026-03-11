@@ -24,15 +24,45 @@ api.interceptors.request.use(
   }
 );
 
+// Token refresh race condition protection
+let isRefreshing = false;
+let refreshSubscribers = [];
+
+const onRefreshed = (token) => {
+  refreshSubscribers.forEach((callback) => callback(token));
+  refreshSubscribers = [];
+};
+
+const onRefreshFailed = (error) => {
+  refreshSubscribers.forEach((callback) => callback(null, error));
+  refreshSubscribers = [];
+};
+
+const addRefreshSubscriber = (callback) => {
+  refreshSubscribers.push(callback);
+};
+
 // Interceptor para manejar errores
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
-    // Si el token expiró y tenemos refresh token
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
+
+      // If already refreshing, queue this request
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          addRefreshSubscriber((token, err) => {
+            if (err) return reject(err);
+            originalRequest.headers.Authorization = `Bearer ${token}`;
+            resolve(api(originalRequest));
+          });
+        });
+      }
+
+      isRefreshing = true;
 
       try {
         const refreshToken = localStorage.getItem('refreshToken');
@@ -44,16 +74,20 @@ api.interceptors.response.use(
           const { token } = response.data;
           localStorage.setItem('token', token);
 
+          isRefreshing = false;
+          onRefreshed(token);
+
           originalRequest.headers.Authorization = `Bearer ${token}`;
           return api(originalRequest);
         }
       } catch (refreshError) {
-        // Si falla el refresh, logout
+        isRefreshing = false;
+        onRefreshFailed(refreshError);
+
         localStorage.removeItem('token');
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('user');
 
-        // Mostrar notificación de sesión expirada
         toast({
           title: 'Sesión expirada',
           description: 'Tu sesión ha caducado. Por favor, inicia sesión nuevamente.',
@@ -61,7 +95,6 @@ api.interceptors.response.use(
           duration: 5000,
         });
 
-        // Redirigir al login después de un breve delay
         setTimeout(() => {
           window.location.href = '/';
         }, 1500);

@@ -202,7 +202,13 @@ const addTransformIndexHtml = {
 	},
 };
 
-console.warn = () => {};
+// Filter noisy warnings (Sass deprecations, etc.) instead of suppressing all
+const originalWarn = console.warn;
+console.warn = (...args) => {
+  const msg = args[0]?.toString() || '';
+  if (msg.includes('Deprecation') || msg.includes('legacy JS API')) return;
+  originalWarn.apply(console, args);
+};
 
 const logger = createLogger()
 const loggerError = logger.error

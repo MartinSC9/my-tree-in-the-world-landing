@@ -1,33 +1,13 @@
-# CLAUDE.md - Mi Arbol en el Mundo Landing Page
+# Project conventions
 
-## Proyecto
-Landing page institucional para la plataforma de plantacion de arboles "Mi Arbol en el Mundo". Pagina publica de presentacion, no requiere autenticacion.
+## Package manager: pnpm
 
-## Comandos
-```bash
-npm install && npm run dev    # Dev server
-npm run build                 # Build produccion
-npm run preview               # Preview build
-```
+This project uses **pnpm** as its package manager. Do NOT use npm or yarn.
 
-## Stack
-React 18 + Vite + Tailwind CSS
-
-## Estructura
-Landing page simple, sin roles ni autenticacion. Secciones:
-- Hero / Banner principal
-- Como funciona (flujo de plantacion)
-- Beneficios / Impacto ambiental
-- Planes / Precios
-- Testimonios
-- FAQ
-- CTA / Registro
-- Footer
-
-## Despliegue
-Vercel (produccion). Ver `docs/setup/deploy-manual.md` en el frontend.
-
-## Notas
-- Esta es una app independiente, NO comparte codigo con el frontend principal
-- No tiene backend propio, es estatica
-- Para info de negocio/precios consultar: `../my-tree-in-the-world-front/docs/business/`
+- Install dependencies: `pnpm install`
+- Add a package: `pnpm add <package>`
+- Add a dev dependency: `pnpm add -D <package>`
+- Remove a package: `pnpm remove <package>`
+- Run scripts: `pnpm <script>` (e.g., `pnpm dev`, `pnpm build`, `pnpm start`)
+- Never use `npm install`, `npm run`, or `yarn` commands.
+- The lockfile is `pnpm-lock.yaml` — do not generate or modify `package-lock.json` or `yarn.lock`.

@@ -13,7 +13,7 @@ import { Label } from '@shared/components/ui/label';
 import { Mail, MapPin, Send, Loader2 } from 'lucide-react';
 import { useToast } from '@shared/components/ui/use-toast';
 import Footer from '@shared/components/layout/Footer';
-import { API_BASE_URL, API_ENDPOINTS } from '@core/config/api.config';
+import api from '@core/config/api';
 
 const ContactoPage = () => {
   const { toast } = useToast();
@@ -37,19 +37,7 @@ const ContactoPage = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.CONTACT}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Error al enviar el mensaje');
-      }
+      const { data } = await api.post('/contact', formData);
 
       toast({
         title: 'Mensaje enviado',
