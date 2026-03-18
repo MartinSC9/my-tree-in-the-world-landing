@@ -138,7 +138,10 @@ const UnifiedMapPage = () => {
   );
 
   const handleTreeDeselect = useCallback(() => {
-    navigate('/mapa', { replace: true });
+    // Solo actualizar la URL si seguimos en /mapa (evita interferir con navegación a otra página)
+    if (window.location.pathname.startsWith('/mapa')) {
+      navigate('/mapa', { replace: true });
+    }
   }, [navigate]);
 
   // Redirigir al front app para plantar
