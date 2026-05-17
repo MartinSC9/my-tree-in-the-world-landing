@@ -1,56 +1,28 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// Animation variants
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
-  },
-};
-
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: 'easeOut' } },
-};
-
 const StatsSection = ({ statsRef, statsInView, stats }) => {
   return (
-    <section
-      ref={statsRef}
-      className="section-padding relative overflow-hidden bg-white dark:bg-gray-900"
-    >
-      <div className="absolute top-0 right-0 w-96 h-96 blob-shape nature-blob" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 blob-shape earth-blob" />
-
+    <section ref={statsRef} className="py-6 md:py-8 px-4 bg-gray-900 dark:bg-gray-950 relative">
       <div className="container-wide relative z-10">
         <motion.div
-          initial="hidden"
-          animate={statsInView ? 'visible' : 'hidden'}
-          variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          initial={{ opacity: 0 }}
+          animate={statsInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 md:gap-x-16 lg:gap-x-20"
         >
           {stats.map((stat, index) => (
-            <motion.div key={index} variants={scaleIn}>
-              <div className="stats-card rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
-                <div
-                  className={`w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 ${stat.bgClass}`}
-                >
-                  <stat.icon className={`h-10 w-10 ${stat.colorClass}`} />
-                </div>
-                <motion.div
-                  className={`font-display text-5xl font-bold mb-2 ${stat.colorClass}`}
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={statsInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.5, delay: index * 0.2 + 0.3 }}
-                >
-                  {stat.value}
-                </motion.div>
-                <div className="text-lg font-semibold text-gray-700 dark:text-gray-300">
-                  {stat.label}
-                </div>
-              </div>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 10 }}
+              animate={statsInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              className="flex items-baseline gap-2.5"
+            >
+              <span className="font-display text-2xl md:text-3xl font-bold text-white">
+                {stat.value}
+              </span>
+              <span className="text-sm md:text-base text-gray-400 font-medium">{stat.label}</span>
             </motion.div>
           ))}
         </motion.div>

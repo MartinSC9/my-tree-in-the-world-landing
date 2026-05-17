@@ -8,131 +8,93 @@ const FreeTreeOptionsSection = ({ plantaSinPlataRef }) => {
       ref={plantaSinPlataRef}
       className="py-16 md:py-24 px-4 bg-gradient-to-br from-gray-50 via-white to-emerald-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900 relative overflow-hidden"
     >
-      {/* Elementos decorativos sutiles */}
-      <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-emerald-100/30 dark:bg-emerald-900/20 blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-gray-200/30 dark:bg-gray-800/30 blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-emerald-100/30 dark:bg-emerald-900/20 blur-3xl" />
 
       <div className="container-wide relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          transition={{ duration: 0.5 }}
+          className="mb-12 max-w-2xl"
         >
-          {/* Badge simple */}
-          <div className="inline-flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 px-4 py-2 rounded-full text-sm font-medium mb-5">
+          <div className="inline-flex items-center gap-2 text-emerald-700 dark:text-emerald-400 text-sm font-medium mb-4">
             <Gift className="h-4 w-4" />
             <span>No necesitas dinero para empezar</span>
           </div>
 
-          {/* Titulo limpio */}
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 dark:text-white mb-4">
-            <span className="text-emerald-600 dark:text-emerald-400">3</span> Formas de Plantar{' '}
-            <span className="text-emerald-600 dark:text-emerald-400">GRATIS</span>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">
+            Plantá gratis, de tres maneras
           </h2>
-
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            No hace falta dinero para ser parte del cambio. Elige la opción que mejor te funcione.
-          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {/* Timeline/path layout */}
+        <div className="max-w-4xl mx-auto relative">
+          {/* Linea conectora vertical (solo desktop) */}
+          <div className="hidden md:block absolute left-8 top-8 bottom-8 w-px bg-gradient-to-b from-emerald-300 via-emerald-400 to-emerald-300 dark:from-emerald-700 dark:via-emerald-600 dark:to-emerald-700" />
+
           {/* Opcion 1: Referidos */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="group"
+            className="relative flex items-start gap-5 md:gap-8 mb-8 md:mb-10"
           >
-            <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 h-full flex flex-col group-hover:-translate-y-1">
-              {/* Numero de opcion */}
-              <div className="absolute top-4 right-4 w-7 h-7 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
-                <span className="text-emerald-600 dark:text-emerald-400 font-bold text-xs">1</span>
-              </div>
-
-              {/* Icono */}
-              <div className="w-14 h-14 bg-emerald-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform shadow-md">
-                <Users className="h-7 w-7 text-white" />
-              </div>
-
-              <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
-                Invita 5 Amigos
+            <div className="flex-shrink-0 w-16 h-16 bg-white dark:bg-gray-800 border-2 border-emerald-200 dark:border-emerald-700 rounded-full flex items-center justify-center shadow-sm z-10">
+              <Users className="h-7 w-7 text-emerald-600 dark:text-emerald-400" />
+            </div>
+            <div className="pt-2">
+              <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-1">
+                Invita 5 amigos
               </h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-4 flex-1 text-sm leading-relaxed">
-                Comparte tu código. Cuando 5 amigos planten, tienes un{' '}
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">
-                  árbol gratis
-                </span>
-                .
+              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed max-w-md">
+                Compartí tu código. Cuando 5 amigos se unan y planten, recibís un árbol gratis en tu
+                cuenta.
               </p>
             </div>
           </motion.div>
 
-          {/* Opcion 2: Colaborativo - Card destacada */}
+          {/* Opcion 2: Colaborativo - destaca con fondo */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="group"
+            className="relative flex items-start gap-5 md:gap-8 mb-8 md:mb-10"
           >
-            <div className="relative bg-emerald-600 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 h-full flex flex-col group-hover:-translate-y-1">
-              {/* Badge popular */}
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <div className="bg-amber-400 text-amber-900 text-xs font-bold px-3 py-1 rounded-full shadow-md">
-                  MÁS POPULAR
-                </div>
-              </div>
-
-              {/* Numero de opcion */}
-              <div className="absolute top-4 right-4 w-7 h-7 rounded-full bg-white/20 flex items-center justify-center">
-                <span className="text-white font-bold text-xs">2</span>
-              </div>
-
-              {/* Icono */}
-              <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mb-4 mt-2 group-hover:scale-105 transition-transform border border-white/30">
-                <Heart className="h-7 w-7 text-white" />
-              </div>
-
-              <h3 className="text-xl font-bold text-white mb-2">Árbol Colaborativo</h3>
-              <p className="text-emerald-100 mb-4 flex-1 text-sm leading-relaxed">
-                Crea un proyecto y compártelo. Tus amigos{' '}
-                <span className="font-semibold text-white">aportan lo que puedan</span> para
-                completar la meta.
+            <div className="flex-shrink-0 w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center shadow-md z-10">
+              <Heart className="h-7 w-7 text-white" />
+            </div>
+            <div className="bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-100 dark:border-emerald-800 rounded-xl px-5 py-4 flex-1 max-w-lg">
+              <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-1">
+                Árbol colaborativo
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                Creá un proyecto y compartilo. Tus amigos y familia aportan lo que puedan hasta
+                completar la meta entre todos.
               </p>
             </div>
           </motion.div>
 
-          {/* Opcion 3: QR Productos */}
+          {/* Opcion 3: QR */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="group"
+            className="relative flex items-start gap-5 md:gap-8"
           >
-            <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 h-full flex flex-col group-hover:-translate-y-1">
-              {/* Numero de opcion */}
-              <div className="absolute top-4 right-4 w-7 h-7 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
-                <span className="text-emerald-600 dark:text-emerald-400 font-bold text-xs">3</span>
-              </div>
-
-              {/* Icono */}
-              <div className="w-14 h-14 bg-emerald-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform shadow-md">
-                <QrCode className="h-7 w-7 text-white" />
-              </div>
-
-              <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
-                Escanea y Gana
+            <div className="flex-shrink-0 w-16 h-16 bg-white dark:bg-gray-800 border-2 border-emerald-200 dark:border-emerald-700 rounded-full flex items-center justify-center shadow-sm z-10">
+              <QrCode className="h-7 w-7 text-emerald-600 dark:text-emerald-400" />
+            </div>
+            <div className="pt-2">
+              <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-1">
+                Escaneá y participá
               </h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-4 flex-1 text-sm leading-relaxed">
-                Productos de empresas partner tienen QR. Escanea y{' '}
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">
-                  participa en sorteos
-                </span>{' '}
-                de árboles.
+              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed max-w-md">
+                Productos de empresas partner incluyen códigos QR. Escaneá para participar en
+                sorteos de árboles.
               </p>
             </div>
           </motion.div>

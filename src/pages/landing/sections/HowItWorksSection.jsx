@@ -1,86 +1,90 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// Animation variants
 const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] } },
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
   },
 };
 
 const HowItWorksSection = ({ howItWorksRef, howItWorksInView }) => {
+  const steps = [
+    {
+      image: '/images/1.png',
+      step: '01',
+      title: 'Elegí tu árbol',
+      desc: 'Seleccioná la ubicación en el mapa, ponele un nombre y elegí la especie.',
+    },
+    {
+      image: '/images/2.png',
+      step: '02',
+      title: 'Lo plantamos por vos',
+      desc: 'Viveros preparan tu árbol, chapistas fabrican tu placa QR. Plantadores profesionales lo plantan con fotos.',
+    },
+    {
+      image: '/images/3.png',
+      step: '03',
+      title: 'Tu legado, para siempre',
+      desc: 'Chapa de acero con QR instalada. Escaneá y accedé a tu página única. Certificado digital incluido.',
+    },
+  ];
+
   return (
-    <section
-      ref={howItWorksRef}
-      className="section-padding premium-gradient relative overflow-hidden"
-    >
-      <div className="container-wide relative z-10">
+    <section ref={howItWorksRef} className="py-16 md:py-24 px-4 bg-white dark:bg-gray-900 relative">
+      <div className="container-wide">
         <motion.div
           initial="hidden"
           animate={howItWorksInView ? 'visible' : 'hidden'}
           variants={staggerContainer}
-          className="text-center mb-16"
+          className="mb-12 max-w-xl"
         >
-          <motion.h2 variants={fadeInUp} className="section-title mb-6">
-            Cómo Funciona
-          </motion.h2>
-          <motion.p variants={fadeInUp} className="section-subtitle mx-auto">
-            En 3 simples pasos, tu árbol estará plantado y con su propia identidad.
+          <motion.p
+            variants={fadeInUp}
+            className="text-sm font-medium text-emerald-600 dark:text-emerald-400 mb-3"
+          >
+            Asi funciona
           </motion.p>
+          <motion.h2
+            variants={fadeInUp}
+            className="font-display text-3xl md:text-4xl font-bold text-gray-900 dark:text-white"
+          >
+            De tu pantalla al suelo, en 3 pasos
+          </motion.h2>
         </motion.div>
 
-        {/* Steps */}
         <motion.div
           initial="hidden"
           animate={howItWorksInView ? 'visible' : 'hidden'}
           variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
         >
-          {[
-            {
-              image: '/images/1.png',
-              title: '1. Compra tu Árbol',
-              desc: 'Elige la ubicación en el mapa, ponle un nombre y selecciona la especie que más te guste.',
-            },
-            {
-              image: '/images/2.png',
-              title: '2. Plantación Real',
-              desc: 'Viveros preparan tu árbol mientras chapistas fabrican tu placa QR. Plantadores profesionales lo plantan con fotos.',
-            },
-            {
-              image: '/images/3.png',
-              title: '3. Tu Árbol, Tu Legado',
-              desc: 'Chapa de acero con QR instalada junto al árbol. Escanea y accede a tu página única. Certificado digital incluido.',
-            },
-          ].map((step, i) => (
-            <motion.div key={i} variants={fadeInUp} className="text-center flex w-full">
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full w-full border border-gray-100 dark:border-gray-700">
-                <div className="overflow-hidden">
+          {steps.map((step, i) => (
+            <motion.div key={i} variants={fadeInUp}>
+              <div className="group h-full">
+                <div className="overflow-hidden rounded-xl mb-4">
                   <img
                     src={step.image}
                     alt={step.title}
-                    className="w-full h-52 object-cover hover:scale-105 transition-transform duration-500"
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="font-display text-xl font-semibold text-gray-800 dark:text-white mb-3">
+                <div>
+                  <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-bold">
+                    {step.step}
+                  </span>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mt-1 mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-3 flex-1">
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                     {step.desc}
                   </p>
-                  {step.price && (
-                    <p className="text-emerald-600 dark:text-emerald-400 font-bold text-lg">
-                      {step.price}
-                    </p>
-                  )}
                 </div>
               </div>
             </motion.div>

@@ -179,165 +179,92 @@ const UnifiedMapPage = () => {
   ];
 
   return (
-    <div
-      className={`min-h-screen ${isDark ? 'bg-gray-900' : 'bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50'}`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+    <div className="h-[calc(100vh-4rem)] w-full relative overflow-hidden">
+      <div className="relative h-full w-full">
+        {/* Stats filters - inside map */}
+        <div className="absolute top-4 left-12 z-[10] flex flex-wrap gap-1.5">
+          <button
+            onClick={() => setStatsFilter('all')}
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium backdrop-blur-sm border transition-all shadow-sm ${statsFilter === 'all' ? 'bg-blue-500 text-white border-blue-500' : 'bg-white/90 dark:bg-gray-800/90 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-600 hover:bg-white dark:hover:bg-gray-800'}`}
+          >
+            <TreePine className="h-3 w-3" />
+            <span className="font-bold">{viewStats.total}</span>
+            <span>Total</span>
+          </button>
+
+          <button
+            onClick={() => setStatsFilter(statsFilter === 'planted' ? 'all' : 'planted')}
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium backdrop-blur-sm border transition-all shadow-sm ${statsFilter === 'planted' ? 'bg-green-500 text-white border-green-500' : 'bg-white/90 dark:bg-gray-800/90 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-600 hover:bg-white dark:hover:bg-gray-800'}`}
+          >
+            <Check className="h-3 w-3" />
+            <span className="font-bold">{viewStats.planted}</span>
+            <span>Plantados</span>
+          </button>
+
+          <button
+            onClick={() => setStatsFilter(statsFilter === 'inProgress' ? 'all' : 'inProgress')}
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium backdrop-blur-sm border transition-all shadow-sm ${statsFilter === 'inProgress' ? 'bg-amber-500 text-white border-amber-500' : 'bg-white/90 dark:bg-gray-800/90 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-600 hover:bg-white dark:hover:bg-gray-800'}`}
+          >
+            <Clock className="h-3 w-3" />
+            <span className="font-bold">{viewStats.inProgress}</span>
+            <span>En Progreso</span>
+          </button>
+        </div>
+
+        <TreeMap
+          trees={filteredTrees}
+          height="100%"
+          defaultOpenTreeId={defaultTreeId}
+          onTreeSelect={handleTreeSelect}
+          onTreeDeselect={handleTreeDeselect}
+        />
+
+        {/* Leyenda de colores */}
+        <div
+          className={`absolute top-4 right-4 backdrop-blur-sm rounded-lg shadow-lg p-3 border z-[10] ${isDark ? 'bg-gray-800/95 border-gray-700' : 'bg-white/95 border-gray-200'}`}
         >
-          {/* Header */}
-          <div className="text-center mb-6">
-            <h1
-              className={`text-3xl md:text-4xl font-bold mb-2 ${isDark ? 'text-white' : 'text-green-800'}`}
-            >
-              Mapa Global de Árboles
-            </h1>
-            <p className={`text-base ${isDark ? 'text-gray-400' : 'text-green-600'}`}>
-              Explora y sigue árboles alrededor del mundo
-            </p>
-          </div>
-
-          {/* Stats Cards - Clickeables para filtrar */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 max-w-4xl mx-auto">
-            <button
-              onClick={() => setStatsFilter('all')}
-              className={`bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl px-6 py-4 shadow-lg transition-all hover:scale-105 ${statsFilter === 'all' ? 'ring-4 ring-blue-300' : ''}`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <TreePine className="h-8 w-8 text-white" />
-                  <div className="text-white text-left">
-                    <div className="text-3xl font-bold">{viewStats.total}</div>
-                    <div className="text-sm opacity-90">Total</div>
-                  </div>
-                </div>
-                <div
-                  className={`w-6 h-6 rounded-full border-2 border-white/60 flex items-center justify-center transition-all ${statsFilter === 'all' ? 'bg-white' : 'bg-transparent'}`}
-                >
-                  {statsFilter === 'all' && <Check className="h-4 w-4 text-blue-600" />}
-                </div>
-              </div>
-            </button>
-
-            <button
-              onClick={() => setStatsFilter(statsFilter === 'planted' ? 'all' : 'planted')}
-              className={`bg-gradient-to-br from-green-500 to-green-600 rounded-xl px-6 py-4 shadow-lg transition-all hover:scale-105 ${statsFilter === 'planted' ? 'ring-4 ring-green-300' : ''}`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="relative">
-                    <TreePine className="h-8 w-8 text-white" />
-                    <Check className="h-4 w-4 text-white absolute -bottom-1 -right-1 bg-green-600 rounded-full p-0.5" />
-                  </div>
-                  <div className="text-white text-left">
-                    <div className="text-3xl font-bold">{viewStats.planted}</div>
-                    <div className="text-sm opacity-90">Plantados</div>
-                  </div>
-                </div>
-                <div
-                  className={`w-6 h-6 rounded-full border-2 border-white/60 flex items-center justify-center transition-all ${statsFilter === 'planted' ? 'bg-white' : 'bg-transparent'}`}
-                >
-                  {statsFilter === 'planted' && <Check className="h-4 w-4 text-green-600" />}
-                </div>
-              </div>
-            </button>
-
-            <button
-              onClick={() => setStatsFilter(statsFilter === 'inProgress' ? 'all' : 'inProgress')}
-              className={`bg-gradient-to-br from-yellow-500 to-amber-500 rounded-xl px-6 py-4 shadow-lg transition-all hover:scale-105 ${statsFilter === 'inProgress' ? 'ring-4 ring-yellow-300' : ''}`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="relative">
-                    <TreePine className="h-8 w-8 text-white" />
-                    <Clock className="h-4 w-4 text-white absolute -bottom-1 -right-1 bg-amber-500 rounded-full p-0.5" />
-                  </div>
-                  <div className="text-white text-left">
-                    <div className="text-3xl font-bold">{viewStats.inProgress}</div>
-                    <div className="text-sm opacity-90">En Progreso</div>
-                  </div>
-                </div>
-                <div
-                  className={`w-6 h-6 rounded-full border-2 border-white/60 flex items-center justify-center transition-all ${statsFilter === 'inProgress' ? 'bg-white' : 'bg-transparent'}`}
-                >
-                  {statsFilter === 'inProgress' && <Check className="h-4 w-4 text-amber-600" />}
-                </div>
-              </div>
-            </button>
-          </div>
-
-          {/* Map */}
-          <Card
-            className={`shadow-xl relative overflow-visible ${isDark ? 'bg-gray-800 border-gray-700' : 'border-green-200'}`}
+          <div
+            className={`text-xs font-semibold mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
           >
-            <CardContent className="p-0">
-              <div className="relative">
-                <TreeMap
-                  trees={filteredTrees}
-                  height="700px"
-                  defaultOpenTreeId={defaultTreeId}
-                  onTreeSelect={handleTreeSelect}
-                  onTreeDeselect={handleTreeDeselect}
-                />
-
-                {/* Leyenda de colores */}
-                <div
-                  className={`absolute top-4 right-4 backdrop-blur-sm rounded-lg shadow-lg p-3 border z-[10] ${isDark ? 'bg-gray-800/95 border-gray-700' : 'bg-white/95 border-gray-200'}`}
-                >
-                  <div
-                    className={`text-xs font-semibold mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
-                  >
-                    Leyenda
-                  </div>
-                  <div className="space-y-1.5 text-xs">
-                    <div className="flex items-center space-x-2">
-                      <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                      <span className={isDark ? 'text-gray-400' : ''}>En Progreso</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-3 h-3 bg-green-600 rounded-full"></div>
-                      <span className={isDark ? 'text-gray-400' : ''}>Plantado</span>
-                    </div>
-                    <div
-                      className={`border-t pt-1.5 mt-1.5 ${isDark ? 'border-gray-700' : 'border-gray-200'}`}
-                    >
-                      <div className="flex items-center space-x-2">
-                        <Users
-                          className={`w-3 h-3 ${isDark ? 'text-gray-500' : 'text-gray-600'}`}
-                        />
-                        <span className={isDark ? 'text-gray-400' : ''}>= Colaborativo</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Floating Plant Button - Redirects to front app */}
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.5, type: 'spring' }}
-            className="fixed bottom-24 right-8 z-50"
-          >
-            <Button
-              onClick={handlePlantClick}
-              className="bg-brand hover:bg-brand-dark text-white rounded-full px-6 py-4 shadow-2xl flex items-center justify-center gap-2"
-              size="lg"
+            Leyenda
+          </div>
+          <div className="space-y-1.5 text-xs">
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+              <span className={isDark ? 'text-gray-400' : ''}>En Progreso</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 bg-green-600 rounded-full"></div>
+              <span className={isDark ? 'text-gray-400' : ''}>Plantado</span>
+            </div>
+            <div
+              className={`border-t pt-1.5 mt-1.5 ${isDark ? 'border-gray-700' : 'border-gray-200'}`}
             >
-              <TreePine className="h-5 w-5" />
-              <span className="font-medium">Plantar Árbol</span>
-            </Button>
-          </motion.div>
-        </motion.div>
+              <div className="flex items-center space-x-2">
+                <Users className={`w-3 h-3 ${isDark ? 'text-gray-500' : 'text-gray-600'}`} />
+                <span className={isDark ? 'text-gray-400' : ''}>= Colaborativo</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Footer */}
-      <Footer />
+      {/* Floating Plant Button */}
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 0.5, type: 'spring' }}
+        className="fixed bottom-6 right-6 z-50"
+      >
+        <Button
+          onClick={handlePlantClick}
+          className="bg-brand hover:bg-brand-dark text-white rounded-full px-5 py-3 shadow-2xl flex items-center justify-center gap-2"
+          size="lg"
+        >
+          <TreePine className="h-5 w-5" />
+          <span className="font-medium">Plantar Árbol</span>
+        </Button>
+      </motion.div>
     </div>
   );
 };

@@ -28,8 +28,6 @@ const CertificatePage = lazy(() => import('@features/certificates/pages/Certific
 
 // Components
 import AuthenticatedLayout from '@shared/components/layout/AuthenticatedLayout';
-import ChatBot from '@shared/components/ChatBot/ChatBot';
-
 // Loading fallback
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
@@ -173,8 +171,6 @@ const App = () => {
                 </Routes>
               </Suspense>
             </ErrorBoundary>
-            {/* Chatbot flotante */}
-            <ChatBot />
           </Router>
         </TreeProvider>
       </AuthProvider>
