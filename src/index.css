@@ -567,6 +567,13 @@ h4 {
   box-shadow: var(--shadow-lg);
 }
 
+/* Hero mini map: restaurar z-index naturales para que tiles rendericen */
+.hero-mini-map .leaflet-pane,
+.hero-mini-map .leaflet-tile-pane,
+.hero-mini-map .leaflet-overlay-pane {
+  z-index: auto !important;
+}
+
 .leaflet-control-container,
 .leaflet-control-container .leaflet-top,
 .leaflet-control-container .leaflet-bottom,
@@ -587,6 +594,24 @@ h4 {
 /* Dark mode map tiles - menos brillo para no deslumbrar */
 .map-tiles-dark .leaflet-tile {
   filter: brightness(0.75) saturate(0.8);
+}
+
+/* Dark mode map popups */
+.map-dark-mode .leaflet-popup-content-wrapper {
+  background: #1f2937;
+  color: #e5e7eb;
+}
+.map-dark-mode .leaflet-popup-tip {
+  background: #1f2937;
+}
+.map-dark-mode .leaflet-popup-content-wrapper a {
+  color: #6ee7b7;
+}
+.map-dark-mode .leaflet-popup-close-button {
+  color: #9ca3af !important;
+}
+.map-dark-mode .leaflet-popup-close-button:hover {
+  color: #f3f4f6 !important;
 }
 
 /* ===== Decorative Elements ===== */

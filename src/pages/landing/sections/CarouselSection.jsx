@@ -90,7 +90,7 @@ const CarouselSection = ({ carouselRef, APP_URL }) => {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <Button
-            onClick={() => window.open(`${APP_URL}/feed`, '_blank')}
+            onClick={() => window.open(`${APP_URL}/plantar`, '_blank')}
             size="lg"
             className="bg-emerald-500 hover:bg-emerald-600 text-white px-7"
           >

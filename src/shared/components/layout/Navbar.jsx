@@ -26,16 +26,15 @@ import {
   Store,
   Shovel,
   Tag,
-  Sun,
-  Moon,
   Info,
+  Heart,
 } from 'lucide-react';
 import { APP_URL } from '@core/config/app.config';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { theme, toggleTheme, isDark } = useTheme();
+  const { isDark } = useTheme();
 
   // Scroll al inicio
   const scrollToTop = (e) => {
@@ -117,18 +116,15 @@ const Navbar = () => {
     { name: 'Inicio', path: '/', icon: Home, isInternal: true },
     { name: 'Mapa Global', path: '/mapa', icon: Globe, isInternal: true },
     { name: 'Sobre Nosotros', path: '/sobre-nosotros', icon: Info, isInternal: true },
+    { name: 'Colaborativos', path: '/colaborativos', icon: Heart, isInternal: true },
   ];
 
-  const programsItems = [
-    { name: 'Sorteos', path: '/sorteos', icon: Gift, desc: 'Participa y gana arboles' },
-    { name: 'Referidos', path: '/referidos', icon: Share2, desc: 'Invita amigos y gana puntos' },
-    {
-      name: 'QR Empresas',
-      path: '/qr-productos',
-      icon: QrCode,
-      desc: 'Programa para empresas partner',
-    },
-  ];
+  // Programas - Deshabilitado temporalmente
+  // const programsItems = [
+  //   { name: 'Sorteos', path: '/sorteos', icon: Gift, desc: 'Participa y gana arboles' },
+  //   { name: 'Referidos', path: '/referidos', icon: Share2, desc: 'Invita amigos y gana puntos' },
+  //   { name: 'QR Empresas', path: '/qr-productos', icon: QrCode, desc: 'Programa para empresas partner' },
+  // ];
 
   const sociosItems = [
     { name: 'Viveros', path: '/viveros', icon: Store, desc: 'Vende tus arboles con nosotros' },
@@ -174,13 +170,23 @@ const Navbar = () => {
             {/* Desktop Navigation - Solo visible en landing (sin autenticacion) */}
             {!user && (
               <div className="hidden lg:flex items-center gap-1 flex-1 justify-center max-w-2xl">
-                {navigationItems.map((item) =>
-                  item.isInternal ? (
+                {navigationItems.map((item) => {
+                  const isActive =
+                    item.path === '/'
+                      ? location.pathname === '/'
+                      : location.pathname.startsWith(item.path);
+                  const baseClass =
+                    'transition-all flex items-center gap-1.5 font-medium px-4 h-16 rounded-none border-b-2';
+                  const activeClass = isActive
+                    ? 'text-green-900 dark:text-white border-green-500 dark:border-emerald-400 bg-green-50/80 dark:bg-gray-800'
+                    : 'text-green-700 dark:text-gray-300 border-transparent hover:text-green-900 dark:hover:text-white hover:bg-green-100/80 dark:hover:bg-gray-700 hover:border-green-500 dark:hover:border-emerald-400';
+
+                  return item.isInternal ? (
                     <Link
                       key={item.name}
                       to={item.path}
                       onClick={item.path === '/' ? scrollToTop : undefined}
-                      className="text-green-700 dark:text-gray-300 hover:text-green-900 dark:hover:text-white hover:bg-green-50 dark:hover:bg-gray-800 transition-all flex items-center gap-1.5 font-medium px-3 py-2 rounded-lg"
+                      className={`${baseClass} ${activeClass}`}
                     >
                       <item.icon className="h-4 w-4" />
                       <span className="text-sm">{item.name}</span>
@@ -188,67 +194,22 @@ const Navbar = () => {
                   ) : (
                     <button
                       key={item.name}
-                      onClick={() => window.open(item.path, '_blank')}
-                      className="text-green-700 dark:text-gray-300 hover:text-green-900 dark:hover:text-white hover:bg-green-50 dark:hover:bg-gray-800 transition-all flex items-center gap-1.5 font-medium px-3 py-2 rounded-lg"
+                      onClick={() => (window.location.href = item.path)}
+                      className={`${baseClass} ${activeClass}`}
                     >
                       <item.icon className="h-4 w-4" />
                       <span className="text-sm">{item.name}</span>
                     </button>
-                  )
-                )}
+                  );
+                })}
 
-                {/* Dropdown Programas */}
-                <div className="relative" ref={programsDropdownRef}>
-                  <button
-                    onClick={() => setIsProgramsDropdownOpen(!isProgramsDropdownOpen)}
-                    className="text-green-700 dark:text-gray-300 hover:text-green-900 dark:hover:text-white hover:bg-green-50 dark:hover:bg-gray-800 transition-all flex items-center gap-1.5 font-medium px-3 py-2 rounded-lg"
-                  >
-                    <Gift className="h-4 w-4" />
-                    <span className="text-sm">Programas</span>
-                    <ChevronDown
-                      className={`h-4 w-4 transition-transform ${isProgramsDropdownOpen ? 'rotate-180' : ''}`}
-                    />
-                  </button>
-
-                  <AnimatePresence>
-                    {isProgramsDropdownOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute left-0 mt-2 w-64 bg-white dark:bg-gray-900 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 py-2 z-50"
-                      >
-                        {programsItems.map((item) => (
-                          <Link
-                            key={item.name}
-                            to={item.path}
-                            onClick={() => setIsProgramsDropdownOpen(false)}
-                            className="flex items-start gap-3 px-4 py-3 hover:bg-green-50 dark:hover:bg-gray-700 transition-colors"
-                          >
-                            <div className="w-8 h-8 rounded-lg bg-green-100 dark:bg-emerald-900/50 flex items-center justify-center flex-shrink-0">
-                              <item.icon className="h-4 w-4 text-green-600 dark:text-emerald-400" />
-                            </div>
-                            <div>
-                              <p className="text-sm font-medium text-gray-900 dark:text-white">
-                                {item.name}
-                              </p>
-                              <p className="text-xs text-gray-500 dark:text-gray-400">
-                                {item.desc}
-                              </p>
-                            </div>
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                {/* Dropdown Programas - Deshabilitado temporalmente */}
 
                 {/* Dropdown Socios */}
                 <div className="relative" ref={sociosDropdownRef}>
                   <button
                     onClick={() => setIsSociosDropdownOpen(!isSociosDropdownOpen)}
-                    className="text-green-700 dark:text-gray-300 hover:text-green-900 dark:hover:text-white hover:bg-green-50 dark:hover:bg-gray-800 transition-all flex items-center gap-1.5 font-medium px-3 py-2 rounded-lg"
+                    className="text-green-700 dark:text-gray-300 hover:text-green-900 dark:hover:text-white hover:bg-green-100/80 dark:hover:bg-gray-700 transition-all flex items-center gap-1.5 font-medium px-4 h-16 rounded-none border-b-2 border-transparent hover:border-green-500 dark:hover:border-emerald-400"
                   >
                     <Users className="h-4 w-4" />
                     <span className="text-sm">Socios</span>
@@ -295,19 +256,6 @@ const Navbar = () => {
 
             {/* Desktop User Section */}
             <div className="hidden lg:flex items-center gap-2 flex-shrink-0">
-              {/* Theme Toggle Button */}
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-lg hover:bg-green-50 dark:hover:bg-gray-800 transition-colors"
-                aria-label={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
-              >
-                {isDark ? (
-                  <Sun className="h-5 w-5 text-yellow-500" />
-                ) : (
-                  <Moon className="h-5 w-5 text-gray-600" />
-                )}
-              </button>
-
               {user ? (
                 <>
                   {/* Boton de notificaciones */}
@@ -380,31 +328,18 @@ const Navbar = () => {
                 </>
               ) : (
                 <Button
-                  onClick={() => window.open(`${APP_URL}/feed`, '_blank')}
+                  onClick={() => window.open(`${APP_URL}/plantar`, '_blank')}
                   size="sm"
                   className="bg-brand hover:bg-brand-dark text-white"
                 >
-                  <LogIn className="h-4 w-4 mr-1" />
-                  Ingresar
+                  <TreePine className="h-4 w-4 mr-1" />
+                  Plantar
                 </Button>
               )}
             </div>
 
             {/* Mobile Hamburger Button */}
             <div className="flex items-center gap-2 lg:hidden">
-              {/* Theme Toggle - Mobile */}
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-lg hover:bg-green-50 dark:hover:bg-gray-800 transition-colors"
-                aria-label={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
-              >
-                {isDark ? (
-                  <Sun className="h-5 w-5 text-yellow-500" />
-                ) : (
-                  <Moon className="h-5 w-5 text-gray-600" />
-                )}
-              </button>
-
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="p-2 rounded-lg hover:bg-green-50 dark:hover:bg-gray-800 transition-colors flex-shrink-0"
@@ -498,7 +433,7 @@ const Navbar = () => {
                 ) : (
                   <div className="mb-6">
                     <Button
-                      onClick={() => window.open(`${APP_URL}/feed`, '_blank')}
+                      onClick={() => (window.location.href = APP_URL)}
                       className="w-full bg-brand hover:bg-brand-dark text-white"
                     >
                       <LogIn className="h-4 w-4 mr-2" />
@@ -510,45 +445,34 @@ const Navbar = () => {
                 {/* Navigation Links - Solo visible en landing (sin autenticacion) */}
                 {!user && (
                   <nav className="space-y-1">
-                    {navigationItems.map((item) => (
-                      <button
-                        key={item.name}
-                        onClick={() => {
-                          if (item.isInternal) {
-                            handleNavigation(item.path);
-                          } else {
-                            window.open(item.path, '_blank');
-                            setIsMenuOpen(false);
-                          }
-                        }}
-                        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-800 hover:text-green-900 dark:hover:text-white transition-colors"
-                      >
-                        <item.icon className="h-5 w-5" />
-                        <span className="font-medium">{item.name}</span>
-                      </button>
-                    ))}
-
-                    {/* Seccion Programas en movil */}
-                    <div className="pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
-                      <p className="px-4 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                        Programas
-                      </p>
-                      {programsItems.map((item) => (
+                    {navigationItems.map((item) => {
+                      const isActive =
+                        item.path === '/'
+                          ? location.pathname === '/'
+                          : location.pathname.startsWith(item.path);
+                      return (
                         <button
                           key={item.name}
-                          onClick={() => handleNavigation(item.path)}
-                          className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-800 hover:text-green-900 dark:hover:text-white transition-colors"
+                          onClick={() => {
+                            if (item.isInternal) {
+                              handleNavigation(item.path);
+                            } else {
+                              window.location.href = item.path;
+                            }
+                          }}
+                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors ${
+                            isActive
+                              ? 'bg-green-100 dark:bg-gray-700 text-green-900 dark:text-white font-semibold'
+                              : 'text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-800 hover:text-green-900 dark:hover:text-white'
+                          }`}
                         >
                           <item.icon className="h-5 w-5" />
-                          <div>
-                            <span className="font-medium block">{item.name}</span>
-                            <span className="text-xs text-gray-500 dark:text-gray-400">
-                              {item.desc}
-                            </span>
-                          </div>
+                          <span className="font-medium">{item.name}</span>
                         </button>
-                      ))}
-                    </div>
+                      );
+                    })}
+
+                    {/* Seccion Programas en movil - Deshabilitado temporalmente */}
 
                     {/* Seccion Socios en movil */}
                     <div className="pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">

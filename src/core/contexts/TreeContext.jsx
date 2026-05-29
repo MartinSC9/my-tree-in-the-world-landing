@@ -65,7 +65,14 @@ export const TreeProvider = ({ children }) => {
     setLoadingTrees(true);
 
     try {
-      const data = await treeService.getTrees(filters);
+      let data;
+      try {
+        data = await treeService.getTrees(filters);
+      } catch (firstError) {
+        // Reintentar 1 vez
+        console.warn('Primer intento fallido, reintentando...', firstError.message);
+        data = await treeService.getTrees(filters);
+      }
       setTrees(data || []);
       cacheRef.current.loaded = true;
       cacheRef.current.lastFilters = filtersKey;
@@ -75,7 +82,7 @@ export const TreeProvider = ({ children }) => {
       }
       return data || [];
     } catch (error) {
-      console.error('Error loading trees:', error);
+      console.error('Error loading trees tras retry:', error);
       toast({
         title: 'Error',
         description: `No se pudieron cargar los árboles: ${error.response?.data?.error || error.message}`,

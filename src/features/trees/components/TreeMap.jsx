@@ -8,6 +8,8 @@ import {
   useMapEvents,
   Rectangle,
   Polygon,
+  CircleMarker,
+  Circle,
 } from 'react-leaflet';
 import L from 'leaflet';
 import { TreePine, Loader2, X, ZoomIn, ExternalLink } from 'lucide-react';
@@ -167,8 +169,12 @@ const TreeMap = ({
   defaultOpenTreeId = null,
   onTreeSelect,
   onTreeDeselect,
+  forceDarkMap,
+  userLocation = null,
+  nearbyRadiusKm = 2,
 }) => {
-  const { isDark } = useTheme();
+  const { isDark: themeDark } = useTheme();
+  const isDark = forceDarkMap !== undefined ? forceDarkMap : themeDark;
   const mapRef = useRef();
   const markerRefs = useRef({});
   const [loadedDetails, setLoadedDetails] = useState({});
@@ -291,7 +297,7 @@ const TreeMap = ({
   return (
     <div
       style={{ height, position: 'relative', width: '100%' }}
-      className="rounded-lg overflow-hidden"
+      className={`rounded-lg overflow-hidden ${isDark ? 'map-dark-mode' : ''}`}
     >
       {/* Mensaje informativo cuando está restringido */}
       {restrictToGreenSpaces ? (
@@ -325,9 +331,14 @@ const TreeMap = ({
         minZoom={restrictToCordoba ? 11 : undefined}
       >
         <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          key={isDark ? 'dark' : 'light'}
+          url={
+            isDark
+              ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+              : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          }
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          className={isDark ? 'map-tiles-dark' : ''}
+          className={!isDark ? 'map-tiles-dark' : ''}
         />
 
         {/* Rectángulo visual mostrando los límites de Córdoba */}
@@ -472,11 +483,40 @@ const TreeMap = ({
                     loadedDetails={loadedDetails}
                     loadingDetails={loadingDetails}
                     statusLabels={statusLabels}
+                    isDark={isDark}
                   />
                 </Popup>
               </Marker>
             );
           })}
+        {/* Ubicación del usuario + zona */}
+        {userLocation && (
+          <>
+            <Circle
+              center={[userLocation.lat, userLocation.lng]}
+              radius={nearbyRadiusKm * 1000}
+              pathOptions={{
+                color: '#34d399',
+                fillColor: '#10b981',
+                fillOpacity: 0.12,
+                weight: 2,
+                opacity: 0.5,
+                dashArray: '8 5',
+              }}
+            />
+            <CircleMarker
+              center={[userLocation.lat, userLocation.lng]}
+              radius={6}
+              pathOptions={{
+                color: '#3b82f6',
+                fillColor: '#3b82f6',
+                fillOpacity: 1,
+                weight: 3,
+                opacity: 0.6,
+              }}
+            />
+          </>
+        )}
       </MapContainer>
     </div>
   );
@@ -507,7 +547,7 @@ const ImageLightbox = ({ src, alt, onClose }) => {
 };
 
 // Componente para el contenido del popup con carga bajo demanda
-const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels }) => {
+const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels, isDark }) => {
   const [showLightbox, setShowLightbox] = useState(false);
 
   // Usar detalles cargados si existen, sino usar datos del tree
@@ -521,7 +561,7 @@ const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels })
     return (
       <div className="p-2 flex items-center gap-2">
         <Loader2 className="h-4 w-4 animate-spin text-green-600" />
-        <span className="text-sm text-gray-600">Cargando...</span>
+        <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Cargando...</span>
       </div>
     );
   }
@@ -536,7 +576,7 @@ const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels })
               e.stopPropagation();
               setShowLightbox(true);
             }}
-            className="relative flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden group cursor-pointer shadow-sm border border-gray-200"
+            className={`relative flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden group cursor-pointer shadow-sm border ${isDark ? 'border-gray-600' : 'border-gray-200'}`}
           >
             <img
               src={imageUrl}
@@ -551,14 +591,18 @@ const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels })
 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
-            <h3 className="font-semibold text-green-800 truncate">{details.name || 'Árbol'}</h3>
+            <h3
+              className={`font-semibold truncate ${isDark ? 'text-emerald-400' : 'text-green-800'}`}
+            >
+              {details.name || 'Árbol'}
+            </h3>
             {tree.type === 'collaborative' && (
               <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full flex-shrink-0">
                 Colaborativo
               </span>
             )}
           </div>
-          <p className="text-sm text-gray-600">
+          <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
             {details.country || details.city || 'Ubicación desconocida'}
           </p>
         </div>
@@ -566,16 +610,16 @@ const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels })
 
       {tree.type === 'collaborative' ? (
         <>
-          <p className="text-xs text-gray-500 mt-1">
+          <p className={`text-xs mt-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
             Especie: {details.tree_species || 'No especificada'}
           </p>
           {details.funding_percentage !== undefined && (
             <div className="mt-2">
               <div className="flex justify-between text-xs mb-1">
-                <span className="text-gray-600">Financiamiento:</span>
+                <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>Financiamiento:</span>
                 <span className="font-semibold text-purple-600">{details.funding_percentage}%</span>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-2">
+              <div className={`w-full rounded-full h-2 ${isDark ? 'bg-gray-600' : 'bg-gray-200'}`}>
                 <div
                   className="bg-purple-600 h-2 rounded-full transition-all"
                   style={{ width: `${Math.min(details.funding_percentage || 0, 100)}%` }}
@@ -584,7 +628,9 @@ const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels })
             </div>
           )}
           {details.creator_name && (
-            <p className="text-xs text-gray-500 mt-1">Creador: {details.creator_name}</p>
+            <p className={`text-xs mt-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+              Creador: {details.creator_name}
+            </p>
           )}
           {details.status && (
             <p className="text-xs mt-1">
@@ -599,7 +645,9 @@ const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels })
             </p>
           )}
           {details.message && (
-            <p className="text-xs text-gray-600 mt-1 italic">"{details.message}"</p>
+            <p className={`text-xs mt-1 italic ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              "{details.message}"
+            </p>
           )}
         </>
       ) : (
@@ -613,18 +661,22 @@ const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels })
                   className="w-4 h-4 rounded-full object-cover"
                 />
               ) : (
-                <div className="w-4 h-4 rounded-full bg-green-100 flex items-center justify-center">
-                  <span className="text-[8px] font-bold text-green-700">
+                <div
+                  className={`w-4 h-4 rounded-full flex items-center justify-center ${isDark ? 'bg-emerald-900' : 'bg-green-100'}`}
+                >
+                  <span
+                    className={`text-[8px] font-bold ${isDark ? 'text-emerald-400' : 'text-green-700'}`}
+                  >
                     {details.owner.first_name[0]}
                   </span>
                 </div>
               )}
-              <span className="text-xs text-gray-600">
+              <span className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                 {`${details.owner.first_name} ${details.owner.last_name || ''}`.trim()}
               </span>
             </div>
           )}
-          <p className="text-xs text-gray-500 mt-1">
+          <p className={`text-xs mt-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
             Creado:{' '}
             {details.planted_at
               ? new Date(details.planted_at).toLocaleDateString()
@@ -641,7 +693,9 @@ const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels })
             {statusLabels[details.status] || details.status}
           </p>
           {details.message && (
-            <p className="text-xs text-gray-600 mt-1 italic">"{details.message}"</p>
+            <p className={`text-xs mt-1 italic ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              "{details.message}"
+            </p>
           )}
         </>
       )}
@@ -651,7 +705,7 @@ const TreePopupContent = ({ tree, loadedDetails, loadingDetails, statusLabels })
         href={`/certificado/${tree.id}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-1.5 mt-3 pt-2 border-t border-gray-200 text-xs font-medium text-green-700 hover:text-green-800 transition-colors"
+        className={`flex items-center justify-center gap-1.5 mt-3 pt-2 border-t text-xs font-medium transition-colors ${isDark ? 'border-gray-600 text-emerald-400 hover:text-emerald-300' : 'border-gray-200 text-green-700 hover:text-green-800'}`}
       >
         <ExternalLink className="h-3 w-3" />
         Ver certificado
@@ -678,6 +732,9 @@ const areEqual = (prevProps, nextProps) => {
   if (prevProps.restrictToGreenSpaces !== nextProps.restrictToGreenSpaces) return false;
   if (prevProps.showGreenSpaces !== nextProps.showGreenSpaces) return false;
   if (prevProps.defaultOpenTreeId !== nextProps.defaultOpenTreeId) return false;
+  if (prevProps.forceDarkMap !== nextProps.forceDarkMap) return false;
+  if (JSON.stringify(prevProps.userLocation) !== JSON.stringify(nextProps.userLocation))
+    return false;
 
   // Comparar arrays de center y selectedLocation
   if (JSON.stringify(prevProps.center) !== JSON.stringify(nextProps.center)) return false;

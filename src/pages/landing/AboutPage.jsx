@@ -18,9 +18,13 @@ import {
   MapPin,
   BadgeCheck,
   TrendingUp,
+  Linkedin,
+  Store,
+  QrCode,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@shared/components/ui/card';
 import { useTheme } from '@core/contexts/ThemeContext';
+import heroBackground from '@/assets/images/login-background.jpeg';
 
 const AboutPage = () => {
   const { isDark } = useTheme();
@@ -97,32 +101,152 @@ const AboutPage = () => {
     <div
       className={`min-h-screen ${isDark ? 'bg-gray-900' : 'bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50'}`}
     >
-      {/* Hero Section */}
-      <section className="relative overflow-hidden py-24 md:py-32 px-4">
+      {/* Quiénes Somos - Hero con fotos grandes */}
+      <section className="relative overflow-hidden pt-8 md:pt-12 pb-12 md:pb-16 px-4">
         <div
-          className={`absolute inset-0 ${isDark ? 'bg-gradient-to-br from-green-900/20 via-emerald-900/10 to-teal-900/20' : 'bg-gradient-to-br from-green-600/10 via-emerald-500/5 to-teal-600/10'}`}
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${heroBackground})` }}
         ></div>
-        <div className="relative max-w-7xl mx-auto text-center">
+        <div
+          className={`absolute inset-0 ${isDark ? 'bg-gray-900/80' : 'bg-white/70 backdrop-blur-[2px]'}`}
+        ></div>
+        <div className="relative max-w-6xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-8"
           >
-            <TreePine
-              className={`h-20 w-20 mx-auto mb-6 ${isDark ? 'text-emerald-400' : 'text-green-600'}`}
-            />
             <h1
-              className={`text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight ${isDark ? 'text-white' : 'text-green-800'}`}
+              className={`text-4xl md:text-5xl font-bold mb-3 leading-tight ${isDark ? 'text-white' : 'text-green-800'}`}
             >
-              Sobre Nosotros
+              Quiénes Somos
             </h1>
             <p
-              className={`text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed ${isDark ? 'text-gray-300' : 'text-green-700'}`}
+              className={`text-lg md:text-xl max-w-3xl mx-auto leading-relaxed ${isDark ? 'text-gray-300' : 'text-green-700'}`}
             >
-              Conectamos a personas y empresas con la naturaleza a través de una plataforma que
-              facilita la plantación de árboles reales, democratizando el acceso a la reforestación.
+              Dos jóvenes de Córdoba, Argentina, usando tecnología como herramienta real de cambio.
             </p>
           </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Nahuel */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <Card
+                className={`h-full hover:shadow-2xl transition-all duration-300 overflow-hidden ${
+                  isDark ? 'bg-gray-800/90 border-gray-700' : 'bg-white/95 border-green-200'
+                }`}
+              >
+                <CardContent className="p-0">
+                  <div className="flex justify-center pt-6 pb-4">
+                    <img
+                      src="/images/nahuel.jpg"
+                      alt="Nahuel Carballo"
+                      className="w-32 h-32 md:w-36 md:h-36 rounded-full object-cover border-4 border-green-300 dark:border-emerald-500 shadow-lg"
+                    />
+                  </div>
+                  <div className="px-6 pb-6 text-center">
+                    <h3
+                      className={`text-xl font-bold mb-0.5 ${isDark ? 'text-white' : 'text-green-800'}`}
+                    >
+                      Nahuel Carballo
+                    </h3>
+                    <p className={`text-sm mb-3 ${isDark ? 'text-emerald-400' : 'text-green-600'}`}>
+                      Fundador & Hardware/Sistemas
+                    </p>
+                    <p
+                      className={`text-sm leading-relaxed mb-3 ${isDark ? 'text-gray-300' : 'text-green-700'}`}
+                    >
+                      Técnico electrónico y estudiante de Ingeniería en Sistemas (UTN). Experiencia
+                      en análisis de hardware, producción industrial y desarrollo de software. La
+                      visión de campo y la conexión con el mundo físico.
+                    </p>
+                    <a
+                      href="https://www.linkedin.com/in/nahuel-carballo-a59408265"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`inline-flex items-center gap-2 text-sm font-medium ${
+                        isDark
+                          ? 'text-emerald-400 hover:text-emerald-300'
+                          : 'text-green-600 hover:text-green-700'
+                      }`}
+                    >
+                      <Linkedin className="h-4 w-4" />
+                      LinkedIn
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Martin */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+            >
+              <Card
+                className={`h-full hover:shadow-2xl transition-all duration-300 overflow-hidden ${
+                  isDark ? 'bg-gray-800/90 border-gray-700' : 'bg-white/95 border-green-200'
+                }`}
+              >
+                <CardContent className="p-0">
+                  <div className="flex justify-center pt-6 pb-4">
+                    <img
+                      src="/images/martin.png"
+                      alt="Martín Contrera"
+                      className="w-32 h-32 md:w-36 md:h-36 rounded-full object-cover border-4 border-green-300 dark:border-emerald-500 shadow-lg"
+                    />
+                  </div>
+                  <div className="px-6 pb-6 text-center">
+                    <h3
+                      className={`text-xl font-bold mb-0.5 ${isDark ? 'text-white' : 'text-green-800'}`}
+                    >
+                      Martín Contrera
+                    </h3>
+                    <p className={`text-sm mb-3 ${isDark ? 'text-emerald-400' : 'text-green-600'}`}>
+                      Co-fundador & Desarrollador
+                    </p>
+                    <p
+                      className={`text-sm leading-relaxed mb-3 ${isDark ? 'text-gray-300' : 'text-green-700'}`}
+                    >
+                      Desarrollador de software con +4 años en producción. Especializado en IoT, IA
+                      y automatizaciones. Diseñó y construyó toda la arquitectura de la plataforma —
+                      desde el backend hasta la app móvil.
+                    </p>
+                    <a
+                      href="https://www.linkedin.com/in/martincontrera"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`inline-flex items-center gap-2 text-sm font-medium ${
+                        isDark
+                          ? 'text-emerald-400 hover:text-emerald-300'
+                          : 'text-green-600 hover:text-green-700'
+                      }`}
+                    >
+                      <Linkedin className="h-4 w-4" />
+                      LinkedIn
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className={`text-center mt-8 text-base md:text-lg max-w-3xl mx-auto leading-relaxed ${isDark ? 'text-gray-300' : 'text-green-700'}`}
+          >
+            En 2025 transformamos una idea en realidad: una plataforma con trazabilidad real,
+            coordenadas GPS y seguimiento. La tecnología tiene que tocar la tierra, ayudar a los
+            viveros, conectar personas y regenerar ecosistemas.
+          </motion.p>
         </div>
       </section>
 
@@ -295,40 +419,19 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Cómo Trabajamos */}
-      <section className="py-20 px-4 bg-gradient-to-br from-green-600 to-emerald-700">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            className="text-center text-white"
-          >
-            <Leaf className="h-16 w-16 mx-auto mb-6" />
-            <h2 className="text-4xl font-bold mb-6">Cómo Trabajamos</h2>
-            <div className="max-w-4xl mx-auto space-y-6 text-lg leading-relaxed">
-              <p>
-                Trabajamos directamente con <strong>viveros locales</strong> y{' '}
-                <strong>equipos de plantación</strong> para garantizar que cada árbol se plante
-                correctamente.
-              </p>
-              <p>
-                Seleccionamos cuidadosamente las{' '}
-                <strong>especies nativas apropiadas para cada región</strong>, considerando el
-                clima, el suelo y el ecosistema local.
-              </p>
-              <p>
-                Cada árbol plantado recibe un <strong>código QR único</strong> instalado en el
-                lugar, permitiendo total trazabilidad y seguimiento del crecimiento.
-              </p>
-              <p className="text-green-100 italic text-xl mt-8">
-                &ldquo;Cada árbol que plantamos es una semilla de esperanza para las futuras
-                generaciones.&rdquo;
-              </p>
-            </div>
+      {/* Cómo Trabajamos - Deshabilitado temporalmente
+      <section className="relative py-20 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroBackground})` }}></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-green-800/90 to-emerald-900/90"></div>
+        <div className="relative max-w-6xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="text-center mb-12">
+            <Leaf className="h-14 w-14 mx-auto mb-4 text-emerald-300" />
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-3">Cómo Trabajamos</h2>
+            <p className="text-lg text-green-200 max-w-2xl mx-auto">Tecnología + naturaleza, de la mano</p>
           </motion.div>
         </div>
       </section>
+      */}
     </div>
   );
 };

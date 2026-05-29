@@ -31,7 +31,7 @@ const FinalCTASection = ({ ctaRef, APP_URL }) => {
             Explorá la plataforma, conectá con otros y plantá tu propio árbol.
           </p>
           <Button
-            onClick={() => window.open(`${APP_URL}/feed`, '_blank')}
+            onClick={() => window.open(`${APP_URL}/plantar`, '_blank')}
             size="lg"
             className="bg-white hover:bg-emerald-50 text-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-500 dark:text-white shadow-lg hover:shadow-xl px-10 py-6 text-lg font-semibold transition-all duration-300 hover:scale-105"
           >

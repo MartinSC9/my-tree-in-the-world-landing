@@ -21,6 +21,7 @@ const SeguridadInfantilPage = lazy(() => import('@/pages/landing/SeguridadInfant
 const ViverosPage = lazy(() => import('@/pages/landing/ViverosPage'));
 const PlantadoresPage = lazy(() => import('@/pages/landing/PlantadoresPage'));
 const ChapistasPage = lazy(() => import('@/pages/landing/ChapistasPage'));
+const ColaborativosPage = lazy(() => import('@/pages/landing/ColaborativosPage'));
 
 // Public pages - lazy loaded
 const UnifiedMapPage = lazy(() => import('@features/trees/pages/UnifiedMapPage'));
@@ -60,6 +61,14 @@ const App = () => {
                     element={
                       <AuthenticatedLayout>
                         <AboutPage />
+                      </AuthenticatedLayout>
+                    }
+                  />
+                  <Route
+                    path="/colaborativos"
+                    element={
+                      <AuthenticatedLayout>
+                        <ColaborativosPage />
                       </AuthenticatedLayout>
                     }
                   />

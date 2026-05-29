@@ -19,6 +19,13 @@ export const statsService = {
   },
 };
 
+export const collaborativeService = {
+  async getCollaborativeTrees() {
+    const response = await api.get(API_ENDPOINTS.COLLABORATIVE_TREES);
+    return response.data.collaborative_trees;
+  },
+};
+
 export const treeService = {
   // Get tree markers (optimized for maps - only coordinates)
   async getTreeMarkers() {
