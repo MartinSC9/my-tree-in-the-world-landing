@@ -5,16 +5,18 @@ import { Button } from '@shared/components/ui/button';
 
 const FinalCTASection = ({ ctaRef, APP_URL }) => {
   return (
-    <section
-      ref={ctaRef}
-      className="py-14 md:py-20 px-4 bg-emerald-600 dark:bg-gray-900 relative overflow-hidden"
-    >
-      {/* Fondo sutil */}
+    <section ref={ctaRef} className="py-14 md:py-20 px-4 relative overflow-hidden">
+      {/* Background image */}
       <div className="absolute inset-0">
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-emerald-700/30 dark:bg-emerald-500/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3" />
+        <img
+          src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1920&q=80"
+          alt=""
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gray-950/75" />
       </div>
-      {/* Borde superior en dark mode */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent dark:block hidden" />
+      {/* Borde superior */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent" />
 
       <div className="container-wide relative z-10">
         <motion.div
@@ -27,13 +29,13 @@ const FinalCTASection = ({ ctaRef, APP_URL }) => {
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
             Empezá ahora
           </h2>
-          <p className="text-lg text-emerald-100 dark:text-gray-300 mb-8">
+          <p className="text-lg text-gray-300 mb-8">
             Explorá la plataforma, conectá con otros y plantá tu propio árbol.
           </p>
           <Button
             onClick={() => window.open(`${APP_URL}/plantar`, '_blank')}
             size="lg"
-            className="bg-white hover:bg-emerald-50 text-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-500 dark:text-white shadow-lg hover:shadow-xl px-10 py-6 text-lg font-semibold transition-all duration-300 hover:scale-105"
+            className="bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg hover:shadow-xl px-10 py-6 text-lg font-semibold transition-all duration-300 hover:scale-105"
           >
             Explorar la plataforma
             <ArrowRight className="h-5 w-5 ml-2" />
