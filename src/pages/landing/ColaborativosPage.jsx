@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import {
   Heart,
   Users,
@@ -15,7 +15,6 @@ import {
   TrendingUp,
 } from 'lucide-react';
 import { Button } from '@shared/components/ui/button';
-import { useTheme } from '@core/contexts/ThemeContext';
 import { collaborativeService } from '@features/trees/services';
 import { formatCurrency, calculateFundingPercentage } from '@/utils/currencyUtils';
 import { APP_URL } from '@core/config/app.config';
@@ -23,6 +22,13 @@ import Footer from '@shared/components/layout/Footer';
 
 // Video de fondo (Mixkit - licencia libre, sin atribucion)
 const HERO_VIDEO_URL = 'https://assets.mixkit.co/videos/50847/50847-1080.mp4';
+
+// Unsplash images for cinematic sections
+const IMAGES = {
+  hero: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1920&q=80',
+  steps: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=1920&q=80',
+  cta: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&q=80',
+};
 
 // Mock data mientras carga
 const MOCK_PROJECTS = [
@@ -88,11 +94,28 @@ const fetchWithRetry = async (fn) => {
   }
 };
 
+// Reveal text animation (slides up from below with overflow-hidden)
+const RevealText = ({ children, delay = 0, className = '' }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-80px' });
+
+  return (
+    <div ref={ref} className="overflow-hidden">
+      <motion.div
+        initial={{ y: '100%', opacity: 0 }}
+        animate={inView ? { y: 0, opacity: 1 } : {}}
+        transition={{ duration: 0.8, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className={className}
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
+};
+
 // Barra de progreso
-const FundingBar = ({ percentage, isDark }) => (
-  <div
-    className={`w-full h-2.5 rounded-full overflow-hidden ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}
-  >
+const FundingBar = ({ percentage }) => (
+  <div className="w-full h-2.5 rounded-full overflow-hidden bg-white/[0.08]">
     <motion.div
       initial={{ width: 0 }}
       animate={{ width: `${Math.min(percentage, 100)}%` }}
@@ -106,8 +129,8 @@ const FundingBar = ({ percentage, isDark }) => (
   </div>
 );
 
-// Card de proyecto
-const ProjectCard = ({ project, index, isDark }) => {
+// Card de proyecto - dark glassmorphism
+const ProjectCard = ({ project, index }) => {
   const percentage =
     project.funding_percentage ??
     calculateFundingPercentage(project.current_amount, project.target_amount);
@@ -118,30 +141,20 @@ const ProjectCard = ({ project, index, isDark }) => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className={`group rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
-        isDark
-          ? 'bg-gray-800/80 border-gray-700 hover:border-emerald-500/50'
-          : 'bg-white border-gray-200 hover:border-emerald-400'
-      }`}
+      className="group rounded-2xl overflow-hidden border transition-all duration-500 bg-white/[0.03] backdrop-blur-xl border-white/[0.08] hover:bg-white/[0.06] hover:border-emerald-500/30 hover:-translate-y-1"
     >
       {/* Header con especie y estado */}
-      <div
-        className={`px-6 pt-6 pb-4 ${isDark ? 'border-b border-gray-700/50' : 'border-b border-gray-100'}`}
-      >
+      <div className="px-6 pt-6 pb-4 border-b border-white/[0.06]">
         <div className="flex items-start justify-between gap-3 mb-2">
           <div className="flex-1 min-w-0">
-            <h3 className={`text-lg font-bold truncate ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              {project.tree_name}
-            </h3>
-            <p className={`text-sm ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`}>
-              {project.tree_species}
-            </p>
+            <h3 className="text-lg font-bold truncate text-white">{project.tree_name}</h3>
+            <p className="text-sm text-emerald-400">{project.tree_species}</p>
           </div>
           <span
             className={`flex-shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold ${
               isCompleted
-                ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300'
-                : 'bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300'
+                ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20'
+                : 'bg-amber-500/15 text-amber-400 border border-amber-500/20'
             }`}
           >
             {isCompleted ? (
@@ -156,25 +169,19 @@ const ProjectCard = ({ project, index, isDark }) => {
 
       {/* Body */}
       <div className="px-6 py-4">
-        <p
-          className={`text-sm leading-relaxed mb-4 line-clamp-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
-        >
+        <p className="text-sm leading-relaxed mb-4 line-clamp-2 text-white/50">
           {project.description || 'Proyecto colaborativo para plantar un arbol entre todos.'}
         </p>
 
         {/* Info */}
         <div className="flex items-center gap-4 mb-4 text-sm">
-          <span
-            className={`flex items-center gap-1.5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
-          >
+          <span className="flex items-center gap-1.5 text-white/40">
             <Users className="h-3.5 w-3.5" />
             {project.total_contributors || 0}{' '}
             {(project.total_contributors || 0) === 1 ? 'persona' : 'personas'}
           </span>
           {project.city && (
-            <span
-              className={`flex items-center gap-1.5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
-            >
+            <span className="flex items-center gap-1.5 text-white/40">
               <Globe className="h-3.5 w-3.5" />
               {project.city}
             </span>
@@ -184,41 +191,33 @@ const ProjectCard = ({ project, index, isDark }) => {
         {/* Barra de progreso */}
         <div className="mb-2">
           <div className="flex items-center justify-between mb-1.5">
-            <span className={`text-sm font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            <span className="text-sm font-semibold text-white">
               {formatCurrency(project.current_amount || 0)}
             </span>
-            <span className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+            <span className="text-xs text-white/30">
               de {formatCurrency(project.target_amount)}
             </span>
           </div>
-          <FundingBar percentage={percentage} isDark={isDark} />
+          <FundingBar percentage={percentage} />
           <div className="flex items-center justify-between mt-1.5">
             <span
               className={`text-xs font-medium ${
-                isCompleted
-                  ? isDark
-                    ? 'text-emerald-400'
-                    : 'text-emerald-600'
-                  : isDark
-                    ? 'text-gray-400'
-                    : 'text-gray-500'
+                isCompleted ? 'text-emerald-400' : 'text-white/40'
               }`}
             >
               {Math.round(percentage)}% financiado
             </span>
-            <span className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-              por {project.creator_name || 'Anonimo'}
-            </span>
+            <span className="text-xs text-white/30">por {project.creator_name || 'Anonimo'}</span>
           </div>
         </div>
       </div>
 
       {/* Footer CTA */}
       {!isCompleted && (
-        <div className={`px-6 pb-5`}>
+        <div className="px-6 pb-5">
           <Button
             onClick={() => window.open(`${APP_URL}/arboles-colaborativos/${project.id}`, '_blank')}
-            className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+            className="w-full bg-emerald-600 hover:bg-emerald-500 text-white border-0 transition-colors duration-300"
             size="sm"
           >
             <HeartHandshake className="h-4 w-4 mr-2" />
@@ -249,16 +248,6 @@ const FloatingLoader = ({ visible }) => (
   </AnimatePresence>
 );
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
-};
-
 const steps = [
   {
     icon: Sparkles,
@@ -282,8 +271,33 @@ const steps = [
   },
 ];
 
+// Section wrapper with scroll-triggered stagger
+const StaggerSection = ({ children, className = '' }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-100px' });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={inView ? 'visible' : 'hidden'}
+      variants={{
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.12 } },
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+const fadeChild = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
+};
+
 const ColaborativosPage = () => {
-  const { isDark } = useTheme();
   const [projects, setProjects] = useState(MOCK_PROJECTS);
   const [loaded, setLoaded] = useState(false);
   const videoRef = useRef(null);
@@ -299,66 +313,80 @@ const ColaborativosPage = () => {
   }, []);
 
   return (
-    <div className={`min-h-screen ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+    <div className="min-h-screen bg-black">
       <FloatingLoader visible={!loaded} />
 
-      {/* Hero con video */}
+      {/* ============================================================
+          HERO — Full viewport, video + Unsplash poster + dark overlay
+          ============================================================ */}
       <section
         ref={heroRef}
-        className="relative min-h-[85vh] flex items-center justify-center overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
-        {/* Video de fondo */}
-        <div className="absolute inset-0 z-0">
+        {/* Unsplash poster (fallback / background) */}
+        <img
+          src={IMAGES.hero}
+          alt="Manos plantando juntas"
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+        />
+
+        {/* Video on top of poster */}
+        <div className="absolute inset-0 z-[1]">
           <video
             ref={videoRef}
             autoPlay
             muted
             loop
             playsInline
-            poster=""
+            poster={IMAGES.hero}
             className="absolute inset-0 w-full h-full object-cover"
           >
             <source src={HERO_VIDEO_URL} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
         </div>
 
-        {/* Contenido hero */}
+        {/* Dark cinematic overlay */}
+        <div className="absolute inset-0 z-[2] bg-gradient-to-b from-black/70 via-black/60 to-black" />
+
+        {/* Content */}
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <motion.div initial="hidden" animate="visible" variants={stagger}>
-            <motion.div variants={fadeInUp} className="mb-6">
-              <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2 text-sm font-medium text-white">
+          <StaggerSection>
+            <motion.div variants={fadeChild} className="mb-6">
+              <span className="inline-flex items-center gap-2 bg-white/[0.06] backdrop-blur-xl border border-white/[0.1] rounded-full px-5 py-2.5 text-sm font-medium text-white/80">
                 <Heart className="h-4 w-4 text-pink-400" />
                 Plantacion colaborativa
               </span>
             </motion.div>
 
-            <motion.h1
-              variants={fadeInUp}
-              className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
-            >
-              Un arbol,{' '}
-              <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-teal-300 bg-clip-text text-transparent">
-                muchas manos
-              </span>
-            </motion.h1>
+            <motion.div variants={fadeChild}>
+              <RevealText className="mb-2">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] tracking-tight">
+                  Un arbol,
+                </h1>
+              </RevealText>
+              <RevealText delay={0.15} className="mb-8">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight bg-gradient-to-r from-emerald-400 via-green-300 to-teal-400 bg-clip-text text-transparent">
+                  muchas manos
+                </h1>
+              </RevealText>
+            </motion.div>
 
-            <motion.p
-              variants={fadeInUp}
-              className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto leading-relaxed"
-            >
-              Unite a proyectos de plantacion creados por la comunidad. Aporta lo que puedas y ve
-              crecer un arbol real, financiado entre todos.
-            </motion.p>
+            <motion.div variants={fadeChild}>
+              <p className="text-lg md:text-xl text-white/60 mb-12 max-w-2xl mx-auto leading-relaxed">
+                Unite a proyectos de plantacion creados por la comunidad. Aporta lo que puedas y ve
+                crecer un arbol real, financiado entre todos.
+              </p>
+            </motion.div>
 
             <motion.div
-              variants={fadeInUp}
+              variants={fadeChild}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <Button
                 onClick={() => window.open(`${APP_URL}/arboles-colaborativos`, '_blank')}
                 size="lg"
-                className="bg-emerald-500 hover:bg-emerald-600 text-white text-lg px-8 group"
+                className="bg-emerald-500 hover:bg-emerald-400 text-white text-lg px-8 group border-0 shadow-lg shadow-emerald-500/20 transition-all duration-300"
               >
                 <Heart className="h-5 w-5 mr-2" />
                 Explorar proyectos
@@ -368,145 +396,126 @@ const ColaborativosPage = () => {
                 onClick={() => window.open(`${APP_URL}/arboles-colaborativos/crear`, '_blank')}
                 size="lg"
                 variant="outline"
-                className="border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white text-lg px-8"
+                className="border-white/[0.15] bg-white/[0.04] backdrop-blur-xl hover:bg-white/[0.08] hover:border-white/[0.25] text-white text-lg px-8 transition-all duration-300"
               >
                 <Sparkles className="h-5 w-5 mr-2" />
                 Crear un proyecto
               </Button>
             </motion.div>
-          </motion.div>
+          </StaggerSection>
 
           {/* Scroll indicator */}
           <motion.div
-            className="mt-16 flex flex-col items-center cursor-pointer"
+            className="mt-20 flex flex-col items-center cursor-pointer"
             onClick={() =>
               document.getElementById('que-son')?.scrollIntoView({ behavior: 'smooth' })
             }
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <span className="text-white/50 text-sm mb-2">Conoce mas</span>
-            <ChevronDown className="h-5 w-5 text-white/50" />
+            <span className="text-white/30 text-xs uppercase tracking-[0.2em] mb-3">
+              Conoce mas
+            </span>
+            <ChevronDown className="h-5 w-5 text-white/30" />
           </motion.div>
         </div>
       </section>
 
-      {/* Que son los arboles colaborativos */}
-      <section id="que-son" className={`py-20 px-4 ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <div
-              className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 ${
-                isDark ? 'bg-emerald-900/50' : 'bg-emerald-100'
-              }`}
-            >
-              <Users className={`h-8 w-8 ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`} />
-            </div>
-            <h2
-              className={`text-3xl md:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}
-            >
-              Que son los arboles colaborativos?
-            </h2>
-            <p
-              className={`text-lg max-w-3xl mx-auto leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
-            >
-              Son proyectos de plantacion donde varias personas juntan fondos para plantar un arbol
-              real. Vos elegis cuanto aportar, y cuando se completa la meta, el arbol se planta con
-              ubicacion GPS, chapa QR y seguimiento en vivo. Cada contribuyente recibe su
-              certificado digital.
-            </p>
-          </motion.div>
+      {/* ============================================================
+          QUE SON — Background image + dark overlay + glass step cards
+          ============================================================ */}
+      <section id="que-son" className="relative py-28 px-4 overflow-hidden">
+        {/* Background image */}
+        <img
+          src={IMAGES.steps}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" />
+
+        <div className="relative z-10 max-w-5xl mx-auto">
+          <StaggerSection className="text-center mb-20">
+            <motion.div variants={fadeChild}>
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 bg-emerald-500/10 border border-emerald-500/20">
+                <Users className="h-8 w-8 text-emerald-400" />
+              </div>
+            </motion.div>
+            <motion.div variants={fadeChild}>
+              <RevealText>
+                <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white tracking-tight">
+                  Que son los arboles colaborativos?
+                </h2>
+              </RevealText>
+            </motion.div>
+            <motion.div variants={fadeChild}>
+              <p className="text-lg max-w-3xl mx-auto leading-relaxed text-white/50">
+                Son proyectos de plantacion donde varias personas juntan fondos para plantar un
+                arbol real. Vos elegis cuanto aportar, y cuando se completa la meta, el arbol se
+                planta con ubicacion GPS, chapa QR y seguimiento en vivo. Cada contribuyente recibe
+                su certificado digital.
+              </p>
+            </motion.div>
+          </StaggerSection>
 
           {/* Como funciona - Steps */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <StaggerSection className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {steps.map((step, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`relative text-center p-6 rounded-2xl ${
-                  isDark ? 'bg-gray-700/50' : 'bg-emerald-50/80'
-                }`}
+                variants={fadeChild}
+                className="relative text-center p-6 rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] hover:bg-white/[0.06] hover:border-emerald-500/20 transition-all duration-500"
               >
-                <div
-                  className={`absolute -top-3 -left-1 text-6xl font-bold leading-none ${
-                    isDark ? 'text-gray-600/30' : 'text-emerald-200/60'
-                  }`}
-                >
+                {/* Number watermark */}
+                <div className="absolute -top-3 -left-1 text-7xl font-bold leading-none text-white/[0.04] select-none">
                   {i + 1}
                 </div>
-                <div
-                  className={`relative inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4 ${
-                    isDark ? 'bg-emerald-900/50' : 'bg-emerald-100'
-                  }`}
-                >
-                  <step.icon
-                    className={`h-6 w-6 ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`}
-                  />
+                <div className="relative inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4 bg-emerald-500/10 border border-emerald-500/20">
+                  <step.icon className="h-6 w-6 text-emerald-400" />
                 </div>
-                <h3 className={`font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  {step.title}
-                </h3>
-                <p
-                  className={`text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
-                >
-                  {step.desc}
-                </p>
+                <h3 className="font-bold mb-2 text-white">{step.title}</h3>
+                <p className="text-sm leading-relaxed text-white/40">{step.desc}</p>
               </motion.div>
             ))}
-          </div>
+          </StaggerSection>
         </div>
       </section>
 
-      {/* Proyectos activos */}
-      <section className={`py-20 px-4 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      {/* ============================================================
+          PROYECTOS — Dark bg, glassmorphism project cards
+          ============================================================ */}
+      <section className="py-28 px-4 bg-gray-950">
         <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2
-              className={`text-3xl md:text-4xl font-bold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}
-            >
-              Proyectos de la comunidad
-            </h2>
-            <p className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              Encontra un proyecto que te inspire y suma tu aporte
-            </p>
-          </motion.div>
+          <StaggerSection className="text-center mb-16">
+            <motion.div variants={fadeChild}>
+              <RevealText>
+                <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white tracking-tight">
+                  Proyectos de la comunidad
+                </h2>
+              </RevealText>
+            </motion.div>
+            <motion.div variants={fadeChild}>
+              <p className="text-lg text-white/40">
+                Encontra un proyecto que te inspire y suma tu aporte
+              </p>
+            </motion.div>
+          </StaggerSection>
 
           {projects.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {projects
                 .filter((p) => p.status === 'active' || p.status === 'completed')
                 .map((project, i) => (
-                  <ProjectCard key={project.id} project={project} index={i} isDark={isDark} />
+                  <ProjectCard key={project.id} project={project} index={i} />
                 ))}
             </div>
           ) : (
-            <div className={`text-center py-16 rounded-2xl ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
-              <TreePine
-                className={`h-12 w-12 mx-auto mb-4 ${isDark ? 'text-gray-600' : 'text-gray-300'}`}
-              />
-              <p
-                className={`text-lg font-medium mb-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
-              >
+            <div className="text-center py-16 rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.08]">
+              <TreePine className="h-12 w-12 mx-auto mb-4 text-white/20" />
+              <p className="text-lg font-medium mb-2 text-white/40">
                 No hay proyectos activos en este momento
               </p>
-              <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-                Se el primero en crear uno!
-              </p>
+              <p className="text-sm text-white/25">Se el primero en crear uno!</p>
             </div>
           )}
 
@@ -516,17 +525,13 @@ const ColaborativosPage = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-center mt-10"
+            className="text-center mt-12"
           >
             <Button
               onClick={() => window.open(`${APP_URL}/arboles-colaborativos`, '_blank')}
               variant="outline"
               size="lg"
-              className={`${
-                isDark
-                  ? 'border-emerald-500 text-emerald-400 hover:bg-emerald-900/30'
-                  : 'border-emerald-600 text-emerald-700 hover:bg-emerald-50'
-              }`}
+              className="border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 hover:border-emerald-500/50 transition-all duration-300"
             >
               Ver todos los proyectos
               <ArrowRight className="h-4 w-4 ml-2" />
@@ -535,39 +540,50 @@ const ColaborativosPage = () => {
         </div>
       </section>
 
-      {/* CTA final */}
-      <section className="relative py-20 px-4 overflow-hidden">
-        <div className="absolute inset-0">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-          >
-            <source src={HERO_VIDEO_URL} type="video/mp4" />
-          </video>
-          <div className={`absolute inset-0 ${isDark ? 'bg-gray-900/85' : 'bg-emerald-900/80'}`} />
-        </div>
+      {/* ============================================================
+          CTA FINAL — Unsplash aerial forest bg + dark overlay
+          ============================================================ */}
+      <section className="relative py-28 px-4 overflow-hidden">
+        {/* Background image */}
+        <img
+          src={IMAGES.cta}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-black/70" />
 
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <Heart className="h-12 w-12 text-pink-400 mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Cada aporte suma</h2>
-            <p className="text-lg text-gray-200 mb-8 max-w-xl mx-auto leading-relaxed">
-              No importa el monto. Cuando muchos aportan un poco, un arbol real crece en algun
-              rincon del mundo con tu nombre grabado.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <StaggerSection>
+            <motion.div variants={fadeChild}>
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-pink-500/10 border border-pink-500/20 mb-8">
+                <Heart className="h-8 w-8 text-pink-400" />
+              </div>
+            </motion.div>
+
+            <motion.div variants={fadeChild}>
+              <RevealText>
+                <h2 className="text-3xl md:text-5xl font-bold text-white mb-5 tracking-tight">
+                  Cada aporte suma
+                </h2>
+              </RevealText>
+            </motion.div>
+
+            <motion.div variants={fadeChild}>
+              <p className="text-lg text-white/50 mb-10 max-w-xl mx-auto leading-relaxed">
+                No importa el monto. Cuando muchos aportan un poco, un arbol real crece en algun
+                rincon del mundo con tu nombre grabado.
+              </p>
+            </motion.div>
+
+            <motion.div
+              variants={fadeChild}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
               <Button
                 onClick={() => window.open(`${APP_URL}/arboles-colaborativos`, '_blank')}
                 size="lg"
-                className="bg-emerald-500 hover:bg-emerald-600 text-white text-lg px-8"
+                className="bg-emerald-500 hover:bg-emerald-400 text-white text-lg px-8 border-0 shadow-lg shadow-emerald-500/20 transition-all duration-300"
               >
                 <HeartHandshake className="h-5 w-5 mr-2" />
                 Contribuir ahora
@@ -576,12 +592,12 @@ const ColaborativosPage = () => {
                 onClick={() => window.open(`${APP_URL}/arboles-colaborativos/crear`, '_blank')}
                 size="lg"
                 variant="outline"
-                className="border-white/30 bg-white/10 hover:bg-white/20 text-white text-lg px-8"
+                className="border-white/[0.15] bg-white/[0.04] backdrop-blur-xl hover:bg-white/[0.08] hover:border-white/[0.25] text-white text-lg px-8 transition-all duration-300"
               >
                 Crear mi proyecto
               </Button>
-            </div>
-          </motion.div>
+            </motion.div>
+          </StaggerSection>
         </div>
       </section>
 

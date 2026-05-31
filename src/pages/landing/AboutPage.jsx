@@ -1,17 +1,14 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import {
-  TreePine,
-  Heart,
-  Globe,
-  Users,
   Target,
-  Leaf,
   Eye,
   Shield,
+  Heart,
   Link2,
   Lightbulb,
   Sprout,
+  Users,
   CheckCircle2,
   Camera,
   Bell,
@@ -19,78 +16,108 @@ import {
   BadgeCheck,
   TrendingUp,
   Linkedin,
-  Store,
-  QrCode,
+  ArrowRight,
 } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@shared/components/ui/card';
-import { useTheme } from '@core/contexts/ThemeContext';
 import heroBackground from '@/assets/images/login-background.jpeg';
+import Footer from '@shared/components/layout/Footer';
+import { APP_URL } from '@core/config/app.config';
+
+const IMAGES = {
+  mission:
+    'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1920&q=80',
+  vision:
+    'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1920&q=80',
+  values:
+    'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1920&q=80',
+  commitment:
+    'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1920&q=80',
+};
+
+// Reveal text animation
+const RevealText = ({ children, delay = 0 }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-80px' });
+  return (
+    <div ref={ref} className="overflow-hidden">
+      <motion.div
+        initial={{ y: '100%', opacity: 0 }}
+        animate={inView ? { y: 0, opacity: 1 } : {}}
+        transition={{ duration: 0.8, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
+};
+
+// Animated section wrapper
+const AnimatedSection = ({ children, className = '', delay = 0 }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-80px' });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
 
 const AboutPage = () => {
-  const { isDark } = useTheme();
-
   const values = [
     {
       icon: Shield,
       title: 'Transparencia',
       description:
-        'Mostramos en tiempo real el estado de cada árbol plantado, desde el vivero hasta su ubicación final. Cada usuario puede seguir el ciclo completo de su árbol con información verificable.',
+        'Mostramos en tiempo real el estado de cada arbol plantado, desde el vivero hasta su ubicacion final. Cada usuario puede seguir el ciclo completo de su arbol con informacion verificable.',
     },
     {
       icon: Target,
       title: 'Impacto Real',
       description:
-        'No somos una plataforma de árboles virtuales: cada árbol que se planta en nuestra app corresponde a un árbol físico plantado por un profesional, en un lugar real, con coordenadas GPS verificables.',
+        'No somos una plataforma de arboles virtuales: cada arbol que se planta en nuestra app corresponde a un arbol fisico plantado por un profesional, en un lugar real, con coordenadas GPS verificables.',
     },
     {
       icon: Heart,
       title: 'Accesibilidad',
       description:
-        'Creemos que cuidar el planeta debe estar al alcance de todos. Nuestra plataforma elimina las barreras geográficas y económicas para que cualquier persona pueda contribuir a la reforestación.',
+        'Creemos que cuidar el planeta debe estar al alcance de todos. Nuestra plataforma elimina las barreras geograficas y economicas para que cualquier persona pueda contribuir a la reforestacion.',
     },
     {
       icon: Link2,
-      title: 'Colaboración',
+      title: 'Colaboracion',
       description:
         'Conectamos usuarios, empresas, viveros y plantadores en un ecosistema donde cada rol es esencial. El trabajo en equipo multiplica nuestro impacto ambiental.',
     },
     {
       icon: Lightbulb,
-      title: 'Innovación con Propósito',
+      title: 'Innovacion con Proposito',
       description:
-        'Utilizamos la tecnología como herramienta para resolver problemas ambientales reales. Cada funcionalidad que desarrollamos tiene como objetivo facilitar y amplificar el impacto positivo.',
+        'Utilizamos la tecnologia como herramienta para resolver problemas ambientales reales. Cada funcionalidad que desarrollamos tiene como objetivo facilitar y amplificar el impacto positivo.',
     },
     {
       icon: Sprout,
       title: 'Responsabilidad Ambiental',
       description:
-        'Nos comprometemos con prácticas sostenibles en toda nuestra operación. Seleccionamos especies nativas, respetamos los ecosistemas locales y priorizamos la biodiversidad.',
+        'Nos comprometemos con practicas sostenibles en toda nuestra operacion. Seleccionamos especies nativas, respetamos los ecosistemas locales y priorizamos la biodiversidad.',
     },
     {
       icon: Users,
       title: 'Comunidad',
       description:
-        'Fomentamos una comunidad activa de personas comprometidas con el medio ambiente, donde cada árbol plantado es un lazo que une a quienes comparten el deseo de un planeta más verde.',
+        'Fomentamos una comunidad activa de personas comprometidas con el medio ambiente, donde cada arbol plantado es un lazo que une a quienes comparten el deseo de un planeta mas verde.',
     },
   ];
 
   const commitments = [
-    {
-      icon: Camera,
-      text: 'Verificar cada árbol plantado con fotografías y ubicación GPS',
-    },
-    {
-      icon: Bell,
-      text: 'Informar periódicamente sobre el estado de los árboles',
-    },
-    {
-      icon: MapPin,
-      text: 'Seleccionar especies apropiadas para cada región',
-    },
-    {
-      icon: BadgeCheck,
-      text: 'Trabajar con viveros y plantadores locales certificados',
-    },
+    { icon: Camera, text: 'Verificar cada arbol plantado con fotografias y ubicacion GPS' },
+    { icon: Bell, text: 'Informar periodicamente sobre el estado de los arboles' },
+    { icon: MapPin, text: 'Seleccionar especies apropiadas para cada region' },
+    { icon: BadgeCheck, text: 'Trabajar con viveros y plantadores locales certificados' },
     {
       icon: TrendingUp,
       text: 'Reinvertir en la mejora continua de nuestra plataforma y operaciones',
@@ -98,340 +125,291 @@ const AboutPage = () => {
   ];
 
   return (
-    <div
-      className={`min-h-screen ${isDark ? 'bg-gray-900' : 'bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50'}`}
-    >
-      {/* Quiénes Somos - Hero con fotos grandes */}
-      <section className="relative overflow-hidden pt-8 md:pt-12 pb-12 md:pb-16 px-4">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroBackground})` }}
-        ></div>
-        <div
-          className={`absolute inset-0 ${isDark ? 'bg-gray-900/80' : 'bg-white/70 backdrop-blur-[2px]'}`}
-        ></div>
-        <div className="relative max-w-6xl mx-auto">
+    <div className="bg-black min-h-screen">
+      {/* ===== HERO - Quienes Somos ===== */}
+      <section className="relative min-h-[70vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={heroBackground} alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
+        </div>
+
+        <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 w-full">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-8"
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
           >
-            <h1
-              className={`text-4xl md:text-5xl font-bold mb-3 leading-tight ${isDark ? 'text-white' : 'text-green-800'}`}
-            >
-              Quiénes Somos
+            <p className="text-emerald-400 text-sm font-medium uppercase tracking-[0.3em] mb-4">
+              Sobre nosotros
+            </p>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+              Quienes Somos
             </h1>
-            <p
-              className={`text-lg md:text-xl max-w-3xl mx-auto leading-relaxed ${isDark ? 'text-gray-300' : 'text-green-700'}`}
-            >
-              Dos jóvenes de Córdoba, Argentina, usando tecnología como herramienta real de cambio.
+            <p className="text-xl text-white/50 max-w-2xl mx-auto">
+              Dos jovenes de Cordoba, Argentina, usando tecnologia como herramienta real de cambio.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Nahuel */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <Card
-                className={`h-full hover:shadow-2xl transition-all duration-300 overflow-hidden ${
-                  isDark ? 'bg-gray-800/90 border-gray-700' : 'bg-white/95 border-green-200'
-                }`}
+          {/* Team cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {[
+              {
+                name: 'Nahuel Carballo',
+                role: 'Fundador & Hardware/Sistemas',
+                photo: '/images/nahuel.jpg',
+                bio: 'Tecnico electronico y estudiante de Ingenieria en Sistemas (UTN). Experiencia en analisis de hardware, produccion industrial y desarrollo de software. La vision de campo y la conexion con el mundo fisico.',
+                linkedin: 'https://www.linkedin.com/in/nahuel-carballo-a59408265',
+                delay: 0.3,
+              },
+              {
+                name: 'Martin Contrera',
+                role: 'Co-fundador & Desarrollador',
+                photo: '/images/martin.png',
+                bio: 'Desarrollador de software con +4 anos en produccion. Especializado en IoT, IA y automatizaciones. Diseno y construyo toda la arquitectura de la plataforma — desde el backend hasta la app movil.',
+                linkedin: 'https://www.linkedin.com/in/martincontrera',
+                delay: 0.45,
+              },
+            ].map((person) => (
+              <motion.div
+                key={person.name}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: person.delay }}
+                className="group relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-2xl overflow-hidden hover:border-emerald-500/20 transition-all duration-500"
               >
-                <CardContent className="p-0">
-                  <div className="flex justify-center pt-6 pb-4">
-                    <img
-                      src="/images/nahuel.jpg"
-                      alt="Nahuel Carballo"
-                      className="w-32 h-32 md:w-36 md:h-36 rounded-full object-cover border-4 border-green-300 dark:border-emerald-500 shadow-lg"
-                    />
-                  </div>
-                  <div className="px-6 pb-6 text-center">
-                    <h3
-                      className={`text-xl font-bold mb-0.5 ${isDark ? 'text-white' : 'text-green-800'}`}
-                    >
-                      Nahuel Carballo
-                    </h3>
-                    <p className={`text-sm mb-3 ${isDark ? 'text-emerald-400' : 'text-green-600'}`}>
-                      Fundador & Hardware/Sistemas
-                    </p>
-                    <p
-                      className={`text-sm leading-relaxed mb-3 ${isDark ? 'text-gray-300' : 'text-green-700'}`}
-                    >
-                      Técnico electrónico y estudiante de Ingeniería en Sistemas (UTN). Experiencia
-                      en análisis de hardware, producción industrial y desarrollo de software. La
-                      visión de campo y la conexión con el mundo físico.
-                    </p>
-                    <a
-                      href="https://www.linkedin.com/in/nahuel-carballo-a59408265"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-2 text-sm font-medium ${
-                        isDark
-                          ? 'text-emerald-400 hover:text-emerald-300'
-                          : 'text-green-600 hover:text-green-700'
-                      }`}
-                    >
-                      <Linkedin className="h-4 w-4" />
-                      LinkedIn
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Martin */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.35 }}
-            >
-              <Card
-                className={`h-full hover:shadow-2xl transition-all duration-300 overflow-hidden ${
-                  isDark ? 'bg-gray-800/90 border-gray-700' : 'bg-white/95 border-green-200'
-                }`}
-              >
-                <CardContent className="p-0">
-                  <div className="flex justify-center pt-6 pb-4">
-                    <img
-                      src="/images/martin.png"
-                      alt="Martín Contrera"
-                      className="w-32 h-32 md:w-36 md:h-36 rounded-full object-cover border-4 border-green-300 dark:border-emerald-500 shadow-lg"
-                    />
-                  </div>
-                  <div className="px-6 pb-6 text-center">
-                    <h3
-                      className={`text-xl font-bold mb-0.5 ${isDark ? 'text-white' : 'text-green-800'}`}
-                    >
-                      Martín Contrera
-                    </h3>
-                    <p className={`text-sm mb-3 ${isDark ? 'text-emerald-400' : 'text-green-600'}`}>
-                      Co-fundador & Desarrollador
-                    </p>
-                    <p
-                      className={`text-sm leading-relaxed mb-3 ${isDark ? 'text-gray-300' : 'text-green-700'}`}
-                    >
-                      Desarrollador de software con +4 años en producción. Especializado en IoT, IA
-                      y automatizaciones. Diseñó y construyó toda la arquitectura de la plataforma —
-                      desde el backend hasta la app móvil.
-                    </p>
-                    <a
-                      href="https://www.linkedin.com/in/martincontrera"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-2 text-sm font-medium ${
-                        isDark
-                          ? 'text-emerald-400 hover:text-emerald-300'
-                          : 'text-green-600 hover:text-green-700'
-                      }`}
-                    >
-                      <Linkedin className="h-4 w-4" />
-                      LinkedIn
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-emerald-500/0 to-emerald-500/0 group-hover:from-emerald-500/5 group-hover:to-transparent transition-all duration-500" />
+                <div className="relative z-10 p-8 text-center">
+                  <img
+                    src={person.photo}
+                    alt={person.name}
+                    className="w-28 h-28 rounded-full object-cover mx-auto mb-5 border-2 border-emerald-500/30 shadow-lg shadow-emerald-500/10"
+                  />
+                  <h3 className="text-xl font-bold text-white mb-1">{person.name}</h3>
+                  <p className="text-emerald-400 text-sm mb-4">{person.role}</p>
+                  <p className="text-white/40 text-sm leading-relaxed mb-5">{person.bio}</p>
+                  <a
+                    href={person.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm text-emerald-400 hover:text-emerald-300 transition-colors"
+                  >
+                    <Linkedin className="h-4 w-4" />
+                    LinkedIn
+                  </a>
+                </div>
+              </motion.div>
+            ))}
           </div>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className={`text-center mt-8 text-base md:text-lg max-w-3xl mx-auto leading-relaxed ${isDark ? 'text-gray-300' : 'text-green-700'}`}
+            transition={{ delay: 0.7, duration: 0.6 }}
+            className="text-center mt-12 text-white/40 text-lg max-w-3xl mx-auto leading-relaxed"
           >
             En 2025 transformamos una idea en realidad: una plataforma con trazabilidad real,
-            coordenadas GPS y seguimiento. La tecnología tiene que tocar la tierra, ayudar a los
+            coordenadas GPS y seguimiento. La tecnologia tiene que tocar la tierra, ayudar a los
             viveros, conectar personas y regenerar ecosistemas.
           </motion.p>
         </div>
       </section>
 
-      {/* Misión y Visión */}
-      <section className={`py-20 px-4 ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-12"
-          >
-            {/* Misión */}
-            <div>
-              <div
-                className={`inline-block p-4 rounded-2xl mb-6 ${isDark ? 'bg-emerald-900/50' : 'bg-green-100'}`}
-              >
-                <Target className={`h-12 w-12 ${isDark ? 'text-emerald-400' : 'text-green-600'}`} />
-              </div>
-              <h2 className={`text-4xl font-bold mb-6 ${isDark ? 'text-white' : 'text-green-800'}`}>
-                Nuestra Misión
-              </h2>
-              <p
-                className={`text-lg leading-relaxed ${isDark ? 'text-gray-300' : 'text-green-700'}`}
-              >
-                Conectar a personas y empresas con la naturaleza a través de una plataforma
-                tecnológica que facilita la plantación de árboles reales, democratizando el acceso a
-                la reforestación y permitiendo que cada individuo contribuya activamente a la
-                regeneración del medio ambiente desde cualquier lugar del mundo.
-              </p>
+      {/* ===== MISION & VISION - Split cinematic ===== */}
+      <section className="relative">
+        {/* Mision */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[70vh]">
+          <div className="relative h-[40vh] lg:h-auto overflow-hidden">
+            <motion.img
+              src={IMAGES.mission}
+              alt=""
+              className="w-full h-full object-cover"
+              initial={{ scale: 1.1 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.5 }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-black" />
+          </div>
+          <div className="bg-black flex items-center py-16 lg:py-0">
+            <div className="px-8 md:px-16 lg:px-20 max-w-xl">
+              <AnimatedSection>
+                <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-8">
+                  <Target className="h-8 w-8 text-emerald-400" />
+                </div>
+              </AnimatedSection>
+              <RevealText>
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
+                  Nuestra{' '}
+                  <span className="bg-gradient-to-r from-emerald-300 to-teal-300 bg-clip-text text-transparent">
+                    Mision
+                  </span>
+                </h2>
+              </RevealText>
+              <RevealText delay={0.15}>
+                <p className="text-white/50 text-lg leading-relaxed">
+                  Conectar a personas y empresas con la naturaleza a traves de una plataforma
+                  tecnologica que facilita la plantacion de arboles reales, democratizando el acceso
+                  a la reforestacion y permitiendo que cada individuo contribuya activamente a la
+                  regeneracion del medio ambiente desde cualquier lugar del mundo.
+                </p>
+              </RevealText>
             </div>
+          </div>
+        </div>
 
-            {/* Visión */}
-            <div>
-              <div
-                className={`inline-block p-4 rounded-2xl mb-6 ${isDark ? 'bg-emerald-900/50' : 'bg-green-100'}`}
-              >
-                <Eye className={`h-12 w-12 ${isDark ? 'text-emerald-400' : 'text-green-600'}`} />
-              </div>
-              <h2 className={`text-4xl font-bold mb-6 ${isDark ? 'text-white' : 'text-green-800'}`}>
-                Nuestra Visión
-              </h2>
-              <p
-                className={`text-lg leading-relaxed ${isDark ? 'text-gray-300' : 'text-green-700'}`}
-              >
-                Ser la plataforma líder en América Latina para la plantación colaborativa de
-                árboles, creando un movimiento global donde cada persona pueda ver el impacto
-                tangible de su contribución ambiental, logrando plantar un millón de árboles y
-                estableciendo un nuevo estándar en la conexión entre tecnología y sostenibilidad.
-              </p>
+        {/* Vision */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[70vh]">
+          <div className="bg-black flex items-center py-16 lg:py-0 order-2 lg:order-1">
+            <div className="px-8 md:px-16 lg:px-20 max-w-xl lg:ml-auto">
+              <AnimatedSection>
+                <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-8">
+                  <Eye className="h-8 w-8 text-emerald-400" />
+                </div>
+              </AnimatedSection>
+              <RevealText>
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
+                  Nuestra{' '}
+                  <span className="bg-gradient-to-r from-teal-300 to-emerald-300 bg-clip-text text-transparent">
+                    Vision
+                  </span>
+                </h2>
+              </RevealText>
+              <RevealText delay={0.15}>
+                <p className="text-white/50 text-lg leading-relaxed">
+                  Ser la plataforma lider en America Latina para la plantacion colaborativa de
+                  arboles, creando un movimiento global donde cada persona pueda ver el impacto
+                  tangible de su contribucion ambiental, logrando plantar un millon de arboles y
+                  estableciendo un nuevo estandar en la conexion entre tecnologia y sostenibilidad.
+                </p>
+              </RevealText>
             </div>
-          </motion.div>
+          </div>
+          <div className="relative h-[40vh] lg:h-auto overflow-hidden order-1 lg:order-2">
+            <motion.img
+              src={IMAGES.vision}
+              alt=""
+              className="w-full h-full object-cover"
+              initial={{ scale: 1.1 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.5 }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent lg:bg-gradient-to-l lg:from-transparent lg:to-black" />
+          </div>
         </div>
       </section>
 
-      {/* Valores */}
-      <section
-        className={`py-20 px-4 ${isDark ? 'bg-gray-900' : 'bg-gradient-to-br from-green-50 to-emerald-50'}`}
-      >
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-center mb-16"
-          >
-            <h2
-              className={`text-4xl md:text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-green-800'}`}
-            >
-              Nuestros Valores
-            </h2>
-            <p
-              className={`text-xl max-w-3xl mx-auto ${isDark ? 'text-gray-400' : 'text-green-700'}`}
-            >
-              Los principios que guían cada decisión que tomamos
-            </p>
-          </motion.div>
+      {/* ===== VALORES ===== */}
+      <section className="relative py-32 overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0">
+          <img src={IMAGES.values} alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-black/85" />
+        </div>
+        {/* Grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }}
+        />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="relative z-10 max-w-7xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <RevealText>
+              <p className="text-emerald-400 text-sm font-medium uppercase tracking-[0.3em] mb-4">
+                Principios
+              </p>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                Nuestros Valores
+              </h2>
+            </RevealText>
+            <RevealText delay={0.15}>
+              <p className="text-xl text-white/40 max-w-2xl mx-auto">
+                Los principios que guian cada decision que tomamos
+              </p>
+            </RevealText>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {values.map((value, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 + index * 0.08 }}
-              >
-                <Card
-                  className={`h-full hover:shadow-xl transition-all duration-300 hover:scale-[1.03] ${
-                    isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-green-200'
-                  }`}
-                >
-                  <CardHeader>
-                    <div
-                      className={`w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 ${
-                        isDark
-                          ? 'bg-emerald-900/50'
-                          : 'bg-gradient-to-br from-green-100 to-emerald-100'
-                      }`}
-                    >
-                      <value.icon
-                        className={`h-7 w-7 ${isDark ? 'text-emerald-400' : 'text-green-600'}`}
-                      />
-                    </div>
-                    <CardTitle
-                      className={`text-center text-base ${isDark ? 'text-white' : 'text-green-800'}`}
-                    >
-                      {value.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p
-                      className={`text-center text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-green-700'}`}
-                    >
-                      {value.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
+              <AnimatedSection key={index} delay={index * 0.08}>
+                <div className="group h-full bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-2xl p-7 hover:bg-white/[0.06] hover:border-emerald-500/20 transition-all duration-500">
+                  <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-5 group-hover:bg-emerald-500/20 transition-colors">
+                    <value.icon className="h-6 w-6 text-emerald-400" />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-3">{value.title}</h3>
+                  <p className="text-white/35 text-sm leading-relaxed">{value.description}</p>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Nuestro Compromiso */}
-      <section className={`py-20 px-4 ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-center mb-12"
-          >
-            <CheckCircle2
-              className={`h-16 w-16 mx-auto mb-6 ${isDark ? 'text-emerald-400' : 'text-green-600'}`}
-            />
-            <h2 className={`text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-green-800'}`}>
-              Nuestro Compromiso
-            </h2>
-            <p className={`text-lg ${isDark ? 'text-gray-400' : 'text-green-700'}`}>
-              En Mi Árbol en el Mundo nos comprometemos a:
-            </p>
-          </motion.div>
+      {/* ===== COMPROMISO ===== */}
+      <section className="relative py-32 overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0">
+          <img src={IMAGES.commitment} alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-black/80" />
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <AnimatedSection>
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, type: 'spring' }}
+                className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 mb-8"
+              >
+                <CheckCircle2 className="h-10 w-10 text-emerald-400" />
+              </motion.div>
+            </AnimatedSection>
+            <RevealText>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+                Nuestro Compromiso
+              </h2>
+            </RevealText>
+            <RevealText delay={0.15}>
+              <p className="text-lg text-white/40">En Mi Arbol en el Mundo nos comprometemos a:</p>
+            </RevealText>
+          </div>
 
           <div className="space-y-4">
             {commitments.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                className={`flex items-center gap-4 p-5 rounded-xl transition-all ${
-                  isDark
-                    ? 'bg-gray-700/50 hover:bg-gray-700'
-                    : 'bg-gradient-to-r from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100'
-                }`}
-              >
-                <div
-                  className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
-                    isDark ? 'bg-emerald-900/50' : 'bg-green-600'
-                  }`}
-                >
-                  <item.icon className={`h-6 w-6 ${isDark ? 'text-emerald-400' : 'text-white'}`} />
+              <AnimatedSection key={index} delay={index * 0.1}>
+                <div className="flex items-center gap-5 p-6 bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-xl hover:bg-white/[0.06] hover:border-emerald-500/15 transition-all duration-500 group">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-emerald-500/15 flex items-center justify-center group-hover:bg-emerald-500/25 transition-colors">
+                    <item.icon className="h-5 w-5 text-emerald-400" />
+                  </div>
+                  <p className="text-white/70 text-lg font-medium group-hover:text-white/90 transition-colors">
+                    {item.text}
+                  </p>
                 </div>
-                <p className={`text-lg font-medium ${isDark ? 'text-gray-200' : 'text-green-800'}`}>
-                  {item.text}
-                </p>
-              </motion.div>
+              </AnimatedSection>
             ))}
           </div>
+
+          {/* CTA */}
+          <AnimatedSection delay={0.5} className="text-center mt-16">
+            <button
+              onClick={() => window.open(`${APP_URL}/plantar`, '_blank')}
+              className="group inline-flex items-center gap-3 px-10 py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-lg rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(16,185,129,0.4)]"
+            >
+              Planta tu arbol
+              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* Cómo Trabajamos - Deshabilitado temporalmente
-      <section className="relative py-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroBackground})` }}></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-green-800/90 to-emerald-900/90"></div>
-        <div className="relative max-w-6xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="text-center mb-12">
-            <Leaf className="h-14 w-14 mx-auto mb-4 text-emerald-300" />
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-3">Cómo Trabajamos</h2>
-            <p className="text-lg text-green-200 max-w-2xl mx-auto">Tecnología + naturaleza, de la mano</p>
-          </motion.div>
-        </div>
-      </section>
-      */}
+      <Footer />
     </div>
   );
 };

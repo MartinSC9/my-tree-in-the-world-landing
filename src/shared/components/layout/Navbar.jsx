@@ -145,7 +145,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className="bg-white/95 dark:bg-gray-950/95 backdrop-blur-md border-b border-green-200 dark:border-gray-800 sticky top-0 z-[1000] shadow-sm"
+        className="bg-black/80 backdrop-blur-xl border-b border-white/[0.06] sticky top-0 z-[1000]"
         role="navigation"
         aria-label="Navegacion principal"
       >
@@ -158,11 +158,11 @@ const Navbar = () => {
               className="flex items-center space-x-2 flex-shrink-0"
               aria-label="Ir a pagina de inicio"
             >
-              <TreePine className="h-7 w-7 text-green-600 dark:text-emerald-400" />
-              <span className="text-lg font-bold text-green-800 dark:text-white hidden xl:block">
+              <TreePine className="h-7 w-7 text-emerald-400" />
+              <span className="text-lg font-bold text-white hidden xl:block">
                 Mi Árbol en el Mundo
               </span>
-              <span className="text-lg font-bold text-green-800 dark:text-white xl:hidden hidden md:block">
+              <span className="text-lg font-bold text-white xl:hidden hidden md:block">
                 Mi Árbol
               </span>
             </Link>
@@ -178,8 +178,8 @@ const Navbar = () => {
                   const baseClass =
                     'transition-all flex items-center gap-1.5 font-medium px-4 h-16 rounded-none border-b-2';
                   const activeClass = isActive
-                    ? 'text-green-900 dark:text-white border-green-500 dark:border-emerald-400 bg-green-50/80 dark:bg-gray-800'
-                    : 'text-green-700 dark:text-gray-300 border-transparent hover:text-green-900 dark:hover:text-white hover:bg-green-100/80 dark:hover:bg-gray-700 hover:border-green-500 dark:hover:border-emerald-400';
+                    ? 'text-white border-emerald-400 bg-white/[0.05]'
+                    : 'text-white/60 border-transparent hover:text-white hover:bg-white/[0.05] hover:border-emerald-400/50';
 
                   return item.isInternal ? (
                     <Link
@@ -209,7 +209,7 @@ const Navbar = () => {
                 <div className="relative" ref={sociosDropdownRef}>
                   <button
                     onClick={() => setIsSociosDropdownOpen(!isSociosDropdownOpen)}
-                    className="text-green-700 dark:text-gray-300 hover:text-green-900 dark:hover:text-white hover:bg-green-100/80 dark:hover:bg-gray-700 transition-all flex items-center gap-1.5 font-medium px-4 h-16 rounded-none border-b-2 border-transparent hover:border-green-500 dark:hover:border-emerald-400"
+                    className="text-white/60 hover:text-white hover:bg-white/[0.05] transition-all flex items-center gap-1.5 font-medium px-4 h-16 rounded-none border-b-2 border-transparent hover:border-emerald-400/50"
                   >
                     <Users className="h-4 w-4" />
                     <span className="text-sm">Socios</span>
@@ -225,25 +225,21 @@ const Navbar = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute left-0 mt-2 w-64 bg-white dark:bg-gray-900 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 py-2 z-50"
+                        className="absolute left-0 mt-2 w-64 bg-gray-950 rounded-xl shadow-2xl border border-white/[0.08] py-2 z-50"
                       >
                         {sociosItems.map((item) => (
                           <Link
                             key={item.name}
                             to={item.path}
                             onClick={() => setIsSociosDropdownOpen(false)}
-                            className="flex items-start gap-3 px-4 py-3 hover:bg-green-50 dark:hover:bg-gray-700 transition-colors"
+                            className="flex items-start gap-3 px-4 py-3 hover:bg-white/[0.05] transition-colors"
                           >
-                            <div className="w-8 h-8 rounded-lg bg-green-100 dark:bg-emerald-900/50 flex items-center justify-center flex-shrink-0">
-                              <item.icon className="h-4 w-4 text-green-600 dark:text-emerald-400" />
+                            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+                              <item.icon className="h-4 w-4 text-emerald-400" />
                             </div>
                             <div>
-                              <p className="text-sm font-medium text-gray-900 dark:text-white">
-                                {item.name}
-                              </p>
-                              <p className="text-xs text-gray-500 dark:text-gray-400">
-                                {item.desc}
-                              </p>
+                              <p className="text-sm font-medium text-white">{item.name}</p>
+                              <p className="text-xs text-white/40">{item.desc}</p>
                             </div>
                           </Link>
                         ))}
@@ -261,24 +257,24 @@ const Navbar = () => {
                   {/* Boton de notificaciones */}
                   <button
                     onClick={() => navigate(`/usuario/${user.id}/notificaciones`)}
-                    className="relative p-2 hover:bg-green-50 dark:hover:bg-gray-800 rounded-lg transition-colors group"
+                    className="relative p-2 hover:bg-white/[0.05] rounded-lg transition-colors group"
                     aria-label="Notificaciones"
                   >
-                    <Bell className="h-5 w-5 text-green-700 dark:text-gray-300 group-hover:text-green-900 dark:group-hover:text-white" />
+                    <Bell className="h-5 w-5 text-white/60 group-hover:text-white" />
                   </button>
 
                   <div className="relative" ref={profileDropdownRef}>
                     <button
                       onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-                      className="flex items-center gap-2 px-3 py-2 hover:bg-green-50 dark:hover:bg-gray-800 rounded-lg transition-colors group"
+                      className="flex items-center gap-2 px-3 py-2 hover:bg-white/[0.05] rounded-lg transition-colors group"
                     >
-                      <div className="h-8 w-8 rounded-full bg-green-600 dark:bg-emerald-600 flex items-center justify-center text-white font-semibold text-sm group-hover:bg-green-700 dark:group-hover:bg-emerald-500 transition-colors">
+                      <div className="h-8 w-8 rounded-full bg-emerald-600 flex items-center justify-center text-white font-semibold text-sm group-hover:bg-emerald-500 transition-colors">
                         {user.username?.charAt(0).toUpperCase() || 'U'}
                       </div>
-                      <span className="text-sm font-medium text-green-800 dark:text-white max-w-[120px] truncate">
+                      <span className="text-sm font-medium text-white max-w-[120px] truncate">
                         {user.username}
                       </span>
-                      <ChevronDown className="h-4 w-4 text-green-700 dark:text-gray-300 group-hover:text-green-900 dark:group-hover:text-white transition-colors" />
+                      <ChevronDown className="h-4 w-4 text-white/60 group-hover:text-white transition-colors" />
                     </button>
 
                     {/* Dropdown Menu */}
@@ -289,16 +285,12 @@ const Navbar = () => {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
                           transition={{ duration: 0.2 }}
-                          className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-900 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 z-50"
+                          className="absolute right-0 mt-2 w-64 bg-gray-950 rounded-lg shadow-2xl border border-white/[0.08] py-2 z-50"
                         >
                           {/* User Info */}
-                          <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-                            <p className="text-sm font-medium text-gray-900 dark:text-white">
-                              {user.username}
-                            </p>
-                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 truncate">
-                              {user.email}
-                            </p>
+                          <div className="px-4 py-3 border-b border-white/[0.06]">
+                            <p className="text-sm font-medium text-white">{user.username}</p>
+                            <p className="text-xs text-white/40 mt-1 truncate">{user.email}</p>
                           </div>
 
                           {/* Menu Items */}
@@ -308,14 +300,14 @@ const Navbar = () => {
                                 navigate(getDashboardPath());
                                 setIsProfileDropdownOpen(false);
                               }}
-                              className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-700 flex items-center gap-2"
+                              className="w-full px-4 py-2 text-left text-sm text-white/70 hover:bg-white/[0.05] hover:text-white flex items-center gap-2"
                             >
                               <User className="h-4 w-4" />
                               {user.role === 'user' ? 'Ver mi perfil' : 'Ver panel'}
                             </button>
                             <button
                               onClick={handleLogout}
-                              className="w-full px-4 py-2 text-left text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-2"
+                              className="w-full px-4 py-2 text-left text-sm text-red-400 hover:bg-red-500/10 flex items-center gap-2"
                             >
                               <LogOut className="h-4 w-4" />
                               Cerrar sesion
@@ -327,14 +319,13 @@ const Navbar = () => {
                   </div>
                 </>
               ) : (
-                <Button
+                <button
                   onClick={() => window.open(`${APP_URL}/plantar`, '_blank')}
-                  size="sm"
-                  className="bg-brand hover:bg-brand-dark text-white"
+                  className="flex items-center gap-1.5 px-5 py-2 bg-emerald-500 hover:bg-emerald-400 text-black font-semibold text-sm rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)]"
                 >
-                  <TreePine className="h-4 w-4 mr-1" />
+                  <TreePine className="h-4 w-4" />
                   Plantar
-                </Button>
+                </button>
               )}
             </div>
 
@@ -342,13 +333,13 @@ const Navbar = () => {
             <div className="flex items-center gap-2 lg:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="p-2 rounded-lg hover:bg-green-50 dark:hover:bg-gray-800 transition-colors flex-shrink-0"
+                className="p-2 rounded-lg hover:bg-white/[0.05] transition-colors flex-shrink-0"
                 aria-label="Abrir menu de navegacion"
               >
                 {isMenuOpen ? (
-                  <X className="h-6 w-6 text-green-700 dark:text-gray-300" />
+                  <X className="h-6 w-6 text-white/70" />
                 ) : (
-                  <Menu className="h-6 w-6 text-green-700 dark:text-gray-300" />
+                  <Menu className="h-6 w-6 text-white/70" />
                 )}
               </button>
             </div>
@@ -376,69 +367,62 @@ const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-80 bg-white dark:bg-gray-900 shadow-2xl z-[1000] lg:hidden overflow-y-auto"
+              className="fixed top-0 right-0 bottom-0 w-80 bg-gray-950 border-l border-white/[0.06] shadow-2xl z-[1000] lg:hidden overflow-y-auto"
             >
               <div className="p-6">
                 {/* Close Button */}
                 <div className="flex justify-between items-center mb-8">
                   <div className="flex items-center space-x-2">
-                    <TreePine className="h-6 w-6 text-green-600 dark:text-emerald-400" />
-                    <span className="text-lg font-bold text-green-800 dark:text-white">Menu</span>
+                    <TreePine className="h-6 w-6 text-emerald-400" />
+                    <span className="text-lg font-bold text-white">Menu</span>
                   </div>
                   <button
                     onClick={() => setIsMenuOpen(false)}
-                    className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+                    className="p-2 rounded-lg hover:bg-white/[0.05]"
                     aria-label="Cerrar menu"
                   >
-                    <X className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+                    <X className="h-5 w-5 text-white/60" />
                   </button>
                 </div>
 
                 {/* User Profile Section */}
                 {user ? (
-                  <div className="mb-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-gray-800 dark:to-gray-800 rounded-xl">
+                  <div className="mb-6 p-4 bg-white/[0.03] border border-white/[0.06] rounded-xl">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="h-12 w-12 rounded-full bg-green-600 dark:bg-emerald-600 flex items-center justify-center text-white font-bold text-lg">
+                      <div className="h-12 w-12 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-lg">
                         {user.username?.charAt(0).toUpperCase() || 'U'}
                       </div>
                       <div>
-                        <p className="font-semibold text-green-900 dark:text-white">
-                          {user.username}
-                        </p>
-                        <p className="text-xs text-green-700 dark:text-gray-400 capitalize">
-                          {user.role}
-                        </p>
+                        <p className="font-semibold text-white">{user.username}</p>
+                        <p className="text-xs text-white/40 capitalize">{user.role}</p>
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-2">
-                      <Button
+                      <button
                         onClick={() => handleNavigation(getDashboardPath())}
-                        className="bg-brand hover:bg-brand-dark text-white"
-                        size="sm"
+                        className="flex items-center justify-center gap-1.5 px-3 py-2 bg-emerald-500 hover:bg-emerald-400 text-black font-semibold text-sm rounded-lg transition-all"
                       >
-                        <User className="h-4 w-4 mr-2" />
-                        {user.role === 'user' ? 'Ver mi perfil' : 'Mi Panel'}
-                      </Button>
-                      <Button
+                        <User className="h-4 w-4" />
+                        {user.role === 'user' ? 'Perfil' : 'Panel'}
+                      </button>
+                      <button
                         onClick={() => handleNavigation(`/usuario/${user.id}/notificaciones`)}
-                        variant="outline"
-                        className="border-green-600 dark:border-emerald-600 text-green-700 dark:text-emerald-400 hover:bg-green-50 dark:hover:bg-gray-800"
-                        size="sm"
+                        className="flex items-center justify-center gap-1.5 px-3 py-2 border border-white/[0.1] text-white/70 hover:bg-white/[0.05] text-sm rounded-lg transition-all"
                       >
-                        <Bell className="h-4 w-4 mr-2" />
-                        Notificaciones
-                      </Button>
+                        <Bell className="h-4 w-4" />
+                        Alertas
+                      </button>
                     </div>
                   </div>
                 ) : (
                   <div className="mb-6">
-                    <Button
+                    <button
                       onClick={() => (window.location.href = APP_URL)}
-                      className="w-full bg-brand hover:bg-brand-dark text-white"
+                      className="w-full flex items-center justify-center gap-2 px-5 py-3 bg-emerald-500 hover:bg-emerald-400 text-black font-semibold rounded-full transition-all"
                     >
-                      <LogIn className="h-4 w-4 mr-2" />
+                      <LogIn className="h-4 w-4" />
                       Ir a la App
-                    </Button>
+                    </button>
                   </div>
                 )}
 
@@ -462,8 +446,8 @@ const Navbar = () => {
                           }}
                           className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors ${
                             isActive
-                              ? 'bg-green-100 dark:bg-gray-700 text-green-900 dark:text-white font-semibold'
-                              : 'text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-800 hover:text-green-900 dark:hover:text-white'
+                              ? 'bg-white/[0.08] text-white font-semibold'
+                              : 'text-white/60 hover:bg-white/[0.05] hover:text-white'
                           }`}
                         >
                           <item.icon className="h-5 w-5" />
@@ -475,22 +459,20 @@ const Navbar = () => {
                     {/* Seccion Programas en movil - Deshabilitado temporalmente */}
 
                     {/* Seccion Socios en movil */}
-                    <div className="pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
-                      <p className="px-4 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <div className="pt-4 mt-4 border-t border-white/[0.06]">
+                      <p className="px-4 py-2 text-xs font-semibold text-white/30 uppercase tracking-wider">
                         Socios
                       </p>
                       {sociosItems.map((item) => (
                         <button
                           key={item.name}
                           onClick={() => handleNavigation(item.path)}
-                          className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-800 hover:text-green-900 dark:hover:text-white transition-colors"
+                          className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-white/60 hover:bg-white/[0.05] hover:text-white transition-colors"
                         >
                           <item.icon className="h-5 w-5" />
                           <div>
                             <span className="font-medium block">{item.name}</span>
-                            <span className="text-xs text-gray-500 dark:text-gray-400">
-                              {item.desc}
-                            </span>
+                            <span className="text-xs text-white/30">{item.desc}</span>
                           </div>
                         </button>
                       ))}
@@ -500,10 +482,10 @@ const Navbar = () => {
 
                 {/* Logout Button */}
                 {user && (
-                  <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                  <div className="mt-6 pt-6 border-t border-white/[0.06]">
                     <button
                       onClick={handleLogout}
-                      className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                      className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-red-400 hover:bg-red-500/10 transition-colors"
                     >
                       <LogOut className="h-5 w-5" />
                       <span className="font-medium">Cerrar Sesion</span>

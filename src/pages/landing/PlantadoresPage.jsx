@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import {
   Shovel,
   TreePine,
@@ -18,13 +18,35 @@ import {
   Camera,
   Award,
   Compass,
+  ChevronDown,
 } from 'lucide-react';
-import { Button } from '@shared/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@shared/components/ui/card';
 import { APP_URL } from '@core/config/app.config';
 import Footer from '@shared/components/layout/Footer';
 
+/* ------------------------------------------------------------------ */
+/*  Reusable animation wrapper                                        */
+/* ------------------------------------------------------------------ */
+const Reveal = ({ children, className = '', delay = 0 }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-60px' });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+/* ------------------------------------------------------------------ */
+/*  Component                                                         */
+/* ------------------------------------------------------------------ */
 const PlantadoresPage = () => {
+  /* ---- data arrays (unchanged) ---- */
   const benefits = [
     {
       icon: DollarSign,
@@ -138,378 +160,409 @@ const PlantadoresPage = () => {
     },
   ];
 
+  /* ---------------------------------------------------------------- */
+  /*  RENDER                                                          */
+  /* ---------------------------------------------------------------- */
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 dark:from-gray-900 dark:to-gray-900">
-      {/* Hero Section */}
-      <section className="py-16 px-4">
-        <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-black text-white">
+      {/* ============================================================ */}
+      {/*  1. HERO — full viewport                                     */}
+      {/* ============================================================ */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* bg image */}
+        <img
+          src="https://images.unsplash.com/photo-1574263867128-a3d5c1b1decc?w=1920&q=80"
+          alt="Person planting in soil"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        {/* overlay */}
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black" />
+
+        <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
+          {/* badge */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12"
           >
-            <div className="bg-amber-100 dark:bg-amber-900/50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Shovel className="h-10 w-10 text-amber-600 dark:text-amber-400" />
-            </div>
-            <div className="inline-block bg-amber-600 text-white text-sm font-semibold px-4 py-1 rounded-full mb-4">
-              Próximo lanzamiento en Córdoba
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-amber-800 dark:text-amber-400 mb-4">
-              Sé Plantador
-            </h1>
-            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Estamos armando nuestra red de plantadores en Córdoba. Registrate ahora para ser de
-              los primeros y ganá dinero mientras ayudás a reforestar el planeta.
-            </p>
+            <span className="inline-block bg-emerald-500/20 backdrop-blur-sm border border-emerald-400/30 text-emerald-400 text-sm font-semibold px-5 py-1.5 rounded-full mb-6 tracking-wide">
+              Próximo lanzamiento
+            </span>
           </motion.div>
 
-          {/* CTA Principal */}
+          {/* title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
+            className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 leading-tight"
+          >
+            <span className="bg-gradient-to-r from-emerald-400 via-green-300 to-emerald-500 bg-clip-text text-transparent">
+              Sé Plantador
+            </span>
+          </motion.h1>
+
+          {/* subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="text-lg md:text-xl text-white/60 max-w-3xl mx-auto leading-relaxed mb-10"
+          >
+            Estamos armando nuestra red de plantadores en Córdoba. Registrate ahora para ser de los
+            primeros y ganá dinero mientras ayudás a reforestar el planeta.
+          </motion.p>
+
+          {/* CTA buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.45 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
           >
-            <Button
-              size="lg"
-              className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-6 text-lg"
+            <button
               onClick={() => window.open(`${APP_URL}/registro/plantador`, '_blank')}
+              className="inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-8 py-4 rounded-full text-lg transition-colors"
             >
-              <Shovel className="h-5 w-5 mr-2" />
+              <Shovel className="h-5 w-5" />
               Pre-registrarme como Plantador
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="border-amber-600 text-amber-700 hover:bg-amber-50 dark:text-amber-400 dark:border-amber-500 dark:hover:bg-amber-900/30 px-8 py-6 text-lg"
+            </button>
+            <Link
+              to="/contacto"
+              className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/[0.06] text-white font-semibold px-8 py-4 rounded-full text-lg transition-colors backdrop-blur-sm"
             >
-              <Link to="/contacto">Más información</Link>
-            </Button>
+              Más información
+            </Link>
           </motion.div>
 
-          {/* Propuesta de valor */}
+          {/* 4 stat cards */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.6 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
           >
-            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 text-center border border-white/50 dark:border-gray-700">
-              <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">Córdoba</p>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">Primera zona</p>
-            </div>
-            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 text-center border border-white/50 dark:border-gray-700">
-              <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">100%</p>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">Trabajo flexible</p>
-            </div>
-            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 text-center border border-white/50 dark:border-gray-700">
-              <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">48hs</p>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">Pago garantizado</p>
-            </div>
-            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 text-center border border-white/50 dark:border-gray-700">
-              <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">Gratis</p>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">Registro sin costo</p>
-            </div>
+            {[
+              { value: 'Córdoba', label: 'Primera zona' },
+              { value: '100%', label: 'Trabajo flexible' },
+              { value: '48hs', label: 'Pago garantizado' },
+              { value: 'Gratis', label: 'Registro sin costo' },
+            ].map((stat, i) => (
+              <div
+                key={i}
+                className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-5 text-center"
+              >
+                <p className="text-2xl font-bold text-emerald-400">{stat.value}</p>
+                <p className="text-white/40 text-sm mt-1">{stat.label}</p>
+              </div>
+            ))}
           </motion.div>
         </div>
+
+        {/* scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+          >
+            <ChevronDown className="h-6 w-6 text-white/40" />
+          </motion.div>
+        </motion.div>
       </section>
 
-      {/* Beneficios */}
-      <section className="py-12 px-4 bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 dark:text-amber-400 mb-3 text-center">
-              ¿Por qué ser Plantador?
+      {/* ============================================================ */}
+      {/*  2. BENEFITS — Unsplash bg + overlay                         */}
+      {/* ============================================================ */}
+      <section className="relative py-24 px-4 overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80"
+          alt="Golden field at sunrise"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/60" />
+
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-3">
+              <span className="bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+                ¿Por qué ser Plantador?
+              </span>
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-center mb-10 max-w-2xl mx-auto">
+            <p className="text-white/60 text-center mb-14 max-w-2xl mx-auto">
               Más que un trabajo, una forma de vida conectada con la naturaleza
             </p>
+          </Reveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {benefits.map((benefit, index) => {
-                const Icon = benefit.icon;
-                const bgColors = {
-                  amber: 'bg-amber-100 dark:bg-amber-900/50',
-                  rose: 'bg-rose-100 dark:bg-rose-900/50',
-                  orange: 'bg-orange-100 dark:bg-orange-900/50',
-                  yellow: 'bg-yellow-100 dark:bg-yellow-900/50',
-                };
-                const iconColors = {
-                  amber: 'text-amber-600 dark:text-amber-400',
-                  rose: 'text-rose-600 dark:text-rose-400',
-                  orange: 'text-orange-600 dark:text-orange-400',
-                  yellow: 'text-yellow-600 dark:text-yellow-400',
-                };
-                return (
-                  <Card
-                    key={index}
-                    className="border-amber-200 dark:border-gray-700 dark:bg-gray-800 hover:shadow-lg transition-shadow"
-                  >
-                    <CardHeader className="pb-3">
-                      <div
-                        className={`w-14 h-14 rounded-full flex items-center justify-center mb-3 ${bgColors[benefit.color]}`}
-                      >
-                        <Icon className={`h-7 w-7 ${iconColors[benefit.color]}`} />
-                      </div>
-                      <CardTitle className="text-amber-800 dark:text-amber-400 text-lg">
-                        {benefit.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm">
-                        {benefit.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {benefits.map((benefit, index) => {
+              const Icon = benefit.icon;
+              return (
+                <Reveal key={index} delay={index * 0.1}>
+                  <div className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 h-full hover:border-emerald-400/30 transition-colors group">
+                    <div className="w-14 h-14 rounded-full flex items-center justify-center mb-4 bg-emerald-500/10 border border-emerald-400/20">
+                      <Icon className="h-7 w-7 text-emerald-400" />
+                    </div>
+                    <h3 className="text-white font-bold text-lg mb-2 group-hover:text-emerald-400 transition-colors">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-white/60 text-sm leading-relaxed">{benefit.description}</p>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      {/* Cómo Funciona */}
-      <section className="py-12 px-4 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-800">
+      {/* ============================================================ */}
+      {/*  3. HOW IT WORKS — dark bg, connecting arrows                */}
+      {/* ============================================================ */}
+      <section className="py-24 px-4 bg-gray-950">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 dark:text-amber-400 mb-3 text-center">
-              ¿Cómo Funciona?
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-3">
+              <span className="bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+                ¿Cómo Funciona?
+              </span>
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-center mb-10 max-w-2xl mx-auto">
+            <p className="text-white/60 text-center mb-14 max-w-2xl mx-auto">
               En 4 simples pasos empezás a plantar y ganar
             </p>
+          </Reveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {howItWorks.map((item, index) => (
-                <div key={index} className="relative">
-                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md border border-amber-100 dark:border-gray-700 h-full">
-                    <div className="bg-amber-600 w-10 h-10 rounded-full flex items-center justify-center mb-4 text-white font-bold">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {howItWorks.map((item, index) => (
+              <Reveal key={index} delay={index * 0.12}>
+                <div className="relative h-full">
+                  <div className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 h-full hover:border-emerald-400/30 transition-colors">
+                    <div className="bg-emerald-500 w-10 h-10 rounded-full flex items-center justify-center mb-4 text-black font-bold text-sm">
                       {item.step}
                     </div>
-                    <h3 className="font-bold text-amber-800 dark:text-amber-400 mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">{item.description}</p>
+                    <h3 className="font-bold text-white mb-2">{item.title}</h3>
+                    <p className="text-white/60 text-sm leading-relaxed">{item.description}</p>
                   </div>
                   {index < howItWorks.length - 1 && (
-                    <ArrowRight className="hidden lg:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-amber-300 h-6 w-6" />
+                    <ArrowRight className="hidden lg:block absolute top-1/2 -right-3 -translate-y-1/2 text-emerald-400/40 h-6 w-6" />
                   )}
                 </div>
-              ))}
-            </div>
-          </motion.div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ¿Por qué unirte ahora? */}
-      <section className="py-12 px-4 bg-white dark:bg-gray-900">
+      {/* ============================================================ */}
+      {/*  4. PIONEER BENEFITS — dark bg, 3 centered cards             */}
+      {/* ============================================================ */}
+      <section className="py-24 px-4 bg-black">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 dark:text-amber-400 mb-3 text-center">
-              ¿Por qué unirte ahora?
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-3">
+              <span className="bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+                ¿Por qué unirte ahora?
+              </span>
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-center mb-10 max-w-2xl mx-auto">
+            <p className="text-white/60 text-center mb-14 max-w-2xl mx-auto">
               Ventajas exclusivas para los primeros plantadores
             </p>
+          </Reveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              {pioneerBenefits.map((benefit, index) => {
-                const Icon = benefit.icon;
-                return (
-                  <Card
-                    key={index}
-                    className="border-amber-200 dark:border-gray-700 dark:bg-gray-800 text-center"
-                  >
-                    <CardContent className="p-6">
-                      <div className="bg-amber-100 dark:bg-amber-900/50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Icon className="h-8 w-8 text-amber-600 dark:text-amber-400" />
-                      </div>
-                      <h3 className="font-bold text-amber-800 dark:text-amber-400 text-lg mb-2">
-                        {benefit.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm">
-                        {benefit.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {pioneerBenefits.map((benefit, index) => {
+              const Icon = benefit.icon;
+              return (
+                <Reveal key={index} delay={index * 0.1}>
+                  <div className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-8 text-center h-full hover:border-emerald-400/30 transition-colors group">
+                    <div className="bg-emerald-500/10 border border-emerald-400/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5">
+                      <Icon className="h-8 w-8 text-emerald-400" />
+                    </div>
+                    <h3 className="font-bold text-white text-lg mb-2 group-hover:text-emerald-400 transition-colors">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-white/60 text-sm leading-relaxed">{benefit.description}</p>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
 
-            <div className="mt-10 bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 rounded-xl p-6 max-w-2xl mx-auto text-center border border-amber-200 dark:border-amber-800">
-              <p className="text-amber-800 dark:text-amber-400 font-medium">
+          <Reveal delay={0.35}>
+            <div className="mt-12 bg-white/[0.03] backdrop-blur-xl border border-emerald-400/20 rounded-2xl p-6 max-w-2xl mx-auto text-center">
+              <p className="text-white/60">
                 Estamos en etapa de pre-registro. Cuando lancemos en tu zona, serás de los primeros
                 en recibir asignaciones.
               </p>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
 
-      {/* El día de un plantador */}
-      <section className="py-12 px-4 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-800">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 dark:text-amber-400 mb-3 text-center">
-              El proceso de plantación
+      {/* ============================================================ */}
+      {/*  5. PROCESS — Unsplash bg + overlay, 4 Paso cards            */}
+      {/* ============================================================ */}
+      <section className="relative py-24 px-4 overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1592150621744-aca64f48394a?w=1920&q=80"
+          alt="Hands holding seedling"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/60" />
+
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-3">
+              <span className="bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+                El proceso de plantación
+              </span>
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-center mb-10 max-w-2xl mx-auto">
+            <p className="text-white/60 text-center mb-14 max-w-2xl mx-auto">
               Vos elegís cuándo hacerlo, solo necesitás luz del día para las fotos
             </p>
+          </Reveal>
 
-            <div className="bg-gradient-to-br from-amber-600 to-orange-600 dark:from-amber-700 dark:to-orange-700 rounded-2xl p-8 text-white shadow-xl">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div className="bg-white/10 dark:bg-white/15 rounded-xl p-5 backdrop-blur-sm border border-white/10 dark:border-white/20 hover:bg-white/15 dark:hover:bg-white/20 transition-colors">
-                  <Clock className="h-8 w-8 mb-3 text-amber-200" />
-                  <h3 className="font-bold text-lg mb-1 text-white">Paso 1</h3>
-                  <p className="text-amber-100 dark:text-amber-200 text-sm">
-                    Revisás las notificaciones y aceptás una asignación cerca de tu zona
-                  </p>
-                </div>
-                <div className="bg-white/10 dark:bg-white/15 rounded-xl p-5 backdrop-blur-sm border border-white/10 dark:border-white/20 hover:bg-white/15 dark:hover:bg-white/20 transition-colors">
-                  <TreePine className="h-8 w-8 mb-3 text-amber-200" />
-                  <h3 className="font-bold text-lg mb-1 text-white">Paso 2</h3>
-                  <p className="text-amber-100 dark:text-amber-200 text-sm">
-                    Retirás el árbol del vivero asignado con todas las instrucciones
-                  </p>
-                </div>
-                <div className="bg-white/10 dark:bg-white/15 rounded-xl p-5 backdrop-blur-sm border border-white/10 dark:border-white/20 hover:bg-white/15 dark:hover:bg-white/20 transition-colors">
-                  <Shovel className="h-8 w-8 mb-3 text-amber-200" />
-                  <h3 className="font-bold text-lg mb-1 text-white">Paso 3</h3>
-                  <p className="text-amber-100 dark:text-amber-200 text-sm">
-                    Llegás a la ubicación, preparás el terreno y plantás el árbol
-                  </p>
-                </div>
-                <div className="bg-white/10 dark:bg-white/15 rounded-xl p-5 backdrop-blur-sm border border-white/10 dark:border-white/20 hover:bg-white/15 dark:hover:bg-white/20 transition-colors">
-                  <Camera className="h-8 w-8 mb-3 text-amber-200" />
-                  <h3 className="font-bold text-lg mb-1 text-white">Paso 4</h3>
-                  <p className="text-amber-100 dark:text-amber-200 text-sm">
-                    Documentás con fotos durante el día, subís el reporte y recibís tu pago en 48hs
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: Clock,
+                title: 'Paso 1',
+                text: 'Revisás las notificaciones y aceptás una asignación cerca de tu zona',
+              },
+              {
+                icon: TreePine,
+                title: 'Paso 2',
+                text: 'Retirás el árbol del vivero asignado con todas las instrucciones',
+              },
+              {
+                icon: Shovel,
+                title: 'Paso 3',
+                text: 'Llegás a la ubicación, preparás el terreno y plantás el árbol',
+              },
+              {
+                icon: Camera,
+                title: 'Paso 4',
+                text: 'Documentás con fotos durante el día, subís el reporte y recibís tu pago en 48hs',
+              },
+            ].map((paso, index) => {
+              const Icon = paso.icon;
+              return (
+                <Reveal key={index} delay={index * 0.1}>
+                  <div className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 h-full hover:border-emerald-400/30 transition-colors">
+                    <Icon className="h-8 w-8 mb-4 text-emerald-400" />
+                    <h3 className="font-bold text-lg mb-2 text-white">{paso.title}</h3>
+                    <p className="text-white/60 text-sm leading-relaxed">{paso.text}</p>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      {/* Requisitos */}
-      <section className="py-12 px-4 bg-white dark:bg-gray-900">
+      {/* ============================================================ */}
+      {/*  6. REQUIREMENTS — dark bg, glass card with checklist        */}
+      {/* ============================================================ */}
+      <section className="py-24 px-4 bg-gray-950">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 dark:text-amber-400 mb-3 text-center">
-              Requisitos para ser Plantador
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-3">
+              <span className="bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+                Requisitos para ser Plantador
+              </span>
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-center mb-10 max-w-2xl mx-auto">
+            <p className="text-white/60 text-center mb-14 max-w-2xl mx-auto">
               Todo lo que necesitás para empezar
             </p>
+          </Reveal>
 
-            <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-800 rounded-xl p-8 shadow-lg max-w-3xl mx-auto border border-amber-100 dark:border-gray-700">
-              <ul className="space-y-4">
+          <Reveal delay={0.15}>
+            <div className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-8 md:p-10 max-w-3xl mx-auto">
+              <ul className="space-y-5">
                 {requirements.map((req, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <CheckCircle className="h-6 w-6 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700 dark:text-gray-300">{req}</span>
+                  <li key={index} className="flex items-start gap-4">
+                    <CheckCircle className="h-6 w-6 text-emerald-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-white/60">{req}</span>
                   </li>
                 ))}
               </ul>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
 
-      {/* FAQs */}
-      <section className="py-12 px-4 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-800">
+      {/* ============================================================ */}
+      {/*  7. FAQs — dark bg, 2-column glass cards                     */}
+      {/* ============================================================ */}
+      <section className="py-24 px-4 bg-black">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-amber-800 dark:text-amber-400 mb-3 text-center">
-              Preguntas Frecuentes
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-3">
+              <span className="bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+                Preguntas Frecuentes
+              </span>
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-center mb-10 max-w-2xl mx-auto">
+            <p className="text-white/60 text-center mb-14 max-w-2xl mx-auto">
               Resolvemos tus dudas más comunes
             </p>
+          </Reveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-              {faqs.map((faq, index) => (
-                <Card
-                  key={index}
-                  className="border-amber-200 dark:border-gray-700 dark:bg-gray-800"
-                >
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-amber-800 dark:text-amber-400 text-base">
-                      {faq.question}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">{faq.answer}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {faqs.map((faq, index) => (
+              <Reveal key={index} delay={index * 0.08}>
+                <div className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 h-full hover:border-emerald-400/30 transition-colors">
+                  <h3 className="text-white font-semibold mb-3">{faq.question}</h3>
+                  <p className="text-white/60 text-sm leading-relaxed">{faq.answer}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* CTA Final */}
-      <section className="py-12 px-4 bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="bg-gradient-to-r from-amber-600 to-orange-600 rounded-xl p-8 text-white text-center"
-          >
-            <Shovel className="h-12 w-12 mx-auto mb-4" />
-            <h2 className="text-2xl md:text-3xl font-bold mb-3 text-white">
-              ¿Querés ser de los primeros?
+      {/* ============================================================ */}
+      {/*  8. FINAL CTA — Unsplash bg + dark overlay                   */}
+      {/* ============================================================ */}
+      <section className="relative py-32 px-4 overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1920&q=80"
+          alt="Aerial green valley"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/60" />
+
+        <div className="relative z-10 max-w-3xl mx-auto text-center">
+          <Reveal>
+            <Shovel className="h-12 w-12 mx-auto mb-6 text-emerald-400" />
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+                ¿Querés ser de los primeros?
+              </span>
             </h2>
-            <p className="text-lg mb-6 max-w-2xl mx-auto text-amber-100">
+            <p className="text-lg text-white/60 mb-10 max-w-2xl mx-auto">
               Registrate ahora y asegurá tu lugar como plantador fundador en Córdoba
             </p>
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="bg-white hover:bg-gray-50 text-amber-600"
+              <button
                 onClick={() => window.open(`${APP_URL}/registro/plantador`, '_blank')}
+                className="inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-8 py-4 rounded-full text-lg transition-colors"
               >
-                <Shovel className="h-5 w-5 mr-2" />
+                <Shovel className="h-5 w-5" />
                 Quiero ser Plantador Fundador
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                className="bg-transparent border-2 border-white text-white hover:bg-white/20"
+              </button>
+              <Link
+                to="/contacto"
+                className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/[0.06] text-white font-semibold px-8 py-4 rounded-full text-lg transition-colors backdrop-blur-sm"
               >
-                <Link to="/contacto">Tengo más preguntas</Link>
-              </Button>
+                Tengo más preguntas
+              </Link>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
 

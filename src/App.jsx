@@ -28,11 +28,11 @@ const UnifiedMapPage = lazy(() => import('@features/trees/pages/UnifiedMapPage')
 const CertificatePage = lazy(() => import('@features/certificates/pages/CertificatePage'));
 
 // Components
-import AuthenticatedLayout from '@shared/components/layout/AuthenticatedLayout';
+import DarkLayout from '@shared/components/layout/DarkLayout';
 // Loading fallback
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
-    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
+  <div className="min-h-screen flex items-center justify-center bg-black">
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-500"></div>
   </div>
 );
 
@@ -48,100 +48,93 @@ const App = () => {
               <Suspense fallback={<PageLoader />}>
                 <Routes>
                   {/* Landing pages (public) */}
-                  <Route
-                    path="/"
-                    element={
-                      <AuthenticatedLayout>
-                        <LandingHome />
-                      </AuthenticatedLayout>
-                    }
-                  />
+                  <Route path="/" element={<LandingHome />} />
                   <Route
                     path="/sobre-nosotros"
                     element={
-                      <AuthenticatedLayout>
+                      <DarkLayout>
                         <AboutPage />
-                      </AuthenticatedLayout>
+                      </DarkLayout>
                     }
                   />
                   <Route
                     path="/colaborativos"
                     element={
-                      <AuthenticatedLayout>
+                      <DarkLayout>
                         <ColaborativosPage />
-                      </AuthenticatedLayout>
+                      </DarkLayout>
                     }
                   />
                   <Route
                     path="/empresas"
                     element={
-                      <AuthenticatedLayout>
+                      <DarkLayout>
                         <EmpresasPage />
-                      </AuthenticatedLayout>
+                      </DarkLayout>
                     }
                   />
                   <Route
                     path="/sorteos"
                     element={
-                      <AuthenticatedLayout>
+                      <DarkLayout>
                         <SorteosPage />
-                      </AuthenticatedLayout>
+                      </DarkLayout>
                     }
                   />
                   <Route
                     path="/contacto"
                     element={
-                      <AuthenticatedLayout>
+                      <DarkLayout>
                         <ContactoPage />
-                      </AuthenticatedLayout>
+                      </DarkLayout>
                     }
                   />
                   <Route
                     path="/referidos"
                     element={
-                      <AuthenticatedLayout>
+                      <DarkLayout>
                         <ReferidosPage />
-                      </AuthenticatedLayout>
+                      </DarkLayout>
                     }
                   />
                   <Route
                     path="/qr-productos"
                     element={
-                      <AuthenticatedLayout>
+                      <DarkLayout>
                         <QRProductosPage />
-                      </AuthenticatedLayout>
+                      </DarkLayout>
                     }
                   />
                   <Route
                     path="/viveros"
                     element={
-                      <AuthenticatedLayout>
+                      <DarkLayout>
                         <ViverosPage />
-                      </AuthenticatedLayout>
+                      </DarkLayout>
                     }
                   />
                   <Route
                     path="/plantadores"
                     element={
-                      <AuthenticatedLayout>
+                      <DarkLayout>
                         <PlantadoresPage />
-                      </AuthenticatedLayout>
+                      </DarkLayout>
                     }
                   />
                   <Route
                     path="/chapistas"
                     element={
-                      <AuthenticatedLayout>
+                      <DarkLayout>
                         <ChapistasPage />
-                      </AuthenticatedLayout>
+                      </DarkLayout>
                     }
                   />
                   <Route
                     path="/mapa/:treeId?"
                     element={
-                      <AuthenticatedLayout>
+                      <DarkLayout>
                         <UnifiedMapPage />
-                      </AuthenticatedLayout>
+                      </DarkLayout>
                     }
                   />
 
@@ -149,26 +142,26 @@ const App = () => {
                   <Route
                     path="/terminos"
                     element={
-                      <AuthenticatedLayout>
+                      <DarkLayout>
                         <TerminosPage />
-                      </AuthenticatedLayout>
+                      </DarkLayout>
                     }
                   />
                   <Route
                     path="/privacidad"
                     element={
-                      <AuthenticatedLayout>
+                      <DarkLayout>
                         <PrivacidadPage />
-                      </AuthenticatedLayout>
+                      </DarkLayout>
                     }
                   />
 
                   <Route
                     path="/seguridad-infantil"
                     element={
-                      <AuthenticatedLayout>
+                      <DarkLayout>
                         <SeguridadInfantilPage />
-                      </AuthenticatedLayout>
+                      </DarkLayout>
                     }
                   />
 
