@@ -1,1 +1,0 @@
-const a=t=>{const r=parseFloat(t)||0;return new Intl.NumberFormat("es-AR",{style:"currency",currency:"ARS",minimumFractionDigits:2,maximumFractionDigits:2}).format(r)},c=(t,r)=>{const n=parseFloat(t)||0,e=parseFloat(r)||0;return!e||e===0?0:Math.min(n/e*100,100)};export{c,a as f};
